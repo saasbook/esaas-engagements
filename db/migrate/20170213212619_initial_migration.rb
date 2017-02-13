@@ -20,8 +20,8 @@ class InitialMigration < ActiveRecord::Migration
     end
 
     create_table :engagements, :force => true do |t|
-      t.belongs_to :organization
-      t.belongs_to :app
+      t.references :organization, :index => true, :foreign_key => true
+      t.references :app, :index => true, :foreign_key => true
       t.string :category        # :development, :maintenance, :inactive
       t.datetime :start_date
 

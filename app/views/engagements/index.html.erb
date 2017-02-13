@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Engagements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organization</th>
+      <th>App</th>
+      <th>Category</th>
+      <th>Start date</th>
+      <th>Screencast url</th>
+      <th>Poster preview url</th>
+      <th>Poster url</th>
+      <th>Presentation url</th>
+      <th>Prototype deployment url</th>
+      <th>Student names</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @engagements.each do |engagement| %>
+      <tr>
+        <td><%= engagement.organization %></td>
+        <td><%= engagement.app %></td>
+        <td><%= engagement.category %></td>
+        <td><%= engagement.start_date %></td>
+        <td><%= engagement.screencast_url %></td>
+        <td><%= engagement.poster_preview_url %></td>
+        <td><%= engagement.poster_url %></td>
+        <td><%= engagement.presentation_url %></td>
+        <td><%= engagement.prototype_deployment_url %></td>
+        <td><%= engagement.student_names %></td>
+        <td><%= link_to 'Show', engagement %></td>
+        <td><%= link_to 'Edit', edit_engagement_path(engagement) %></td>
+        <td><%= link_to 'Destroy', engagement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Engagement', new_engagement_path %>

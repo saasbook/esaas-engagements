@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @app.description %>
+</p>
+
+<p>
+  <strong>Deployment url:</strong>
+  <%= @app.deployment_url %>
+</p>
+
+<p>
+  <strong>Repository url:</strong>
+  <%= @app.repository_url %>
+</p>
+
+<%= link_to 'Edit', edit_app_path(@app) %> |
+<%= link_to 'Back', apps_path %>

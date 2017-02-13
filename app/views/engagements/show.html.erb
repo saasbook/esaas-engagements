@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @engagement.organization %>
+</p>
+
+<p>
+  <strong>App:</strong>
+  <%= @engagement.app %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @engagement.category %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @engagement.start_date %>
+</p>
+
+<p>
+  <strong>Screencast url:</strong>
+  <%= @engagement.screencast_url %>
+</p>
+
+<p>
+  <strong>Poster preview url:</strong>
+  <%= @engagement.poster_preview_url %>
+</p>
+
+<p>
+  <strong>Poster url:</strong>
+  <%= @engagement.poster_url %>
+</p>
+
+<p>
+  <strong>Presentation url:</strong>
+  <%= @engagement.presentation_url %>
+</p>
+
+<p>
+  <strong>Prototype deployment url:</strong>
+  <%= @engagement.prototype_deployment_url %>
+</p>
+
+<p>
+  <strong>Student names:</strong>
+  <%= @engagement.student_names %>
+</p>
+
+<%= link_to 'Edit', edit_engagement_path(@engagement) %> |
+<%= link_to 'Back', engagements_path %>
