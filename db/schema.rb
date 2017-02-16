@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170213212619) do
   end
 
   create_table "engagements", force: :cascade do |t|
-    t.integer  "organization_id"
+    t.integer  "org_id"
     t.integer  "app_id"
     t.string   "category"
     t.datetime "start_date"
@@ -33,16 +33,14 @@ ActiveRecord::Schema.define(version: 20170213212619) do
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
-  add_index "engagements", ["organization_id"], name: "index_engagements_on_organization_id"
+  add_index "engagements", ["org_id"], name: "index_engagements_on_org_id"
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "orgs", force: :cascade do |t|
     t.string "name"
-    t.text   "description"
+    t.string "description"
     t.string "url"
     t.string "contact_name"
     t.string "contact_email"
-    t.string "primary_phone"
-    t.string "secondary_phone"
   end
 
 end

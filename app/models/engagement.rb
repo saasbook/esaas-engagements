@@ -1,4 +1,4 @@
 class Engagement < ActiveRecord::Base
-  belongs_to :organization
+  belongs_to :org
   belongs_to :app
 end

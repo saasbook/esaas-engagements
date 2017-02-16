@@ -1,6 +1,7 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap/theme";
 // use @import to add any other SCSS files here.
 // DO NOT use *= require_tree or *= require_self, as the Rails default
 // .css file does.

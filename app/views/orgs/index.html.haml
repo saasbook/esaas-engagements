@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%h1 Organizations
+
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Name & Homepage Link
+      %th Contact name & email
+      %th Description
+      %th{:colspan=>2}
+    %tbody
+      - @orgs.each do |org|
+        %tr
+          %td= link_to_unless org.url.blank?, org.name, org.url, :target => '_blank'
+          %td= mail_to org.contact_email, org.contact_name 
+          %td= org.description 
+          %td= link_to 'Edit', edit_org_path(org) 
+          %td= link_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' } 
+
+%br
+
+= link_to 'New Org', new_org_path
+

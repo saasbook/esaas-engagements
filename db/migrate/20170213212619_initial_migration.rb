@@ -2,14 +2,12 @@ class InitialMigration < ActiveRecord::Migration
 
   def change
 
-    create_table :organizations, :force => true do |t|
+    create_table :orgs, :force => true do |t|
       t.string :name
-      t.text :description
+      t.string :description
       t.string :url
       t.string :contact_name
       t.string :contact_email
-      t.string :primary_phone
-      t.string :secondary_phone
     end
 
     create_table :apps, :force => true do |t|
@@ -20,7 +18,7 @@ class InitialMigration < ActiveRecord::Migration
     end
 
     create_table :engagements, :force => true do |t|
-      t.references :organization, :index => true, :foreign_key => true
+      t.references :org, :index => true, :foreign_key => true
       t.references :app, :index => true, :foreign_key => true
       t.string :category        # :development, :maintenance, :inactive
       t.datetime :start_date
