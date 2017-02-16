@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Description</th>
       <th>Deployment url</th>
       <th>Repository url</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @apps.each do |app| %>
       <tr>
+        <td><%= app.name %></td>
         <td><%= app.description %></td>
         <td><%= app.deployment_url %></td>
         <td><%= app.repository_url %></td>

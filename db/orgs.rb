@@ -4,10 +4,12 @@ def seed_orgs!
   get_orgs.each do |org|
     Org.create!(:name => org[2], :contact_name => org[1], :contact_email => org[0])
   end
+  puts "#{Org.all.size} orgs"
 end
 
 def get_orgs
   [
+    ["campaign@evolve-ca.org","Evolve CA","Evolve, a Community Organization"],
     ["ellen@activevoice.net","Ellen Schneider","Active Voice"],
     ["afxdance@gmail.com","Ryan Barroga","AFX Dance"],
     ["alexanderchen@berkeley.edu","Alexander Chen","Alexander Chen"],

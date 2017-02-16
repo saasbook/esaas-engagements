@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 require "#{Rails.root}/db/orgs.rb"
+require "#{Rails.root}/db/apps.rb"

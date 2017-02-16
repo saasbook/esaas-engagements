@@ -1,0 +1,27 @@
+%p#notice= notice
+
+.page-header
+  %h1
+    = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url
+    = link_to_unless @app.repository_url.blank?, image_tag 'octocat.png', @app.repository_url
+
+.well#description
+  %p= @app.description
+
+= link_to 'Edit', edit_app_path(@app) 
+\|
+= link_to 'Back', apps_path
+
+.page-header
+  %h1 Engagements
+
+%table.table
+  %thead
+  %tbody
+    - @app.engagements.each do |engagement|
+      %tr
+        %td= engagement.start_date.strftime '%F'
+        %td= mail_to engagement.contact_email, engagement.contact_name
+        %td= link_to image_tag('video.png'), engagement.screencast_url
+        %td= link_to image_tag('presentation.png'), engagement.presentation_url
+

@@ -64,7 +64,7 @@ class AppsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_app
-      @app = App.find(params[:id])
+      @app = App.find(params[:id]).include(:engagements)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

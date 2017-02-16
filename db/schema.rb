@@ -14,18 +14,24 @@
 ActiveRecord::Schema.define(version: 20170213212619) do
 
   create_table "apps", force: :cascade do |t|
-    t.string "description"
-    t.string "deployment_url"
-    t.string "repository_url"
+    t.integer "org_id"
+    t.integer "status",         default: 0
+    t.string  "name"
+    t.string  "description"
+    t.string  "deployment_url"
+    t.string  "repository_url"
   end
 
+  add_index "apps", ["org_id"], name: "index_apps_on_org_id"
+
   create_table "engagements", force: :cascade do |t|
-    t.integer  "org_id"
     t.integer  "app_id"
-    t.string   "category"
+    t.string   "team_number"
     t.datetime "start_date"
+    t.string   "contact_name"
+    t.string   "contact_email"
     t.string   "screencast_url"
-    t.string   "poster_preview_url"
+    t.string   "screenshot_url"
     t.string   "poster_url"
     t.string   "presentation_url"
     t.string   "prototype_deployment_url"
@@ -33,7 +39,6 @@ ActiveRecord::Schema.define(version: 20170213212619) do
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
-  add_index "engagements", ["org_id"], name: "index_engagements_on_org_id"
 
   create_table "orgs", force: :cascade do |t|
     t.string "name"
