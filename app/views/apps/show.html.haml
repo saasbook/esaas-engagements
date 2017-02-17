@@ -2,8 +2,8 @@
 
 .page-header
   %h1
-    = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url
-    = link_to_unless @app.repository_url.blank?, image_tag 'octocat.png', @app.repository_url
+    = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
+    = link_to_unless @app.repository_url.blank?, image_tag('octocat.png'), @app.repository_url, :target => '_blank'
 
 .well#description
   %p= @app.description
@@ -17,11 +17,20 @@
 
 %table.table
   %thead
+    %tr
+      %th Started
+      %th Contact
+      %th Team
+      %th Developers
+      %th{:colspan => 3} Assets
   %tbody
-    - @app.engagements.each do |engagement|
+    - @engagements.each do |engagement|
       %tr
         %td= engagement.start_date.strftime '%F'
         %td= mail_to engagement.contact_email, engagement.contact_name
-        %td= link_to image_tag('video.png'), engagement.screencast_url
-        %td= link_to image_tag('presentation.png'), engagement.presentation_url
+        %td= engagement.team_number
+        %td= engagement.student_names
+        %td= link_to image_tag('octocat-gray.png'), engagement.prototype_deployment_url, :target => '_blank'
+        %td= link_to image_tag('video.png'), engagement.screencast_url, :target => '_blank'
+        %td= link_to image_tag('presentation.png'), engagement.presentation_url, :target => '_blank'
 

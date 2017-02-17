@@ -8,6 +8,7 @@ class InitialMigration < ActiveRecord::Migration
       t.string :url
       t.string :contact_name
       t.string :contact_email
+      t.timestamps
     end
 
     create_table :apps, :force => true do |t|
@@ -19,6 +20,7 @@ class InitialMigration < ActiveRecord::Migration
       t.string :description
       t.string :deployment_url
       t.string :repository_url
+      t.timestamps
     end
 
     create_table :engagements, :force => true do |t|
@@ -36,6 +38,8 @@ class InitialMigration < ActiveRecord::Migration
       t.string :prototype_deployment_url
 
       t.string :student_names
+
+      t.timestamps
     end
 
     

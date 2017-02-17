@@ -15,7 +15,7 @@ CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
       :deployment_url => p[14],
       :repository_url => p[15])
     app.engagements.create!(
-      :team_number => p[0],
+      :team_number => "#{p[0]}-#{p[2]}",
       :start_date => Time.parse(p[1]),
       :contact_name => p[10],
       :contact_email => p[9],
