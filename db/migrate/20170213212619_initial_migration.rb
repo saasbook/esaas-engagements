@@ -2,12 +2,18 @@ class InitialMigration < ActiveRecord::Migration
 
   def change
 
+    create_table :users, :force => true do |t|
+      t.string :name
+      t.string :email
+      t.string :github_uid
+      t.timestamps
+    end
+
     create_table :orgs, :force => true do |t|
       t.string :name
       t.string :description
       t.string :url
-      t.string :contact_name
-      t.string :contact_email
+      t.references :contact, :index => true, :foreign_key => true # FK to `users`
       t.timestamps
     end
 
@@ -28,9 +34,12 @@ class InitialMigration < ActiveRecord::Migration
       t.string :team_number
       t.datetime :start_date
 
-      t.string :contact_name    # may be different from main org contact
-      t.string :contact_email
+      # Contact person within the client org
+      t.references :contact, :index => true, :foreign_key => true # FK  `users`
 
+      # Coach and org the coach belongs to
+      t.references :coach, :index => true, :foreign_key => true # FK `users` 
+      t.references :coaching_org, :index => true, :foreign_key => true # FK `orgs`
       t.string :screencast_url
       t.string :screenshot_url  # eg for poster preview
       t.string :poster_url

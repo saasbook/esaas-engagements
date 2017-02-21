@@ -2,6 +2,11 @@ require 'CSV'
 
 App.delete_all
 Engagement.delete_all
+coach = User.find_by!(:email => 'fox@berkeley.edu')
+cs169 = Org.create!(:name => 'UCB CS169 Fox',
+  :description => 'CS 169 at Berkeley',
+  :url => 'http://cs169.saas-class.org',
+  :contact => coach)
 CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
   next if p[0] =~ /semester/i || p[0] =~ /0$/
   if org = Org.where("name = ?", p[11]).try(:first)
@@ -14,11 +19,13 @@ CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
       :description => p[13],
       :deployment_url => p[14],
       :repository_url => p[15])
+    coach = User.where("email = ?", p[9]).first ||
+      User.create!(:name => p[10], :email => p[9])
     app.engagements.create!(
       :team_number => "#{p[0]}-#{p[2]}",
       :start_date => Time.parse(p[1]),
-      :contact_name => p[10],
-      :contact_email => p[9],
+      :coaching_org => cs169,
+      :coach => coach,
       :screencast_url => p[16],
       :screenshot_url => p[17],
       :poster_url => p[19],

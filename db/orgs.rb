@@ -2,9 +2,10 @@
 def seed_orgs!
   Org.delete_all
   get_orgs.each do |org|
-    Org.create!(:name => org[2], :contact_name => org[1], :contact_email => org[0])
+    u = User.find_by(:email => org[0]) || User.create!(:name => org[1], :email => org[0])
+    Org.create!(:name => org[2], :contact => u)
   end
-  puts "#{Org.all.size} orgs"
+  puts "#{Org.all.size} orgs, #{User.all.size} users"
 end
 
 def get_orgs
