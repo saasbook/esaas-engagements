@@ -3,13 +3,16 @@ def seed_orgs!
   Org.delete_all
   get_orgs.each do |org|
     u = User.find_by(:email => org[0]) || User.create!(:name => org[1], :email => org[0])
-    Org.create!(:name => org[2], :contact => u)
+    url = org[4] || ( u.email !~ /gmail|berkeley.edu/ && u.email =~ /@(.*)$/ ? "http://#{$1}" : nil)
+    Org.create!(:name => org[2], :contact => u, :description => org[3], :url => url)
   end
   puts "#{Org.all.size} orgs, #{User.all.size} users"
 end
 
 def get_orgs
   [
+    ["skylareconomy@gmail.com","Skylar Economy","Photogenie Films, LLC","FITE Film (From Incarceration to Education), a documentary film"],
+    ["akkhazan@berkeley.edu","Anish Khazane","Project RISHI - Berkeley Chapter","NGO doing rural work all over India","http://www.projectrishi.org"],
     ["campaign@evolve-ca.org","Evolve CA","Evolve, a Community Organization"],
     ["ellen@activevoice.net","Ellen Schneider","Active Voice"],
     ["afxdance@gmail.com","Ryan Barroga","AFX Dance"],
