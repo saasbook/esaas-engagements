@@ -2,7 +2,7 @@ require 'CSV'
 
 App.delete_all
 Engagement.delete_all
-coach = User.find_by!(:email => 'fox@berkeley.edu')
+coach = User.find_by!(:email => 'fox@cs.berkeley.edu')
 cs169 = Org.create!(:name => 'UCB CS169 Fox',
   :description => 'CS 169 at Berkeley',
   :url => 'http://cs169.saas-class.org',

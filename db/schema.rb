@@ -14,12 +14,14 @@
 ActiveRecord::Schema.define(version: 20170213212619) do
 
   create_table "apps", force: :cascade do |t|
-    t.integer "org_id"
-    t.integer "status",         default: 0
-    t.string  "name"
-    t.string  "description"
-    t.string  "deployment_url"
-    t.string  "repository_url"
+    t.integer  "org_id"
+    t.integer  "status",         default: 0
+    t.string   "name"
+    t.string   "description"
+    t.string   "deployment_url"
+    t.string   "repository_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "apps", ["org_id"], name: "index_apps_on_org_id"
@@ -28,24 +30,41 @@ ActiveRecord::Schema.define(version: 20170213212619) do
     t.integer  "app_id"
     t.string   "team_number"
     t.datetime "start_date"
-    t.string   "contact_name"
-    t.string   "contact_email"
+    t.integer  "contact_id"
+    t.integer  "coach_id"
+    t.integer  "coaching_org_id"
     t.string   "screencast_url"
     t.string   "screenshot_url"
     t.string   "poster_url"
     t.string   "presentation_url"
     t.string   "prototype_deployment_url"
     t.string   "student_names"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
+  add_index "engagements", ["coach_id"], name: "index_engagements_on_coach_id"
+  add_index "engagements", ["coaching_org_id"], name: "index_engagements_on_coaching_org_id"
+  add_index "engagements", ["contact_id"], name: "index_engagements_on_contact_id"
 
   create_table "orgs", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "url"
-    t.string "contact_name"
-    t.string "contact_email"
+    t.string   "name"
+    t.string   "description"
+    t.string   "url"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orgs", ["contact_id"], name: "index_orgs_on_contact_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "github_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
