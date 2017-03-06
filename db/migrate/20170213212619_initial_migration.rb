@@ -13,7 +13,7 @@ class InitialMigration < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :url
-      t.references :contact, :index => true, :foreign_key => true # FK to `users`
+      t.references :contact, :index => true, :foreign_key => {:to_table => 'users'} 
       t.timestamps
     end
 
@@ -35,11 +35,11 @@ class InitialMigration < ActiveRecord::Migration
       t.datetime :start_date
 
       # Contact person within the client org
-      t.references :contact, :index => true, :foreign_key => true # FK  `users`
+      t.references :contact, :index => true, :foreign_key => {:to_table => 'users'}
 
       # Coach and org the coach belongs to
-      t.references :coach, :index => true, :foreign_key => true # FK `users` 
-      t.references :coaching_org, :index => true, :foreign_key => true # FK `orgs`
+      t.references :coach, :index => true, :foreign_key => {:to_table => 'users'}
+      t.references :coaching_org, :index => true, :foreign_key => {:to_table => 'orgs'}
       t.string :screencast_url
       t.string :screenshot_url  # eg for poster preview
       t.string :poster_url
