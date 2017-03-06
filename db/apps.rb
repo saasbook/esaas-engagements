@@ -1,4 +1,4 @@
-require 'CSV'
+require 'csv'
 
 App.delete_all
 Engagement.delete_all
