@@ -13,12 +13,12 @@ class InitialMigration < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :url
-      t.references :contact, :index => true, :foreign_key => {:to_table => 'users'} 
+      t.belongs_to :contact, :index => true, :references => 'courses'
       t.timestamps
     end
 
     create_table :apps, :force => true do |t|
-      t.references :org, :index => true, :foreign_key => true
+      t.belongs_to :org, :index => true, :foreign_key => true
 
       t.integer :status, :default => 0 # see app.rb for enum types
 
@@ -30,16 +30,16 @@ class InitialMigration < ActiveRecord::Migration
     end
 
     create_table :engagements, :force => true do |t|
-      t.references :app, :index => true, :foreign_key => true
+      t.belongs_to :app, :index => true, :foreign_key => true
       t.string :team_number
       t.datetime :start_date
 
       # Contact person within the client org
-      t.references :contact, :index => true, :foreign_key => {:to_table => 'users'}
+      t.belongs_to :contact, :index => true, :references => 'users'
 
       # Coach and org the coach belongs to
-      t.references :coach, :index => true, :foreign_key => {:to_table => 'users'}
-      t.references :coaching_org, :index => true, :foreign_key => {:to_table => 'orgs'}
+      t.belongs_to :coach, :index => true,  :references => 'users'
+      t.belongs_to :coaching_org, :index => true, :references => 'orgs'
       t.string :screencast_url
       t.string :screenshot_url  # eg for poster preview
       t.string :poster_url
