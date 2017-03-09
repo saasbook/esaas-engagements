@@ -42,7 +42,7 @@ class OrgsController < ApplicationController
   def update
     respond_to do |format|
       if @org.update(org_params)
-        format.html { redirect_to @org, notice: 'Org was successfully updated.' }
+        format.html { redirect_to orgs_path, notice: 'Org was successfully updated.' }
         format.json { render :show, status: :ok, location: @org }
       else
         format.html { render :edit }

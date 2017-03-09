@@ -69,6 +69,6 @@ class EngagementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def engagement_params
-      params.require(:engagement).permit(:organization_id, :app_id, :category, :start_date, :screencast_url, :poster_preview_url, :poster_url, :presentation_url, :prototype_deployment_url, :student_names)
+      params.require(:engagement).permit(:org_id, :app_id, :category, :start_date, :screencast_url, :poster_preview_url, :poster_url, :presentation_url, :prototype_deployment_url, :student_names)
     end
 end
