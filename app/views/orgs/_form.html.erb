@@ -26,7 +26,6 @@
   <div class="field">
     <%= f.label :contact %><br>
     <%= f.select :contact_id, options_from_collection_for_select(User.all, :id, :name, @org.contact_id) %>
-    <%= f.label :contact_name %><br>
   </div>
   <div class="actions">
     <%= f.submit %>
