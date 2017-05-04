@@ -1,6 +1,6 @@
 = form_for(@app) do |f|
   - if @app.errors.any?
-    #error_explanation
+    #error_explanation.alert.alert-danger
       %h2
         = pluralize(@app.errors.count, "error")
         prohibited this app from being saved:
