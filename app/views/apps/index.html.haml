@@ -1,7 +1,7 @@
 %p#notice= notice
 .page-header
   %h1 Listing Apps
-%table.table.table-condensed.table-striped
+%table.table.table-condensed
   %thead
     %tr
       %th Name
@@ -10,11 +10,11 @@
       %th{:colspan => "2"}
   %tbody
     - @apps.each do |app|
-      %tr
+      %tr{:class => row_background_for(app)}
         %td= link_to app.name, app
         %td= app.org.name
         %td= app.description
         %td= link_to 'Edit', edit_app_path(app)
         %td= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
-= link_to 'New App', new_app_path
+= link_to 'New App', new_app_path, :class => 'btn btn-primary'

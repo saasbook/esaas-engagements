@@ -1,0 +1,18 @@
+= form_for(@app) do |f|
+  - if @app.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@app.errors.count, "error")
+        prohibited this app from being saved:
+      %ul
+        - @app.errors.full_messages.each do |message|
+          %li= message
+  = field f, :name
+  = field f, :description
+  = field f, :deployment_url
+  = field f, :repository_url
+  = menu_field f, :org
+  = f.label 'Status'
+  = f.select :status, App.statuses.keys
+  .actions
+    = f.submit 'Save', :class => 'btn btn-primary'

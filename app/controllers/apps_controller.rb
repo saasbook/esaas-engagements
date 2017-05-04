@@ -42,10 +42,10 @@ class AppsController < ApplicationController
   def update
     respond_to do |format|
       if @app.update(app_params)
-        format.html { redirect_to @app, notice: 'App was successfully updated.' }
+        format.html { redirect_to apps_path, notice: 'App was successfully updated.' }
         format.json { render :show, status: :ok, location: @app }
       else
-        format.html { render :edit }
+        format.html { render :action => :edit }
         format.json { render json: @app.errors, status: :unprocessable_entity }
       end
     end
@@ -70,6 +70,6 @@ class AppsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params.require(:app).permit(:description, :deployment_url, :repository_url)
+      params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :org_id, :status)
     end
 end
