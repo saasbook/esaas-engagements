@@ -5,6 +5,8 @@ Fox, is to do continuous tracking over time of customer apps developed
 by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
 
+The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
+
 Since we have had many repeat customers who come back in subsequent
 semesters to have a new student cohort enhance an existing app, this
 system will track an app's current status over its lifetime as it is
@@ -62,6 +64,31 @@ When a new course offering starts, or when a non-course org is looking
 to source projects, they can look here to find apps in need of
 enhancement; if greenfield apps are built, they can be registered here
 so that future dev teams can pick up and enhance them.
+
+# Getting the app running locally
+
+You will need Ruby 2.2.5 and Rails 4.2.6 installed.
+
+Clone the repo, and run `rake db:setup` and then `rake db:seed` to
+seed the development database with a subset of the initial data set.
+You should then be able to use `rails server` to start the app, and
+point your browser at `http://localhost:3000` to access it.
+
+The file `config/application.yml.asc` is an encrypted version of a
+credentials file needed to login.  This is a temporary hack, and when
+the app is deployed locally in development mode, it won't ask for a 
+password.  But if you deploy your own staging version to your own
+Heroku container, you will have to create the file `config/application.yml` 
+that looks like this:
+
+```yaml
+auth_user: your_username
+auth_pass: your_password
+```
+
+This is the username/password to login to the overall app.  Once you have
+deployed the app to Heroku, run `figaro heroku:set -e production` to
+cause the username and password values to be propagated to Heroku.
 
 # High priority feature list
 
