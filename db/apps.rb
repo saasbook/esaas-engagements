@@ -16,9 +16,9 @@ CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
       :org => org,
       :name => appname,
       :status => :inactive,
-      :description => p[13],
+      :description => p[13] || 'NA',
       :deployment_url => p[14],
-      :repository_url => p[15])
+      :repository_url => p[15] || 'http://')
     coach = User.where("email = ?", p[9]).first ||
       User.create!(:name => p[10], :email => p[9])
     app.engagements.create!(
