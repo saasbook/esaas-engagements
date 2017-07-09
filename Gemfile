@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.5'
+ruby '2.3.1'
 
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views

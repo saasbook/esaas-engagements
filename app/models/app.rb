@@ -6,6 +6,6 @@ class App < ActiveRecord::Base
   
 
   default_scope { order(:name => :asc) }
-  enum :status => { :inactive => 0, :development => 1, :maintenance => 2 }
+  enum :status => { :dead => 0, :development => 1, :in_use => 2, :in_use_and_wants_improvement => 3, :inactive_but_wants_improvement => 4 }
 
 end
