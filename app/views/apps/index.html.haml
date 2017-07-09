@@ -14,7 +14,7 @@
         %td= link_to app.name, app
         %td= app.org.name
         %td= app.description
-        %td= link_to 'Edit', edit_app_path(app)
-        %td= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
+        %td= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
 %br/
 = link_to 'New App', new_app_path, :class => 'btn btn-primary'
