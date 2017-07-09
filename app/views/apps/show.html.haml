@@ -6,7 +6,12 @@
     = link_to_unless @app.repository_url.blank?, image_tag('octocat.png'), @app.repository_url, :target => '_blank'
 
 .well#description
+  %label.control-label Description
   %p= @app.description
+
+.well#comments
+  %label.control-label Comments
+  %p= @app.comments
 
 = link_to 'Edit', edit_app_path(@app) 
 \|
@@ -27,7 +32,7 @@
     - @engagements.each do |engagement|
       %tr
         %td= engagement.start_date.strftime '%F'
-        %td= mail_to engagement.contact_email, engagement.contact_name
+        %td= mail_to(engagement.contact.email, engagement.contact.name) if engagement.contact
         %td= engagement.team_number
         %td= engagement.student_names
         %td= link_to image_tag('octocat-gray.png'), engagement.prototype_deployment_url, :target => '_blank'

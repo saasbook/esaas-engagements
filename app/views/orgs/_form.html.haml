@@ -1,0 +1,18 @@
+= form_for(@org) do |f|
+  - if @org.errors.any?
+    #error_explanation
+      %h2 #{pluralize(@org.errors.count, "error")} prohibited this organization from being saved:
+
+      %ul
+        - @org.errors.full_messages.each do |message|
+          %li= message
+
+  = field f, :name
+  = field f, :description, :text_area
+  = field f, :url
+  = field f, :comments, :text_area
+  = menu_field f, :contact, :model_class => User
+  .actions
+    = f.submit 'Save', :class => 'btn btn-primary'
+    = link_to 'Back', orgs_path, :class => 'btn btn-primary'
+

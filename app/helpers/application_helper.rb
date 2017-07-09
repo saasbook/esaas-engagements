@@ -11,8 +11,8 @@ module ApplicationHelper
       "\n"
   end
 
-  def menu_field(model, field_name, printable_name = 'name')
-    model_class = field_name.to_s.capitalize.constantize
+  def menu_field(model, field_name, printable_name: 'name', model_class: nil)
+    model_class ||= field_name.to_s.capitalize.constantize
     foreign_key = "#{field_name}_id"
     (model.label(model_class.to_s) <<
       '<br/>'.html_safe <<
