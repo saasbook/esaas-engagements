@@ -4,6 +4,9 @@
   %h1
     = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
     = link_to_unless @app.repository_url.blank?, image_tag('octocat.png'), @app.repository_url, :target => '_blank'
+    - unless (url = @app.code_climate_url).blank?
+      = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
+      = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
 
 .well#description
   %label.control-label Description

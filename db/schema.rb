@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709160914) do
+ActiveRecord::Schema.define(version: 20170712182259) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
-    t.integer  "status",         default: 0
+    t.integer  "status",           default: 0
     t.string   "name"
     t.string   "description"
     t.string   "deployment_url"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170709160914) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comments"
+    t.string   "code_climate_url"
   end
 
   add_index "apps", ["org_id"], name: "index_apps_on_org_id"
