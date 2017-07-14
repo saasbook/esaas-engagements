@@ -5,6 +5,10 @@ class AppsController < ApplicationController
   # GET /apps.json
   def index
     @apps = App.all
+    respond_to do |format|
+      format.json { render :json => @apps }
+      format.html 
+    end
   end
 
   # GET /apps/1
