@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :engagements
-  resources :apps
+  resources :apps do
+    resources :engagements, :except => :index
+  end
   resources :orgs
   resources :users
   root :to => 'apps#index'

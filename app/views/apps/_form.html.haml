@@ -17,5 +17,5 @@
   = f.label 'Status'
   = f.select :status, App.statuses.keys
   .actions
-    = f.submit 'Save', :class => 'btn btn-primary'
+    = f.submit 'Save', :class => 'btn btn-success'
     = link_to 'Back', apps_path, :class => 'btn btn-primary'

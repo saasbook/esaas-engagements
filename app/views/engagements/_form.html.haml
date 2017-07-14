@@ -1,0 +1,30 @@
+= form_for([@app,@engagement]) do |f| 
+  - if @engagement.errors.any?
+    #error_explanation
+      %h2 #{pluralize(@engagement.errors.count, "error")}  prohibited this engagement from being saved:
+      %ul
+        - @engagement.errors.full_messages.each do |message|
+          %li= message
+
+  %fieldset
+    %legend Coaching Info
+    = field f, :start_date, :date_select
+    = menu_field f, :coaching_org, :model_class => Org
+    = menu_field f, :coach, :model_class => User
+    = menu_field f, :contact, :model_class => User
+
+  %fieldset
+    %legend Team Info and Work Products
+    = field f, :team_number
+    = field f, :student_names
+    = field f, :screencast_url
+    = field f, :screenshot_url
+    = field f, :poster_url
+    = field f, :presentation_url
+    = field f, :prototype_deployment_url
+
+
+  .actions
+    = f.submit 'Save', :class => 'btn btn-success'
+    = link_to 'Back', @app, :class => 'btn btn-secondary'
+
