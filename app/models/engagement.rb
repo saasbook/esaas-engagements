@@ -15,6 +15,8 @@ class Engagement < ActiveRecord::Base
   validates_presence_of :team_number
   validates_presence_of :start_date
   validates_presence_of :student_names
+
+  has_many :iterations
   
   default_scope { order('start_date DESC') }
 end

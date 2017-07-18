@@ -1,0 +1,19 @@
+%h1 Iterations for #{@engagement.app.name}
+
+%h3= engagement_short_name(@engagement)
+
+%p.explanation Click on iteration end date to edit iteration data.
+
+= link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary'
+= link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'
+
+%table.table
+  %thead
+    %tr
+      %th Iteration End
+      %th Customer Feedback
+  %tbody
+    - @engagement.iterations.each do |iter|
+      %tr
+        %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
+        %td= iter.customer_feedback

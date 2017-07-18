@@ -2,6 +2,8 @@
 
 %h1 Engagements
 
+%p.explanation Click on engagement start date or iteration count to view/edit iterations.
+
 %table
   %thead
     %tr
@@ -14,6 +16,7 @@
       %th Presentation 
       %th Prototype deployment 
       %th Student names
+      %th Iterations
       %th{:colspan => 2}
 
   %tbody 
@@ -22,12 +25,13 @@
         %td= en.coaching_org.try(:name)
         %td= link_to(en.coach.name, user_path(en.coach)) if en.coach
         %td= link_to en.app.name, app_path(en.app)
-        %td= en.start_date.strftime '%F'
+        %td= link_to en.start_date.strftime('%F'), engagement_iterations_path(en)
         %td= link_to('Screencast', en.screencast_url) if en.screencast_url
         %td= link_to('Poster', en.poster_url) if en.poster_url
         %td= link_to('Presentation', en.presentation_url) if en.presentation_url
         %td= link_to('Deployment', en.prototype_deployment_url) if en.prototype_deployment_url
         %td= en.student_names 
+        %td= link_to en.iterations.count, engagement_iterations_path(en)
         %td= link_to 'Show', en, :class => 'btn btn-primary'
         %td= link_to 'Edit', edit_engagement_path(en), :class => 'btn btn-primary' 
       

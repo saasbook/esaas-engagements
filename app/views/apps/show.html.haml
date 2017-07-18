@@ -24,6 +24,9 @@
   %h1 Engagements
   = link_to 'New&hellip;'.html_safe, new_app_engagement_path(@app), :class => 'btn btn-primary'
 
+%p.explanation
+  Click on engagement start date to view or edit Iterations.
+
 %table.table
   %thead
     %tr
@@ -37,7 +40,7 @@
   %tbody
     - @engagements.each_with_index do |engagement,indx|
       %tr
-        %td= engagement.start_date.strftime '%F'
+        %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
         %td= mail_to(engagement.contact.email, engagement.contact.name) if engagement.contact
         %td= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
         %td= engagement.team_number

@@ -1,7 +1,8 @@
 class App < ActiveRecord::Base
   belongs_to :org
   has_many :engagements
-
+  has_many :iterations, :through => :engagements
+  
   validates_presence_of :name, :description, :org_id, :status, :repository_url
   
 

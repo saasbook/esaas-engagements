@@ -1,16 +1,11 @@
 class EngagementsController < ApplicationController
   before_action :set_app
-  before_action :set_engagement, only: [:show, :edit, :update, :destroy]
+  before_action :set_engagement, only: [:edit, :update, :destroy]
 
   # GET /engagements
   # GET /engagements.json
   def index
-    @engagements = Engagement.all
-  end
-
-  # GET /engagements/1
-  # GET /engagements/1.json
-  def show
+    @engagements = Engagement.where(:app_id => @app.id)
   end
 
   # GET /engagements/new
