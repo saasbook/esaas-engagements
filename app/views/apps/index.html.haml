@@ -11,9 +11,16 @@
   %tbody
     - @apps.each do |app|
       %tr{:class => row_background_for(app)}
-        %td= link_to app.name, app
+        %td
+          = app.id
+          = link_to app.name, app
         %td= app.org.name
-        %td= app.description
+        %td
+          = app.description
+          %br
+          - app.engagements.each do |engagement|
+            %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
+            %br
         %td= link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
         %td= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
 %br/
