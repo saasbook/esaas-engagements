@@ -5,6 +5,8 @@ Fox, is to do continuous tracking over time of customer apps developed
 by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
 
+[![Code Climate](https://img.shields.io/codeclimate/github/saasbook/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/saasbook/esaas-engagements)
+
 The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
 
 Since we have had many repeat customers who come back in subsequent
