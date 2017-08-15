@@ -1,1 +1,8 @@
 body { padding: 2ex; }
+
+.dead { background-color: #ffcccc; }
+.development { background-color: #b3d9ff; }
+.in_use  { }
+.in_use_and_wants_improvement  { background-color: #b3ffb3;  }
+.inactive_but_wants_improvement  { background-color: #ffff99; }
+

@@ -15,7 +15,7 @@
   = field f, :comments, :text_area
   = menu_field f, :org
   = f.label 'Status'
-  = f.select :status, App.statuses.keys
+  = f.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize }
   .actions
     = f.submit 'Save', :class => 'btn btn-success'
     = link_to 'Back', apps_path, :class => 'btn btn-primary'

@@ -1,7 +1,16 @@
 %p#notice= notice
 .page-header
   %h1 Listing Apps
-%table.table.table-condensed
+  #filters
+    Show:
+    - App.statuses.keys.each do |status|
+      = check_box_tag status, 1, true, :class => 'filter'
+      %span{:class => status}= status.humanize
+    :javascript
+      $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
+      
+    
+%table.table.table-condensed#apps_table
   %thead
     %tr
       %th Name
@@ -10,7 +19,7 @@
       %th{:colspan => "2"}
   %tbody
     - @apps.each do |app|
-      %tr{:class => row_background_for(app)}
+      %tr{:class => app.status.to_s}
         %td
           = app.id
           = link_to app.name, app
