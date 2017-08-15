@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     resources :iterations
   end
   resources :orgs
-  resources :users
+  resources :users, :only => [:index, :new, :edit, :create, :update]
   root :to => 'apps#index'
 end

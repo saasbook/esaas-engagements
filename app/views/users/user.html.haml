@@ -1,0 +1,19 @@
+%h1 #{action_name.capitalize} User
+
+= form_for(@user) do |f|
+  - if @user.errors.any?
+    #error_explanation.alert.alert-danger
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prevented this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+
+  = field f, :name
+  = field f, :email
+  = field f, :github_uid
+
+  .actions
+    = f.submit 'Save', :class => 'btn btn-success'
+    = link_to 'Back', users_path, :class => 'btn btn-primary'
