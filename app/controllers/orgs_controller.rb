@@ -4,7 +4,7 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
-    @orgs = Org.all
+    @orgs = Org.all.includes(:apps)
   end
 
   # GET /orgs/1
