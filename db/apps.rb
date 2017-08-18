@@ -15,12 +15,12 @@ CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
       App.create!(
       :org => org,
       :name => appname,
-      :status => :inactive,
+      :status => :dead,
       :description => p[13] || 'NA',
       :deployment_url => p[14],
       :repository_url => p[15] || 'http://')
     coach = User.where("email = ?", p[9]).first ||
-      User.create!(:name => p[10], :email => p[9])
+      User.create!(:name => p[10] || "Unknown", :email => p[9] || "unknown@email.com")
     app.engagements.create!(
       :team_number => "#{p[0]}-#{p[2]}",
       :start_date => Time.parse(p[1]),
@@ -31,7 +31,7 @@ CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
       :poster_url => p[19],
       :presentation_url => p[18],
       :prototype_deployment_url => p[14],
-      :student_names => p[25]
+      :student_names => p[25] || "Unknown"
       )
   else
     puts "No org #{p[11]}"

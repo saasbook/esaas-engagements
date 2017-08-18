@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def user_params
     params.
       require(:user).
-      permit(:name,:email,:github_uid)
+      permit(:name,:email,:preferred_contact,:github_uid)
   end
 
 

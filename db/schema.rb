@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718172604) do
+ActiveRecord::Schema.define(version: 20170818165700) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 20170718172604) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comments"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "city_state_zip"
   end
 
   add_index "orgs", ["contact_id"], name: "index_orgs_on_contact_id"
@@ -76,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170718172604) do
     t.string   "github_uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "preferred_contact"
   end
 
 end
