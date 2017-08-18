@@ -1,5 +1,7 @@
 #flash_messages
   - unless flash[:notice].blank?
     .alert.alert-success= flash[:notice]
+  - unless flash[:alert].blank?
+    .alert.alert-danger= flash[:alert]
 
     

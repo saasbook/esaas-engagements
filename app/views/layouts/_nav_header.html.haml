@@ -1,6 +1,10 @@
-- klass = controller.controller_name
-%ul.nav.nav-tabs
-  %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
-  %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
-  %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
-  %li= link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank'
+#nav_header
+  - klass = controller.controller_name
+  %ul.nav.nav-tabs
+    %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
+    %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
+    %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
+    %li= link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank'
+    - if @current_user
+      %li= link_to "Logout @#{@current_user.github_uid}", logout_path
+

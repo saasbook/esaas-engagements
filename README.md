@@ -76,26 +76,28 @@ seed the development database with a subset of the initial data set.
 You should then be able to use `rails server` to start the app, and
 point your browser at `http://localhost:3000` to access it.
 
-The file `config/application.yml.asc` is an encrypted version of a
-credentials file needed to login.  This is a temporary hack, and when
-the app is deployed locally in development mode, it won't ask for a 
-password.  But if you deploy your own staging version to your own
-Heroku container, you will have to create the file `config/application.yml` 
-that looks like this:
+## Logging In (Production)
 
-```yaml
-auth_user: your_username
-auth_pass: your_password
-```
+In production, you login with your GitHub account.  Login is only
+permitted for a user whose `github_uid` field in the database is set to
+their GitHub username, e.g. `armandofox`.  So, get someone who already
+has this field set to set the field for your user record.
 
-This is the username/password to login to the overall app.  Once you have
-deployed the app to Heroku, run `figaro heroku:set -e production` to
-cause the username and password values to be propagated to Heroku.
+## Logging In (Development)
+
+The file `db/github_mock_login.yml` contains the attributes for a fake
+user that you can login-as for development work.  You will always be
+logged in as the user whose info appears in this file.  **Important:**
+You must have run `rake db:seed` to create the fake orgs, apps, and this
+user. 
+
+The file `config/application.yml.asc` is an encrypted version of the
+file containing the GitHub application key and secret for OmniAuth. 
+You shouldn't need to change it, but if you do, get the encryption key
+from @armandofox so that you can decrypt, modify, then re-encrypt and
+commit `application.yml.asc`.
 
 # High priority feature list
 
-0. SSO-only login: GitHub for devs/coaches, Google or Facebook or
-LinkedIn for customer contacts
-0. Add/edit/manage users, including signup using SSO
 0. Add user contact info and a way to track user meeting notes
-0. Add/edit engagements
+0. Google or Facebook or LinkedIn login for customer contacts

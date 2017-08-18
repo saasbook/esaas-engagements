@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # OmniAuth authentication with GitHub
+  get 'login' => 'session#login', :as => 'login'
+  match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]
+  get 'auth/failure' => 'session#failure'
+  get 'logout' => 'session#destroy'
+
   # route /apps/:app_id/engagements/:engagement_id
   resources :apps do
     resources :engagements, :except => :index

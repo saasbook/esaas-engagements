@@ -8,3 +8,6 @@
 
 require "#{Rails.root}/db/orgs.rb"
 require "#{Rails.root}/db/apps.rb"
+# Create the user used for mocking the GitHub OAuth login in non-production envs.
+User.create!(YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml"))
+

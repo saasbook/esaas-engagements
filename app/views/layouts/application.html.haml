@@ -6,6 +6,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = render 'layouts/nav_header'
-    = render 'shared/flash_messages'
-    = yield
+    #main.container
+      = render 'layouts/nav_header'
+      = render 'shared/flash_messages'
+      = yield
