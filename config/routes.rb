@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :engagements, :only => [] do # don't route engagements by themselves
     resources :iterations
   end
-  resources :orgs
+  resources :orgs, :except => :show
   resources :users, :only => [:index, :new, :edit, :create, :update]
   root :to => 'apps#index'
 end

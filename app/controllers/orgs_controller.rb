@@ -7,11 +7,6 @@ class OrgsController < ApplicationController
     @orgs = Org.all.includes(:apps)
   end
 
-  # GET /orgs/1
-  # GET /orgs/1.json
-  def show
-  end
-
   # GET /orgs/new
   def new
     @org = Org.new
@@ -28,7 +23,7 @@ class OrgsController < ApplicationController
 
     respond_to do |format|
       if @org.save
-        format.html { redirect_to @org, notice: 'Org was successfully created.' }
+        format.html { redirect_to orgs_path, notice: 'Org was successfully created.' }
         format.json { render :show, status: :created, location: @org }
       else
         format.html { render :new }
