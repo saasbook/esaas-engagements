@@ -7,7 +7,7 @@ class AppsController < ApplicationController
   def index
     @apps = App.all
     respond_to do |format|
-      format.json { render :json => @apps }
+      format.json { render :json => @apps.featured }
       format.html 
     end
   end
