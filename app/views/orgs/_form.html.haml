@@ -15,6 +15,7 @@
   = field f, :description, :text_area
   = field f, :url
   = field f, :comments, :text_area
+  = field f, :defunct, :check_box
   = menu_field f, :contact, :model_class => User
   .actions
     = f.submit 'Save', :class => 'btn btn-success'
