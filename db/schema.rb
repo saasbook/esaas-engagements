@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818172540) do
+ActiveRecord::Schema.define(version: 20170911013601) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170818172540) do
     t.string   "address_line_2"
     t.string   "city_state_zip"
     t.string   "phone"
+    t.boolean  "defunct",        default: false
   end
 
   add_index "orgs", ["contact_id"], name: "index_orgs_on_contact_id"

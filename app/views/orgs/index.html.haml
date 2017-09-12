@@ -12,7 +12,7 @@
       %th{:colspan=>2}
     %tbody
       - @orgs.each do |org|
-        %tr
+        %tr{:class => ("defunct" if org.defunct)}
           %td= link_to_unless org.url.blank?, org.name, org.url, :target => '_blank'
           %td= mail_to org.contact.email, org.contact.name 
           %td= org.description 
