@@ -11,7 +11,7 @@ end
 
 def get_orgs
   [
-    ["johndoe@email.com", "John Doe", "AAAA", "The empty org"],
+    ["johndoe@email.com", "John Doe", "--- Pending Organization ---", "The empty org"],
     ["skylareconomy@gmail.com","Skylar Economy","Photogenie Films, LLC","FITE Film (From Incarceration to Education), a documentary film"],
     ["akkhazan@berkeley.edu","Anish Khazane","Project RISHI - Berkeley Chapter","NGO doing rural work all over India","http://www.projectrishi.org"],
     ["campaign@evolve-ca.org","Evolve CA","Evolve, a Community Organization"],

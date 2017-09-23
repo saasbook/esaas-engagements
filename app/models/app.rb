@@ -7,9 +7,9 @@ class App < ActiveRecord::Base
   validates_presence_of :repository_url, unless: :pending?
 
   default_scope { order(:name => :asc) }
-  enum :status => { :dead => 0, :development => 1, :in_use => 2, :in_use_and_wants_improvement => 3, :inactive_but_wants_improvement => 4, :pending => 5 }
+  enum :status => { :pending => 0, :dead => 1, :development => 2, :in_use => 3, :in_use_and_wants_improvement => 4, :inactive_but_wants_improvement => 5}
 
-  scope :featured, -> { where.not("status = 0") }
+  scope :featured, -> { where.not("status = 0 or status = 1") }
 
   def as_json(options={})
     options[:only] = [:id,:name,:description,:deployment_url,:repository_url]
