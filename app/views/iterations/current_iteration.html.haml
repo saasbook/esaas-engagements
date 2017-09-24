@@ -1,0 +1,21 @@
+= link_to "Get customer feedback", get_customer_feedback_path, :class => "btn btn-primary"
+
+%table.table
+  %thead
+    %tr
+      %th End date
+      %th App
+      %th Customer
+      %th Email
+      %th Email sent?
+  %tbody
+    - @iterations.each do |iter, eng|
+      %tr
+        %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(eng,iter)
+        %td= eng.app.name
+        %td= eng.contact.name
+        %td= eng.contact.email
+        - if PendingFeedback.exists?(:engagement_id => eng.id, :iteration_id => iter.id)
+          %td Yes
+        - else
+          %td No

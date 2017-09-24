@@ -1,0 +1,10 @@
+%h1= "Hi, #{@customer}! Please enter your feedback below."
+
+=form_tag feedback_process_response_path(@engagement.id, @iteration.id), :method => :post do
+	%p Feedback
+	=text_area_tag "feedback", ""
+	%p Other
+	=text_area_tag "other", ""
+	%br
+	%br
+	=submit_tag "Submit", :class => "btn btn-primary"

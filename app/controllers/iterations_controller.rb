@@ -1,7 +1,7 @@
 class IterationsController < ApplicationController
 
   before_action :set_iteration, :only => [:edit,:update,:destroy]
-  before_action :set_engagement
+  before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
 
   def index ; end
 
@@ -32,6 +32,33 @@ class IterationsController < ApplicationController
   def destroy
     @iteration.destroy
     redirect_to @app, notice: 'Engagement was successfully destroyed.'
+  end
+
+  def current_iteration
+    iterations = Iteration.where(:customer_feedback => "").all()
+    @iterations = iterations.map do |iter|
+      [iter, iter.engagement]
+    end
+  end
+
+  def get_customer_feedback
+    iterations = Iteration.where(:customer_feedback => "").all()
+    iterations = iterations.map do |iter|
+      [iter, iter.engagement]
+    end
+    iterations.each do |iter, eng|
+      unless PendingFeedback.exists?(:engagement_id => eng.id, :iteration_id => iter.id)
+        pf = PendingFeedback.new
+        pf.engagement = eng
+        pf.iteration = iter
+        pf.save
+
+        puts "*"*1000
+        puts "http://localhost:3000/feedback/#{eng.id}/#{iter.id}"
+        puts "*"*1000
+      end 
+    end
+    redirect_to current_iteration_path
   end
 
   private
