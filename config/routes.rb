@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   resources :orgs, :except => :show
   resources :users, :only => [:index, :new, :edit, :create, :update]
   root :to => 'apps#index'
+
+  get 'current_iteration' => 'iterations#current_iteration', :as => 'current_iteration'
+  get 'get_customer_feedback' => 'iterations#get_customer_feedback', :as => 'get_customer_feedback'
+  get 'feedback/:engagement_id/:iteration_id' => 'pending_feedback#form', :as => 'feedback_form'
+  post 'feedback/:engagement_id/:iteration_id' => 'pending_feedback#process_response', :as => 'feedback_process_response'
 end
