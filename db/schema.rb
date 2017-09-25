@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924201905) do
+ActiveRecord::Schema.define(version: 20170925160606) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
-    t.integer  "status",           default: 0
+    t.integer  "status",           default: 5
     t.string   "name"
     t.string   "description"
     t.string   "deployment_url"
