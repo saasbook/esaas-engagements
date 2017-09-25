@@ -53,9 +53,8 @@ class IterationsController < ApplicationController
         pf.iteration = iter
         pf.save
 
-        puts "*"*1000
-        puts "http://localhost:3000/feedback/#{eng.id}/#{iter.id}"
-        puts "*"*1000
+        url = "http://localhost:3000/feedback/#{eng.id}/#{iter.id}"
+        FormMailer.send_form(eng.contact.name, eng.contact.email, url).deliver_now
       end 
     end
     redirect_to current_iteration_path
