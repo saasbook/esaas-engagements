@@ -53,11 +53,8 @@ class IterationsController < ApplicationController
         pf.iteration = iter
         pf.save
 
-        if Rails.env.production?
-          url = "http://esaas-engagements.herokuapp.com/feedback/#{eng.id}/#{iter.id}"
-        else
-          url = "http://localhost:3000/feedback/#{eng.id}/#{iter.id}"
-        end
+        host = request.env["REQUEST_URI"].split("/")[2]
+        url = "http://#{host}/feedback/#{eng.id}/#{iter.id}"
         FormMailer.send_form(eng.contact.name, eng.contact.email, url).deliver_now
       end 
     end
