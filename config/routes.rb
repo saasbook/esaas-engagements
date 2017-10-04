@@ -21,6 +21,6 @@ Rails.application.routes.draw do
   get 'get_customer_feedback' => 'iterations#get_customer_feedback', :as => 'get_customer_feedback'
   get 'feedback/:engagement_id/:iteration_id' => 'pending_feedback#form', :as => 'feedback_form'
   post 'feedback/:engagement_id/:iteration_id' => 'pending_feedback#process_response', :as => 'feedback_process_response'
-  post 'search' => 'apps#search', :as => 'search'
-  get 'results' => 'apps#results', :as => 'results'
+  post 'search' => 'search#search', :as => 'search'
+  get 'results' => 'search#results', :as => 'results'
 end
