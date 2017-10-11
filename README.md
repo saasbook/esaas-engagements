@@ -7,6 +7,7 @@ Engineering](https://cs169.saas-class.org).
 
 [![Build Status](https://travis-ci.org/andrewhalle/esaas-engagements.svg?branch=master)](https://travis-ci.org/andrewhalle/esaas-engagements)
 [![Code Climate](https://img.shields.io/codeclimate/github/saasbook/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/saasbook/esaas-engagements)
+[![Test Coverage](https://codeclimate.com/github/codeclimate/codeclimate/badges/coverage.svg)](https://codeclimate.com/github/codeclimate/codeclimate/coverage)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
 
