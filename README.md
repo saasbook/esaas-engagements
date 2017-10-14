@@ -13,6 +13,8 @@ Engineering](https://cs169.saas-class.org).
 
 The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
 
+Heroku Link: https://shielded-bastion-61752.herokuapp.com/
+
 Since we have had many repeat customers who come back in subsequent
 semesters to have a new student cohort enhance an existing app, this
 system will track an app's current status over its lifetime as it is
