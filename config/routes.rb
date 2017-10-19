@@ -23,4 +23,7 @@ Rails.application.routes.draw do
   post 'feedback/:engagement_id/:iteration_id' => 'pending_feedback#process_response', :as => 'feedback_process_response'
   post 'search' => 'search#search', :as => 'search'
   get 'results' => 'search#results', :as => 'results'
+  
+  get 'creation' => 'creation#new', :as => 'creation'
+  post 'creation' => 'creation#create', :as => 'create_all'
 end

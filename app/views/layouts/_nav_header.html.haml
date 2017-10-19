@@ -4,6 +4,7 @@
     %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
     %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
+    %li= link_to 'Creation', creation_path, :class => ('active' if klass =~ /creation/i), :role => 'presentation'
     %li= link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank'
     - if @current_user
       %li= link_to "Current iteration", current_iteration_path
