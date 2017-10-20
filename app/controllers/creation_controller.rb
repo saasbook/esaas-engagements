@@ -13,38 +13,44 @@ class CreationController < ApplicationController
     end
     
     def new
+        @user = User.new
+        @org = Org.new
+        @app = App.new
     end
 
     def  create
-        byebug
+        # byebug
+        # create user, check error. if error. re-render 
+        # create the org, check error, if error, DELETE USER@@@@
+        # create the app, check error, if error, DELETE THE USER AND ORG@@@@@@
+
+        #why am i getting rid of @model specific models again? llolol
+
         @user = User.new(user_params)
-        @org = Org.new(org_params)
-        @app = App.new(app_params)
-        
-        respond_to do |format|
-            user_errs = !@user.save
-            org_errs = !@org.save
-            app_errs = !@app.save
-            if user_errs || org_errs || app_errs
-                errs = []
-                if user_errs
-                    errs.push(@user.errors)
-                    print @user.errors
-                end
-                if org_errs
-                    errs.push(@org.errors)
-                    print @org.errors
-                end
-                if app_errs
-                    errs.push(@app.errors)
-                    print @app.errors
-                end
-                format.html { render :new }
-                format.json { render json: errs, status: :unprocessable_entity }
-            else
-                format.html { redirect_to app_path(@app), notice: 'User, Org, and App were successfully created.' }
-            end
+        no_user_err = @user.save
+        if !no_user_err
+            @errors = @user.errors.full_messages
+            render :new and return
         end
+
+        @org = Org.new(org_params.merge(:contact => @user))
+        no_org_err = @org.save
+        if !no_org_err
+            @errors = @org.errors.full_messages
+            @user.destroy
+            render :new and return
+        end
+
+        @app = App.new(app_params.merge(:org_id => @org.id))
+        no_app_err = @app.save
+        if !no_app_err
+            @errors = @app.errors.full_messages
+            @user.destroy
+            @org.destroy
+            render :new and return
+        end
+        
+        redirect_to app_path(@app), notice: 'User, Org, and App were successfully created.'
     end
                 
 
