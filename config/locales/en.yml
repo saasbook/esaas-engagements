@@ -21,3 +21,33 @@
 
 en:
   hello: "Hello world"
+  
+en:
+  activerecord:
+    attributes:
+      user:
+        name: "User Name"
+        email: "User E-mail address"
+      org:
+        name: "Org Name"
+      app:
+        name: "App Name"
+        description: "App Description"
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "can't be blank"
+            email:
+              blank: "can't be blank"
+        org:
+          attributes:
+            name:
+              blank: "can't be blank"
+        app:
+          attributes:
+            name:
+              blank: "can't be blank"
+            description:
+              blank: "can't be blank"
