@@ -25,7 +25,10 @@ Scenario: User cannot submit if form is blank
     Then creation should fail with "Form is incomplete"
 
 Scenario: User cannot submit if form is incomplete
-    Given I fill in the following:
+    And I fill in the "User Information" fields as follows:
+    And I fill in the "Org Information" fields as follows:
+    And I fill in the "App Information" fields as follows:
+
       	| User Name        | Faker         |
       	| Org Name         | Fake Org      |
       	| Org url          | sofake.com    |
@@ -35,6 +38,8 @@ Scenario: User cannot submit if form is incomplete
 	Then creation should fail with "Form is incomplete"
 
 Scenario: User can submit successfully if form is complete
+    And I fill in the "User Information" fields as follows:
+    And I fill in the "Org Information" fields as follows:
     And I fill in the "App Information" fields as follows:
     	| App Name       		 | Fake app      	        |
     	| App Description        | Fake app description     |
