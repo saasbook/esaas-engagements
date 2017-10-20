@@ -8,6 +8,8 @@
         %li= message
 
 = form_tag creation_path do
+
+  //attempt at creating columns for easier viewing --unsucessful
         
   // #bottom
   //   .column-left{ float: left; width: 33%; }
@@ -86,11 +88,10 @@
   //     %br
   //     = text_area :app, 'comments'
   //     %br
+  
   %br
-  %em <strong> User Information </strong>
-  %br
-  %br
-  .User
+  %fieldset#User
+    %legend= 'User Information'
     = label :user, :name, 'User Name'
     %br
     = text_field :user, 'name'
@@ -108,10 +109,8 @@
     = text_field :user, 'github_uid'
     %br
   %br
-  %em <strong> Org Information </strong>
-  %br
-  %br
-  .Org
+  %fieldset#Org
+    %legend= 'Org Information'
     = label :org, :name, 'Organization Name'
     %br
     = text_field :org, 'name'
@@ -149,10 +148,8 @@
     = check_box :org, 'defunct'
     %br
   %br
-  %em <strong> App Information </strong>
-  %br
-  %br
-  .App
+  %fieldset#App
+    %legend= 'App Information'
     = label :app, :name, 'App Name'
     %br
     = text_field :app, 'name'
@@ -178,5 +175,5 @@
     %br
     = text_area :app, 'comments'
     %br
-  
+  %br
   = submit_tag 'Create'
