@@ -49,7 +49,7 @@ Scenario: User cannot submit if form is incomplete
         | field            | value         |
       	| User             | Fake app name |
 	And I press "Submit"
-	Then creation should fail with "User E-mail address"
+	Then creation should fail with "User E-mail address can't be blank"
 
 Scenario: User can submit successfully if form is complete
     And I follow "Create"
@@ -80,6 +80,7 @@ Scenario: User can submit successfully if form is complete
     Then I should be on the app details page for "Fake app"
 
 Scenario: User can clear the form
-    Given I fill in "User Name" with "Some Name"
-    And I press "Clear"
-    Then I should see an empty form
+    Given I follow "Create"
+    And I fill in "User Name" with "Some Name"
+    And I follow "Cancel"
+    Then the field "User Name" should be empty

@@ -15,8 +15,8 @@ Given(/^I am logged in on the "([^"]*) page$/) do |arg|
   visit "/arg"
 end
 
-Then /^I should see an empty form$/ do
-  pending
+Then /^the field "(.*)" should be empty$/ do |field|
+  expect(find_field("#{field}").value).to be nil
 end
 
 Then /^I should be on the "([^"]*) page$/ do |arg|
