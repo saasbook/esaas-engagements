@@ -1,0 +1,2 @@
+export github_key=WHATEVERYOUWANT
+export github_secret=WHICHEVERYOUWANT
