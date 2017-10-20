@@ -26,16 +26,16 @@ Scenario: User cannot submit if form is blank
 
 Scenario: User cannot submit if form is incomplete
     Given I fill in the following:
-      		| User Name        | Faker         |
-      		| Org Name         | Fake Org      |
-      		| Org url          | sofake.com    |
-      		| App Name         | Fake It       |
-      		| Repository url   | notreal.com   |
+      	| User Name        | Faker         |
+      	| Org Name         | Fake Org      |
+      	| Org url          | sofake.com    |
+      	| App Name         | Fake It       |
+      	| Repository url   | notreal.com   |
 	And I press "Submit"
 	Then creation should fail with "Form is incomplete"
 
 Scenario: User can submit successfully if form is complete
-    And I fill in the "App" fields as follows:
+    And I fill in the "App Information" fields as follows:
     	| App Name       		 | Fake app      	        |
     	| App Description        | Fake app description     |
     	| App Deployment url     | Fake app deployment url  |
