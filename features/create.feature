@@ -4,19 +4,34 @@ Feature: create a new app, user, and organization all at once
     So that I can quickly create an app, user, organization
     I want to create everything on one page
 
-Background: Logged in as admin on the create page
-    Given I'm logged in on the orgs page
-    And I follow "create"
+Background: Logged in
+    Given the following apps exist:
+        | name  | description | org_id | status  |
+        | app1  | test        | 1      | pending |
+        | app2  | test        | 1      | pending |
+        | app3  | test        | 1      | pending |
+
+    And the following orgs exist:
+        | name | contact_id |
+        | org1 | 1          |
+        | org2 | 1          |
+        | org3 | 1          |
+
+    And the following users exist:
+        | name  | github_uid      | email         |
+        | user1 | esaas_developer | test@user.com |
+        | user2 |                 | test@user.com |
+        | user3 |                 | test@user.com |
 
 Scenario: An admin user can visit the create tab
     Given I'm logged in on the orgs page
-    And I press "create"
+    And I follow "Create"
     Then I should be on the create page
 
 Scenario: If you're not logged in and you click on the create tab, there should be an option to log in as admin
     Given I am not logged in
     #web_steps.rb already has below step, we just need to ensure the link is called "create"
-    And I press "Create"
+    And I follow "Create"
     Then I should see "Log in with GitHub"
 
 Scenario: User cannot submit if form is blank

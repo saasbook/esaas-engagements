@@ -24,7 +24,7 @@ Then /^I should be on the "([^"]*) page$/ do |arg|
 end
 
 Given /^the form is "blank"$/ do
-  pending
+  visit creation_path
 end
 
 Given /^an app exists with the parameters: "(.*)"$/ do |parameters|
