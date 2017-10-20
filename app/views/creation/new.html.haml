@@ -8,7 +8,6 @@
         %li= message
 
 = form_tag creation_path do
-  = button_tag 'Clear', type: :reset
 
   //attempt at creating columns for easier viewing --unsucessful
         
@@ -178,3 +177,5 @@
     %br
   %br
   = submit_tag 'Submit'
+  
+  = link_to 'Cancel', creation_path
