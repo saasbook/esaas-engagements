@@ -9,6 +9,8 @@
 
 = form_tag creation_path do  
   %br
+  <div class="row" style="display: table; clear: both;">
+  <div class="column left" style="float: left; padding: 60px;">
   %fieldset#User
     %legend= 'User Information'
     = label :user, :name, 'User Name'
@@ -27,7 +29,9 @@
     %br
     = text_field :user, 'github_uid'
     %br
-  %br
+  </div>
+
+  <div class="column middle" style="float: left; padding: 60px;">
   %fieldset#Org
     %legend= 'Org Information'
     = label :org, :name, 'Organization Name'
@@ -66,7 +70,9 @@
     %br
     = check_box :org, 'defunct'
     %br
-  %br
+    </div>
+
+  <div class="column right" style="float: left; padding: 60px;">
   %fieldset#App
     %legend= 'App Information'
     = label :app, :name, 'App Name'
@@ -95,6 +101,9 @@
     = text_area :app, 'comments'
     %br
   %br
+  </div>
+  </div>
+
   = submit_tag 'Submit'
   
   = link_to 'Cancel', creation_path
