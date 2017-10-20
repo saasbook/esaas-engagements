@@ -8,6 +8,7 @@
         %li= message
 
 = form_tag creation_path do
+  = button_tag 'Clear', type: :reset
 
   //attempt at creating columns for easier viewing --unsucessful
         
@@ -131,7 +132,7 @@
     %br
     = text_field :org, 'phone'
     %br
-    = label :org, :description, 'Description'
+    = label :org, :description, 'Organization Description'
     %br
     = text_area :org, 'description'
     %br
@@ -139,7 +140,7 @@
     %br
     = text_field :org, 'url'
     %br
-    = label :org, :comments, 'Comments'
+    = label :org, :comments, 'Organization Comments'
     %br
     = text_area :org, 'comments'
     %br
@@ -154,7 +155,7 @@
     %br
     = text_field :app, 'name'
     %br
-    = label :app, :description, 'Description'
+    = label :app, :description, 'App Description'
     %br
     = text_area :app, 'description'
     %br
@@ -171,7 +172,7 @@
     %br
     = text_field :app, 'code_climate_url'
     %br
-    = label :app, :comments, 'Comments'
+    = label :app, :comments, 'App Comments'
     %br
     = text_area :app, 'comments'
     %br
