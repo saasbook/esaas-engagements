@@ -35,7 +35,7 @@ Scenario: User cannot submit if form is incomplete
 	Then creation should fail with "Form is incomplete"
 
 Scenario: User can submit successfully if form is complete
-	Given I fill in the following:
+    And I fill in the "App" fields as follows:
     	| App Name       		 | Fake app      	        |
     	| App Description        | Fake app description     |
     	| App Deployment url     | Fake app deployment url  |
