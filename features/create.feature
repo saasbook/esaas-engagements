@@ -77,7 +77,7 @@ Scenario: User can submit successfully if form is complete
     	| Code Climate url   | Fake app codeclimate url |
         | App Comments       | Fake app status          |
     And I press "Submit"
-    Then I should be on the app page for the app "fake_app"
+    Then I should be on the app details page for "Fake app"
 
 Scenario: User can clear the form
     Given I fill in "User Name" with "Some Name"

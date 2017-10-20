@@ -18,6 +18,9 @@ module NavigationHelpers
       
     when /^the create page$/
       then creation_path
+          
+    when /^the app details page for "(.*)"$/ then app_path(App.find_by_name($1))
+      
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
