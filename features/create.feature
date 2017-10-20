@@ -49,7 +49,7 @@ Scenario: User cannot submit if form is incomplete
         | field            | value         |
       	| User             | Fake app name |
 	And I press "Submit"
-	Then creation should fail with "Email can't be blank"
+	Then creation should fail with "User E-mail address"
 
 Scenario: User can submit successfully if form is complete
     And I follow "Create"
