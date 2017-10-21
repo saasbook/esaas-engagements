@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020225300) do
+ActiveRecord::Schema.define(version: 20171021062049) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20171020225300) do
     t.string   "repository_url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "comments"
     t.string   "code_climate_url"
   end
 

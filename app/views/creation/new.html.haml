@@ -7,7 +7,7 @@
       - @errors.each do |message|
         %li= message
 
-= form_tag creation_path do  
+= form_tag creation_path do
   %br
   <div class="row" style="display: table; clear: both;">
   <div class="column left" style="float: left; padding: 60px;">
@@ -96,14 +96,10 @@
     %br
     = text_field :app, 'code_climate_url'
     %br
-    = label :app, :comments, 'App Comments'
-    %br
-    = text_area :app, 'comments'
-    %br
   %br
   </div>
   </div>
 
-  = submit_tag 'Submit'
-  
-  = link_to 'Cancel', creation_path
+  = submit_tag 'Submit', :class => 'btn btn-primary'
+
+  = link_to 'Cancel', creation_path, :class => 'btn btn-primary'

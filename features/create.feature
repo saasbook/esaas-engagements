@@ -22,7 +22,7 @@ Background: Logged in
         | user1 | esaas_developer | test@user.com |
         | user2 |                 | test@user.com |
         | user3 |                 | test@user.com |
-    
+
     And I'm logged in on the orgs page
 
 Scenario: An admin user can visit the create tab
@@ -75,7 +75,6 @@ Scenario: User can submit successfully if form is complete
     	| Deployment url     | Fake app deployment url  |
     	| Repository url     | Fake app repository      |
     	| Code Climate url   | Fake app codeclimate url |
-        | App Comments       | Fake app status          |
     And I press "Submit"
     Then I should be on the app details page for "Fake app"
 
