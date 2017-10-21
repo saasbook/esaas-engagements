@@ -25,18 +25,17 @@ Background: a user is logged into the app
 
     And I am logged in
     And I follow "app1"
-    And I follow "Edit"
 
 Scenario: user does not fill in the comment form (sad path)
-	Given I fill in "New Comment" with ""
+	Given I fill in "Write a comment..." with ""
 	And the time is "1997-07-16T19:20"
-	When I press "Add Comment"
-	Then I should see "You cannot add a blank comment."
+	When I press "Post"
+	Then I should not see "user1"
 
 Scenario: user fills in some comment in the form (happy path)
-	Given I fill in "New Comment" with "This App is AWESOME!"
+	Given I fill in "Write a comment..." with "This App is AWESOME!"
 	And the time is "1997-07-16T19:20"
-	When I press "Add Comment"
-	Then I should see "This App is AWESOME!" within "Comments"
-	And I should see "esaas_developer" within "Comments"
-	And I should see "1997.07.16 at 7:20PM" within "Comments"
+	When I press "Post"
+	Then I should see "This App is AWESOME!"
+	And I should see "user1"
+	And I should see "Jul 16, 1997 at 7:20:00 PM"

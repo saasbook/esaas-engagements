@@ -26,6 +26,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'jasmine-rails'
   gem 'database_cleaner'
+  gem 'timecop'
 end
 
 group :production do
