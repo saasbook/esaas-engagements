@@ -25,7 +25,7 @@
                 %span.time= comment.created_at.strftime("%b %d, %Y at %l:%M:%S %p")
               %div.edit-delete
                 %span= link_to 'Edit', edit_app_comment_path(params[:id], comment.id)
-                %span= '|'
+                \|
                 %span= link_to 'Delete', app_comment_path(params[:id], comment.id), :method => :delete
 
             %div.comment-body= comment.content
