@@ -1,7 +1,7 @@
 require 'time'
 
 And /^the time is "(.*)"$/ do |utc_time|
-    Timecop.freeze(Time.parse(utc_time))
+    Timecop.freeze(Time.zone.parse(utc_time))
 end
 
 Given /^I am logged in$/ do

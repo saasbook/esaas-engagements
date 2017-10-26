@@ -14,9 +14,28 @@
 
 .well#comments
   %label.control-label Comments
-  %p= @app.comments
+  %div.comment-list
+    %ul
+      -@app.comments.each do |comment|
+        %li
+          %div.comment-box
+            %div.comment-header
+              %div.username-time
+                %span.username= comment.username
+                %span.time= comment.created_at.strftime("%b %d, %Y at %l:%M:%S %p")
+              %div.edit-delete
+                %span= link_to 'Edit', edit_app_comment_path(params[:id], comment.id)
+                \|
+                %span= link_to 'Delete', app_comment_path(params[:id], comment.id), :method => :delete
 
-= link_to 'Edit', edit_app_path(@app) 
+            %div.comment-body= comment.content
+
+  = form_tag app_comments_path(@app) do
+    = label :comment, :content, "Write a comment..."
+    = text_area :comment, 'content'
+    %br= submit_tag 'Post', :class => "btn btn-primary"
+
+= link_to 'Edit', edit_app_path(@app)
 \|
 = link_to 'Back', apps_path
 

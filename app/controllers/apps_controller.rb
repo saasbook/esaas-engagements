@@ -8,7 +8,7 @@ class AppsController < ApplicationController
     @apps = App.all
     respond_to do |format|
       format.json { render :json => @apps.featured }
-      format.html 
+      format.html
     end
   end
 
@@ -24,6 +24,7 @@ class AppsController < ApplicationController
 
   # GET /apps/1/edit
   def edit
+    @comments = App.find_by_id(params[:id]).comments
   end
 
   # POST /apps

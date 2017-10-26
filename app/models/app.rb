@@ -1,5 +1,6 @@
 class App < ActiveRecord::Base
   belongs_to :org
+  has_many :comments, dependent: :destroy
   has_many :engagements
   has_many :iterations, :through => :engagements
 

@@ -7,13 +7,13 @@ Engineering](https://cs169.saas-class.org).
 
 [![Build Status](https://travis-ci.org/csungwon/esaas-engagements.svg?branch=master)](https://travis-ci.org/csungwon/esaas-engagements)
 [![Code Climate](https://img.shields.io/codeclimate/github/csungwon/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/csungwon/esaas-engagements)
-[![Test Coverage](https://codeclimate.com/github/codeclimate/codeclimate/badges/coverage.svg)](https://codeclimate.com/github/codeclimate/codeclimate/coverage)
+[![Test Coverage](https://codeclimate.com/github/csungwon/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/csungwon/esaas-engagements/coverage)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
 
-The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
-
 Heroku Link: https://shielded-bastion-61752.herokuapp.com/
+
+The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
 
 Since we have had many repeat customers who come back in subsequent
 semesters to have a new student cohort enhance an existing app, this
