@@ -6,7 +6,7 @@ by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
 
 [![Build Status](https://travis-ci.org/csungwon/esaas-engagements.svg?branch=master)](https://travis-ci.org/csungwon/esaas-engagements)
-[![Code Climate](https://codeclimate.com/github/csungwon/esaas-engagements/badges/gpa.svg)](https://codeclimate.com/github/csungwon/esaas-engagements)
+[![Maintainability](https://api.codeclimate.com/v1/badges/37b99accaeddb85c2528/maintainability)](https://codeclimate.com/github/csungwon/esaas-engagements/maintainability)
 [![Test Coverage](https://codeclimate.com/github/csungwon/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/csungwon/esaas-engagements/coverage)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
