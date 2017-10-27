@@ -53,7 +53,8 @@ class IterationsController < ApplicationController
         pf.iteration = iter
         pf.save
 
-        url = "http://localhost:3000/feedback/#{eng.id}/#{iter.id}"
+        host = request.host_with_port
+        url = "http://#{host}/feedback/#{eng.id}/#{iter.id}"
         FormMailer.send_form(eng.contact.name, eng.contact.email, url).deliver_now
       end 
     end
