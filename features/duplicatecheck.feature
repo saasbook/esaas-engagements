@@ -16,8 +16,6 @@ Background: User is trying to sign up
         | user2 |                 | user2@user.com |
         | user3 |                 | user3@user.com |
 
-    And I'm trying to sign up as a new user or a new org
-
 Scenario: user fills in information in new user page
 	Given I try to sign up as a user with email "user1@user.com"
 	When I press "Save"
