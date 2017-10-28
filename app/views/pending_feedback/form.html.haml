@@ -1,10 +1,131 @@
 %h1= "Hi, #{@customer}! Please enter your feedback below."
 
 =form_tag feedback_process_response_path(@engagement.id, @iteration.id), :method => :post do
-	%p Feedback
-	=text_area_tag "feedback", ""
-	%p Other
-	=text_area_tag "other", ""
+	%h3 For approximately how long did you meet?
+	=radio_button_tag :duration, "15 min"
+	=label_tag(:duration_15, "15 min")
+	=radio_button_tag :duration, "30 min"
+	=label_tag(:duration_30, "30 min")
+	=radio_button_tag :duration, "45 min"
+	=label_tag(:duration_45, "45 min")
+	=radio_button_tag :duration, "1 hour"
+	=label_tag(:duration_60, "1 hour")
+	=radio_button_tag :duration, "1 hour 15 min"
+	=label_tag(:duration_75, "1 hour 15 min")
+	=radio_button_tag :duration, "1 hour 30 min"
+	=label_tag(:duration_90, "1 hour 30 min")
+	=radio_button_tag :duration, "Longer than 1 hour 30 min"
+	=label_tag(:duration_91, "Longer than 1 hour 30 min")
+
+	%br
+
+	%h3 The team presented a professional demeanor during the meeting
+	=radio_button_tag :demeanor, "Strongly agree"
+	=label_tag(:demeanor_1, "Strongly agree")
+	=radio_button_tag :demeanor, "Mostly agree"
+	=label_tag(:demeanor_2, "Mostly agree")
+	=radio_button_tag :demeanor, "Neither agree nor disagree"
+	=label_tag(:demeanor_3, "Neither agree nor disagree")
+	=radio_button_tag :demeanor, "Mostly disagree"
+	=label_tag(:demeanor_4, "Mostly disagree")
+	=radio_button_tag :demeanor, "Strongly disagree"
+	=label_tag(:demeanor_5, "Strongly disagree")
+
+	%br
+
+	%h3 All team members appeared to be engaged in the discussion
+	=radio_button_tag :engaged, "Strongly agree"
+	=label_tag(:engaged_1, "Strongly agree")
+	=radio_button_tag :engaged, "Mostly agree"
+	=label_tag(:engaged_2, "Mostly agree")
+	=radio_button_tag :engaged, "Neither agree nor disagree"
+	=label_tag(:engaged_3, "Neither agree nor disagree")
+	=radio_button_tag :engaged, "Mostly disagree"
+	=label_tag(:engaged_4, "Mostly disagree")
+	=radio_button_tag :engaged, "Strongly disagree"
+	=label_tag(:engaged_5, "Strongly disagree")
+
+	%br
+
+	%h3 Comments about member engagement during discussion
+	=text_area_tag :engaged_text, ""
+
+	%br
+
+	%h3 The team communicated clearly regarding what was needed from you
+	=radio_button_tag :communication, "Strongly agree"
+	=label_tag(:communication_1, "Strongly agree")
+	=radio_button_tag :communication, "Mostly agree"
+	=label_tag(:communication_2, "Mostly agree")
+	=radio_button_tag :communication, "Neither agree nor disagree"
+	=label_tag(:communication_3, "Neither agree nor disagree")
+	=radio_button_tag :communication, "Mostly disagree"
+	=label_tag(:communication_4, "Mostly disagree")
+	=radio_button_tag :communication, "Strongly disagree"
+	=label_tag(:communication_5, "Strongly disagree")
+
+	%br
+
+	%h3 Comments about communication with the team regarding your needs
+	=text_area_tag :communication_text, ""
+
+	%br
+
+	%h3 The team left the meeting with a shared understanding of your business needs
+	=radio_button_tag :understanding, "Strongly agree"
+	=label_tag(:understanding_1, "Strongly agree")
+	=radio_button_tag :understanding, "Mostly agree"
+	=label_tag(:understanding_2, "Mostly agree")
+	=radio_button_tag :understanding, "Neither agree nor disagree"
+	=label_tag(:understanding_3, "Neither agree nor disagree")
+	=radio_button_tag :understanding, "Mostly disagree"
+	=label_tag(:understanding_4, "Mostly disagree")
+	=radio_button_tag :understanding, "Strongly disagree"
+	=label_tag(:understanding_5, "Strongly disagree")
+
+	%br
+
+	%h3 Comments about understanding of your business needs
+	=text_area_tag :understanding_text, ""
+
+	%br
+
+	%h3 The team effectively addressed my requests in the last iteration
+	=radio_button_tag :effectiveness, "Strongly agree"
+	=label_tag(:effectiveness_1, "Strongly agree")
+	=radio_button_tag :effectiveness, "Mostly agree"
+	=label_tag(:effectiveness_2, "Mostly agree")
+	=radio_button_tag :effectiveness, "Neither agree nor disagree"
+	=label_tag(:effectiveness_3, "Neither agree nor disagree")
+	=radio_button_tag :effectiveness, "Mostly disagree"
+	=label_tag(:effectiveness_4, "Mostly disagree")
+	=radio_button_tag :effectiveness, "Strongly disagree"
+	=label_tag(:effectiveness_5, "Strongly disagree")
+
+	%br
+
+	%h3 Comments about addressed requests
+	=text_area_tag :effectiveness_text, ""
+
+	%br
+
+	%h3 I was satisfied with the results the teams delivered in the last iteration
+	=radio_button_tag :satisfied, "Strongly agree"
+	=label_tag(:satisfied_1, "Strongly agree")
+	=radio_button_tag :satisfied, "Mostly agree"
+	=label_tag(:satisfied_2, "Mostly agree")
+	=radio_button_tag :satisfied, "Neither agree nor disagree"
+	=label_tag(:satisfied_3, "Neither agree nor disagree")
+	=radio_button_tag :satisfied, "Mostly disagree"
+	=label_tag(:satisfied_4, "Mostly disagree")
+	=radio_button_tag :satisfied, "Strongly disagree"
+	=label_tag(:satisfied_5, "Strongly disagree")
+
+	%br
+
+	%h3 Comments about delivered products
+	=text_area_tag :satisfied_text, ""
+
 	%br
 	%br
 	=submit_tag "Submit", :class => "btn btn-primary"
