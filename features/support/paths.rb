@@ -15,12 +15,24 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       then '/'
-      
+
     when /^the create page$/
       then creation_path
-          
+
     when /^the app details page for "(.*)"$/ then app_path(App.find_by_name($1))
+
+    when /^Engagement page for an engagement with an app "(.*)" and start date "(.*)"$/ then pending
       
+    when /^the app details page for "(.*)"$/ then app_path(App.find_by_name($1))
+
+    when /^the feedback form page for engagement id "(.*)" and iteration id "(.*)"$/ \
+      then feedback_form_path(Engagement.find_by_id($1), Iteration.find_by_id($2))
+
+    when /^the engagement iterations page for engagement id "(.*)"$/ \
+      then engagement_iterations_path(Engagement.find_by_id($1))
+
+    when /^the edit engagement iteration page for engagement id "(.*)" and iteration id "(.*)"$/ \
+      then edit_engagement_iteration_path(Engagement.find_by_id($1), Iteration.find_by_id($2))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
