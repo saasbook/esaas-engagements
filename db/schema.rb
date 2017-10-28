@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171021062049) do
     t.string   "student_names"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "repository_url"
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
