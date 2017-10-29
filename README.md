@@ -5,7 +5,7 @@ Fox, is to do continuous tracking over time of customer apps developed
 by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
 
-[![Build Status](https://travis-ci.org/andrewhalle/esaas-engagements.svg?branch=master)](https://travis-ci.org/saasbook/esaas-engagements)
+[![Build Status](https://travis-ci.org/andrewhalle/esaas-engagements.svg?branch=master)](https://travis-ci.org/andrewhalle/esaas-engagements)
 [![Code Climate](https://img.shields.io/codeclimate/github/andrewhalle/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/andrewhalle/esaas-engagements)
 [![Test Coverage](https://codeclimate.com/github/andrewhalle/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/andrewhalle/esaas-engagements/coverage)
 
