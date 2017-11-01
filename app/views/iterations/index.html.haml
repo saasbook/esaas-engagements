@@ -11,9 +11,14 @@
   %thead
     %tr
       %th Iteration End
-      %th Customer Feedback
+      %th Customer Feedback:
+      %th Demeanor
+      %th Engagement
+      %th Communication
+      %th Understanding
+      %th Effectiveness
   %tbody
     - @engagement.iterations.each do |iter|
       %tr
         %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
-        %td= iter.customer_feedback
+        %td= iter.parse_customer_feedback

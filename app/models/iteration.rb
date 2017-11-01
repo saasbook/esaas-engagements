@@ -8,4 +8,8 @@ class Iteration < ActiveRecord::Base
   
   default_scope { order('end_date ASC') }
   
+  def parse_customer_feedback
+    JSON.parse(customer_feedback)
+  end
+  
 end
