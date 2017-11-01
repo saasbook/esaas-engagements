@@ -10,6 +10,8 @@ class Iteration < ActiveRecord::Base
   
   def parse_customer_feedback
     JSON.parse(customer_feedback)
+    rescue (Exception)
+        return customer_feedback
   end
   
 end
