@@ -22,3 +22,8 @@
       %tr
         %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
         %td= iter.parse_customer_feedback
+        %td= feedback_to_rating(iter.parse_customer_feedback["demeanor"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["engaged"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["communication"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["understanding"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["effectiveness"])
