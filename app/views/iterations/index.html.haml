@@ -17,8 +17,29 @@
     %tr
       %th Iteration End
       %th Customer Feedback
+      %th Demeanor
+      %th Engagement
+      %th Communication
+      %th Understanding
+      %th Effectiveness
   %tbody
     - @engagement.iterations.each do |iter|
       %tr
         %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
-        %td= iter.customer_feedback
+        %td
+          %table
+            %tr
+              %td="engagement: " + (iter.parse_customer_feedback["engaged_text"] ||= " ")
+            %tr
+              %td="communication: " + (iter.parse_customer_feedback["communication_text"]  ||= " ")
+            %tr
+              %td="understanding: " + (iter.parse_customer_feedback["understanding_text"] ||= " ")
+            %tr
+              %td="effectiveness: " + (iter.parse_customer_feedback["effectiveness_text"] ||= " ")
+            %tr
+              %td="customer satisfaction: " + (iter.parse_customer_feedback["satisfied_text"] ||= " ")
+        %td= feedback_to_rating(iter.parse_customer_feedback["demeanor"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["engaged"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["communication"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["understanding"])
+        %td= feedback_to_rating(iter.parse_customer_feedback["effectiveness"])
