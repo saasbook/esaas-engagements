@@ -25,6 +25,10 @@ class Iteration < ActiveRecord::Base
   	%w(demeanor engaged communication understanding effectiveness satisfied)
   end
 
+  def self.customer_text_keys
+    %w(engaged_text communication_text understanding_text effectiveness_text satisfied_text)
+  end
+
   def self.ratings
   	{"Strongly agree" => 5, "Mostly agree" => 4, "Neither agree nor disagree" => 3, \
   		"Mostly disagree" => 2, "Strongly disagree" => 1}

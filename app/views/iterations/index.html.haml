@@ -5,7 +5,7 @@
 %div.stat
   - @stat.each do |key, value|
     %h4= key
-    %div{:style => "width: #{value * 100 + 50}px"}= "#{value} / 5.0"
+    %div{:style => "width: #{value * 100 + 50}px"}= "%.1f / 5.0" % value
 
 %p.explanation Click on iteration end date to edit iteration data.
 
@@ -24,22 +24,23 @@
       %th Effectiveness
   %tbody
     - @engagement.iterations.each do |iter|
+      - h = iter.customer_feedback_to_hash || Hash.new
       %tr
         %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
         %td
           %table
             %tr
-              %td="engagement: " + (iter.parse_customer_feedback["engaged_text"] ||= " ")
+              %td="engagement: " + (h["engaged_text"] || " ")
             %tr
-              %td="communication: " + (iter.parse_customer_feedback["communication_text"]  ||= " ")
+              %td="communication: " + (h["communication_text"]  || " ")
             %tr
-              %td="understanding: " + (iter.parse_customer_feedback["understanding_text"] ||= " ")
+              %td="understanding: " + (h["understanding_text"] || " ")
             %tr
-              %td="effectiveness: " + (iter.parse_customer_feedback["effectiveness_text"] ||= " ")
+              %td="effectiveness: " + (h["effectiveness_text"] || " ")
             %tr
-              %td="customer satisfaction: " + (iter.parse_customer_feedback["satisfied_text"] ||= " ")
-        %td= feedback_to_rating(iter.parse_customer_feedback["demeanor"])
-        %td= feedback_to_rating(iter.parse_customer_feedback["engaged"])
-        %td= feedback_to_rating(iter.parse_customer_feedback["communication"])
-        %td= feedback_to_rating(iter.parse_customer_feedback["understanding"])
-        %td= feedback_to_rating(iter.parse_customer_feedback["effectiveness"])
+              %td="customer satisfaction: " + (h["satisfied_text"] || " ")
+        %td= Iteration.rating_to_score(h['demeanor'])
+        %td= Iteration.rating_to_score(h["engaged"])
+        %td= Iteration.rating_to_score(h["communication"])
+        %td= Iteration.rating_to_score(h["understanding"])
+        %td= Iteration.rating_to_score(h["effectiveness"])
