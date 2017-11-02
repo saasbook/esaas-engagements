@@ -3,7 +3,19 @@ class IterationsController < ApplicationController
   before_action :set_iteration, :only => [:edit,:update,:destroy]
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
 
-  def index ; end
+  def index
+    @stat = Hash[Iteration.customer_rating_keys.map {|item| [item, 0]}]
+    num_valid_feedback = 0
+    @engagement.iterations.each do |iter|
+      unless (customer_rating = iter.customer_rating).nil?
+        customer_rating.each do |key, value|
+          @stat[key] += value
+        end
+        num_valid_feedback += 1
+      end
+    end
+    @stat.each_key{|key| @stat[key] /= num_valid_feedback.to_f if num_valid_feedback != 0}
+  end
 
   def new
     @iteration = @engagement.iterations.new
@@ -56,7 +68,7 @@ class IterationsController < ApplicationController
         host = request.env["REQUEST_URI"].split("/")[2]
         url = "http://#{host}/feedback/#{eng.id}/#{iter.id}"
         FormMailer.send_form(eng.contact.name, eng.contact.email, url).deliver_now
-      end 
+      end
     end
     redirect_to current_iteration_path
   end
