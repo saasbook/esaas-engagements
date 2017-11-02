@@ -7,40 +7,32 @@
     %h4= key
     %div{:style => "width: #{value * 100 + 50}px"}= "%.1f / 5.0" % value
 
-%p.explanation Click on iteration end date to edit iteration data.
-
+%br
 = link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary'
 = link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'
 
 %table.table
   %thead
     %tr
-      %th Iteration End
+      %th Iteration 
+      %th End Date
       %th Customer Feedback
       %th Demeanor
       %th Engagement
       %th Communication
       %th Understanding
       %th Effectiveness
+      %th Customer Satisfaction
   %tbody
     - @engagement.iterations.each do |iter|
       - h = iter.customer_feedback_to_hash || Hash.new
       %tr
-        %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
-        %td
+        %td= link_to "Edit Iteration", edit_engagement_iteration_path(@engagement,iter)
+        %td=iter.end_date.strftime('%F')
+        %td 
           %table
-            %tr
-              %td="engagement: " + (h["engaged_text"] || " ")
-            %tr
-              %td="communication: " + (h["communication_text"]  || " ")
-            %tr
-              %td="understanding: " + (h["understanding_text"] || " ")
-            %tr
-              %td="effectiveness: " + (h["effectiveness_text"] || " ")
-            %tr
-              %td="customer satisfaction: " + (h["satisfied_text"] || " ")
-        %td= Iteration.rating_to_score(h['demeanor'])
-        %td= Iteration.rating_to_score(h["engaged"])
-        %td= Iteration.rating_to_score(h["communication"])
-        %td= Iteration.rating_to_score(h["understanding"])
-        %td= Iteration.rating_to_score(h["effectiveness"])
+            - Iteration.customer_text_keys.each do |text|
+              %tr
+                %td= text[0..text.length-6] + ": " + (h[text] || " ")
+        - Iteration.customer_rating_keys.each do |rating|
+          %td=Iteration.rating_to_score(h[rating]) || "No Data"
