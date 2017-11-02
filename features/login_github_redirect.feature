@@ -87,3 +87,44 @@ Scenario: login with Github from create page, after visiting orgs and users
   And I follow "Create"
   And I follow "Log in with GitHub"
   Then I should be on the create page
+  
+Scenario: Login to github to create a new app
+  #Story ID: #152298585
+  Given I am not logged in
+  And I am on the apps page
+  And I follow "New App"
+  And I am on the login page
+  And I follow "Log in with GitHub"
+  And I am on the new_app page
+  And I press "Save"
+  And I should see "2 errors prohibited this app from being saved:"
+  And I should see "App Name can't be blank"
+  And I should see "App Description can't be blank"
+  When I fill in "App Name" with "Fake app"
+  When I fill in "App Description" with "Fake app description "
+  When I fill in "Deployment url" with "Fake app deployment url"
+  When I fill in "Repository url" with "Fake app repository "
+  And I press "Save"
+  Then I should be on the apps page
+  And I should see "App was successfully created."
+
+# Scenario: Login to github to delete an app
+#   #Story ID: #152298585
+#   Given I am not logged in
+#   And I am on the apps page
+#   And I follow "New App"
+#   And I am on the login page
+#   And I follow "Log in with GitHub"
+#   And I am on the new_app page
+#   And I press "Save"
+#   And I should see "2 errors prohibited this app from being saved:"
+#   And I should see "App Name can't be blank"
+#   And I should see "App Description can't be blank"
+#   When I fill in "App Name" with "Fake app"
+#   When I fill in "App Description" with "Fake app description "
+#   When I fill in "Deployment url" with "Fake app deployment url"
+#   When I fill in "Repository url" with "Fake app repository "
+#   And I press "Save"
+#   Then I should be on the apps page
+#   And I should see "App was successfully created."
+  
