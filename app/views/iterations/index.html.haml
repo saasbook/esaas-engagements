@@ -14,7 +14,7 @@
 %table.table
   %thead
     %tr
-      %th Iteration 
+      %th Iteration
       %th End Date
       %th Customer Feedback
       %th Demeanor
@@ -29,10 +29,10 @@
       %tr
         %td= link_to "Edit Iteration", edit_engagement_iteration_path(@engagement,iter)
         %td=iter.end_date.strftime('%F')
-        %td 
+        %td
           %table
             - Iteration.customer_text_keys.each do |text|
               %tr
-                %td= text[0..text.length-6] + ": " + (h[text] || " ")
+                %td= "#{text.gsub(/_text/, '')}: #{h[text]}"
         - Iteration.customer_rating_keys.each do |rating|
           %td=Iteration.rating_to_score(h[rating]) || "No Data"
