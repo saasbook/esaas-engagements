@@ -4,7 +4,7 @@
 
 %div.stat
   - @stat.each do |key, value|
-    %h4= key
+    %h4{:style => 'margin-bottom: 0px'}= key
     %div{:style => "width: #{value * 100 + 50}px"}= "%.1f / 5.0" % value
 
 %br
