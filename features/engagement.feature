@@ -32,16 +32,16 @@ Background: Seeding data / logging into the app
     And I'm logged in on the orgs page
 
 Scenario: Engagement summary is displayed
-    Given I am on Engagement page for an engagement with an app "app1" and start date "2017-03-25"
-    Then I should see "Demeanor: 5.0 / 5.0"
-    And I should see "Engagement: 4.0 / 5.0"
-    And I should see "Communication: 5.0 / 5.0"
-    And I should see "Understanding: 5.0 / 5.0"
-    And I should see "Effectiveness: 5.0 / 5.0"
-    And I should see "Satisfaction: 5.0 / 5.0"
+    Given I am on the engagement iterations page for engagement id "1"
+    Then the rating for "demeanor" should be "5.0 / 5.0"
+    And the rating for "engaged" should be "4.0 / 5.0"
+    And the rating for "communication" should be "5.0 / 5.0"
+    And the rating for "understanding" should be "5.0 / 5.0"
+    And the rating for "effectiveness" should be "5.0 / 5.0"
+    And the rating for "satisfied" should be "5.0 / 5.0"
 
 Scenario: Engagement summary averages the scores from all iterations
-    Given I add the following iteration:
+    Given I add the following iterations:
         | id | engagement_id | end_date   |
         | 2  | 1             | 2017-04-28 |
 
@@ -49,10 +49,28 @@ Scenario: Engagement summary averages the scores from all iterations
         | duration | demeanor | engaged | engaged_text | communication | communication_text | understanding | understanding_text | effectiveness | effectiveness_text | satisfied | satisfied_text |
         | 30 min | Mostly agree | Mostly agree | Very Engaged | Mostly disagree | good | Strongly agree | nice | Mostly agree | great | Neither agree nor disagree | love |
 
-    And I am on Engagement page for an engagement with an app "app1" and start date "2017-03-25"
-    Then I should see "Demeanor: 4.5 / 5.0"
-    And I should see "Engagement: 4.0 / 5.0"
-    And I should see "Communication: 3.5 / 5.0"
-    And I should see "Understanding: 5.0 / 5.0"
-    And I should see "Effectiveness: 4.5 / 5.0"
-    And I should see "Satisfaction: 4.0 / 5.0"
+    And I am on the engagement iterations page for engagement id "1"
+    Then the rating for "demeanor" should be "4.5 / 5.0"
+    And the rating for "engaged" should be "4.0 / 5.0"
+    And the rating for "communication" should be "3.5 / 5.0"
+    And the rating for "understanding" should be "5.0 / 5.0"
+    And the rating for "effectiveness" should be "4.5 / 5.0"
+    And the rating for "satisfied" should be "4.0 / 5.0"
+
+Scenario: Engagment summary should not count an iteration without a customer feedback
+    Given I add the following iterations:
+        | id | engagement_id | end_date   |
+        | 2  | 1             | 2017-04-28 |
+        | 3  | 1             | 2017-05-12 |
+
+    And Iteration "2" has the following customer feedback:
+        | duration | demeanor | engaged | engaged_text | communication | communication_text | understanding | understanding_text | effectiveness | effectiveness_text | satisfied | satisfied_text |
+        | 30 min | Mostly agree | Mostly agree | Very Engaged | Mostly disagree | good | Strongly agree | nice | Mostly agree | great | Neither agree nor disagree | love |
+
+    And I am on the engagement iterations page for engagement id "1"
+    Then the rating for "demeanor" should be "4.5 / 5.0"
+    And the rating for "engaged" should be "4.0 / 5.0"
+    And the rating for "communication" should be "3.5 / 5.0"
+    And the rating for "understanding" should be "5.0 / 5.0"
+    And the rating for "effectiveness" should be "4.5 / 5.0"
+    And the rating for "satisfied" should be "4.0 / 5.0"
