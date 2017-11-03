@@ -5,7 +5,7 @@
     = date_select :iteration, :end_date, :default => @iteration.end_date
     %br
 
-    = @feedback.each do |k,v|
+    - @feedback.each do |k,v|
         = label :customer_feedback, k + ':'
         = text_field :customer_feedback , k.to_sym, :value => v
         %br

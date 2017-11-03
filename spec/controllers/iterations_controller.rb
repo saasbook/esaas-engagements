@@ -12,30 +12,30 @@ describe IterationsController, type: :controller do
       :understanding_text=> "team had good understanding", :effectiveness=> "Strongly agree", \
       :effectiveness_text=> "team was effective", :satisfied=> "Strongly agree", \
       :satisfied_text=> "I am satisfied"}
+    @end_date = Date.new(2017,7,7)
   end
 
   describe 'when updating customer feedback' do
+    # let(:iteration) { Iteration.new }
     it 'redirects edit page if customer feedback cannot be updated' do
+      allow_any_instance_of(IterationsController).to receive(:set_iteration).and_return(@iteration)
       allow(@iteration).to receive(:save).and_return(false)
-      # allow(JSON).to receive(:parse).and not_to raise_error
-      # allow(JSON).to receive(:parse).with(@iteration.customer_feedback)
       put :update, :engagement_id => @engagement, :id => @iteration, \
-      :customer_feedback => @feedback_params
-      # expect(JSON).to receive(:parse).with(@iteration.customer_feedback).and_return({"duration"=>"15 min", "demeanor"=>"Strongly agree", "engaged"=>"Strongly agree", "engaged_text"=>"i", "communication"=>"Strongly agree", "communication_text"=>"i", "understanding"=>"Strongly agree", "understanding_text"=>"i", "effectiveness"=>"Strongly agree", "effectiveness_text"=>"i", "satisfied"=>"Strongly agree", "satisfied_text"=>"i"})
-      expect(subject).to redirect_to :action => :index
-      # expect(subject).to redirect_to :action => :edit
+      :customer_feedback => @feedback_params, :iteration => {:end_date => @end_date}
+      # expect(subject).to redirect_to :action => :index
+      expect(subject).to redirect_to :action => :edit
     end
     it 'redirects engagement page if customer feedback updated successfully' do
       allow(@iteration).to receive(:save).and_return(true)
       put :update, :engagement_id => @engagement, :id => @iteration, \
-      :customer_feedback => @feedback_params
+      :customer_feedback => @feedback_params, :iteration => {:end_date => @end_date}
       expect(response).to redirect_to(engagement_iterations_path)    
     end
 
     it 'displays a success notice if customer feedback updated successfully' do
       allow(@iteration).to receive(:save).and_return(true)
       put :update, :engagement_id => @engagement, :id => @iteration, \
-      :customer_feedback => @feedback_params
+      :customer_feedback => @feedback_params, :iteration => {:end_date => @end_date}
       expect(flash[:notice]).to match(/^Iteration was successfully updated.$/)
     end
 
@@ -51,13 +51,6 @@ describe IterationsController, type: :controller do
       it 'displays an error notice if attempted to edit when feedback not in JSON' do
         expect(flash[:alert]).to match(/^Customer Feedback does not have editable format.$/)
       end
-
     end
-
-
-
   end
-
-
-
 end
