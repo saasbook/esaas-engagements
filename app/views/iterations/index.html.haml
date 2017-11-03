@@ -33,6 +33,6 @@
           %table
             - Iteration.customer_text_keys.each do |text|
               %tr
-                %td= text[0..text.length-6] + ": " + (h[text] || " ")
+                %td{:style => "width:232px"}= text[0..text.length-6] + ": " + (h[text] || " ")
         - Iteration.customer_rating_keys.each do |rating|
           %td=Iteration.rating_to_score(h[rating]) || "No Data"
