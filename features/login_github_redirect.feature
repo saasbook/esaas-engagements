@@ -26,21 +26,7 @@ Background: users, orgs and apps have been added to database
 
   And I am not logged in
 
-Scenario: not logged in so should see login with Github from users page
-  #Story ID: #152298585
-  Given I am on the users page
-  Then I should see "Log in with GitHub"
- 
-Scenario: not logged in so should see login with Github from orgs page 
-  #Story ID: #152298585
-  Given I am on the orgs page
-  Then I should see "Log in with GitHub"
-  
-Scenario: not logged in so should see login with Github from create page 
-  #Story ID: #152298585
-  Given I am on the create page
-  Then I should be on the login page
-  # Then I should see "Log in with GitHub"
+
 
 Scenario: login with Github from orgs page and redirect to orgs
   #Story ID: #152298585

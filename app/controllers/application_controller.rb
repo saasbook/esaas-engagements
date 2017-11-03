@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  #, if: :storable_location?
   before_filter :logged_in?
   
   # Prevent CSRF attacks by raising an exception.
