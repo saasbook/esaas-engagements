@@ -1,5 +1,3 @@
-require 'JSON'
-
 class IterationsController < ApplicationController
 
   before_action :set_iteration, :only => [:edit,:update,:destroy]
