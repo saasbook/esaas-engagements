@@ -2,10 +2,10 @@
 
 %h3= engagement_short_name(@engagement)
 
-%div.stat
+%div#stat
   - @stat.each do |key, value|
     %h4{:style => 'margin-bottom: 0px'}= key
-    %div{:style => "width: #{value * 100 + 50}px"}= "%.1f / 5.0" % value
+    %div{:style => "width: #{value * 100 + 50}px", :id => "#{key}_score"}= "#{value.round(2)} / 5.0"
 
 %br
 = link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary'
@@ -25,7 +25,7 @@
       %th Customer Satisfaction
   %tbody
     - @engagement.iterations.each do |iter|
-      - h = iter.customer_feedback_to_hash || Hash.new
+      - h = iter.customer_feedback_to_hash
       %tr
         %td= link_to "Edit Iteration", edit_engagement_iteration_path(@engagement,iter)
         %td=iter.end_date.strftime('%F')

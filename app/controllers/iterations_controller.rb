@@ -4,14 +4,7 @@ class IterationsController < ApplicationController
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
 
   def index
-    @stat = Hash[Iteration.customer_rating_keys.map {|item| [item, 0]}]
-    num_valid_feedback = 0
-    @engagement.iterations.each do |iter|
-      customer_rating = iter.customer_rating || Hash.new
-      customer_rating.each{|key, value| @stat[key] += value}
-      num_valid_feedback += 1 unless customer_rating.empty?
-    end
-    @stat.each_key{|key| @stat[key] /= num_valid_feedback.to_f if num_valid_feedback != 0}
+    @stat = @engagement.summarize_customer_rating
   end
 
   def new

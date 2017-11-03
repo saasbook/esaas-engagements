@@ -9,16 +9,20 @@ class Iteration < ActiveRecord::Base
   default_scope { order('end_date ASC') }
 
   def customer_feedback_to_hash
-  	JSON.parse customer_feedback rescue nil
+  	JSON.parse customer_feedback rescue Hash.new
   end
 
   def customer_rating
-  	customer_rating = customer_feedback_to_hash
-  	unless customer_rating.nil?
-	  	return customer_rating.each{|k, v| customer_rating[k] = Iteration.rating_to_score v} \
-	  							.select{|k, v| Iteration.customer_rating_keys.include? k}
-  	end
-  	return nil
+    Hash[
+      customer_feedback_to_hash
+      .select{|k, v| Iteration.customer_rating_keys.include? k}
+      .to_a
+      .map{|k,v| [k, Iteration.rating_to_score(v)]}
+    ]
+  end
+
+  def self.create_base_rating_hash
+    Hash[self.customer_rating_keys.map {|key| [key, 0]}]
   end
 
   def self.customer_rating_keys
@@ -35,6 +39,6 @@ class Iteration < ActiveRecord::Base
   end
 
   def self.rating_to_score(rating)
-  	self.ratings[rating] if self.ratings.keys.include? rating
+  	self.ratings[rating]
   end
 end
