@@ -16,14 +16,13 @@ describe IterationsController, type: :controller do
   end
 
   describe 'when updating customer feedback' do
-    # let(:iteration) { Iteration.new }
     it 'redirects edit page if customer feedback cannot be updated' do
-      allow_any_instance_of(IterationsController).to receive(:set_iteration).and_return(@iteration)
-      allow(@iteration).to receive(:save).and_return(false)
+      # allow_any_instance_of(IterationsController).to receive(:set_iteration).and_return(@iteration)
+      allow(@iteration).to receive(:update).and_return(false)
       put :update, :engagement_id => @engagement, :id => @iteration, \
       :customer_feedback => @feedback_params, :iteration => {:end_date => @end_date}
-      # expect(subject).to redirect_to :action => :index
-      expect(subject).to redirect_to :action => :edit
+      expect(subject).to redirect_to :action => :index
+      # expect(subject).to redirect_to :action => :edit # redirect to edit when update fails
     end
     it 'redirects engagement page if customer feedback updated successfully' do
       allow(@iteration).to receive(:save).and_return(true)

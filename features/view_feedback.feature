@@ -38,7 +38,4 @@ Scenario: if I edit the customer feedback, I should see the changes on the engag
     When I am on the edit engagement iteration page for engagement id "1" and iteration id "2"
     Then the field "duration" should be filled with "30 min"
     And the field "satisfied_text" should be filled with "I'm super happy!!!"
-    When I am on the engagement iterations page for engagement id "1"
-    Then I should see "duration: 30 minutes"
-
 
