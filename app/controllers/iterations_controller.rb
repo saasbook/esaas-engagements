@@ -3,7 +3,9 @@ class IterationsController < ApplicationController
   before_action :set_iteration, :only => [:edit,:update,:destroy]
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
 
-  def index ; end
+  def index
+    @stat = @engagement.summarize_customer_rating
+  end
 
   def new
     @iteration = @engagement.iterations.new
@@ -64,7 +66,7 @@ class IterationsController < ApplicationController
         host = request.env["REQUEST_URI"].split("/")[2]
         url = "http://#{host}/feedback/#{eng.id}/#{iter.id}"
         FormMailer.send_form(eng.contact.name, eng.contact.email, url).deliver_now
-      end 
+      end
     end
     redirect_to current_iteration_path
   end

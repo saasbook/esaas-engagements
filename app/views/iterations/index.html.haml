@@ -2,18 +2,37 @@
 
 %h3= engagement_short_name(@engagement)
 
-%p.explanation Click on iteration end date to edit iteration data.
+%div#stat
+  - @stat.each do |key, value|
+    %h4{:style => 'margin-bottom: 0px'}= key
+    %div{:style => "width: #{value * 100 + 50}px", :id => "#{key}_score"}= "#{value.round(2)} / 5.0"
 
+%br
 = link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary'
 = link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'
 
 %table.table
   %thead
     %tr
-      %th Iteration End
+      %th Iteration
+      %th End Date
       %th Customer Feedback
+      %th Demeanor
+      %th Engagement
+      %th Communication
+      %th Understanding
+      %th Effectiveness
+      %th Customer Satisfaction
   %tbody
     - @engagement.iterations.each do |iter|
+      - h = iter.customer_feedback_to_hash
       %tr
-        %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
-        %td= iter.customer_feedback
+        %td= link_to "Edit Iteration", edit_engagement_iteration_path(@engagement,iter)
+        %td=iter.end_date.strftime('%F')
+        %td
+          %table
+            - Iteration.customer_text_keys.each do |text|
+              %tr
+                %td{:style => "width:232px"}= "#{text.gsub(/_text/, '')}: #{h[text]}"
+        - Iteration.customer_rating_keys.each do |rating|
+          %td=Iteration.rating_to_score(h[rating]) || "No Data"
