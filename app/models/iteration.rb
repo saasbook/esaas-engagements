@@ -14,11 +14,16 @@ class Iteration < ActiveRecord::Base
 
   def customer_rating
     Hash[
-      customer_feedback_to_hash
-      .select{|k, v| Iteration.customer_rating_keys.include? k}
+      customer_feedback_with_rating
       .to_a
       .map{|k,v| [k, Iteration.rating_to_score(v)]}
     ]
+  end
+
+  def customer_feedback_with_rating
+    customer_feedback_to_hash.select do |key, value|
+      Iteration.customer_rating_keys.include? key
+    end
   end
 
   def self.create_base_rating_hash
