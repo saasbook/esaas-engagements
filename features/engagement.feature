@@ -32,6 +32,7 @@ Background: Seeding data / logging into the app
     And I'm logged in on the orgs page
 
 Scenario: Engagement summary is displayed
+    #Story ID: #152298633
     Given I am on the engagement iterations page for engagement id "1"
     Then the rating for "demeanor" should be "5.0 / 5.0"
     And the rating for "engaged" should be "4.0 / 5.0"
@@ -41,6 +42,7 @@ Scenario: Engagement summary is displayed
     And the rating for "satisfied" should be "5.0 / 5.0"
 
 Scenario: Engagement summary averages the scores from all iterations
+    #Story ID: #152298633
     Given I add the following iterations:
         | id | engagement_id | end_date   |
         | 2  | 1             | 2017-04-28 |
@@ -58,6 +60,7 @@ Scenario: Engagement summary averages the scores from all iterations
     And the rating for "satisfied" should be "4.0 / 5.0"
 
 Scenario: Engagment summary should not count an iteration without a customer feedback
+    #Story ID: #152298633
     Given I add the following iterations:
         | id | engagement_id | end_date   |
         | 2  | 1             | 2017-04-28 |
