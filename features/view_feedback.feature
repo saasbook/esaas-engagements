@@ -26,6 +26,7 @@ Background: Logged in
         | 2  | 1             | 2017-10-31 | {"duration":"15 min", "demeanor":"Strongly agree", "engaged":"Strongly agree", "engaged_text":"i", "communication":"Strongly agree", "communication_text":"i", "understanding":"Strongly agree", "understanding_text":"i", "effectiveness":"Strongly agree", "effectiveness_text":"i", "satisfied":"Strongly agree", "satisfied_text":"I am satisfied"} | 
     And I'm logged in on the orgs page
 
+# Story ID: 152298649
 Scenario: if I edit the customer feedback, I should see the changes on the engagement iterations page and the edit iteration page
     Given I am on the edit engagement iteration page for engagement id "1" and iteration id "2"
     Then the field "duration" should be filled with "15 min"
