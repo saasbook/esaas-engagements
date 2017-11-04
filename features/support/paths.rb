@@ -46,6 +46,8 @@ module NavigationHelpers
 
     when /^the edit user page for user id: "(.*)"$/ then edit_user_path($1)
 
+    when /^the edit org page for org id: "(.*)"$/ then edit_org_path($1)
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
