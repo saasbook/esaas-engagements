@@ -34,6 +34,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'json'
 gem 'figaro'
 gem 'haml'
 gem 'sass-rails', '~> 5.0'
