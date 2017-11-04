@@ -36,6 +36,10 @@ module NavigationHelpers
 
     when /^the current iteration page$/ then current_iteration_path
 
+    when /^the new user page$/ then new_user_path
+
+    when /^the edit user page for user id: "(.*)"$/ then edit_user_path($1)
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
