@@ -43,6 +43,8 @@ When /^I fill in the "(.*)" fields as follows:$/ do |fieldset, table|
       steps %Q{When I select "#{$1}" from "#{t[:field]}"}
     when /^(un)?checked$/
       steps %Q{When I #{$1}check "#{t[:field]}"}
+    when /^choose "(.*)"$/
+      steps %Q{When I choose "#{$1}" for "#{t[:field]}"}
     else
       steps %Q{When I fill in "#{t[:field]}" with "#{t[:value]}"}
     end
