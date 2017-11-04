@@ -304,6 +304,7 @@ DEPENDENCIES
   jasmine-rails
   jbuilder (~> 2.0)
   jquery-rails
+  json
   omniauth-github
   pg
   rails (= 4.2.7)

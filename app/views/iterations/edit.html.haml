@@ -1,3 +1,14 @@
-%h1 Edit Iteration
+%h1 Edit Customer Feedback
 
-= render 'iteration'
+= form_tag engagement_iteration_path(@engagement, @iteration), :method => 'put' do
+    = label :iteration, "End date:"
+    = date_select :iteration, :end_date, :default => @iteration.end_date
+    %br
+
+    - @feedback.each do |k,v|
+        = label :customer_feedback, k + ':'
+        = text_field :customer_feedback , k.to_sym, :value => v
+        %br
+    %br
+    = submit_tag 'Save Changes'
+    

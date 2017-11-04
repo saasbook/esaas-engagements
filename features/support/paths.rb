@@ -34,6 +34,8 @@ module NavigationHelpers
     when /^the edit engagement iteration page for engagement id "(.*)" and iteration id "(.*)"$/ \
       then edit_engagement_iteration_path(Engagement.find_by_id($1), Iteration.find_by_id($2))
 
+    when /^the current iteration page$/ then current_iteration_path
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
