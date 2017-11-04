@@ -14,6 +14,9 @@
   = field f, :email
   = field f, :preferred_contact
   = field f, :github_uid
+  = f.label 'Type of User'
+  = f.collection_select :type_user, { :student => 'Student', :staff => 'Staff' }, :last, ->(x) { x.last }
+  = field f, :sid
 
   .actions
     = f.submit 'Save', :class => 'btn btn-success'

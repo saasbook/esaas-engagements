@@ -5,7 +5,7 @@ class CreationController < ApplicationController
     end 
     
     def user_params
-        params.require(:user).permit(:name,:email,:preferred_contact,:github_uid)
+        params.require(:user).permit(:name,:email,:preferred_contact,:github_uid, :type_user, :sid)
     end
     
     def org_params

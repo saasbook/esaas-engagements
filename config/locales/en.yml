@@ -28,6 +28,7 @@ en:
       user:
         name: "User Name"
         email: "User E-mail address"
+        sid: "SID"
       org:
         name: "Org Name"
       app:

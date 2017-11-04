@@ -1,11 +1,15 @@
 %h1 Users
 
+= link_to 'New User', new_user_path, :class => 'btn btn-success'
+
 %table.table.table-condensed
   %thead
     %tr
       %th Name
       %th Email
       %th GitHub username
+      %th Type
+      %th SID
       %th
   %tbody
     - @users.each do |user|
@@ -13,6 +17,6 @@
         %td= user.name
         %td= mail_to user.email
         %td= link_to(user.github_uid, "https://github.com/#{user.github_uid}") unless user.github_uid.blank?
+        %td= user.sid
+        %td= user.type_user
         %td= link_to 'Edit', edit_user_path(user), :class => 'btn btn-primary'
-
-= link_to 'New User', new_user_path, :class => 'btn btn-success'

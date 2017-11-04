@@ -29,6 +29,14 @@
     %br
     = text_field :user, 'github_uid'
     %br
+    = label :user, :type_user, 'Type of User'
+    %br
+    = select(:user, :type_user, options_for_select([["Student", "Student"], ["Staff", "Staff"]]))
+    %br
+    = label :user, :sid, 'SID'
+    %br
+    = text_field :user, 'sid'
+    %br
   </div>
 
   <div class="column middle" style="float: left; padding: 60px;">
