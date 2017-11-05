@@ -17,6 +17,9 @@
     %legend Team Info and Work Products
     = field f, :team_number
     = field f, :student_names
+    = f.label 'Team Members'
+    %br
+    = f.collection_select(:user_ids, User.all, :id, :name, {:include_blank => true}, {:multiple => true, :size => 10})
     = field f, :screencast_url
     = field f, :screenshot_url
     = field f, :poster_url

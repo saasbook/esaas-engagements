@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104064324) do
+ActiveRecord::Schema.define(version: 20171104080350) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -103,6 +103,9 @@ ActiveRecord::Schema.define(version: 20171104064324) do
     t.string   "preferred_contact"
     t.string   "sid"
     t.string   "type_user"
+    t.integer  "engagement_id"
   end
+
+  add_index "users", ["engagement_id"], name: "index_users_on_engagement_id"
 
 end

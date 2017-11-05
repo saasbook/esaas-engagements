@@ -63,7 +63,10 @@
         %td= mail_to(engagement.contact.email, engagement.contact.name) if engagement.contact
         %td= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
         %td= engagement.team_number
-        %td= engagement.student_names
+        %td
+          %div{:class => 'members'}
+            -engagement.users.each_with_index do |member, index|
+              %div{:class => "member#{index}"} #{member.try(:name)}
         %td= link_to image_tag('octocat-gray.png'), engagement.prototype_deployment_url, :target => '_blank'
         %td= link_to image_tag('video.png'), engagement.screencast_url, :target => '_blank'
         %td= link_to image_tag('presentation.png'), engagement.presentation_url, :target => '_blank'
