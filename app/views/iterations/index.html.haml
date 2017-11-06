@@ -5,7 +5,7 @@
 %div#stat
   - @stat.each do |key, value|
     %h4{:style => 'margin-bottom: 0px'}= key
-    %div{:style => "width: #{value * 100 + 50}px", :id => "#{key}_score"}= "#{value.round(2)} / 5.0"
+    %div{:style => "width: #{value * 100 + 100}px", :id => "#{key}_score"}= "#{value.round(2)} / 5.0"
 
 %br
 = link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary'
