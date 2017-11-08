@@ -20,7 +20,7 @@ CSV.foreach("#{Rails.root}/db/apps.csv") do |p|
       :deployment_url => p[14],
       :repository_url => p[15] || 'http://')
     coach = User.where("email = ?", p[9]).first ||
-      User.create!(:name => p[10] || "Unknown", :email => p[9] || "unknown@email.com")
+      User.create!(:name => p[10] || "Unknown", :email => p[9] || "#{appname}_unknown@email.com")
     app.engagements.create!(
       :team_number => "#{p[0]}-#{p[2]}",
       :start_date => Time.parse(p[1]),
