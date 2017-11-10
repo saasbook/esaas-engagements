@@ -4,6 +4,5 @@ When /^dump current page info$/ do
 end
 
 When /^PENDING:/ do
-	print "HEEEEY"
 	pending
 end
