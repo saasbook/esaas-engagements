@@ -1,7 +1,7 @@
-Feature: a user can be created
+Feature: engagements and iterations have edit and destroy buttons
   As a staff of the course
   So that I can manage the engagements and iterations
-  I wnat to add edit and destroy buttons to engagement page and iteration page
+  I want to add edit and destroy buttons to engagement page and iteration page
 
 Background: Logged in
   
@@ -93,7 +93,6 @@ Scenario: Each iteration has edit and destroy button
     | id | app_id | coaching_org_id | coach_id | contact_id | team_number | start_date | student_names |
     | 1  | 1      | 1               | 1        | 2          | 1           | 2017-03-25 | s1, s2, s3    |
     | 2  | 1      | 1               | 1        | 2          | 2           | 2017-08-25 | s4, s5, s6    |
-
   And the following iterations exist:
     | id | engagement_id | end_date   |
     | 1  | 1             | 2017-04-14 |
