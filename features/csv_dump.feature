@@ -1,3 +1,4 @@
+@wip
 Feature: a user can download the data for an engagement in the form of a csv file
     
     AS a developer,
@@ -35,7 +36,7 @@ Background: Logged in
 
 # Story ID: 152689294
 Scenario: I can access the download button
-    Then I should see "Download CSV"
+    Then I should see "Download CSV" in "Div"
 
 # Story ID: 152689294
 Scenario: I can download the engagement data
