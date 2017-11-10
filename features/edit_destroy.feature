@@ -31,49 +31,6 @@ Background: Logged in
   And I am logged in as a "staff"
   And I follow "Apps"
   And I follow "app1"
-  
-Scenario: Can create and edit multiple engagements
-  #Story ID: #152689950
-  And I create a new engagement for "app1"
-  And I fill in the engagement fields as follows:
-       | field                  | value      |
-       | Team number            | Team1      |
-       | Student names          | Student1   | 
-  And I select "user1 user2 user3" as Team members
-  And I press "Save"
-  And I create a new engagement for "app1"
-  And I fill in the engagement fields as follows:
-       | field                  | value      |
-       | Team number            | Team2      |
-       | Student names          | Student2   |
-  And I select "user4 user5 user6" as Team members
-  And I press "Save"
-  
-  Then I should see "Team1" has button "Edit"
-  And I should see "Team2" has button "Edit"
-
-Scenario: Can create and destroy multiple engagements
-  #Story ID: #152689950
-  And I create a new engagement for "app1"
-  And I fill in the engagement fields as follows:
-       | field                  | value      |
-       | Team number            | Team1      |
-       | Student names          | Student1   | 
-  And I select "user1 user2 user3" as Team members
-  And I press "Save"
-  And I create a new engagement for "app1"
-  And I fill in the engagement fields as follows:
-       | field                  | value      |
-       | Team number            | Team2      |
-       | Student names          | Student2   |
-  And I select "user4 user5 user6" as Team members
-  And I press "Save"
-  Then I should see "Team1" has button "Destroy"
-  And I should see "Team2" has button "Destroy"
-
-Scenario: Can destroy existing engagements
-  #Story ID: #152689950
-  Given I follow "app1"
   And the following engagements exist:
     | id | app_id | coaching_org_id | coach_id | contact_id | team_number | start_date | student_names |
     | 1  | 1      | 1               | 1        | 2          | 1           | 2017-03-25 | s1, s2, s3    |
@@ -83,21 +40,21 @@ Scenario: Can destroy existing engagements
     | id | engagement_id | end_date   |
     | 1  | 1             | 2017-04-14 |
     | 2  | 1             | 2017-04-28 |
-
+  
+Scenario: Can edit and destroy all existing engagements
+  #Story ID: #152689950
+  Then I should see "Team1" has button "Edit"
+  And I should see "Team2" has button "Edit"
+  And I should see "Team1" has button "Destroy"
+  And I should see "Team2" has button "Destroy"
+  
+Scenario: Destroying existing engagements is successful
+  #Story ID: #152689950
   And I press "Destroy" for the engagement for team number "2"
   Then I should see "Engagement was successfully destroyed"
 
-Scenario: Each iteration has edit and destroy button
+Scenario: Each iteration has edit and destroy buttons
   #Story ID: #152689950
-  Given I follow "app1"
-  And the following engagements exist:
-    | id | app_id | coaching_org_id | coach_id | contact_id | team_number | start_date | student_names |
-    | 1  | 1      | 1               | 1        | 2          | 1           | 2017-03-25 | s1, s2, s3    |
-    | 2  | 1      | 1               | 1        | 2          | 2           | 2017-08-25 | s4, s5, s6    |
-  And the following iterations exist:
-    | id | engagement_id | end_date   |
-    | 1  | 1             | 2017-04-14 |
-    | 2  | 1             | 2017-04-28 |
   Given I am at the engagment iterations page for engagement id "1"
   Then I should see "Iterations for app1"
   And I should see "Edit" for each iteration
