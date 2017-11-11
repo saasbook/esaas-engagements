@@ -44,7 +44,7 @@ Scenario: When I'm on the edit page, I see the edit form
     And I should see "Satisfied text:"
 
 # Story ID: 152298649
-Scenario: if I edit the customer feedback, I should see the changes on the engagement iterations page and the edit iteration page
+Scenario: If feedback already submiited by form, I can edit the feedback and see the changes
     Given I am on the edit engagement iteration page for engagement id "1" and iteration id "2"
     Then the field "duration" should be filled with "15 min"
     And the field "satisfied_text" should be filled with "I am satisfied"
@@ -68,6 +68,29 @@ Scenario: I can leave a field blank and it may still be saved
     When I am on the edit engagement iteration page for engagement id "1" and iteration id "2"
     Then the field "duration" should be filled with ""
     And the field "satisfied_text" should be filled with "I'm super happy!!!"
+
+# Story ID: 152689630
+@wip
+Scenario: If feedback hasn't been submitted by form yet and is blank, a user can manually add in feedback
+    Given I try to visit the edit engagement iteration page for engagement id "1" and iteration id "1"
+    And I fill in the "Feedback" fields as follows:
+        | field                 | value                              |
+        | duration              | choose "1 hour"                    |
+        | demeanor              | choose "Mostly agree"              | 
+        | engaged               | choose "Mostly agree"              | 
+        | engaged_text          | They were engaged                  | 
+        | communication         | choose "Mostly agree"              | 
+        | communication_text    | They communicated well             | 
+        | understanding         | choose "Mostly agree"              | 
+        | understanding_text    | They understood well               | 
+        | effectiveness         | choose "Mostly agree"              | 
+        | effectiveness_text    | They were effective                | 
+        | satisfied             | choose "Mostly agree"              |
+        | satisfied_text        | I am satisfied                     |
+    And I press "Submit"
+    And the field "satisfied_text" should be filled with "I am satisfied"
+
+
 
 
 
