@@ -1,0 +1,13 @@
+exclude_paths:
+- "tests/"
+- "spec/"
+- "**/vendor/"
+- config/
+- db/
+- dist/
+- features/
+- **/node_modules/
+- script/
+- **/*.d.ts
+- **/bootstrap.js
+- **/initializers/
