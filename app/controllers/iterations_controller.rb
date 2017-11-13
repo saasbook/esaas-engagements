@@ -55,7 +55,7 @@ class IterationsController < ApplicationController
 
         host = request.host_with_port
         url = "http://#{host}/feedback/#{eng.id}/#{iter.id}"
-        FormMailer.send_form(eng.contact.name, eng.contact.email, url).deliver_now
+        FormMailer.send_form(eng.contact.name, eng.contact.email, url, iter, eng).deliver_now
       end 
     end
     redirect_to current_iteration_path
@@ -73,7 +73,7 @@ class IterationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def iteration_params
-    params.require(:iteration).permit(:customer_feedback, :end_date)
+    params.require(:iteration).permit(:customer_feedback, :end_date, :number)
   end
 
 end
