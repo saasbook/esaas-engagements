@@ -1,9 +1,5 @@
 # ESaaS Engagements Tracker
 
-The goal of this currently bare-bones app, thrown together by Armando
-Fox, is to do continuous tracking over time of customer apps developed
-by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
-Engineering](https://cs169.saas-class.org).
 
 [![Build Status](https://travis-ci.org/saasbook/esaas-engagements.svg?branch=master)](https://travis-ci.org/saasbook/esaas-engagements)
 [![Code Climate](https://img.shields.io/codeclimate/github/saasbook/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/saasbook/esaas-engagements)
@@ -11,7 +7,14 @@ Engineering](https://cs169.saas-class.org).
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
 
-The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
+
+The goal of this currently bare-bones app, thrown together by Armando
+Fox with contributions by [Andrew Halle](https://github.com/andrewhalle), 
+is to enable continuous tracking over time of customer apps developed
+by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
+Engineering](https://cs169.saas-class.org).
+
+The data initially used to populate the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
 
 Since we have had many repeat customers who come back in subsequent
 semesters to have a new student cohort enhance an existing app, this
@@ -20,12 +23,14 @@ handed off from cohort to cohort.
 
 The main models are:
 
-* App: a deployable Web app.  An app's status may be:
-  * `inactive`: not deployed, and/or customer not actively using;
-  dormant
-  * `development`: in active development, whether or not deployed in
+* App: a deployable Web app, i.e. a student project.  An app's status may be:
+  * `dead`: not deployed, and/or customer not actively using;  dormant
+  * `development`: in active development (a team is working on it right now), whether or not deployed in
   production
-  * `maintenance`: deployed in production, not currently in active development
+  * In use: in production use at a customer site; customer has not expressed interest in further improvements
+  * In use and wants improvements: In production, and customer is interested in further development
+  * Inactive but wants improvement: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
+  * Pending: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
 * Org: a customer organization for whom the app was developed
 * User: various subcategories, including developer (e.g. student), coach
 (mentor, GSI), customer contact.  Also a principal for authentication,
