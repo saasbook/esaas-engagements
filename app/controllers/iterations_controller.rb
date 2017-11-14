@@ -14,7 +14,7 @@ class IterationsController < ApplicationController
   def edit
     @feedback = JSON.parse(@iteration.customer_feedback)
     rescue (Exception)
-      redirect_to engagement_iterations_path, alert: "Customer Feedback does not have editable format." 
+      @feedback = Hash.new
   end
 
   def create

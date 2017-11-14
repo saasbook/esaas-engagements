@@ -45,6 +45,8 @@ When /^I fill in the "(.*)" fields as follows:$/ do |fieldset, table|
       steps %Q{When I #{$1}check "#{t[:field]}"}
     when /^choose "(.*)"$/
       steps %Q{When I choose "#{$1}" for "#{t[:field]}"}
+    when /^select "(.*)"$/
+      steps %Q{When I select "#{$1}" for "#{t[:field]}"}
     else
       if "#{t[:field]}" == "Type of user"
         steps %Q{I fill in the following:

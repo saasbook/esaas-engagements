@@ -46,4 +46,12 @@ class Iteration < ActiveRecord::Base
   def self.rating_to_score(rating)
   	self.ratings[rating]
   end
+
+  def self.rating_options
+    ['Strongly agree', 'Mostly agree', 'Neither agree nor disagree', 'Mostly disagree', 'Strongly disagree']
+  end
+
+  def self.duration_options
+    ['15 min', '30 min', '45 min', '1 hour', '1 hour 15 min', '1 hour 30 min', 'Longer than 1 hour 30 min']
+  end
 end

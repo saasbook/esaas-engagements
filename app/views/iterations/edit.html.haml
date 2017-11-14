@@ -1,14 +1,58 @@
 %h1 Edit Customer Feedback
 
 = form_tag engagement_iteration_path(@engagement, @iteration), :method => 'put' do
-    = label :iteration, "End date:"
+    = label :iteration, "End date: "
     = date_select :iteration, :end_date, :default => @iteration.end_date
     %br
 
-    - @feedback.each do |k,v|
-        = label :customer_feedback, k + ':'
-        = text_field :customer_feedback , k.to_sym, :value => v
-        %br
+    = label_tag :duration, 'Duration: '
+    = select :customer_feedback, :duration, Iteration.duration_options, :selected => @feedback["duration"]
+    %br
+
+    = label_tag :demeanor, 'Demeanor: '
+    = select :customer_feedback, :demeanor, Iteration.rating_options, :selected => @feedback["demeanor"]
+    %br
+
+    = label_tag :engaged, 'Engaged: '
+    = select :customer_feedback, :engaged, Iteration.rating_options, :selected => @feedback["engaged"]
+    %br
+
+    = label :customer_feedback, "Engagement Comments: "
+    = text_field :customer_feedback, :engaged_text, :value => @feedback["engaged_text"]
+    %br
+
+    = label_tag :communication, 'Communication: '
+    = select :customer_feedback, :communication, Iteration.rating_options, :selected => @feedback["communication"]
+    %br
+
+    = label :customer_feedback, "Communication Comments: "
+    = text_field :customer_feedback, :communication_text, :value => @feedback["communication_text"]
+    %br
+
+    = label_tag :understanding, 'Understanding: '
+    = select :customer_feedback, :understanding, Iteration.rating_options, :selected => @feedback["understanding"]
+    %br
+
+    = label :customer_feedback, "Understanding Comments: "
+    = text_field :customer_feedback, :understanding_text, :value => @feedback["understanding_text"]
+    %br
+
+    = label_tag :effectiveness, 'Effectiveness: '
+    = select :customer_feedback, :effectiveness, Iteration.rating_options, :selected => @feedback["effectiveness"]
+    %br
+
+    = label :customer_feedback, "Effectiveness Comments: "
+    = text_field :customer_feedback, :effectiveness_text, :value => @feedback["effectiveness_text"]
+    %br
+
+    = label_tag :satisfied, 'Satisfied: '
+    = select :customer_feedback, :satisfied, Iteration.rating_options, :selected => @feedback["satisfied"]
+    %br
+
+    = label :customer_feedback, "Satisfied Comments: "
+    = text_field :customer_feedback, :satisfied_text, :value => @feedback["satisfied_text"]
+    %br
+
     %br
     = submit_tag 'Save Changes'
     
