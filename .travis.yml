@@ -17,10 +17,10 @@ before_script:
 
 script:
   - bundle exec rspec
-  - $CC format-coverage --output coverage/codeclimate.$SUITE.json
+  - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
   - bundle exec cucumber
-  - $CC format-coverage --output coverage/codeclimate.$SUITE.json
+  - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
 
 after_script:
-  - $CC sum-coverage coverage/codeclimate.*.json | $CC upload-coverage
-  - $CC after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
