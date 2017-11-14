@@ -41,7 +41,7 @@ class IterationsController < ApplicationController
   # DELETE /engagements/1.json
   def destroy
     @iteration.destroy
-    redirect_to engagement_iterations_path(@engagement), notice: 'Engagement was successfully destroyed.'
+    redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully destroyed.'
   end
 
   def current_iteration
