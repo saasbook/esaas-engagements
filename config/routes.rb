@@ -8,11 +8,13 @@ Rails.application.routes.draw do
   # route /apps/:app_id/engagements/:engagement_id
   resources :apps do
     resources :engagements, :except => :index
+    resources :engagements, :only => :destroy, :as => 'engagement_destroy'
     resources :comments, :only => [:create, :edit, :show, :update, :destroy]
   end
   # route /engagements/:engagement_id/iterations/:iteration_id
   resources :engagements, :only => [] do # don't route engagements by themselves
     resources :iterations
+    resources :iterations, :only => :destroy, :as => 'iteration_destroy'
   end
   resources :orgs, :except => :show
   resources :users, :only => [:index, :new, :edit, :create, :update]
