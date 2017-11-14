@@ -1,13 +1,13 @@
 ---
 engines:
   brakeman:
-    enabled: true
+    enabled: false
   bundler-audit:
-    enabled: true
+    enabled: false
   csslint:
-    enabled: true
+    enabled: false
   coffeelint:
-    enabled: true
+    enabled: false
   duplication:
     enabled: true
     config:
@@ -17,9 +17,9 @@ engines:
       - python
       - php
   eslint:
-    enabled: true
+    enabled: false
   fixme:
-    enabled: true
+    enabled: false
   rubocop:
     enabled: true
 ratings:
@@ -44,4 +44,11 @@ exclude_paths:
 - features/
 - spec/
 - vendor/
-- bootstrap
+- "**bootstrap**"
+- bin/
+- coverage/
+- lib/
+- tmp/
+- log/
+- public/
+- iterations/
