@@ -44,7 +44,7 @@ exclude_paths:
 - features/
 - spec/
 - vendor/
-- "**bootstrap**"
+- "**/bootstrap"
 - bin/
 - coverage/
 - lib/
