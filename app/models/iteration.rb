@@ -21,7 +21,7 @@ class Iteration < ActiveRecord::Base
   end
 
   def customer_feedback_with_rating
-    customer_feedback_to_hash.select do |key, value|
+    customer_feedback_to_hash.select do |key, _value|
       Iteration.customer_rating_keys.include? key
     end
   end
