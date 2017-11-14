@@ -52,12 +52,24 @@ Scenario: Destroying existing engagements is successful
   #Story ID: #152689950
   And I press "Destroy" for "2017-03-25"
   Then I should see "Engagement was successfully destroyed"
+  
+Scenario: Newly Added Engagement also has buttons
+  #Story ID: #152689950
+   Given I create a new engagement for "app1"
+   When I fill in the engagement fields as follows:
+       | field                  | value      |
+       | Team number            | Team3          |
+       | Student names          | Student1   |
+  And I press "Save"
+  Then I should see "Engagement was successfully created"
+  Then I should see "Team3" has button "Edit"
+  And I should see "Team3" has button "Destroy"
 
 Scenario: Can edit and destroy all existing iterations
   #Story ID: #152689950
   Given I follow "2017-03-25"
   Then I should see "Iterations for app1"
-  Then I should see "2017-04-14" has button "Edit"
+  And I should see "2017-04-14" has button "Edit"
   And I should see "2017-04-28" has button "Edit"
   And I should see "2017-04-14" has button "Destroy"
   And I should see "2017-04-28" has button "Destroy"
@@ -75,3 +87,14 @@ Scenario: Destroying existing iterations is successful
   Given I follow "2017-03-25"
   And I press "Destroy" for "2017-04-14"
   Then I should see "Iteration was successfully destroyed"
+  
+Scenario: Newly Added Iteration also has buttons
+  #Story ID: #152689950
+  Given I follow "2017-03-25"
+  And the time is "2017-11-14T19:20"
+  And I follow "Add Iteration..."
+  And I select "2017 November 14" for the enddate
+  And I press "Save"
+  Then I should see "Iteration was successfully created"
+  And I should see "2017-11-14" has button "Edit"
+  And I should see "2017-11-14" has button "Destroy"
