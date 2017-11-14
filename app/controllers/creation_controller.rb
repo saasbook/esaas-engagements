@@ -18,33 +18,17 @@ class CreationController < ApplicationController
         @app = App.new
     end
 
-    def  create
-        @user = User.new(user_params)
-        no_user_err = @user.save
-        if !no_user_err
-            @errors = @user.errors.full_messages
+    def create
+        begin
+            ActiveRecord::Base.transaction do
+                @user = User.create!(user_params)
+                @org = @user.orgs.create!(org_params)
+                @app = @org.apps.create!(app_params)
+            end
+        rescue ActiveRecord::RecordInvalid => e
+            @errors = [e.message]
             render :new and return
         end
-
-        @org = Org.new(org_params.merge(:contact => @user))
-        no_org_err = @org.save
-        if !no_org_err
-            @errors = @org.errors.full_messages
-            @user.destroy
-            render :new and return
-        end
-
-        @app = App.new(app_params.merge(:org_id => @org.id))
-        no_app_err = @app.save
-        if !no_app_err
-            @errors = @app.errors.full_messages
-            @user.destroy
-            @org.destroy
-            render :new and return
-        end
-
         redirect_to app_path(@app), notice: 'User, Org, and App were successfully created.'
     end
-
-
 end
