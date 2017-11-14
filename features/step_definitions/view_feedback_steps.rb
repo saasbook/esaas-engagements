@@ -21,3 +21,7 @@ Given /^the following iterations exist:$/ do |table|
   	Iteration.create(iteration)
   end
 end
+
+Then /^I should see "(.*)" has button "(.*)"$/ do |date, button|
+   find('tr', text: date.to_s).should have_content(button.to_s)
+end
