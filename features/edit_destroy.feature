@@ -1,4 +1,3 @@
-@wip
 Feature: engagements and iterations have edit and destroy buttons
   As a staff of the course
   So that I can manage the engagements and iterations
@@ -28,7 +27,6 @@ Background: Logged in
     | 6  | user6 |                 | test@user.com |
 
   And I'm logged in on the orgs page
-  And I am logged in as a "staff"
   And I follow "Apps"
   And I follow "app1"
   And the following engagements exist:
