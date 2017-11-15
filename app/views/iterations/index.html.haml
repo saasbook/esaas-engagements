@@ -29,7 +29,7 @@
       - h = iter.customer_feedback_to_hash
       %tr
         %td= link_to('Edit', edit_engagement_iteration_path(@engagement,iter), :class => 'btn btn-primary')
-        %td= link_to 'Destroy', engagement_iteration_destroy_path(@engagement,iter), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+        %td= link_to 'Destroy', engagement_iteration_path(@engagement,iter), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
         %td=iter.end_date.strftime('%F')
         %td
           %table

@@ -71,4 +71,4 @@
         %td= link_to image_tag('video.png'), engagement.screencast_url, :target => '_blank'
         %td= link_to image_tag('presentation.png'), engagement.presentation_url, :target => '_blank'
         %td= link_to('Edit', edit_app_engagement_path(@app,engagement), :class => 'btn btn-primary')
-        %td= link_to 'Destroy', app_engagement_destroy_path(@app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+        %td= link_to 'Destroy', app_engagement_path(@app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
