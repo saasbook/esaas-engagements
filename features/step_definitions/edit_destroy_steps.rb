@@ -1,23 +1,13 @@
-Given /^(?:|I )am logged in as a "(.*)"$/ do |type_user|
-    steps %Q{When PENDING:}
+When /^I select "(.*)" for the enddate$/ do |date|
+  ymd = date.to_s.split(' ')
+  year_select = page.find(:select, "iteration[end_date(1i)]")
+  month_select = page.find(:select, "iteration[end_date(2i)]")
+  day_select = page.find(:select, "iteration[end_date(3i)]")
+  year_select.select ymd[0]
+  month_select.select ymd[1]
+  day_select.select ymd[2]
 end
 
-Then /^I should see "(.*)" has button "(.*)"$/ do |username, sid|
-    steps %Q{When PENDING:}
-end
-
-Given /^(?:|I )press "(.*)" for the engagement for team number "(.*)"$/ do |button, team|
-    steps %Q{When PENDING:}
-end
-
-Given /^(?:|I )am at the engagment iterations page for engagement id "(.*)"$/ do [team]
-    steps %Q{When PENDING:}
-end
-
-Given /^(?:|I )should see "(.*)" for each iteration$/ do |arg|
-    steps %Q{When PENDING:}
-end
-
-Given /^(?:|I )press "(.*)" for Iteration with id "(.*)"$/ do |button, team|
-    steps %Q{When PENDING:}
+Then /^I should see "(.*)" has button "(.*)"$/ do |date, button|
+   find('tr', text: date.to_s).should have_content(button.to_s)
 end

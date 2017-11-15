@@ -70,4 +70,5 @@
         %td= link_to image_tag('octocat-gray.png'), engagement.prototype_deployment_url, :target => '_blank'
         %td= link_to image_tag('video.png'), engagement.screencast_url, :target => '_blank'
         %td= link_to image_tag('presentation.png'), engagement.presentation_url, :target => '_blank'
-        %td= link_to('Edit', edit_app_engagement_path(@app,engagement), :class => 'btn btn-primary') if indx==0
+        %td= link_to('Edit', edit_app_engagement_path(@app,engagement), :class => 'btn btn-primary')
+        %td= link_to 'Destroy', app_engagement_path(@app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
