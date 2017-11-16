@@ -1,6 +1,9 @@
+require 'csv'
+require 'json'
+
 class EngagementsController < ApplicationController
   before_action :set_app
-  before_action :set_engagement, only: [:edit, :update, :destroy]
+  before_action :set_engagement, only: [:edit, :update, :destroy, :export]
 
   # GET /engagements
   # GET /engagements.json
@@ -43,6 +46,28 @@ class EngagementsController < ApplicationController
   def destroy
     @engagement.destroy
     redirect_to @app, notice: 'Engagement was successfully destroyed.'
+  end
+
+  def export
+    # engagement.iterations returns list of iterations
+    # create a hash of iterations
+    iterations_hash = Hash.new
+    @engagement.iterations.each do |i|
+      iterations_hash[i.id] = i.as_json
+    end
+
+    # turn engagement into a hash first before adding more stuff to it
+    eng_hash = @engagement.as_json
+    eng_hash["iterations"] = iterations_hash
+    # make entire thing into a json
+    eng_params = JSON.parse(eng_hash.to_json)
+    keys = eng_params.keys
+    values = eng_params.values
+    file = CSV.generate do |csv|
+      csv << keys
+      csv << values
+    end
+    send_data(file, :filename => "engagement.csv")
   end
 
   private

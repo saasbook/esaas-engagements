@@ -1,5 +1,7 @@
-Then /^I should have downloaded "(.*)"$/ do |data|
-  #pending
-  #expect(page.response_headers["Content-Disposition"]).to be_eq("attachment")
-  #expect(page.source).to be_eq(data)
+Then /^I should have downloaded the engagement csv file$/ do
+	page.status_code.should == 200
+	page.response_headers['Content-Type'].should == "text/csv"
+	header = page.response_headers['Content-Disposition']
+	header.should match /^attachment/
+	header.should match /filename="engagement.csv"$/
 end
