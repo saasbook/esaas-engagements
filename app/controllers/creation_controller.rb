@@ -26,7 +26,7 @@ class CreationController < ApplicationController
                 @app = @org.apps.create!(app_params)
             end
         rescue ActiveRecord::RecordInvalid => e
-            @errors = [e.message]
+            @error_record = e.record
             render :new and return
         end
         redirect_to app_path(@app), notice: 'User, Org, and App were successfully created.'

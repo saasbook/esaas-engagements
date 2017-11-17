@@ -1,12 +1,5 @@
 = form_for(@org) do |f|
-  - if @org.errors.any?
-    #error_explanation
-      %h2 #{pluralize(@org.errors.count, "error")} prohibited this organization from being saved:
-
-      %ul
-        - @org.errors.full_messages.each do |message|
-          %li= message
-
+  = form_errors_for @org
   = field f, :name
   = field f, :address_line_1
   = field f, :address_line_2

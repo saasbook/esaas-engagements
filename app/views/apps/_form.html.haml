@@ -1,12 +1,5 @@
 = form_for(@app) do |f|
-  - if @app.errors.any?
-    #error_explanation.alert.alert-danger
-      %h2
-        = pluralize(@app.errors.count, "error")
-        prohibited this app from being saved:
-      %ul
-        - @app.errors.full_messages.each do |message|
-          %li= message
+  = form_errors_for @app
   = field f, :name
   = field f, :description, :text_area
   = field f, :deployment_url

@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %h1 Organizations
 
 %table.table.table-condensed
@@ -14,10 +12,10 @@
       - @orgs.each do |org|
         %tr{:class => ("defunct" if org.defunct)}
           %td= link_to_unless org.url.blank?, org.name, org.url, :target => '_blank'
-          %td= mail_to org.contact.email, org.contact.name 
-          %td= org.description 
+          %td= mail_to org.contact.email, org.contact.name
+          %td= org.description
           %td= org.apps.map { |a| link_to a.name, app_path(a) }.join(', ').html_safe
-          %td= link_to 'Edit', edit_org_path(org), :title => "Last update: #{org.updated_at.strftime('%c')}", :class => 'btn btn-primary' 
+          %td= link_to 'Edit', edit_org_path(org), :title => "Last update: #{org.updated_at.strftime('%c')}", :class => 'btn btn-primary'
           %td= link_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
 
 %br

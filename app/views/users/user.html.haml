@@ -1,15 +1,7 @@
 %h1 #{action_name.capitalize} User
 
 = form_for(@user) do |f|
-  - if @user.errors.any?
-    #error_explanation.alert.alert-danger
-      %h2
-        = pluralize(@user.errors.count, "error")
-        prevented this user from being saved:
-      %ul
-        - @user.errors.full_messages.each do |message|
-          %li= message
-
+  = form_errors_for @user
   = field f, :name
   = field f, :email
   = field f, :preferred_contact

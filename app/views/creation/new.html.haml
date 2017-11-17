@@ -1,12 +1,5 @@
 %h1 Create New User, Org, and App
-- if @errors
-  #error_explanation
-    %h2 #{pluralize(@errors.count, "error")} prohibited this app from being saved:
-
-    %ul
-      - @errors.each do |message|
-        %li= message
-
+= form_errors_for @error_record
 = form_tag creation_path do
   %br
   <div class="row" style="display: table; clear: both;">

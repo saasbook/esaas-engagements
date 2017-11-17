@@ -1,10 +1,5 @@
-= form_for([@app,@engagement]) do |f| 
-  - if @engagement.errors.any?
-    #error_explanation
-      %h2 #{pluralize(@engagement.errors.count, "error")}  prohibited this engagement from being saved:
-      %ul
-        - @engagement.errors.full_messages.each do |message|
-          %li= message
+= form_for([@app,@engagement]) do |f|
+  = form_errors_for @engagement
 
   %fieldset
     %legend Coaching Info

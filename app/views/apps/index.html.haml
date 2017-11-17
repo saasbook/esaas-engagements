@@ -1,4 +1,3 @@
-%p#notice= notice
 .page-header
   %h1 Listing Apps
   #filters
@@ -8,8 +7,8 @@
       %span{:class => status}= status.humanize
     :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
-      
-    
+
+
 %table.table.table-condensed#apps_table
   %thead
     %tr

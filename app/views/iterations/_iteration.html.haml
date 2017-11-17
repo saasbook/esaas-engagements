@@ -1,10 +1,5 @@
 = form_for([@engagement, @iteration]) do |f|
-  - if @iteration.errors.any?
-    #error_explanation
-      %h2 #{pluralize(@engagement.errors.count, "error")}  prohibited this iteration from being saved:
-      %ul
-        - @iteration.errors.full_messages.each do |message|
-          %li= message
+  = form_errors_for @iteration
 
   %fieldset
     = field f, :end_date, :date_select

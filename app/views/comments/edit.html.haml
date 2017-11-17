@@ -1,6 +1,7 @@
 %h1 Edit Comment
 
 = form_tag app_comment_path(@comment.app_id, @comment.id), :method => :put do
+  = form_errors_for @comment
   = label :comment, :content, "Edit Comments"
   = text_field :comment, 'content'
 
