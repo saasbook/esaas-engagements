@@ -18,15 +18,12 @@ module NavigationHelpers
 
     when /^the create page$/
       then creation_path
-      
+
     when /^the Users page$/
       then users_path
-      
+
     when /^the Orgs page$/
       then orgs_path
-
-    when /^the app details page for "(.*)"$/
-      then app_path(App.find_by_name($1))
 
     when /^the app details page for "(.*)"$/
       then app_path(App.find_by_name($1))

@@ -104,7 +104,6 @@ Scenario: User can submit a create form that includes user type and SID for Stud
     | Phone                     | 555-555-5555           |
     | Organization Description  | ESAAS Engagement Group |
     | url                       | https://google.com     |
-    | Organization Comments     | Hi                     |
   And I fill in the "App Information" fields as follows:
     | field              | value                    |
     | App Name            | Fake app                  |
@@ -135,7 +134,6 @@ Scenario: User can submit a create form that includes user type and SID for Staf
     | Phone                     | 555-555-5555           |
     | Organization Description  | ESAAS Engagement Group |
     | url                       | https://google.com     |
-    | Organization Comments     | Hi                     |
   And I fill in the "App Information" fields as follows:
     | field              | value                    |
     | App Name            | Fake app                  |

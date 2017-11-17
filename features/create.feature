@@ -44,7 +44,6 @@ Scenario: User cannot submit if form is incomplete
         | Phone                     | 555-555-5555           |
         | Organization Description  | ESAAS Engagement Group |
         | url                       | https://google.com     |
-        | Organization Comments     | Hi                     |
     And I fill in the "App Information" fields as follows:
         | field            | value         |
       	| User             | Fake app name |
@@ -67,7 +66,6 @@ Scenario: User can submit successfully if form is complete
         | Phone                     | 555-555-5555           |
         | Organization Description  | ESAAS Engagement Group |
         | url                       | https://google.com     |
-        | Organization Comments     | Hi                     |
     And I fill in the "App Information" fields as follows:
         | field              | value                    |
         | App Name       	 | Fake app      	        |

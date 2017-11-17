@@ -1,44 +1,43 @@
 class CommentsController < ApplicationController
-	def new
-		@comment = Comment.new
-	end
+	before_action :logged_in?
+	before_action :set_comment, only: [:edit, :destroy, :update]
+	before_action :authenticate, only: [:edit, :destroy, :update]
 
 	def create
-		if params["comment"]["content"] =~ /^\s*$/
-			flash[:error] = "Comment cannot be empty!"
-			redirect_to app_path(params[:app_id]) and return
+		@comment = @commentable.comments.new(comment_params)
+		@comment.user = @current_user
+		unless @comment.save
+			render "/#{@commentable.model_name.plural}/show",
+			locals: {"@#{@commentable.model_name.singular}": @commentable.reload, '@comment': @comment} and return
 		end
-		@comment = App.find(params[:app_id]).comments.create!(comment_params)
-		@comment.update_attributes(:username => User.find(session[:user_id]).name, :user_id => session[:user_id])
-		redirect_to app_path(@comment.app_id)
-	end
-
-	def edit
-		@comment = Comment.find(params[:id])
-		if @comment.user_id != session[:user_id]
-			flash[:error] = "You don't have authorization to edit #{@comment.username}'s comment!"
-			redirect_to app_path(@comment.app_id)
-		end
+		redirect_to @commentable, notice: "Comment was successfully created"
 	end
 
 	def destroy
-		@comment = Comment.find(params[:id])
-		if @comment.user_id != session[:user_id]
-			flash[:error] = "You don't have authorization to delete #{@comment.username}'s comment!"
-			redirect_to app_path(@comment.app_id)
-		else
-			@comment.destroy
-			redirect_to app_path(@comment.app_id)
-		end
+		@comment.destroy
+		redirect_to @comment.commentable
 	end
 
 	def update
-		@comment = Comment.find params[:id]
-		@comment.update_attributes!(comment_params)
-		redirect_to app_path(@comment.app_id)
+		unless @comment.update(comment_params)
+			render :edit and return
+		end
+		redirect_to @comment.commentable, notice: "Comment was successfully created"
 	end
 
+private
 	def comment_params
-		params.require(:comment).permit(:username, :user_id, :content, :app_id)
+		params.require(:comment).permit(:content, :comment_type)
+	end
+
+	def authenticate
+		unless @comment.user_id == session[:user_id]
+			flash[:alert] = "You don't have authorization to #{@comment.user.name}'s comment!"
+			redirect_to @comment.commentable
+		end
+	end
+
+	def set_comment
+		@comment = Comment.find params[:id]
 	end
 end

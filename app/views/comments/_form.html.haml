@@ -1,0 +1,8 @@
+= form_for [commentable, @comment] do |f|
+	= form_errors_for @comment
+	%div.form-group
+		- commentable.class.comment_types.each do |type, value|
+			= f.radio_button :comment_type, value, checked: value == (@comment.comment_type || 2)
+			= f.label :comment_type, type.titleize, value: value
+		= f.text_area :content, class: 'form-control', placeholder: 'Add a comment'
+	= f.submit 'Post', class: 'btn btn-primary'

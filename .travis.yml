@@ -6,9 +6,19 @@ bundler_args: --without production
 
 env:
   global:
+    - MOZ_HEADLESS=1
     - CC_TEST_REPORTER_ID=82fff89ba0da7030cf339a100c267baf4fdef4dd1c534490e9dc0d95fe48cf34
     - github_key=test
     - github_secret=test
+
+addons:
+  firefox: latest
+
+before_install:
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

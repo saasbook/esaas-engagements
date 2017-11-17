@@ -7,6 +7,7 @@ require 'simplecov'
 # files.
 
 require 'cucumber/rails'
+require 'selenium-webdriver'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -52,6 +53,9 @@ end
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
+
+# Capybara driver
+Capybara.javascript_driver = :selenium
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.

@@ -1,13 +1,15 @@
 .page-header
-  %h1 Listing Apps
-  #filters
-    Show:
-    - App.statuses.keys.each do |status|
-      = check_box_tag status, 1, true, :class => 'filter'
-      %span{:class => status}= status.humanize
-    :javascript
-      $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
+%h1
+  Listing Apps
+  = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
 
+#filters
+  Show:
+  - App.statuses.keys.each do |status|
+    = check_box_tag status, 1, true, :class => 'filter'
+    %span{:class => status}= status.humanize
+  :javascript
+    $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
 %table.table.table-condensed#apps_table
   %thead
@@ -15,7 +17,7 @@
       %th Name
       %th Organization
       %th Description
-      %th{:colspan => "2"}
+      %th
   %tbody
     - @apps.each do |app|
       %tr{:class => app.status.to_s}
@@ -29,7 +31,6 @@
           - app.engagements.each do |engagement|
             %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
             %br
-        %td= link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
-        %td= link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
-%br/
-= link_to 'New App', new_app_path, :class => 'btn btn-primary'
+        %td{style: 'white-space: nowrap'}
+          = link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
+          = link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'

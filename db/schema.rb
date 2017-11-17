@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104080350) do
+ActiveRecord::Schema.define(version: 20171115224801) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -28,16 +28,16 @@ ActiveRecord::Schema.define(version: 20171104080350) do
   add_index "apps", ["org_id"], name: "index_apps_on_org_id"
 
   create_table "comments", force: :cascade do |t|
-    t.string   "username"
     t.string   "content"
-    t.datetime "when"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "app_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "commentable_id"
     t.integer  "user_id"
+    t.integer  "comment_type"
+    t.string   "commentable_type"
   end
 
-  add_index "comments", ["app_id"], name: "index_comments_on_app_id"
+  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
 
   create_table "engagements", force: :cascade do |t|
     t.integer  "app_id"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20171104080350) do
     t.integer  "contact_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "comments"
     t.string   "address_line_1"
     t.string   "address_line_2"
     t.string   "city_state_zip"

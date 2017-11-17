@@ -5,7 +5,7 @@ And /^the time is "(.*)"$/ do |utc_time|
 end
 
 Given /^I am logged in$/ do
-	visit '/login'
+	visit '/orgs'
 	click_link "Log in with GitHub"
 	visit "/apps"
 end

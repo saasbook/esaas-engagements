@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :orgs, :foreign_key => 'contact_id'
+  has_many :comments, :foreign_key => 'user_id', :dependent => :destroy
 end

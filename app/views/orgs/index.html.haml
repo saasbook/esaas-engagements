@@ -1,9 +1,11 @@
-%h1 Organizations
+%h1
+  Organizations
+  = link_to 'New Org', new_org_path, :class => 'btn btn-success pull-right'
 
 %table.table.table-condensed
   %thead
     %tr
-      %th Name & Homepage Link
+      %th Name
       %th Contact name & email
       %th Description
       %th Apps
@@ -11,16 +13,12 @@
     %tbody
       - @orgs.each do |org|
         %tr{:class => ("defunct" if org.defunct)}
-          %td= link_to_unless org.url.blank?, org.name, org.url, :target => '_blank'
+          %td= link_to org.name, org
           %td= mail_to org.contact.email, org.contact.name
           %td= org.description
           %td= org.apps.map { |a| link_to a.name, app_path(a) }.join(', ').html_safe
-          %td= link_to 'Edit', edit_org_path(org), :title => "Last update: #{org.updated_at.strftime('%c')}", :class => 'btn btn-primary'
-          %td= link_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
-
-%br
-
-= link_to 'New Org', new_org_path, :class => 'btn btn-primary'
-= link_to 'New User', new_user_path, :class => 'btn btn-primary'
+          %td{:style => 'white-space: nowrap'}
+            = link_to 'Edit', edit_org_path(org), :title => "Last update: #{org.updated_at.strftime('%c')}", :class => 'btn btn-primary'
+            = link_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
 
 

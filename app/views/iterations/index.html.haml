@@ -15,7 +15,6 @@
   %thead
     %tr
       %th Iteration
-      %th{:colspan => 1} 
       %th End Date
       %th Customer Feedback
       %th Demeanor
@@ -28,8 +27,9 @@
     - @engagement.iterations.each do |iter|
       - h = iter.customer_feedback_to_hash
       %tr
-        %td= link_to('Edit', edit_engagement_iteration_path(@engagement,iter), :class => 'btn btn-primary')
-        %td= link_to 'Destroy', engagement_iteration_path(@engagement,iter), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+        %td{:style => 'white-space: nowrap'}
+          = link_to('Edit', edit_engagement_iteration_path(@engagement,iter), :class => 'btn btn-primary')
+          = link_to 'Destroy', engagement_iteration_path(@engagement,iter), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
         %td=iter.end_date.strftime('%F')
         %td
           %table
@@ -38,6 +38,6 @@
                 %td{:style => "width:232px"}= "#{text.gsub(/_text/, '')}: #{h[text]}"
         - Iteration.customer_rating_keys.each do |rating|
           %td=Iteration.rating_to_score(h[rating]) || "No Data"
-          
-          
-          
+
+
+

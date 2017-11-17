@@ -1,5 +1,5 @@
 Feature: an org can be created
-    
+
     As an admin user
     So that we can have an org associated with an app
     I want to create an org
@@ -21,7 +21,6 @@ Scenario: There is a form on the orgs page
     And I should see "Phone"
     And I should see "Description"
     And I should see "Url"
-    And I should see "Comments"
     And I should see "Defunct"
     And I should see "Contact"
 

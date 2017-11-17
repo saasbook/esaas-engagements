@@ -7,39 +7,17 @@
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
 
 .well#description
-  %label.control-label Description
+  %h4 Description
   %p= @app.description
 
-.well#comments
-  %label.control-label Comments
-  %div.comment-list
-    %ul
-      -@app.comments.each do |comment|
-        %li
-          %div.comment-box
-            %div.comment-header
-              %div.username-time
-                %span.username= comment.username
-                %span.time= comment.created_at.strftime("%b %d, %Y at %l:%M:%S %p")
-              %div.edit-delete
-                %span= link_to 'Edit', edit_app_comment_path(params[:id], comment.id)
-                \|
-                %span= link_to 'Delete', app_comment_path(params[:id], comment.id), :method => :delete
+= render partial: 'comments/comments', locals: {commentable: @app}
 
-            %div.comment-body= comment.content
-
-  = form_tag app_comments_path(@app) do
-    = label :comment, :content, "Write a comment..."
-    = text_area :comment, 'content'
-    %br= submit_tag 'Post', :class => "btn btn-primary"
-
-= link_to 'Edit', edit_app_path(@app)
-\|
-= link_to 'Back', apps_path
+= link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary'
+= link_to 'Back', apps_path, class: 'btn btn-primary'
 
 .page-header
   %h1 Engagements
-  = link_to 'New&hellip;'.html_safe, new_app_engagement_path(@app), :class => 'btn btn-primary'
+  = link_to 'New Engagement', new_app_engagement_path(@app), :class => 'btn btn-primary'
 
 %p.explanation
   Click on engagement start date to view or edit Iterations.
@@ -55,7 +33,7 @@
       %th{:colspan => 3} Assets
       %th
   %tbody
-    - @engagements.each_with_index do |engagement,indx|
+    - @app.engagements.each_with_index do |engagement,indx|
       %tr
         %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
         %td= mail_to(engagement.contact.email, engagement.contact.name) if engagement.contact
@@ -65,9 +43,10 @@
           %div{:class => 'members'}
             -engagement.users.each_with_index do |member, index|
               %div{:class => "member#{index}"} #{member.try(:name)}
-        %td= link_to image_tag('octocat-gray.png'), engagement.prototype_deployment_url, :target => '_blank'
-        %td= link_to image_tag('video.png'), engagement.screencast_url, :target => '_blank'
-        %td= link_to image_tag('presentation.png'), engagement.presentation_url, :target => '_blank'
-        %td= link_to('Edit', edit_app_engagement_path(@app,engagement), :class => 'btn btn-primary')
-        %td= link_to 'Destroy', app_engagement_path(@app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
-        %td= link_to('CSV', export_path(@app,engagement), :class => 'btn btn-primary')
+        %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
+        %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
+        %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
+        %td
+          = link_to('Edit', edit_app_engagement_path(@app,engagement), :class => 'btn btn-primary')
+          = link_to 'Destroy', app_engagement_path(@app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+          = link_to('CSV', export_path(@app,engagement), :class => 'btn btn-info')

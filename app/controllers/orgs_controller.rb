@@ -66,7 +66,7 @@ class OrgsController < ApplicationController
     def org_params
       params.
         require(:org).
-        permit(:name, :description, :url, :contact_id, :comments,
+        permit(:name, :description, :url, :contact_id,
       :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct)
     end
 end
