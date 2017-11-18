@@ -1,7 +1,7 @@
-Feature: get iteration feedback from customers who haven't submitted feedback yet
-	As a customer
-	So that we can keep track of customer feedback of iterations
-    I want to fill out a feedback form for the iteration
+Feature: Get iteration feedback from customers who haven't submitted feedback yet
+	As a logged in user
+	So that I can collect customer feedback of iterations
+    I want a customer to be able to fill out a feedback form for the iteration
 
 Background: Logged in
     Given the following users exist:
