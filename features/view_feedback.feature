@@ -91,16 +91,17 @@ Given I am on the edit engagement iteration page for engagement id "1" and itera
     And I press "Save Changes"
     Then I should see "Iteration was successfully updated."
     When I am on the edit engagement iteration page for engagement id "1" and iteration id "1"
-    Then the field "duration" should be filled with "1 hour"
-    And the field "demeanor" should be filled with "Mostly agree"
-    And the field "engaged" should be filled with "Strongly agree"
-    And the field "engaged_text" should be filled with "They were engaged"
-    And the field "communication" should be filled with "Neither agree nor disagree"
-    And the field "communication_text" should be filled with "They communicated well"
-    And the field "understanding" should be filled with "Mostly disagree"
-    And the field "understanding_text" should be filled with "They understood well"
-    And the field "effectiveness" should be filled with "Strongly disagree"
-    And the field "effectiveness_text" should be filled with "They were effective"
-    And the field "satisfied" should be filled with "Mostly agree"
-    And the field "satisfied_text" should be filled with "I am satisfied"
-
+    Then the "feedback form" fields should be filled as follows:
+        | field               | value                      |
+        | duration            | 1 hour                     |
+        | demeanor            | Mostly agree               |
+        | engaged             | Strongly agree             |
+        | engaged_text        | They were engaged          |
+        | communication       | Neither agree nor disagree |
+        | communication_text  | They communicated well     |
+        | understanding       | Mostly disagree            |
+        | understanding_text  | They understood well       |
+        | effectiveness       | Strongly disagree          |
+        | effectiveness_text  | They were effective        |
+        | satisfied           | Mostly agree               |
+        | satisfied_text      | I am satisfied             |
