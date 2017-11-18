@@ -21,3 +21,9 @@ Given /^the following iterations exist:$/ do |table|
   	Iteration.create(iteration)
   end
 end
+
+Given /^the following pending feedback exist:$/ do |table|
+  table.hashes.each do |pending_feedback|
+  	PendingFeedback.create(pending_feedback)
+  end
+end
