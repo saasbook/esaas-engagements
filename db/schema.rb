@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021020704) do
+ActiveRecord::Schema.define(version: 20171113154019) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20171021020704) do
     t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "number"
   end
 
   create_table "orgs", force: :cascade do |t|

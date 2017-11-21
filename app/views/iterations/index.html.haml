@@ -10,10 +10,12 @@
 %table.table
   %thead
     %tr
+      %th Iteration Number
       %th Iteration End
       %th Customer Feedback
   %tbody
     - @engagement.iterations.each do |iter|
       %tr
-        %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(@engagement,iter)
+        %td= link_to iter.number ||"Edit", edit_engagement_iteration_path(@engagement, iter)
+        %td= iter.end_date.strftime('%F')
         %td= iter.customer_feedback
