@@ -22,6 +22,9 @@ module NavigationHelpers
     when /^the Users page$/
       then users_path
 
+    when /^the Apps page$/
+      then apps_path
+
     when /^the Orgs page$/
       then orgs_path
 
@@ -44,6 +47,8 @@ module NavigationHelpers
     when /^the edit user page for user id: "(.*)"$/ then edit_user_path($1)
 
     when /^the edit org page for org id: "(.*)"$/ then edit_org_path($1)
+
+    when /^the edit app page for app id: "(.*)"$/ then edit_app_path($1)
 
     when /^the new app page$/ then new_app_path
 
