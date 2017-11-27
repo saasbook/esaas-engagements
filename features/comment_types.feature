@@ -6,18 +6,18 @@ Feature: Users can choose a type of comment on app
 
 Background:
 	And the following users exist:
-		| name 				| github_uid 		| email 						|
-		| ESaaS Developer 	| esaas_developer	| esaas_developer@saasbook.info	|
-		| Armando Fox 		| armandofox 		| fox@berkeley.edu				|
-		| Adnan Hemani		| adnanhemani		| adnan.h@berkeley.edu			|
+		| name              | github_uid      | email                         |
+		| ESaaS Developer   | esaas_developer | esaas_developer@saasbook.info |
+		| Armando Fox       | armandofox      | fox@berkeley.edu              |
+		| Adnan Hemani      | adnanhemani     | adnan.h@berkeley.edu          |
 
 	And the following orgs exist:
-        | name | contact_id |
-        | org1 | 2          |
-        | org2 | 2          |
-        | org3 | 2          |
+		| name | contact_id |
+		| org1 | 2          |
+		| org2 | 2          |
+		| org3 | 2          |
 
-    Given the following apps exist:
+	Given the following apps exist:
 		| name  | description | org_id | status  |
 		| app1  | test        | 1      | pending |
 		| app2  | test        | 2      | pending |
