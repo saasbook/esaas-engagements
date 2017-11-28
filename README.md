@@ -10,8 +10,7 @@ Engineering](https://cs169.saas-class.org).
 [![Test Coverage](https://codeclimate.com/github/csungwon/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/csungwon/esaas-engagements/coverage)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
-
-Heroku Link: https://shielded-bastion-61752.herokuapp.com/
+[Heroku Deployment](https://shielded-bastion-61752.herokuapp.com/)
 
 The data currently populating the app came from this [Google spreadsheet](https://docs.google.com/spreadsheets/d/1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY/edit#gid=0).
 
@@ -23,27 +22,25 @@ handed off from cohort to cohort.
 The main models are:
 
 * App: a deployable Web app.  An app's status may be:
-  * `inactive`: not deployed, and/or customer not actively using;
-  dormant
-  * `development`: in active development, whether or not deployed in
-  production
-  * `maintenance`: deployed in production, not currently in active development
+  * `Dead`: not deployed, and/or customer not actively using; dormant
+  * `Development`: in active development (a team is working on it right now), whether or not deployed in production
+  * `In use`: in production use at a customer site; customer has not expressed interest in further improvements
+  * `In use and wants improvement`: in production, and customer is interested in further development
+  * `Inactive but wants improvement`: an app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
+  * `Pending`: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
 * Org: a customer organization for whom the app was developed
 * User: various subcategories, including developer (e.g. student), coach
-(mentor, GSI), customer contact.  Also a principal for authentication,
-though as of this writing there's no login/auth support.
+(mentor, GSI), customer contact.  Also a principal for authentication: as of now, only a staff member has authorization to edit/destroy.
 * Coaching org: an "organization" whose main function is to provide
 mentoring/coaching to students building apps.  E.g., "UCB CS169 Fall 17"
 is an org, as is "[AgileVentures](https://agileventures.org)", and so
 on.  I would propose that each offering of CS169 be its own org, so we
 can track engagements accurately.
 
-An **engagement** is a period of time over which a coach interacts with
+An `engagement` is a period of time over which a coach interacts with
 developer(s) to work on an app.  During that time, the app is in
-`development` status.
-
-After the engagement ends, the app is either in `maintenance` status
-(customer is using it; app may be enhanced in future) or `inactive`
+`development` status. After the engagement ends, the app is either in `In use` status
+(customer is using it; app may be enhanced in future) or `dead`
 (customer not using it, because it doesn't meet their needs enough to be
 usable).
 
@@ -61,7 +58,7 @@ enhancements in Fall 2017, might have these engagements:
 | maintenance | 5/5/2017   | AgileVentures | Sam Joseph |
 | development | 8/23/2017  | CS169 F'17    | An Ju      |
 
-# Why?
+# Why ESaaS Engagement Tracker?
 
 The goal is to have a robust ecosystem that eventually encompasses not
 only UCB CS169 but its offshoots: the AgileVentures volunteer-developer
@@ -102,6 +99,61 @@ file containing the GitHub application key and secret for OmniAuth.
 You shouldn't need to change it, but if you do, get the encryption key
 from @armandofox so that you can decrypt, modify, then re-encrypt and
 commit `application.yml.asc`.
+
+If you want to have GitHub OAuth on the development environment or on the heroku
+deployment environment, you have to register your app [here](https://github.com/settings/applications/new). After you register and obtain Client ID and Client Secret, add
+the keys to `config/application.yml`
+
+## Setting Environment Variables
+
+We used `figaro` gem to upload app environment variables. You can add secret keys
+in `config/application.yml`. **Important**: since you are storing security-sensitive
+information, remember to add this file to `.gitignore`. The following keys are
+needed to correctly run the app:
+
+* `secret_key_base`: this is used to encrypt and sign session in order to safely
+send session back and forth in cookies
+* `github_key`, `github_secret`: these are used for login with GitHub
+
+Although the app mocks the GitHub OAuth mechanism for test and development environment,
+you still need to add a "mock key" to `config/applicaiton.yml`. For example:
+
+```yaml
+test:
+	secret_key_base: test
+	github_key: test
+	github_secret: test
+
+development:
+	secret_key_base: development
+	github_key: development
+	github_secret: development
+```
+
+However, we think it is a good practice to have a mock key that resembles a real
+key. You can easily generate a key using `rake secret`.
+
+To upload the keys to an Heroku app, run `figaro heroku:set -e production`.
+
+After setting environment variables using `figaro`, you can access them by
+`ENV["YOURKEY"]` or `Figaro.env.YOURKEY`. Refer the [documentation](https://github.com/laserlemon/figaro) for more information.
+
+# FA17 Engagement: Main Features
+
+* New `App`, `Org`, and `User` can be created all at once, with proper association
+* Every user can "post" comments on an `App`, `Org`, and `User`
+  - `App` has different types of comments
+  - Any class that inherits `Commentable` can have many comments
+* More comprehensive customer feedback through a feedback form with ratings/comments
+* Aggregates customer feedbacks from all iterations of an engagement, and display
+averages on each category
+* `User` supports different typs (e.g. Student, Staff/Coach, Customer)
+* Exports `Engagement` information as a CSV file
+* each `User` contains a profile image
+  - currently saves images directly into database (which is considered a bad practice; for future engagements, save them in AWS for better performance along with scalability)
+* Authorization to edit/destroy only to "Staff"
+* Autocomplete dropdown list
+
 
 # High priority feature list
 
