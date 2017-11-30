@@ -1,4 +1,3 @@
-@wip
 Feature: The iterations' 'Edit' page should have a 'Back' button
   As a user of the app
   So that I can navigate around the app's pages
