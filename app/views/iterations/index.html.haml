@@ -1,6 +1,6 @@
-%h1 Iterations for #{@engagement.app.name}
-
-%h3= engagement_short_name(@engagement)
+.page-header
+  %h1 Iterations for #{@engagement.app.name}
+  %h3= engagement_short_name(@engagement)
 
 %div#stat
   - @stat.each do |key, value|
