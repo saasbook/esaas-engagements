@@ -5,12 +5,6 @@ class EngagementsController < ApplicationController
   before_action :set_app
   before_action :set_engagement, only: [:edit, :update, :destroy, :export]
 
-  # GET /engagements
-  # GET /engagements.json
-  def index
-    @engagements = Engagement.where(:app_id => @app.id)
-  end
-
   # GET /engagements/new
   def new
     @engagement = Engagement.new
@@ -25,7 +19,7 @@ class EngagementsController < ApplicationController
   def create
     @engagement = @app.engagements.build(engagement_params)
     if @engagement.save
-      redirect_to @app, notice: 'Engagement was successfully created.' 
+      redirect_to @app, notice: 'Engagement was successfully created.'
     else
       render :new
     end
@@ -84,7 +78,7 @@ class EngagementsController < ApplicationController
     params.require(:engagement).
       permit(:coach_id, :coaching_org_id, :contact_id, :app_id, :team_number,
       :start_date, :screencast_url, :poster_preview_url, :poster_url,
-      :presentation_url, :prototype_deployment_url, :student_names, 
+      :presentation_url, :prototype_deployment_url, :student_names,
       :repository_url, :user_ids => [])
   end
 end
