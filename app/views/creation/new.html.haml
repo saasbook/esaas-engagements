@@ -1,7 +1,8 @@
-%h1 Create New User, Org, and App
-= form_errors_for @error_record
+.page-header
+  %h1 Create New User, Org, and App
+
 = form_tag creation_path do
-  %br
+  = form_errors_for @error_record
   <div class="row" style="display: table; clear: both;">
   <div class="column left" style="float: left; padding: 60px;">
   %fieldset#User
