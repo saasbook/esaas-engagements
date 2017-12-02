@@ -38,6 +38,3 @@
                 %td{:style => "width:232px"}= "#{text.gsub(/_text/, '')}: #{h[text]}"
         - Iteration.customer_rating_keys.each do |rating|
           %td=Iteration.rating_to_score(h[rating]) || "No Data"
-
-
-

@@ -55,4 +55,6 @@
     %br
 
     %br
-    = submit_tag 'Save Changes'
+    = submit_tag 'Save Changes', :class => 'btn btn-success'
+    = link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'
+    = link_to 'Back to Iteration', engagement_iterations_path(@engagement), :class => 'btn btn-primary'

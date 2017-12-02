@@ -1,4 +1,3 @@
-@wip
 Feature: The iterations' 'Edit' page should have a 'Back' button
   As a user of the app
   So that I can navigate around the app's pages
@@ -32,14 +31,21 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
   And I'm logged in on the orgs page
   And I follow "Apps"
   And I follow "app1"
- 
-Scenario: There is a Back Button in the Edit Iteration page and it works
-  #Story ID: 153043640
-  Given I follow "2017-03-25"
+  And I follow "2017-03-25"
   And I press "Edit" for "2017-04-14"
-  Then I should see "Edit Customer Feedback"
-  And I should see "Back"
-  And I press "Back"
-  Then I should see "Iterations for"
+  And I should see "Edit Customer Feedback"
+ 
+Scenario: There is a "Back to App" button in the Edit Iteration page and it works
+  #Story ID: 153043640
+  Then I should see "Back to App"
+  And I follow "Back to App"
+  Then I should see "app1"
+  And I should see "Engagements"
+  
+Scenario: There is a "Back to Iteration" button in the Edit Iteration page and it works
+  #Story ID: 153043640
+  Then I should see "Back to Iteration"
+  And I follow "Back to Iteration"
+  Then I should see "Iterations for app1"
   And I should see "2017-04-14"
   
