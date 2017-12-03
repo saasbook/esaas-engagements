@@ -28,10 +28,9 @@ class CreationController < ApplicationController
                 @org = @user.client_orgs.create!(org_params)
                 @app = @org.apps.create!(app_params)
             end
-        rescue ActiveRecord::RecordInvalid => e
-            @error_record = e.record
-            render :new and return
-        end
-        redirect_to app_path(@app), notice: 'User, Org, and App were successfully created.'
+            redirect_to app_path(@app), notice: 'User, Org, and App were successfully created.'
+        else 
+			redirect_to creation_path, alert: 'Error: Only Staff can create users, orgs, and apps'
+		end
     end
 end

@@ -1,6 +1,8 @@
 class SessionController < ApplicationController
   skip_before_action :logged_in?
+  skip_before_action :auth_user?
   skip_before_action :verify_authenticity_token
+  
   
   def create
     github_uid = request.env["omniauth.auth"]["info"]["nickname"]

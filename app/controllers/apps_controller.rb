@@ -1,7 +1,7 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy]
-
   skip_before_filter :logged_in?, :only => :index
+  
   # GET /apps
   # GET /apps.json
   def index
@@ -20,12 +20,20 @@ class AppsController < ApplicationController
 
   # GET /apps/new
   def new
-    @app = App.new
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
+      @app = App.new
+    else
+      redirect_to apps_path, alert: 'Error: Only Staff can create an app'
+    end
   end
 
   # GET /apps/1/edit
   def edit
-    @comments = App.find_by_id(params[:id]).comments
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
+      @comments = App.find_by_id(params[:id]).comments
+    else
+      redirect_to apps_path, alert: 'Error: Only Staff can edit an app'
+    end 
   end
 
   # POST /apps
@@ -61,11 +69,15 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
-    @app.destroy
-    respond_to do |format|
-      format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
+      @app.destroy
+      respond_to do |format|
+        format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to apps_path, alert: 'Error: Only Staff can destroy an app'
+    end 
   end
 
   private
