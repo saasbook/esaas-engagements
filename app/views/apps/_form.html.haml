@@ -6,8 +6,11 @@
   = field f, :repository_url
   = field f, :code_climate_url
   = f.label 'Organization'
+  %br
   = f.collection_select :org_id, Org.all, :id, :name, {label: 'Organization'}, {class: 'select2'}
+  %br
   = f.label 'Status'
+  %br
   = f.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
   .actions
     = f.submit 'Save', :class => 'btn btn-success'
