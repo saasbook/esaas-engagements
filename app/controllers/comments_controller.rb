@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 	before_action :authenticate, only: [:edit, :destroy, :update]
 
 	def create
-		if User.find_by_id(session[:user_id]).type_user == "Staff"
+		if User.find_by_id(session[:user_id]).type_user == "staff"
 			@comment = @commentable.comments.new(comment_params)
 			@comment.user = @current_user
 			unless @comment.save
@@ -13,27 +13,27 @@ class CommentsController < ApplicationController
 			end
 			redirect_to @app, notice: "Comment was successfully created"
 		else 
-			redirect_to @commentable, alert: 'Error: Only Staff can create comments'
+			redirect_to @commentable, alert: 'Error: Only staff can create comments'
 		end
 	end
 
 	def destroy
-		if User.find_by_id(session[:user_id]).type_user == "Staff"
+		if User.find_by_id(session[:user_id]).type_user == "staff"
 			@comment.destroy
 			redirect_to @comment.commentable
 		else 
-			redirect_to @comment.commentable, alert: 'Error: Only Staff can destroy comments'
+			redirect_to @comment.commentable, alert: 'Error: Only staff can destroy comments'
 		end
 	end
 
 	def update
-		if User.find_by_id(session[:user_id]).type_user == "Staff"
+		if User.find_by_id(session[:user_id]).type_user == "staff"
 			unless @comment.update(comment_params)
 				render :edit and return
 			end
 			redirect_to @comment.commentable, notice: "Comment was successfully created"
 		else 
-			redirect_to @commentable, alert: 'Error: Only Staff can update comments'
+			redirect_to @commentable, alert: 'Error: Only staff can update comments'
 		end
 	end
 

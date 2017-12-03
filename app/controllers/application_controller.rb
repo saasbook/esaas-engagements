@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   private
   @@name_path = nil
+  
+   
 
   def logged_in?
     @@name_path = request.env['PATH_INFO']
