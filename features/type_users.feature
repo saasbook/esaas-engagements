@@ -1,4 +1,4 @@
-Feature: Have User support Student and Staff types
+Feature: Have User support student and staff types
     As a developer
     So that I can differentiate between student and staff among Users
     I want Users to be categorized into types
@@ -44,14 +44,14 @@ Scenario: Can create a User as a student with SID:
     | field               | value      |
     | User Name           | fake name  |
     | User E-mail address | fake addr  |
-    | Type of user        | Student    |
+    | Type of user        | student    |
     | SID                 | 11111111   |
   And I press "Save"
   And I should be on the users page
-  And I should see "fake name" has type "Student"
+  And I should see "fake name" has type "student"
   And I should see "fake name" has SID "11111111"
 
-Scenario: Can create a User that is a Staff:
+Scenario: Can create a User that is a staff:
   #Story ID: #152298593
   Given I follow "New User"
   When I fill in the fields as follows:
@@ -85,7 +85,7 @@ Scenario: Can edit Users to add Type and SID:
 
 # Add tests for create
 
-Scenario: User can submit a create form that includes user type and SID for Student
+Scenario: User can submit a create form that includes user type and SID for student
   #Story ID: #152298593
   And I follow "Create"
   Given I fill in the "User Information" fields as follows:
@@ -94,7 +94,7 @@ Scenario: User can submit a create form that includes user type and SID for Stud
     | Email               | fakeuser@berkeley.edu |
     | Preferred Contact   | 555-555-5555          |
     | Github uid          | fakegithubuid         |
-    | Type of user        | Student               |
+    | Type of user        | student               |
     | SID                 | 11111111              |
   And I fill in the "Org Information" fields as follows:
     | field                     | value                  |
@@ -115,7 +115,7 @@ Scenario: User can submit a create form that includes user type and SID for Stud
   Then I should be on the app details page for "Fake app"
   Then I should see "User, Org, and App were successfully created"
 
-Scenario: User can submit a create form that includes user type and SID for Staff
+Scenario: User can submit a create form that includes user type and SID for staff
   #Story ID: #152298593
   And I follow "Create"
   Given I fill in the "User Information" fields as follows:

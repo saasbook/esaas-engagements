@@ -14,8 +14,9 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
     | 2  | org2 | 1          |
   And the following users exist:
     | id | name  | github_uid      | email          | type_user     |
+    | 2  | user2 | sandy           | test1@user.com | student       |
     | 1  | user1 | esaas_developer | test@user.com  | staff         |
-    | 2  | user2 |                 | test1@user.com | student       |
+    | 2  | user2 | sandy           | test1@user.com | student       |
     | 3  | user3 |                 | test2@user.com | coach         |
   And the following engagements exist:
     | id | app_id | coaching_org_id | coach_id | contact_id | team_number | start_date | student_names |
@@ -28,9 +29,9 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
   
 Scenario: Happy Path - Can create new app, edit and destroy existing app if I am staff
   #Story ID: 153042639
-  Given I am logged in as "user1"
+  Given I am logged in
   And I follow "Apps"
-  And I press "New App"
+  And I follow "New App"
   Then I should see "New App"
   And I press "Back"
   And I press "Edit" for "app1"

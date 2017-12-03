@@ -20,9 +20,14 @@ class AppsController < ApplicationController
 
   # GET /apps/new
   def new
+    print "TYPE"
+    print User.find_by_id(session[:user_id]).type_user
+    print "TYPE"
     if User.find_by_id(session[:user_id]).type_user == "staff"
+      print "GOT IN"
       @app = App.new
     else
+      print "ELSE"
       redirect_to apps_path, alert: 'Error: Only staff can create an app'
     end
   end
