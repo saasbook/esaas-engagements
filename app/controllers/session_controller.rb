@@ -13,10 +13,6 @@ class SessionController < ApplicationController
       flash[:alert] = "No user with GitHub name '#{github_uid}'."
       redirect_to login_path
     end
-    print "DATA"
-    print User.find_by_id(session[:user_id]).name
-    print User.find_by_id(session[:user_id]).github_uid
-    print "DATA"
   end
 
   def destroy

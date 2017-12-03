@@ -10,10 +10,11 @@ class OrgsController < ApplicationController
 
   # GET /orgs/new
   def new
-    if User.find_by_id(session[:user_id]).type_user == "staff"
+    print User.find_by_id(session[:user_id]).github_uid
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
 			@org = Org.new
 		else 
-			redirect_to orgs_path, alert: 'Error: Only staff can create orgs'
+			redirect_to orgs_path, alert: 'Error: Only Staff can create orgs'
 		end
   end
 
@@ -40,7 +41,7 @@ class OrgsController < ApplicationController
   # PATCH/PUT /orgs/1
   # PATCH/PUT /orgs/1.json
   def update
-    if User.find_by_id(session[:user_id]).type_user == "staff"
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
 			respond_to do |format|
         if @org.update(org_params)
           format.html { redirect_to orgs_path, notice: 'Org was successfully updated.' }
@@ -51,21 +52,21 @@ class OrgsController < ApplicationController
         end
       end
 		else 
-			redirect_to orgs_path, alert: 'Error: Only staff can update orgs'
+			redirect_to orgs_path, alert: 'Error: Only Staff can update orgs'
 		end
   end
 
   # DELETE /orgs/1
   # DELETE /orgs/1.json
   def destroy
-    if User.find_by_id(session[:user_id]).type_user == "staff"
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
 			@org.destroy
       respond_to do |format|
         format.html { redirect_to orgs_url, notice: 'Org was successfully destroyed.' }
         format.json { head :no_content }
       end
 		else 
-			redirect_to orgs_path, alert: 'Error: Only staff can destroy orgs'
+			redirect_to orgs_path, alert: 'Error: Only Staff can destroy orgs'
 		end
   end
 

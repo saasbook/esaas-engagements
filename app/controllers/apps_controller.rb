@@ -20,24 +20,19 @@ class AppsController < ApplicationController
 
   # GET /apps/new
   def new
-    print "TYPE"
-    print User.find_by_id(session[:user_id]).type_user
-    print "TYPE"
-    if User.find_by_id(session[:user_id]).type_user == "staff"
-      print "GOT IN"
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
       @app = App.new
     else
-      print "ELSE"
-      redirect_to apps_path, alert: 'Error: Only staff can create an app'
+      redirect_to apps_path, alert: 'Error: Only Staff can create an app'
     end
   end
 
   # GET /apps/1/edit
   def edit
-    if User.find_by_id(session[:user_id]).type_user == "staff"
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
       @comments = App.find_by_id(params[:id]).comments
     else
-      redirect_to apps_path, alert: 'Error: Only staff can edit an app'
+      redirect_to apps_path, alert: 'Error: Only Staff can edit an app'
     end 
   end
 
@@ -74,14 +69,14 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
-    if User.find_by_id(session[:user_id]).type_user == "staff"
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
       @app.destroy
       respond_to do |format|
         format.html { redirect_to apps_url, notice: 'App was successfully destroyed.' }
         format.json { head :no_content }
       end
     else
-      redirect_to apps_path, alert: 'Error: Only staff can destroy an app'
+      redirect_to apps_path, alert: 'Error: Only Staff can destroy an app'
     end 
   end
 

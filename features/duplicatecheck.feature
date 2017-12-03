@@ -12,9 +12,9 @@ Background: User is trying to sign up
 
     And the following users exist:
         | name  | github_uid      | email          | type_user     |
-        | user1 | esaas_developer | user1@user.com | staff         |
-        | user2 |                 | user2@user.com | student       |
-        | user3 |                 | user3@user.com | coach         |
+        | user1 | esaas_developer | user1@user.com | Staff         |
+        | user2 |                 | user2@user.com | Student       |
+        | user3 |                 | user3@user.com | Coach         |
     
     And I'm logged in on the orgs page
 

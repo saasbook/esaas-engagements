@@ -7,8 +7,8 @@ Feature: an org can be destroyed
 Background: Logged in
     And the following users exist:
         | id | name  | github_uid      | email          | type_user     |
-        | 1  | user1 | esaas_developer | test@user.com  | staff         |
-        | 2  | user2 |                 | test1@user.com | student       |
+        | 1  | user1 | esaas_developer | test@user.com  | Staff         |
+        | 2  | user2 |                 | test1@user.com | Student       |
 
     And the following orgs exist:
         | name | contact_id | id |

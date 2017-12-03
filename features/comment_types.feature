@@ -7,9 +7,9 @@ Feature: Users can choose a type of comment on app
 Background:
 	And the following users exist:
 		| name              | github_uid      | email                         | type_user     |
-		| ESaaS Developer   | esaas_developer | esaas_developer@saasbook.info | staff         |
-		| Armando Fox       | armandofox      | fox@berkeley.edu              | staff         |
-		| Adnan Hemani      | adnanhemani     | adnan.h@berkeley.edu          | staff         |
+		| ESaaS Developer   | esaas_developer | esaas_developer@saasbook.info | Staff         |
+		| Armando Fox       | armandofox      | fox@berkeley.edu              | Staff         |
+		| Adnan Hemani      | adnanhemani     | adnan.h@berkeley.edu          | Staff         |
 
 	And the following orgs exist:
 		| name | contact_id |
