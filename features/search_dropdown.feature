@@ -1,4 +1,3 @@
-@wip
 Feature: when creating an app, the orgs dropdown should be searchable
 As a user of the app
 So that I do not have to look through a long list of dropdown menu
@@ -17,10 +16,12 @@ Background: user and orgs have been added to database
         | user1 | esaas_developer | test@user.com |
 
   And I'm logged in on the orgs page
-  
+
+@javascript
 Scenario: I can search the dropdown list of orgs
   # Story ID: 153069853
   Given I am on the new app page
-  And I fill in "organization" with "org"
-  Then I should see "org3"
-  And I should see "org4"
+  And I click "#select2-app_org_id-container"
+  And I type in "org" in ".select2-search__field"
+  Then I should see "org3" inside ".select2-results"
+  And I should see "org4" inside ".select2-results"
