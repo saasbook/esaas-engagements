@@ -6,8 +6,9 @@ Feature: an org can be destroyed
 
 Background: Logged in
     And the following users exist:
-        | name  | github_uid      | email         |
-        | user1 | esaas_developer | test@user.com |
+        | id | name  | github_uid      | email          | type_user     |
+        | 1  | user1 | esaas_developer | test@user.com  | staff         |
+        | 2  | user2 |                 | test1@user.com | student       |
 
     And the following orgs exist:
         | name | contact_id | id |

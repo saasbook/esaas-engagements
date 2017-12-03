@@ -13,7 +13,6 @@ class SessionController < ApplicationController
       flash[:alert] = "No user with GitHub name '#{github_uid}'."
       redirect_to login_path
     end
-    
   end
 
   def destroy

@@ -18,15 +18,11 @@ Background: users, orgs and apps have been added to database
         | org3 | 1          |
 
     And the following users exist:
-        | name  | github_uid      | email         |
-        | user1 | esaas_developer | test@user.com |
-        | user2 |                 | test@user.com |
-        | user3 |                 | test@user.com |
-
-
+        | id | name  | github_uid      | email          | type_user     |
+        | 1  | user1 | esaas_developer | test@user.com  | staff         |
+        | 2  | user2 |                 | test1@user.com | student       |
+        | 3  | user3 |                 | test2@user.com | coach         |
   And I am not logged in
-
-
 
 Scenario: login with Github from orgs page and redirect to orgs
   #Story ID: #152298585
