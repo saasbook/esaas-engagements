@@ -1,4 +1,3 @@
-@wip
 Feature: only authorized users can create, edit, and destroy users, orgs, apps, engagements, and iterations
   As a staff of the course
   So that nothing in the database is modified by unauthorised users
@@ -45,8 +44,7 @@ Scenario: Sad Path - Cannot create new app, edit and destroy existing app if I a
   Given I am logged in as "user2"
   And I follow "Apps"
   And I press "New App"
-  Then I should see "error"
-  And I press "Back"
+  Then I should see "Error: Only Staff can create an app"
   And I press "Edit" for "app1"
   Then I should see "error"
   And I press "Back"

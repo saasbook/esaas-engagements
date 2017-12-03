@@ -8,11 +8,13 @@ class SessionController < ApplicationController
     github_uid = request.env["omniauth.auth"]["info"]["nickname"]
     if (user = User.find_by_github_uid(github_uid))
       session[:user_id] = user.id
+      session[:user_type_user] = "Staff"
       redirect_to @@name_path
     else
       flash[:alert] = "No user with GitHub name '#{github_uid}'."
       redirect_to login_path
     end
+    print "TTTTTTT"
   end
 
   def destroy

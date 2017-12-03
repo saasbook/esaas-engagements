@@ -7,7 +7,11 @@ class EngagementsController < ApplicationController
 
   # GET /engagements/new
   def new
-    @engagement = Engagement.new
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
+			@engagement = Engagement.new
+		else 
+			redirect_to @app, alert: 'Error: Only Staff can create engagements'
+		end
   end
 
   # GET /engagements/1/edit
@@ -28,18 +32,28 @@ class EngagementsController < ApplicationController
   # PATCH/PUT /engagements/1
   # PATCH/PUT /engagements/1.json
   def update
-    if @engagement.update(engagement_params)
-      redirect_to @app, notice: 'Engagement was successfully updated.'
-    else
-      render :edit
-    end
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
+  			if @engagement.update(engagement_params)
+        redirect_to @app, notice: 'Engagement was successfully updated.'
+      else
+        render :edit
+      end
+		else 
+			redirect_to @app, alert: 'Error: Only Staff can update engagements'
+		end
+    
   end
 
   # DELETE /engagements/1
   # DELETE /engagements/1.json
   def destroy
-    @engagement.destroy
-    redirect_to @app, notice: 'Engagement was successfully destroyed.'
+    if User.find_by_id(session[:user_id]).type_user == "Staff"
+			@engagement.destroy
+      redirect_to @app, notice: 'Engagement was successfully destroyed.'
+		else 
+			redirect_to @app, alert: 'Error: Only Staff can destroy engagements'
+		end
+    
   end
 
   def export
