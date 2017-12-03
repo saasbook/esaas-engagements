@@ -9,6 +9,9 @@
   = field f, :url
   = field f, :defunct, :check_box
   = menu_field f, :contact, :model_class => User
+  = f.label :coach_ids, 'Coaches'
+  %br
+  = f.collection_select(:coach_ids, User.all, :id, :name, {:include_blank => true}, {:multiple => true, :size => 10})
   .actions
     = f.submit 'Save', :class => 'btn btn-success'
     = link_to 'Back', orgs_path, :class => 'btn btn-primary'

@@ -36,12 +36,12 @@
     - @app.engagements.each_with_index do |engagement,indx|
       %tr
         %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
-        %td= mail_to(engagement.contact.email, engagement.contact.name) if engagement.contact
+        %td= mail_to(engagement.client.email, engagement.client.name) if engagement.client
         %td= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
         %td= engagement.team_number
         %td
           %div{:class => 'members'}
-            -engagement.users.each_with_index do |member, index|
+            -engagement.developers.each_with_index do |member, index|
               %div{:class => "member#{index}"} #{member.try(:name)}
         %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
         %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'

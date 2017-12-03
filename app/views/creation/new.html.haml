@@ -23,9 +23,9 @@
     %br
     = text_field :user, 'github_uid'
     %br
-    = label :user, :type_user, 'Type of User'
+    = label :user, :user_type, 'Type of User'
     %br
-    = select(:user, :type_user, options_for_select([["Student", "Student"], ["Staff", "Staff"]]))
+    = collection_select :user, :user_type, User.user_types, :first, ->(x){x.first.humanize}
     %br
     = label :user, :sid, 'SID'
     %br
@@ -63,8 +63,6 @@
     = label :org, :url, 'url'
     %br
     = text_field :org, 'url'
-    %br
-    = label :org, :comments, 'Organization Comments'
     %br
     = label :org, :defunct, 'Defunct'
     %br

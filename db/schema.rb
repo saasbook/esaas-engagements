@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115224801) do
+ActiveRecord::Schema.define(version: 20171202224507) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -43,9 +43,7 @@ ActiveRecord::Schema.define(version: 20171115224801) do
     t.integer  "app_id"
     t.string   "team_number"
     t.datetime "start_date"
-    t.integer  "contact_id"
     t.integer  "coach_id"
-    t.integer  "coaching_org_id"
     t.string   "screencast_url"
     t.string   "screenshot_url"
     t.string   "poster_url"
@@ -59,8 +57,6 @@ ActiveRecord::Schema.define(version: 20171115224801) do
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
   add_index "engagements", ["coach_id"], name: "index_engagements_on_coach_id"
-  add_index "engagements", ["coaching_org_id"], name: "index_engagements_on_coaching_org_id"
-  add_index "engagements", ["contact_id"], name: "index_engagements_on_contact_id"
 
   create_table "iterations", force: :cascade do |t|
     t.integer  "engagement_id"
@@ -102,9 +98,11 @@ ActiveRecord::Schema.define(version: 20171115224801) do
     t.string   "preferred_contact"
     t.string   "sid"
     t.string   "type_user"
-    t.integer  "engagement_id"
+    t.integer  "developing_engagement_id"
+    t.integer  "coaching_org_id"
+    t.integer  "user_type"
   end
 
-  add_index "users", ["engagement_id"], name: "index_users_on_engagement_id"
+  add_index "users", ["developing_engagement_id"], name: "index_users_on_developing_engagement_id"
 
 end

@@ -16,8 +16,8 @@
       %tr
         %td= link_to iter.end_date.strftime('%F'), edit_engagement_iteration_path(eng,iter)
         %td= eng.app.name
-        %td= eng.contact.name
-        %td= eng.contact.email
+        %td= eng.client.name
+        %td= eng.client.email
         - if PendingFeedback.exists?(:engagement_id => eng.id, :iteration_id => iter.id)
           %td Yes
         - else

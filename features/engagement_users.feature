@@ -34,7 +34,7 @@ Scenario: Can create an engagement with Team members
    Then I should see "Team members"
    And I select "user1 user2 user3" as Team members
    And I press "Save"
-   Then I should see "2 errors prohibited Engagement from being saved:"
+   Then I should see "1 error prohibited Engagement from being saved:"
 
 Scenario: Can create an engagement with Team members
    #Story ID: #152298585

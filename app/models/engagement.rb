@@ -1,24 +1,15 @@
 class Engagement < ActiveRecord::Base
   belongs_to :app
-  validates_presence_of :app_id
+  belongs_to :coach, class_name: 'User'
 
-  belongs_to :coaching_org, :class_name => 'Org'
-  validates_presence_of :coaching_org_id
-  validates_associated :coaching_org
+  has_one :coaching_org, through: :coach
+  has_one :client_org, through: :app, source: :org
+  has_one :client, through: :client_org, source: :contact
 
-  belongs_to :coach, :class_name => 'User'
-  validates_presence_of :coach_id
-  validates_associated :coach
+  has_many :iterations, dependent: :destroy
+  has_many :developers, foreign_key: :developing_engagement_id, class_name: 'User'
 
-  belongs_to :contact, :class_name => 'User'
-
-  validates_presence_of :team_number
-  validates_presence_of :start_date
-  validates_presence_of :student_names
-
-  has_many :iterations
-
-  has_many :users
+  validates_presence_of :app_id, :coach_id, :team_number, :start_date
 
   default_scope { order('start_date DESC') }
 

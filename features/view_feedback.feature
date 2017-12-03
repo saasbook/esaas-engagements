@@ -17,13 +17,13 @@ Background: Logged in
         | 1  | app1  | test        | 1      | pending |
 
     And the following engagements exist:
-        | id | app_id | contact_id | coaching_org_id | coach_id | team_number | start_date | student_names       |
-        | 1  | 1      | 1          | 1               | 1        | 1           | 2017-10-01 | fake1, fake2, fake3 |
+        | id | app_id | coach_id | team_number | start_date | student_names       |
+        | 1  | 1      | 1        | 1           | 2017-10-01 | fake1, fake2, fake3 |
 
     And the following iterations exist:
         | id | engagement_id | end_date   | customer_feedback |
         | 1  | 1             | 2017-10-26 |                   |
-        | 2  | 1             | 2017-10-31 | {"duration":"15 min", "demeanor":"Strongly agree", "engaged":"Strongly agree", "engaged_text":"i", "communication":"Strongly agree", "communication_text":"i", "understanding":"Strongly agree", "understanding_text":"i", "effectiveness":"Strongly agree", "effectiveness_text":"i", "satisfied":"Strongly agree", "satisfied_text":"I am satisfied"} | 
+        | 2  | 1             | 2017-10-31 | {"duration":"15 min", "demeanor":"Strongly agree", "engaged":"Strongly agree", "engaged_text":"i", "communication":"Strongly agree", "communication_text":"i", "understanding":"Strongly agree", "understanding_text":"i", "effectiveness":"Strongly agree", "effectiveness_text":"i", "satisfied":"Strongly agree", "satisfied_text":"I am satisfied"} |
     And I'm logged in on the orgs page
 
 # Story ID: 152298649

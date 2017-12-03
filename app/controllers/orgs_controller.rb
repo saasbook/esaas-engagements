@@ -67,6 +67,6 @@ class OrgsController < ApplicationController
       params.
         require(:org).
         permit(:name, :description, :url, :contact_id,
-      :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct)
+      :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
 end

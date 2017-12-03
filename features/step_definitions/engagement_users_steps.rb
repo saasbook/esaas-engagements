@@ -11,7 +11,7 @@ end
 
 Given /^I select "(.*)" as Team members$/ do |all_names|
   members = all_names.to_s.split(' ')
-  selection = page.find(:select, 'engagement_user_ids')
+  selection = page.find(:select, 'engagement_developer_ids')
   members.each do |member|
       selection.select member
   end

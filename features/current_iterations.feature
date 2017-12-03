@@ -1,4 +1,4 @@
-Feature: See all customers who haven't given feedback 
+Feature: See all customers who haven't given feedback
 	As a logged in user
 	So that I can easily see which customers to remind to fill out a feedback form
     I want to see all iterations that don't have feedback yet
@@ -17,8 +17,8 @@ Background: Logged in
         | 1  | app1  | test        | 1      | pending |
 
     And the following engagements exist:
-        | id | app_id | contact_id | coaching_org_id | coach_id | team_number | start_date | student_names       |
-        | 1  | 1      | 1          | 1               | 1        | 1           | 2017-10-01 | fake1, fake2, fake3 |
+        | id | app_id | coach_id | team_number | start_date | student_names       |
+        | 1  | 1      | 1        | 1           | 2017-10-01 | fake1, fake2, fake3 |
 
     And the following iterations exist:
         | id | engagement_id | end_date   | customer_feedback |

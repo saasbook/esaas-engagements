@@ -1,15 +1,18 @@
 class CreationController < ApplicationController
 
     def app_params
-        params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments)
+        params.require(:app).permit(:name, :description, :deployment_url,
+            :repository_url, :code_climate_url, :org_id, :status, :comments)
     end
 
     def user_params
-        params.require(:user).permit(:name,:email,:preferred_contact,:github_uid, :type_user, :sid)
+        params.require(:user).permit(:name, :email, :preferred_contact,
+            :github_uid, :user_type, :sid,:developing_engagement_id, :coaching_org_id)
     end
 
     def org_params
-        params.require(:org).permit(:name, :description, :url, :contact_id, :comments, :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct)
+        params.require(:org).permit(:name, :description, :url, :contact_id,
+            :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct)
     end
 
     def new
@@ -22,7 +25,7 @@ class CreationController < ApplicationController
         begin
             ActiveRecord::Base.transaction do
                 @user = User.create!(user_params)
-                @org = @user.orgs.create!(org_params)
+                @org = @user.client_orgs.create!(org_params)
                 @app = @org.apps.create!(app_params)
             end
         rescue ActiveRecord::RecordInvalid => e

@@ -18,6 +18,6 @@
         %td= user.name
         %td= mail_to user.email
         %td= link_to(user.github_uid, "https://github.com/#{user.github_uid}") unless user.github_uid.blank?
-        %td= user.type_user
+        %td= user.user_type.try(:humanize)
         %td= user.sid
         %td= link_to 'Edit', edit_user_path(user), :class => 'btn btn-primary'

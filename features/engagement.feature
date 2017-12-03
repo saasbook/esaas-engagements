@@ -18,8 +18,8 @@ Background: Seeding data / logging into the app
         | 2  | contact |                 | contact@user.com |
 
     And the following engagements exist:
-        | id | app_id | coaching_org_id | coach_id | contact_id | team_number | start_date | student_names |
-        | 1  | 1      | 1               | 1        | 2          | 1           | 2017-03-25 | s1, s2, s3    |
+        | id | app_id | coach_id | team_number | start_date | student_names |
+        | 1  | 1      | 1        | 1           | 2017-03-25 | s1, s2, s3    |
 
     And the following iterations exist:
         | id | engagement_id | end_date   |

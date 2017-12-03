@@ -4,7 +4,7 @@ class PendingFeedbackController < ApplicationController
 	def form
 		@engagement = Engagement.find(params[:engagement_id])
 		@iteration = Iteration.find(params[:iteration_id])
-		@customer = @engagement.contact.name
+		@customer = @engagement.client.name
 	end
 
 	def process_response

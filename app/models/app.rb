@@ -1,16 +1,17 @@
 class App < ActiveRecord::Base
   belongs_to :org
+
   has_many :comments, dependent: :destroy, as: :commentable
-  has_many :engagements
+  has_many :engagements, dependent: :destroy
   has_many :iterations, :through => :engagements
 
   validates_presence_of :name, :description, :org_id, :status
   validates_presence_of :repository_url, unless: :pending?
 
-  default_scope { order(:name => :asc) }
-  enum :status => { :dead => 0, :development => 1, :in_use => 2, :in_use_and_wants_improvement => 3, :inactive_but_wants_improvement => 4, :pending => 5}
-  enum :comment_type => { :contact_status => 0, :app_functionality => 1, :general => 2}
+  enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending]
+  enum comment_type: [:contact_status, :app_functionality, :general]
 
+  default_scope { order(:name => :asc) }
   scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
 
   def as_json(options={})

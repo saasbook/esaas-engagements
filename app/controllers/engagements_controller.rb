@@ -76,9 +76,8 @@ class EngagementsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def engagement_params
     params.require(:engagement).
-      permit(:coach_id, :coaching_org_id, :contact_id, :app_id, :team_number,
-      :start_date, :screencast_url, :poster_preview_url, :poster_url,
-      :presentation_url, :prototype_deployment_url, :student_names,
-      :repository_url, :user_ids => [])
+      permit(:coach_id, :app_id, :team_number, :start_date, :screencast_url,
+      :poster_url, :presentation_url, :prototype_deployment_url,
+      :student_names, :repository_url, developer_ids: [])
   end
 end
