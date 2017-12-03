@@ -16,4 +16,9 @@ class ApplicationController < ActionController::Base
       (@current_user = User.find_by_id(session[:user_id])).kind_of?(User)
   end
   
+  def auth_user?
+    if User.find_by_id(session[:user_id]).type_user != "Staff"
+      redirect_to orgs_path and return
+    end 
+  end 
 end
