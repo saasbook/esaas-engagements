@@ -123,7 +123,7 @@ Scenario: Sad Path - Cannot use the Create page and submit the form if I am not 
     | 1  | user1 | esaas_developer | test@user.com  | Student         |
   And I am logged in
   And I follow "Create"
-  Then I should see "Error: Only Staff can create apps, orgs, users"
+  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
  
 Scenario: Happy Path - Can create new engagement, edit and destroy existing engagement if I am Staff
   #Story ID: 153042639

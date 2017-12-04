@@ -21,14 +21,12 @@ class ApplicationController < ActionController::Base
   end 
   
   def redirect_path
-    if @@name_path.first(5) == "/apps" # apps and their engagements path
+    if @@name_path.first(5) == "/apps" or @@name_path.first(5) == "/crea"# apps and their engagements path
       redirect_to apps_path, alert: 'Error: Only Staff can create, edit and destroy apps and engagements'
     elsif @@name_path.first(5) == "/orgs"
       redirect_to orgs_path, alert: 'Error: Only Staff can create, edit and destroy orgs'
     elsif @@name_path.first(5) == "/user"
       redirect_to users_path, alert: 'Error: Only Staff can create and edit users'
-    elsif @@name_path.first(5) == "/crea"
-      redirect_to apps_path, alert: 'Error: Only Staff can create apps, orgs, users'
     elsif @@name_path.first(5) == "/enga" #engagement's iteration path
       parts = @@name_path.split("/")
       path = "/" + parts[1] + "/" + parts[2] + "/" + parts[3]
