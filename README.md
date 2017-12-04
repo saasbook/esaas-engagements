@@ -83,8 +83,8 @@ point your browser at `http://localhost:3000` to access it.
 
 In production, you login with your GitHub account.  Login is only
 permitted for a user whose `github_uid` field in the database is set to
-their GitHub username, e.g. `armandofox`.  So, get someone who already
-has this field set to set the field for your user record.
+their GitHub username, e.g. `armandofox`.  So, **get someone who already
+has this field set to set the field for your user record.**
 
 ## Logging In (Development)
 
@@ -120,23 +120,55 @@ you still need to add a "mock key" to `config/applicaiton.yml`. For example:
 
 ```yaml
 test:
-	secret_key_base: test
-	github_key: test
-	github_secret: test
+  secret_key_base: test
+  github_key: test
+  github_secret: test
 
 development:
-	secret_key_base: development
-	github_key: development
-	github_secret: development
+  secret_key_base: development
+  github_key: development
+  github_secret: development
 ```
 
 However, we think it is a good practice to have a mock key that resembles a real
 key. You can easily generate a key using `rake secret`.
 
-To upload the keys to an Heroku app, run `figaro heroku:set -e production`.
+To upload the keys to a Heroku app, run `figaro heroku:set -e production`.
 
 After setting environment variables using `figaro`, you can access them by
 `ENV["YOURKEY"]` or `Figaro.env.YOURKEY`. Refer the [documentation](https://github.com/laserlemon/figaro) for more information.
+
+## Uploading Images with AWS S3
+Since Heroku wipes out all data when dyno server is down, we used AWS S3 Bucket
+to store the images. After you open an account for AWS, you will need the following
+keys (in `config/application.yml`):
+```yaml
+AWS_ACCESS_KEY_ID: <your_aws_access_key_id>
+AWS_SECRET_ACCESS_KEY: <your_aws_secret_access_key>
+S3_BUCKET_NAME: <your_s3_bucket_name>
+AWS_REGION: <your_aws_region>
+S3_HOST_NAME: <your_s3_host_name>
+```
+
+## Running Unit/Integration Tests
+
+We used Cucumber/Capybara for integration tests, and RSpec for unit tests. You can
+run tests using:
+```shell
+bundle exec cucumber
+bundle exec rspec
+```
+
+To test javascript behaviors, Cucumber uses Selenium Webdriver as default. This
+requires you to have a [geckodriver](https://github.com/mozilla/geckodriver/releases),
+and firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
+to configure default webdriver.
+
+If you do not want to download a new webdriver, you can skip scenarios which require
+webdriver by:
+```shell
+bundle exec cucumber --tags ~@javascript
+```
 
 # FA17 Engagement: Main Features
 
@@ -150,12 +182,19 @@ averages on each category
 * `User` supports different typs (e.g. Student, Staff/Coach, Customer)
 * Exports `Engagement` information as a CSV file
 * each `User` contains a profile image
-  - currently saves images directly into database (which is considered a bad practice; for future engagements, save them in AWS for better performance along with scalability)
-* Authorization to edit/destroy only to "Staff"
-* Autocomplete dropdown list
-
+  - we are using Amazon S3 to store images on production envrionment, because
+  Heroku has [emphemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
+  have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
+* Authorization to edit/destroy only to "Coach"
+* Autocomplete dropdown list (select2)
+* Major Bootstrap styling
 
 # High priority feature list
 
 0. Add user contact info and a way to track user meeting notes
 0. Google or Facebook or LinkedIn login for customer contacts
+0. Manage customer feedback as a active record, not a json string
+0. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
+0. Mailing customer feedback forms to customers for each iteration (Sendgrid)
+0. More authorizations to different types of users
+  - a user cannot edit/delete other users unless it is a staff/coach
