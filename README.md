@@ -72,7 +72,7 @@ so that future dev teams can pick up and enhance them.
 
 # Getting the app running locally
 
-You will need Ruby 2.2.5 and Rails 4.2.6 installed.
+You will need Ruby 2.3.1 and Rails 4.2.7 installed.
 
 Clone the repo, and run `rake db:setup` and then `rake db:seed` to
 seed the development database with a subset of the initial data set.
@@ -85,6 +85,13 @@ In production, you login with your GitHub account.  Login is only
 permitted for a user whose `github_uid` field in the database is set to
 their GitHub username, e.g. `armandofox`.  So, **get someone who already
 has this field set to set the field for your user record.**
+
+You also need to be a `coach` to navigate through the app and do some core operations
+(create, update, delete). In order to give permission at database level run rails
+console on heroku server(`heroku run rails console`) and create/update a user:
+```ruby
+User.create(name: 'USERNAME', email: 'USER@NAME.COM', github_uid: 'username', user_type: 'coach')
+```
 
 ## Logging In (Development)
 
