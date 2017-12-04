@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :auth_user?, only: [:new, :create, :edit, :update]
-  
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
     @users = User.all
   end
@@ -10,8 +10,10 @@ class UsersController < ApplicationController
     render 'user'
   end
 
+  def show
+  end
+
   def edit
-    @user = User.find params[:id]
     render 'user'
   end
 
@@ -25,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path, notice: 'User was successfully updated.'
     else
@@ -34,6 +35,9 @@ class UsersController < ApplicationController
   end
 
   private
+  def set_user
+    @user = User.find(params[:id])
+  end
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.

@@ -31,6 +31,9 @@ module NavigationHelpers
     when /^the app details page for "(.*)"$/
       then app_path(App.find_by_name($1))
 
+    when /^the user details page for "(.*)"$/
+      then user_path(User.find_by_name($1))
+
     when /^the feedback form page for engagement id "(.*)" and iteration id "(.*)"$/ \
       then feedback_form_path(Engagement.find_by_id($1), Iteration.find_by_id($2))
 

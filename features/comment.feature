@@ -22,7 +22,6 @@ Background: a user is logged into the app
         | 1  | user1 | esaas_developer | test@user.com  | Staff         |
         | 2  | user2 |                 | test1@user.com | Student       |
         | 3  | user3 |                 | test2@user.com | Coach         |
-
     And I am logged in
     And I follow "app1"
 
