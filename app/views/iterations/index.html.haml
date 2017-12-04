@@ -23,6 +23,7 @@
       %th Understanding
       %th Effectiveness
       %th Customer Satisfaction
+      %th General Feedback
   %tbody
     - @engagement.iterations.each do |iter|
       - h = iter.customer_feedback_to_hash
@@ -38,3 +39,4 @@
                 %td{:style => "width:232px"}= "#{text.gsub(/_text/, '')}: #{h[text]}"
         - Iteration.customer_rating_keys.each do |rating|
           %td=Iteration.rating_to_score(h[rating]) || "No Data"
+        %td=iter.general_feedback

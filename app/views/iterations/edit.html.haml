@@ -53,7 +53,10 @@
     = label :customer_feedback, "Satisfied Comments: "
     = text_field :customer_feedback, :satisfied_text, :value => @feedback["satisfied_text"]
     %br
+    %br
 
+    = label :iteration, "General Feedback: "
+    = text_field :iteration, :general_feedback, :size => '80x6'
     %br
     = submit_tag 'Save Changes', :class => 'btn btn-success'
     = link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'

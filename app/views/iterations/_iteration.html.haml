@@ -3,7 +3,8 @@
 
   %fieldset
     = field f, :end_date, :date_select
-    = field f, :customer_feedback, :text_area, :size => '80x6'
+    /= field f, :customer_feedback, :text_area, :size => '80x6'
+    = field f, :general_feedback, :text_area, :size => '80x6'
 
     .actions
       = f.submit 'Save', :class => 'btn btn-success'

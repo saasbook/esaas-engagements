@@ -29,8 +29,8 @@ class IterationsController < ApplicationController
   def update
     feedback = feedback_params
     @iteration.customer_feedback = feedback.to_json
-    new_end_date = params.require(:iteration).permit(:end_date)
-    if @iteration.save and @iteration.update(new_end_date)
+    new_params = params.require(:iteration).permit(:end_date, :general_feedback)
+    if @iteration.save and @iteration.update(new_params)
       redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully updated.'
     else
       render :edit
@@ -83,7 +83,7 @@ class IterationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def iteration_params
-    params.require(:iteration).permit(:customer_feedback, :end_date)
+    params.require(:iteration).permit(:customer_feedback, :end_date, :general_feedback)
   end
 
   def feedback_params
