@@ -33,11 +33,10 @@
 = link_to 'Back', orgs_path, class: 'btn btn-primary'
 
 .page-header
-  %h1 Apps
-  = link_to 'New App', new_app_path, :class => 'btn btn-primary'
-
-%p.explanation
-  Click on app name to view or edit Iterations.
+  %h1
+    Apps
+    =link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
+  .help-block Click on app name to see more information.
 
 %table.table
   %thead

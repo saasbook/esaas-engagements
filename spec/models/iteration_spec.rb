@@ -84,7 +84,7 @@ describe Iteration do
 	end
 
 	it 'contains a list of keys that relate to customer feedback' do
-		expect(Iteration.customer_text_keys).to eq(%w(engaged_text communication_text understanding_text effectiveness_text satisfied_text))
+		expect(Iteration.customer_text_keys).to eq(%w(demeanor_text engaged_text communication_text understanding_text effectiveness_text satisfied_text))
 	end
 	it 'conatins a hash that maps a customer rating to a score' do
 		expect(Iteration.ratings).to eq({"Strongly agree" => 5, "Mostly agree" => 4, "Neither agree nor disagree" => 3, \
@@ -93,5 +93,11 @@ describe Iteration do
 	it 'creates a bash hash for storing summary statistics' do
 		expect(Iteration.create_base_rating_hash).to eq({"demeanor" => 0, "engaged" => 0, "communication" => 0, \
 		"understanding" => 0, "effectiveness" => 0, "satisfied" => 0})
+	end
+	it 'contains a list of rating options' do
+		expect(Iteration.rating_options).to eq ['Strongly agree', 'Mostly agree', 'Neither agree nor disagree', 'Mostly disagree', 'Strongly disagree']
+	end
+	it 'contains a list of duration options' do
+		expect(Iteration.duration_options).to eq ['15 min', '30 min', '45 min', '1 hour', '1 hour 15 min', '1 hour 30 min', 'Longer than 1 hour 30 min']
 	end
 end

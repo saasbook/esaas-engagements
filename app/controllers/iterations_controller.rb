@@ -88,8 +88,8 @@ class IterationsController < ApplicationController
   end
 
   def feedback_params
-    params.require(:customer_feedback).permit(:duration, :demeanor,
-      :engaged, :engaged_text, :communication,
+    params.require(:iteration).require(:customer_feedback).permit(:duration,
+      :demeanor, :demeanor_text, :engaged, :engaged_text, :communication,
       :communication_text, :understanding, :understanding_text,
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
   end

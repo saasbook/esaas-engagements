@@ -9,6 +9,7 @@
     - if @current_user
       %li= link_to "Current iteration", current_iteration_path
       %li= link_to "Logout @#{@current_user.github_uid}", logout_path
-      = form_tag search_path, :method => :post do
-        = text_field_tag "keyword", ""
-        = submit_tag "Search", :class => "btn btn-primary"
+      %li
+        = form_tag search_path, :method => :post do
+          = text_field_tag "keyword", ""
+          = submit_tag "Search", :class => "btn btn-primary"

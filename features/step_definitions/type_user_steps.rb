@@ -1,6 +1,6 @@
 When /^I fill in the fields as follows:$/ do |table|
  table.hashes.each do |t|
-    if "#{t[:field]}" == "Type of user"
+    if "#{t[:field]}" == "User Type"
       select "#{t[:value]}" , :from => "user[user_type]"
     else
       steps %Q{When I fill in "#{t[:field]}" with "#{t[:value]}"}

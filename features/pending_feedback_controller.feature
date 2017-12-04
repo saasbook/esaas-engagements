@@ -5,8 +5,8 @@ Feature: Get iteration feedback from customers who haven't submitted feedback ye
 
 Background: Logged in
     Given the following users exist:
-        | id | name  | github_uid      | email         |
-        | 1  | user1 | esaas_developer | test@user.com |
+        | id | name  | github_uid      | email         | user_type |
+        | 1  | user1 | esaas_developer | test@user.com | coach     |
 
     And the following orgs exist:
         | id | name | contact_id |
@@ -53,16 +53,16 @@ Scenario: A customer can fill out a feedback form and submit it
     Then I should see "Thank you!"
     When I am on the edit engagement iteration page for engagement id "1" and iteration id "1"
     Then the "feedback form" fields should be filled as follows:
-        | field                 | value                  |
-        | duration              | 1 hour                 |
-        | demeanor              | Mostly agree           |
-        | engaged               | Mostly agree           |
-        | engaged_text          | They were engaged      |
-        | communication         | Mostly agree           |
-        | communication_text    | They communicated well |
-        | understanding         | Mostly agree           |
-        | understanding_text    | They understood well   |
-        | effectiveness         | Mostly agree           |
-        | effectiveness_text    | They were effective    |
-        | satisfied             | Mostly agree           |
-        | satisfied_text        | I am satisfied         |
+        | field                  | value                  |
+        | Duration               | 1 hour                 |
+        | Demeanor               | Mostly agree           |
+        | Engagement             | Mostly agree           |
+        | Engagement Comments    | They were engaged      |
+        | Communication          | Mostly agree           |
+        | Communication Comments | They communicated well |
+        | Understanding          | Mostly agree           |
+        | Understanding Comments | They understood well   |
+        | Effectiveness          | Mostly agree           |
+        | Effectiveness Comments | They were effective    |
+        | Satisfaction           | Mostly agree           |
+        | Satisfaction Comments  | I am satisfied         |

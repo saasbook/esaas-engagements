@@ -15,13 +15,13 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
     | 2  | org2 | 1          |
     | 3  | org3 | 1          |
   And the following users exist:
-    | id | name  | github_uid      | email          | type_user     |
-    | 1  | user1 | esaas_developer | test@user.com  | Staff         |
-    | 2  | user2 |                 | test1@user.com | Staff         |
-    | 3  | user3 |                 | test2@user.com | Staff         |
-    | 4  | user4 |                 | test3@user.com | Staff         |
-    | 5  | user5 |                 | test@user.com  | Staff         |
-    | 6  | user6 |                 | test@user.com  | Student       |
+    | id | name  | github_uid      | email          | user_type     |
+    | 1  | user1 | esaas_developer | test@user.com  | coach         |
+    | 2  | user2 |                 | test1@user.com | coach         |
+    | 3  | user3 |                 | test2@user.com | coach         |
+    | 4  | user4 |                 | test3@user.com | coach         |
+    | 5  | user5 |                 | test@user.com  | coach         |
+    | 6  | user6 |                 | test@user.com  | student       |
   And the following engagements exist:
     | id | app_id | coach_id | team_number | start_date | student_names |
     | 1  | 1      | 1        | 1           | 2017-03-25 | s1, s2, s3    |
@@ -44,8 +44,8 @@ Scenario: Can edit and destroy all existing engagements
 Scenario: Editing existing engagements is successful
   #Story ID: #152689950
   And I press "Edit" for "2017-03-25"
-  Then I should see "Editing Engagement for"
-  And I press "Save"
+  Then I should see "Editing Engagement For"
+  And I press "Update Engagement"
   Then I should see "Engagement was successfully updated."
 
 Scenario: Destroying existing engagements is successful
@@ -58,9 +58,9 @@ Scenario: Newly Added Engagement also has buttons
    Given I create a new engagement for "app1"
    When I fill in the engagement fields as follows:
        | field                  | value      |
-       | Team number            | Team3          |
-       | Student names          | Student1   |
-  And I press "Save"
+       | Team Number            | Team3      |
+       | Student Names          | Student1   |
+  And I press "Create Engagement"
   Then I should see "Engagement was successfully created"
   Then I should see "Team3" has button "Edit"
   And I should see "Team3" has button "Destroy"
@@ -79,7 +79,7 @@ Scenario: Editing existing iterations is successful
   Given I follow "2017-03-25"
   And I press "Edit" for "2017-04-14"
   And I should see "Edit Customer Feedback"
-  And I press "Save Changes"
+  And I press "Update Iteration"
   And I should see "Iteration was successfully updated."
 
 Scenario: Destroying existing iterations is successful
@@ -93,8 +93,8 @@ Scenario: Newly Added Iteration also has buttons
   Given I follow "2017-03-25"
   And the time is "2017-11-14T19:20"
   And I follow "Add Iteration..."
-  And I select "2017 November 14" for the enddate
-  And I press "Save"
+  And I fill in "2017-11-14" for "End Date"
+  And I press "Create Iteration"
   Then I should see "Iteration was successfully created"
   And I should see "2017-11-14" has button "Edit"
   And I should see "2017-11-14" has button "Destroy"

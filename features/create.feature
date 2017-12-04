@@ -18,9 +18,9 @@ Background: Logged in
         | org3 | 1          |
 
     And the following users exist:
-        | id | name  | github_uid      | email          | type_user     |
-        | 1  | user1 | esaas_developer | test@user.com  | Staff         |
-        | 2  | user2 |                 | test1@user.com | Student       |
+        | id | name  | github_uid      | email          | user_type     |
+        | 1  | user1 | esaas_developer | test@user.com  | coach         |
+        | 2  | user2 |                 | test1@user.com | student       |
         | 3  | user3 |                 | test2@user.com | coach         |
 
     And I'm logged in on the orgs page
@@ -43,10 +43,10 @@ Scenario: User cannot submit if form is incomplete
         | field                     | value                  |
         | Phone                     | 555-555-5555           |
         | Organization Description  | ESAAS Engagement Group |
-        | url                       | https://google.com     |
+        | Url                       | https://google.com     |
     And I fill in the "App Information" fields as follows:
         | field            | value         |
-      	| User             | Fake app name |
+        | App Name         | Fake app name |
 	And I press "Submit"
 	Then creation should fail with "User E-mail address can't be blank"
 
@@ -57,7 +57,7 @@ Scenario: User can submit successfully if form is complete
         | User Name           | Fakeuser              |
         | Email               | fakeuser@berkeley.edu |
         | Preferred Contact   | 555-555-5555          |
-        | Github uid          | fakegithubuid         |
+        | Github Uid          | fakegithubuid         |
     And I fill in the "Org Information" fields as follows:
         | field                     | value                  |
         | Organization Name         | Group 20               |
@@ -65,19 +65,20 @@ Scenario: User can submit successfully if form is complete
         | City State Zip            | Berkeley, CA 55555     |
         | Phone                     | 555-555-5555           |
         | Organization Description  | ESAAS Engagement Group |
-        | url                       | https://google.com     |
+        | Url                       | https://google.com     |
     And I fill in the "App Information" fields as follows:
         | field              | value                    |
         | App Name       	 | Fake app      	        |
     	| App Description    | Fake app description     |
-    	| Deployment url     | Fake app deployment url  |
-    	| Repository url     | Fake app repository      |
-    	| Code Climate url   | Fake app codeclimate url |
+    	| Deployment Url     | Fake app deployment url  |
+    	| Repository Url     | Fake app repository      |
+    	| Code Climate Url   | Fake app codeclimate url |
     And I press "Submit"
     Then I should be on the app details page for "Fake app"
 
+@javascript
 Scenario: User can clear the form
     Given I follow "Create"
     And I fill in "User Name" with "Some Name"
-    And I follow "Cancel"
+    And I press "Reset"
     Then the field "User Name" should be empty

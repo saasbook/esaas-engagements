@@ -1,104 +1,41 @@
+= form_errors_for @error_record
+
 .page-header
-  %h1 Create New User, Org, and App
-  %h4 Staff can create a new user, org, and app at the same time. The newly created user belongs to the newly created org and owns the newly created app. 
+    %h1 Create New User, Org, and App
+    .help-block Staff can create a new user, org, and app at the same time. The newly created user belongs to the newly created org and owns the newly created app.
 
-= form_tag creation_path do
-  = form_errors_for @error_record
-  <div class="row" style="display: table; clear: both;">
-  <div class="column left" style="float: left; padding: 60px;">
-  %fieldset#User
-    %legend= 'User Information'
-    = label :user, :name, 'User Name'
-    %br
-    = text_field :user, 'name'
-    %br
-    = label :user, :email, 'Email'
-    %br
-    = text_field :user, 'email'
-    %br
-    = label :user, :preferred_contact, 'Preferred Contact'
-    %br
-    = text_field :user, 'preferred_contact'
-    %br
-    = label :user, :github_uid, 'Github uid'
-    %br
-    = text_field :user, 'github_uid'
-    %br
-    = label :user, :user_type, 'Type of User'
-    %br
-    = collection_select :user, :user_type, User.user_types, :first, ->(x){x.first.humanize}
-    %br
-    = label :user, :sid, 'SID'
-    %br
-    = text_field :user, 'sid'
-    %br
-  </div>
-
-  <div class="column middle" style="float: left; padding: 60px;">
-  %fieldset#Org
-    %legend= 'Org Information'
-    = label :org, :name, 'Organization Name'
-    %br
-    = text_field :org, 'name'
-    %br
-    = label :org, :address_line_1, 'Address Line 1'
-    %br
-    = text_field :org, 'address_line_1'
-    %br
-    = label :org, :address_line_2, 'Address Line 2'
-    %br
-    = text_field :org, 'address_line_2'
-    %br
-    = label :org, :city_state_zip, 'City State Zip'
-    %br
-    = text_field :org, 'city_state_zip'
-    %br
-    = label :org, :phone, 'Phone'
-    %br
-    = text_field :org, 'phone'
-    %br
-    = label :org, :description, 'Organization Description'
-    %br
-    = text_area :org, 'description'
-    %br
-    = label :org, :url, 'url'
-    %br
-    = text_field :org, 'url'
-    %br
-    = label :org, :defunct, 'Defunct'
-    %br
-    = check_box :org, 'defunct'
-    %br
-    </div>
-
-  <div class="column right" style="float: left; padding: 60px;">
-  %fieldset#App
-    %legend= 'App Information'
-    = label :app, :name, 'App Name'
-    %br
-    = text_field :app, 'name'
-    %br
-    = label :app, :description, 'App Description'
-    %br
-    = text_area :app, 'description'
-    %br
-    %br
-    = label :app, :deployment_url, 'Deployment url'
-    %br
-    = text_field :app, 'deployment_url'
-    %br
-    = label :app, :repository_url, 'Repository url'
-    %br
-    = text_field :app, 'repository_url'
-    %br
-    = label :app, :code_climate_url, 'Code Climate url'
-    %br
-    = text_field :app, 'code_climate_url'
-    %br
-  %br
-  </div>
-  </div>
-
-  = submit_tag 'Submit', :class => 'btn btn-primary'
-
-  = link_to 'Cancel', creation_path, :class => 'btn btn-primary'
+= bootstrap_form_tag url: creation_path, html: {id: 'create'} do |f|
+    .row
+        %fieldset.col-sm-4
+            %legend= 'User Information'
+            = fields_for(@user, nil, builder: BootstrapForm::FormBuilder) do |user_form|
+                = user_form.text_field :name, label: 'User Name'
+                = user_form.email_field :email, label: 'Email'
+                = user_form.phone_field :preferred_contact, label: 'Preferred Contact'
+                = user_form.text_field :github_uid, label: 'Github Uid'
+                = user_form.collection_select :user_type, User.user_types, :first, ->(x){x.first.humanize}, {label: 'User Type'}, {class: 'select2'}
+                = user_form.text_field :sid, label: 'SID'
+        %fieldset.col-sm-4
+            %legend= 'Org Information'
+            = fields_for @org, nil, builder: BootstrapForm::FormBuilder do |org_form|
+                = org_form.text_field :name, label: 'Organization Name'
+                = org_form.text_field :address_line_1, label: 'Address Line 1'
+                = org_form.text_field :address_line_2, label: 'Address Line 2'
+                = org_form.text_field :city_state_zip, label: 'City State Zip'
+                = org_form.phone_field :phone, label: 'Phone'
+                = org_form.text_area :description, label: 'Organization Description'
+                = org_form.url_field :url, label: 'Url'
+                = org_form.collection_select(:coach_ids, User.all, :id, :name, {:include_blank => true, label: 'Coaches'}, {:multiple => true, class: 'select2', css: '#select_coach'})
+                = org_form.check_box :defunct, label: 'Defunct'
+        %fieldset.col-sm-4
+            %legend= 'App Information'
+            = fields_for @app, nil, builder: BootstrapForm::FormBuilder do |app_form|
+                = app_form.text_field :name, label: 'App Name'
+                = app_form.text_area :description, rows: '5', label: 'App Description'
+                = app_form.url_field :deployment_url, label: 'Deployment Url'
+                = app_form.url_field :repository_url, label: 'Repository Url'
+                = app_form.url_field :code_climate_url, label: 'Code Climate Url'
+                = app_form.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
+    = f.submit 'Submit', class: 'btn btn-success'
+    = link_to 'Cancel', apps_path, :class => 'btn btn-primary'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'

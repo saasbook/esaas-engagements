@@ -1,21 +1,19 @@
-= form_for(@org) do |f|
-  = form_errors_for @org
-  = field f, :name
-  = field f, :address_line_1
-  = field f, :address_line_2
-  = field f, :city_state_zip
-  = field f, :phone
-  = field f, :description, :text_area
-  = field f, :url
-  = field f, :defunct, :check_box
-  = f.label 'Contact'
-  %br
+= form_errors_for @org
+
+= bootstrap_form_for(@org, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
+  = f.text_field :name, label: 'Organization Name'
+  = f.text_field :address_line_1, label: 'Address Line 1'
+  = f.text_field :address_line_2, label: 'Address Line 2'
+  = f.text_field :city_state_zip, label: 'City State Zip'
+  = f.phone_field :phone, label: 'Phone'
+  = f.text_area :description, label: 'Organization Description'
+  = f.url_field :url, label: 'Url'
   = f.collection_select :contact_id, User.all, :id, :name, {label: 'Contact'}, {class: 'select2'}
-  %br
-  = f.label :coach_ids, 'Coaches'
-  %br
   = f.collection_select(:coach_ids, User.all, :id, :name, {:include_blank => true, label: 'Coaches'}, {:multiple => true, class: 'select2', css: '#select_coach'})
-  .actions
-    = f.submit 'Save', :class => 'btn btn-success'
+  = f.form_group do
+    = f.check_box :defunct, label: 'Defunct'
+  = f.form_group do
+    = f.submit :class => 'btn btn-success'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
     = link_to 'Back', orgs_path, :class => 'btn btn-primary'
 

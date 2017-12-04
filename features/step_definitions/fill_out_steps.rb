@@ -12,9 +12,9 @@ When /^I fill in the "(.*)" fields as follows:$/ do |fieldset, table|
     when /^select "(.*)"$/
       steps %Q{When I select "#{$1}" for "#{t[:field]}"}
     else
-      if "#{t[:field]}" == "Type of user"
+      if "#{t[:field]}" == "User Type"
         steps %Q{I fill in the following:
-         | Type of user      | "#{t[:field]}"  |
+         | User Type      | "#{t[:field]}"  |
         }
       else
         steps %Q{When I fill in "#{t[:field]}" with "#{t[:value]}"}

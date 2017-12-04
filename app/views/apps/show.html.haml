@@ -16,8 +16,9 @@
 = link_to 'Back', apps_path, class: 'btn btn-primary'
 
 .page-header
-  %h1 Engagements
-  = link_to 'New Engagement', new_app_engagement_path(@app), :class => 'btn btn-success pull-right'
+  %h1
+    Engagements
+    = link_to 'New Engagement', new_app_engagement_path(@app), :class => 'btn btn-success pull-right'
   .help-block Click on engagement start date to view or edit Iterations.
 
 = render partial: 'engagements/index', locals: {engagements: @app.engagements}

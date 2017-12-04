@@ -1,17 +1,14 @@
-= form_for(@app) do |f|
-  = form_errors_for @app
-  = field f, :name
-  = field f, :description, :text_area
-  = field f, :deployment_url
-  = field f, :repository_url
-  = field f, :code_climate_url
-  = f.label 'Organization'
-  %br
+= form_errors_for @app
+
+= bootstrap_form_for(@app, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
+  = f.text_field :name, label: 'App Name'
+  = f.text_area :description, rows: '5', label: 'App Description'
+  = f.url_field :deployment_url, label: 'Deployment Url'
+  = f.url_field :repository_url, label: 'Repository Url'
+  = f.url_field :code_climate_url, label: 'Code Climate Url'
   = f.collection_select :org_id, Org.all, :id, :name, {label: 'Organization'}, {class: 'select2'}
-  %br
-  = f.label 'Status'
-  %br
   = f.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
-  .actions
-    = f.submit 'Save', :class => 'btn btn-success'
+  = f.form_group do
+    = f.submit class: 'btn btn-success'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
     = link_to 'Back', apps_path, :class => 'btn btn-primary'

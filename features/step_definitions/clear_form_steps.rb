@@ -9,10 +9,10 @@ Then /^All text fields are empty for the form with selector "(.*)"$/ do |form_se
 	end
 end
 
-Then /^I should have selected "(.*)" from "(.*)"$/ do |value, field|
-	expect(body).to have_select(field, selected: value)
-end
-
 Then /^I should have filled in "(.*)" for "(.*)"$/ do |value, field|
 	expect(body).to have_field(field, with: value)
+end
+
+Then /^the "(.*)" should not be checked$/ do |field|
+	expect(page).to have_field(field, checked: false)
 end

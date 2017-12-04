@@ -12,12 +12,8 @@ Background: user and orgs have been added to database
         | 4  | org4     | 1          |
 
   And the following users exist:
-        | name              | id | github_uid      | email          |
-        | user1             | 1  | esaas_developer | test1@user.com |
-        | user2             | 2  |                 | test2@user.com |
-        | cal student       | 3  |                 | test3@user.com |
-        | stanford student  | 4  |                 | test4@user.com |
-
+        | name              | id | github_uid      | email          | user_type |
+        | user1             | 1  | esaas_developer | test1@user.com | coach     |
 
   And I'm logged in on the orgs page
 
@@ -36,10 +32,10 @@ Scenario: I can still create a new app as usual
   Given I am on the new app page
   When I fill in "App Name" with "Fake app"
   When I fill in "App Description" with "Fake app description"
-  When I fill in "Repository url" with "Fake app repository"
+  When I fill in "Repository Url" with "http://fakeapp.com"
   And I click "#select2-app_org_id-container"
   And I type in "org" in ".select2-search__field"
   And I press enter in ".select2-search__field"
-  And I press "Save"
+  And I press "Create App"
   Then I should be on the apps page
   And I should see "App was successfully created."

@@ -15,10 +15,10 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
     | 2  | org2 | 1          |
     | 3  | org3 | 1          |
   And the following users exist:
-    | id | name  | github_uid      | email          |
-    | 1  | user1 | esaas_developer | test@user.com  |
-    | 2  | user2 |                 | test1@user.com |
-    | 3  | user3 |                 | test2@user.com |
+    | id | name  | github_uid      | email          | user_type |
+    | 1  | user1 | esaas_developer | test@user.com  | coach     |
+    | 2  | user2 |                 | test1@user.com | student   |
+    | 3  | user3 |                 | test2@user.com | student   |
 
   And the following engagements exist:
     | id | app_id | coach_id | team_number | start_date | student_names |

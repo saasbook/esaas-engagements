@@ -1,14 +1,14 @@
 Feature: an org can be destroyed
-    
+
     As an admin user
     So that we can delete orgs that we no longer want to keep track of
     I want to destroy an org
 
 Background: Logged in
     And the following users exist:
-        | id | name  | github_uid      | email          | type_user     |
-        | 1  | user1 | esaas_developer | test@user.com  | Staff         |
-        | 2  | user2 |                 | test1@user.com | Student       |
+        | id | name  | github_uid      | email          | user_type     |
+        | 1  | user1 | esaas_developer | test@user.com  | coach         |
+        | 2  | user2 |                 | test1@user.com | student       |
 
     And the following orgs exist:
         | name | contact_id | id |

@@ -35,7 +35,7 @@ class Iteration < ActiveRecord::Base
   end
 
   def self.customer_text_keys
-    %w(engaged_text communication_text understanding_text effectiveness_text satisfied_text)
+    %w(demeanor_text engaged_text communication_text understanding_text effectiveness_text satisfied_text)
   end
 
   def self.ratings
