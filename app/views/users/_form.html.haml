@@ -7,6 +7,7 @@
   = f.text_field :github_uid, label: 'Github Uid'
   = f.collection_select :user_type, User.user_types, :first, ->(x) { x.first.humanize }, {label: 'User Type'}, {class: 'select2'}
   = f.text_field :sid, label: 'SID'
+  = f.file_field :profile_picture, label: 'Profile Picture'
   = f.form_group do
     = f.submit class: 'btn btn-success'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'

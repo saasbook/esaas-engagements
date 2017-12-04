@@ -46,6 +46,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap_form'
+gem 'paperclip', '~> 5.0.0'
+gem 'aws-sdk', '~> 2.3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

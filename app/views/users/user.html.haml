@@ -1,0 +1,18 @@
+.page-header
+  %h1 #{action_name.capitalize} User
+
+= form_for(@user, html: { multipart: true }) do |f|
+  = form_errors_for @user
+  = f.label :profile_picture, 'Upload Profile Picture'
+  = f.file_field :profile_picture
+  = field f, :name
+  = field f, :email
+  = field f, :preferred_contact
+  = field f, :github_uid
+  = f.label 'Type of User'
+  = f.collection_select :type_user, { :student => 'Student', :staff => 'Staff' }, :last, ->(x) { x.last }
+  = field f, :sid
+
+  .actions
+    = f.submit 'Save', :class => 'btn btn-success'
+    = link_to 'Back', users_path, :class => 'btn btn-primary'

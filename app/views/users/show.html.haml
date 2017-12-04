@@ -4,19 +4,24 @@
     = link_to(image_tag('octocat.png'), "https://www.github.com/#{@user.github_uid}", target: '_blank') if @user.github_uid
 
 .well#description
-  %h4
-    = @user.name
-    %span.pull-right= @user.user_type.try(:humanize)
-  %ul
-    %li
-      %strong Email:
-      = @user.email
-    %li
-      %strong Github User ID:
-      = @user.github_uid
-    %li
-      %strong Preferred Contact:
-      = @user.preferred_contact
+  %div.media
+    .media-left
+      = image_tag @user.profile_picture.url(:thumb), class: 'media-object'
+    %div.media-body
+      %h4.media-heading
+        = @user.name
+        %span.pull-right= @user.user_type.try(:humanize)
+      %div
+        %ul
+          %li
+            %strong Email:
+            = @user.email
+          %li
+            %strong Github User ID:
+            = @user.github_uid
+          %li
+            %strong Preferred Contact:
+            = @user.preferred_contact
 
 = render partial: 'comments/comments', locals: {commentable: @user}
 

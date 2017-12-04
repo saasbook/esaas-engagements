@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def user_params
     params.
       require(:user).
-      permit(:name, :email, :preferred_contact, :github_uid, :user_type, :sid,
-        :developing_engagement_id, :coaching_org_id)
+      permit(:name,:email,:preferred_contact,:github_uid,:user_type,:sid,
+        :developing_engagement_id, :coaching_org_id, :profile_picture)
   end
 end

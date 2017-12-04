@@ -100,6 +100,10 @@ ActiveRecord::Schema.define(version: 20171204012819) do
     t.string   "sid"
     t.string   "type_user"
     t.integer  "developing_engagement_id"
+    t.string   "profile_picture_file_name"
+    t.string   "profile_picture_content_type"
+    t.integer  "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
     t.integer  "coaching_org_id"
     t.integer  "user_type"
   end
