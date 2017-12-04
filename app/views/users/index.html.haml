@@ -15,7 +15,7 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        %td= link_to(user.name, user_path(user))
         %td= mail_to user.email
         %td= link_to(user.github_uid, "https://github.com/#{user.github_uid}") unless user.github_uid.blank?
         %td= user.user_type.try(:humanize)

@@ -18,7 +18,7 @@ Background: a user is logged into the app
         | org3 | 1          |
 
     And the following users exist:
-        | name  | github_uid      | email         |
+        | name  | github_uid      | email          |
         | user1 | esaas_developer | test1@user.com |
         | user2 |                 | test2@user.com |
         | user3 |                 | test3@user.com |
