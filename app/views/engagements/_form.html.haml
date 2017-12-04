@@ -4,7 +4,8 @@
   %fieldset
     %legend Coaching Info
     = field f, :start_date, :date_select
-    = menu_field f, :coach, :model_class => User
+    = f.label 'Coach'
+    = f.collection_select :coach_id, User.all, :id, :name, {label: 'Coach'}, {class: 'select2'}
 
   %fieldset
     %legend Team Info and Work Products
@@ -12,7 +13,7 @@
     = field f, :student_names
     = f.label :developer_ids, 'Team members'
     %br
-    = f.collection_select(:developer_ids, User.all, :id, :name, {:include_blank => true, label: 'developers'}, {:multiple => true, :size => 10})
+    = f.collection_select(:developer_ids, User.all, :id, :name, {:include_blank => true, label: 'developers'}, {:multiple => true, class: 'select2'})
     = field f, :screencast_url
     = field f, :screenshot_url
     = field f, :poster_url

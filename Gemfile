@@ -35,6 +35,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
 gem 'json'
 gem 'figaro'
 gem 'haml'
