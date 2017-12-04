@@ -21,24 +21,24 @@ class ApplicationController < ActionController::Base
   end 
   
   def redirect_path
-    command = @@name_path.first(5)
-    if command == "/apps" # apps and their engagements path
-      redirect_to apps_path, alert: 'Error: Only Staff can create, edit and destroy apps and engagements'
-    elsif command == "/orgs"
-      redirect_to orgs_path, alert: 'Error: Only Staff can create, edit and destroy orgs'
-    elsif command == "/user"
-      redirect_to users_path, alert: 'Error: Only Staff can create and edit users'
-    elsif command == "/crea"
-      redirect_to apps_path, alert: 'Error: Only Staff can create apps, orgs, users'
-    elsif command == "/enga" #engagement's iteration path
-      redirect_to part_path, alert: 'Error: Only Staff can create, edit and destroy apps, engagements and iterations' and return
+    if @@name_path.first(5) == "/apps" 
+      redirect_helper(apps_path, 'Error: Only Staff can create, edit and destroy apps and engagements')
+    elsif @@name_path.first(5) == "/orgs"
+      redirect_helper(orgs_path, 'Error: Only Staff can create, edit and destroy orgs')
+    elsif @@name_path.first(5) == "/user"
+      redirect_helper(users_path, 'Error: Only Staff can create and edit users')
+    elsif @@name_path.first(5) == "/crea"
+      redirect_helper(apps_path, 'Error: Only Staff can create apps, orgs, users')
+    elsif @@name_path.first(5) == "/enga"
+      parts = @@name_path.split("/")
+      path = "/" + parts[1] + "/" + parts[2] + "/" + parts[3]
+      redirect_helper(path, 'Error: Only Staff can create, edit and destroy apps, engagements and iterations') 
     end
     return
   end 
   
-  def part_path
-    parts = @@name_path.split("/")
-    "/" + parts[1] + "/" + parts[2] + "/" + parts[3]
+  def redirect_helper(path, msg)
+    redirect_to path, alert: msg
   end 
   
 end
