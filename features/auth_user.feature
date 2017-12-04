@@ -13,9 +13,9 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
     | 1  | org1 | 1          |
     | 2  | org2 | 1          |
   And the following engagements exist:
-    | id | app_id | coaching_org_id | coach_id | contact_id | team_number | start_date | student_names |
-    | 1  | 1      | 1               | 1        | 2          | 1           | 2017-03-25 | s1, s2, s3    |
-    | 2  | 1      | 1               | 1        | 2          | 2           | 2017-08-25 | s4, s5, s6    |
+    | id | app_id | coach_id | team_number | start_date | student_names |
+    | 1  | 1      | 1        | 1           | 2017-03-25 | s1, s2, s3    |
+    | 2  | 1      | 1        | 2           | 2017-08-25 | s4, s5, s6    |
   And the following iterations exist:
     | id | engagement_id | end_date   |
     | 1  | 1             | 2017-04-14 |
@@ -75,12 +75,11 @@ Scenario: Sad Path - Cannot create new org, edit and destroy existing org if I a
   And I am logged in
   And I follow "Orgs"
   And I follow "New Org"
-  Then I should see "Error: Only Staff can create orgs"
+  Then I should see "Error: Only Staff can create, edit and destroy orgs"
   And I press "Edit" for "org1"
-  And I press "Save"
-  Then I should see "Error: Only Staff can update orgs"
+  Then I should see "Error: Only Staff can create, edit and destroy orgs"
   And I press "Destroy" for "org1"
-  Then I should see "Error: Only Staff can destroy orgs"
+  Then I should see "Error: Only Staff can create, edit and destroy orgs"
 
 Scenario: Happy Path - Can create new user and edit existing user if I am Staff
   Given the following users exist:
@@ -104,9 +103,9 @@ Scenario: Sad Path - Cannot create new user, edit and destroy existing user if I
   And I am logged in
   And I follow "Users"
   And I follow "New User"
-  Then I should see "Error: Only Staff can create users"
+  Then I should see "Error: Only Staff can create and edit users"
   And I press "Edit" for "user1"
-  Then I should see "Error: Only Staff can edit users"
+  Then I should see "Error: Only Staff can create and edit users"
 
 Scenario: Happy Path - Can use the Create page and submit the form if I am Staff
   #Story ID: 153042639
@@ -124,29 +123,7 @@ Scenario: Sad Path - Cannot use the Create page and submit the form if I am not 
     | 1  | user1 | esaas_developer | test@user.com  | Student         |
   And I am logged in
   And I follow "Create"
-  And I fill in the "User Information" fields as follows:
-        | field               | value                 |
-        | User Name           | Fakeuser              |
-        | Email               | fakeuser@berkeley.edu |
-        | Preferred Contact   | 555-555-5555          |
-        | Github uid          | fakegithubuid         |
-  And I fill in the "Org Information" fields as follows:
-        | field                     | value                  |
-        | Organization Name         | Group 20               |
-        | Address Line 1            | 2000 Durant            |
-        | City State Zip            | Berkeley, CA 55555     |
-        | Phone                     | 555-555-5555           |
-        | Organization Description  | ESAAS Engagement Group |
-        | url                       | https://google.com     |
-  And I fill in the "App Information" fields as follows:
-        | field              | value                    |
-        | App Name       	 | Fake app      	        |
-    	| App Description    | Fake app description     |
-    	| Deployment url     | Fake app deployment url  |
-    	| Repository url     | Fake app repository      |
-    	| Code Climate url   | Fake app codeclimate url |
-  And I press "Submit"
-  Then I should see "Error: Only Staff can create users, orgs, and apps"
+  Then I should see "Error: Only Staff can create apps, orgs, users"
  
 Scenario: Happy Path - Can create new engagement, edit and destroy existing engagement if I am Staff
   #Story ID: 153042639
@@ -174,12 +151,13 @@ Scenario: Sad Path - Cannot create new engagement, edit and destroy existing eng
   And I follow "Apps"
   Given I follow "app1"
   And I follow "New Engagement"
-  Then I should see "Error: Only Staff can create engagements"
+  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
+  And I follow "app1"
   And I press "Edit" for "2017-03-25"
-  And I press "Save"
-  Then I should see "Error: Only Staff can update engagements"
+  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
+  And I follow "app1"
   And I press "Destroy" for "2017-03-25"
-  Then I should see "Error: Only Staff can destroy engagements"
+  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
 
 Scenario: Happy Path - Can create new iteration, edit and destroy existing iterations if I am Staff
   #Story ID: 153042639
@@ -209,10 +187,9 @@ Scenario: Sad Path - Cannot create new iteration, edit and destroy existing iter
   And I follow "app1"
   And I follow "2017-03-25"
   And I follow "Add Iteration"
-  Then I should see "Error: Only Staff can create iterations"
+  Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
   And I press "Edit" for "2017-04-14"
-  And I press "Save"
-  Then I should see "Error: Only Staff can edit iterations"
+  Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
   And I press "Destroy" for "2017-04-14"
-  Then I should see "Error: Only Staff can destroy iterations"
+  Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
   

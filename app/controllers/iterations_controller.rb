@@ -2,18 +2,14 @@ class IterationsController < ApplicationController
 
   before_action :set_iteration, :only => [:edit,:update,:destroy]
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @stat = @engagement.summarize_customer_rating
   end
 
   def new
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-			@iteration = @engagement.iterations.new
-		else 
-			redirect_to engagement_iterations_path(@engagement), alert: 'Error: Only Staff can create iterations'
-		end
-    
+    @iteration = @engagement.iterations.new
   end
 
   def edit
@@ -32,29 +28,21 @@ class IterationsController < ApplicationController
   end
 
   def update
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-      feedback = feedback_params
-      @iteration.customer_feedback = feedback.to_json
-      new_end_date = params.require(:iteration).permit(:end_date)
-      if @iteration.save and @iteration.update(new_end_date)
-        redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully updated.'
-      else
-        render :edit
-      end
-    else 
-			redirect_to engagement_iterations_path(@engagement), alert: 'Error: Only Staff can edit iterations'
-		end
+    feedback = feedback_params
+    @iteration.customer_feedback = feedback.to_json
+    new_end_date = params.require(:iteration).permit(:end_date)
+    if @iteration.save and @iteration.update(new_end_date)
+      redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   # DELETE /engagements/1
   # DELETE /engagements/1.json
   def destroy
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-      @iteration.destroy
-      redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully destroyed.'
-    else 
-			redirect_to engagement_iterations_path(@engagement), alert: 'Error: Only Staff can destroy iterations'
-		end
+    @iteration.destroy
+    redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully destroyed.'
   end
 
   def current_iteration
@@ -105,5 +93,4 @@ class IterationsController < ApplicationController
       :communication_text, :understanding, :understanding_text,
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
   end
-
 end

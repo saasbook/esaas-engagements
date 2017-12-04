@@ -4,14 +4,11 @@ require 'json'
 class EngagementsController < ApplicationController
   before_action :set_app
   before_action :set_engagement, only: [:edit, :update, :destroy, :export]
-
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
+  
   # GET /engagements/new
   def new
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-      @engagement = Engagement.new
-    else 
-      redirect_to @app, alert: 'Error: Only Staff can create engagements'
-    end
+    @engagement = Engagement.new
   end
 
   # GET /engagements/1/edit
@@ -32,26 +29,18 @@ class EngagementsController < ApplicationController
   # PATCH/PUT /engagements/1
   # PATCH/PUT /engagements/1.json
   def update
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-      if @engagement.update(engagement_params)
-        redirect_to @app, notice: 'Engagement was successfully updated.'
-      else 
-        render :edit
-      end
-    else 
-      redirect_to @app, alert: 'Error: Only Staff can update engagements'
+    if @engagement.update(engagement_params)
+      redirect_to @app, notice: 'Engagement was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /engagements/1
   # DELETE /engagements/1.json
   def destroy
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-			@engagement.destroy
-      redirect_to @app, notice: 'Engagement was successfully destroyed.'
-    else
-      redirect_to @app, alert: 'Error: Only Staff can destroy engagements'
-    end
+    @engagement.destroy
+    redirect_to @app, notice: 'Engagement was successfully destroyed.'
   end
 
   def export

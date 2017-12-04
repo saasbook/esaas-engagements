@@ -1,6 +1,6 @@
 class OrgsController < ApplicationController
-  
   before_action :set_org, only: [:show, :edit, :update, :destroy]
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /orgs
   # GET /orgs.json
@@ -10,12 +10,7 @@ class OrgsController < ApplicationController
 
   # GET /orgs/new
   def new
-    print User.find_by_id(session[:user_id]).github_uid
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-			@org = Org.new
-		else 
-			redirect_to orgs_path, alert: 'Error: Only Staff can create orgs'
-		end
+    @org = Org.new
   end
 
   # GET /orgs/1/edit
@@ -41,33 +36,25 @@ class OrgsController < ApplicationController
   # PATCH/PUT /orgs/1
   # PATCH/PUT /orgs/1.json
   def update
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-			respond_to do |format|
-        if @org.update(org_params)
-          format.html { redirect_to orgs_path, notice: 'Org was successfully updated.' }
-          format.json { render :show, status: :ok, location: @org }
-        else
-          format.html { render :edit }
-          format.json { render json: @org.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @org.update(org_params)
+        format.html { redirect_to orgs_path, notice: 'Org was successfully updated.' }
+        format.json { render :show, status: :ok, location: @org }
+      else
+        format.html { render :edit }
+        format.json { render json: @org.errors, status: :unprocessable_entity }
       end
-		else 
-			redirect_to orgs_path, alert: 'Error: Only Staff can update orgs'
-		end
+    end
   end
 
   # DELETE /orgs/1
   # DELETE /orgs/1.json
   def destroy
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-			@org.destroy
-      respond_to do |format|
-        format.html { redirect_to orgs_url, notice: 'Org was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-		else 
-			redirect_to orgs_path, alert: 'Error: Only Staff can destroy orgs'
-		end
+    @org.destroy
+    respond_to do |format|
+      format.html { redirect_to orgs_url, notice: 'Org was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

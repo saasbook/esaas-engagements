@@ -1,26 +1,18 @@
 class UsersController < ApplicationController
-  skip_before_action :auth_user?
+  before_action :auth_user?, only: [:new, :create, :edit, :update]
   
   def index
     @users = User.all
   end
 
   def new
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-			@user = User.new
-      render 'user'
-		else 
-			redirect_to users_path, alert: 'Error: Only Staff can create users'
-		end
+    @user = User.new
+    render 'user'
   end
 
   def edit
-    if User.find_by_id(session[:user_id]).type_user == "Staff"
-      @user = User.find params[:id]
-      render 'user'
-    else 
-			redirect_to users_path, alert: 'Error: Only Staff can edit users'
-		end
+    @user = User.find params[:id]
+    render 'user'
   end
 
   def create
@@ -50,4 +42,3 @@ class UsersController < ApplicationController
         :developing_engagement_id, :coaching_org_id)
   end
 end
-

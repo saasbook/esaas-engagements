@@ -8,11 +8,7 @@
   = field f, :preferred_contact
   = field f, :github_uid
   = f.label 'Type of User'
-<<<<<<< HEAD
   = f.collection_select :user_type, User.user_types, :first, ->(x){x.first.humanize}
-=======
-  = f.collection_select :type_user, { :student => 'Student', :staff => 'Staff' }, :last, ->(x) { x.last }
->>>>>>> authorized access to staff only to modify datavase
   = field f, :sid
 
   .actions

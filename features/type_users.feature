@@ -58,10 +58,10 @@ Scenario: Can create a User that is a Staff:
     | field                  | value      |
     | User Name              | fake name  |
     | User E-mail address    | fake addr  |
-    | Type of user           | Staff      |
+    | Type of user           | Coach      |
   And I press "Save"
   And I should be on the users page
-  And I should see "fake name" has type "Staff"
+  And I should see "fake name" has type "Coach"
 
 Scenario: Edit form for Users has Type and SID fields:
   #Story ID: #152298593
@@ -76,11 +76,11 @@ Scenario: Can edit Users to add Type and SID:
   And I should see "Edit User"
   When I fill in the fields as follows:
     | field                  | value      |
-    | Type of user           | Staff      |
+    | Type of user           | Coach      |
     | SID                    | 0          |
   And I press "Save"
   And I should be on the users page
-  And I should see "user2" has type "Staff"
+  And I should see "user2" has type "Coach"
   And I should see "user2" has SID "0"
 
 # Add tests for create
