@@ -17,18 +17,19 @@ class ApplicationController < ActionController::Base
   def auth_user?
     if User.find_by_id(session[:user_id]).type_user == "Student"
       if @@name_path.first(5) == "/apps" # apps and their engagements path
-        redirect_to apps_path, alert: 'Error: Only Staff can create, edit and destroy apps and engagements' and return
+        redirect_to apps_path, alert: 'Error: Only Staff can create, edit and destroy apps and engagements'
       elsif @@name_path.first(5) == "/orgs"
-        redirect_to orgs_path, alert: 'Error: Only Staff can create, edit and destroy orgs' and return
+        redirect_to orgs_path, alert: 'Error: Only Staff can create, edit and destroy orgs'
       elsif @@name_path.first(5) == "/user"
-        redirect_to users_path, alert: 'Error: Only Staff can create and edit users' and return
+        redirect_to users_path, alert: 'Error: Only Staff can create and edit users'
       elsif @@name_path.first(5) == "/crea"
-        redirect_to apps_path, alert: 'Error: Only Staff can create apps, orgs, users' and return
+        redirect_to apps_path, alert: 'Error: Only Staff can create apps, orgs, users'
       elsif @@name_path.first(5) == "/enga" #engagement's iteration path
         parts = @@name_path.split("/")
         path = "/" + parts[1] + "/" + parts[2] + "/" + parts[3]
         redirect_to path, alert: 'Error: Only Staff can create, edit and destroy apps, engagements and iterations' and return
       end
+      return
     end 
   end 
 end
