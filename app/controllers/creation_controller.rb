@@ -1,4 +1,5 @@
 class CreationController < ApplicationController
+    before_action :auth_user?, only: [:new, :create]
 
     def app_params
         params.require(:app).permit(:name, :description, :deployment_url,

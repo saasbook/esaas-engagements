@@ -1,5 +1,6 @@
 class OrgsController < ApplicationController
   before_action :set_org, only: [:show, :edit, :update, :destroy]
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /orgs
   # GET /orgs.json

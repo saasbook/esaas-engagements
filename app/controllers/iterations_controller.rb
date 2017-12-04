@@ -2,6 +2,7 @@ class IterationsController < ApplicationController
 
   before_action :set_iteration, :only => [:edit,:update,:destroy]
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @stat = @engagement.summarize_customer_rating
@@ -92,5 +93,4 @@ class IterationsController < ApplicationController
       :communication_text, :understanding, :understanding_text,
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
   end
-
 end

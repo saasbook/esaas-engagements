@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
+  before_action :auth_user?, only: [:new, :create, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   def index
     @users = User.all
   end
@@ -46,4 +46,3 @@ class UsersController < ApplicationController
         :developing_engagement_id, :coaching_org_id)
   end
 end
-

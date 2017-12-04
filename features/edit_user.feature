@@ -6,8 +6,10 @@ Feature: a user can be edited
 
 Background: Logged in
     And the following users exist:
-        | name  | github_uid      | email         | id |
-        | user1 | esaas_developer | test@user.com | 1  |
+        | id | name  | github_uid      | email          | type_user     |
+        | 1  | user1 | esaas_developer | test@user.com  | Staff         |
+        | 2  | user2 |                 | test1@user.com | Student       |
+        | 3  | user3 |                 | test2@user.com | Coach         |
 
     And I'm logged in on the orgs page
     Given I am on the edit user page for user id: "1"

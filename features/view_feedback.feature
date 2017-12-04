@@ -5,8 +5,10 @@ Feature: having a better view for iteration feedback
 
 Background: Logged in
     Given the following users exist:
-        | id | name  | github_uid      | email         |
-        | 1  | user1 | esaas_developer | test@user.com |
+        | id | name  | github_uid      | email          | type_user     |
+        | 1  | user1 | esaas_developer | test@user.com  | Staff         |
+        | 2  | user2 |                 | test1@user.com | Student       |
+        | 3  | user3 |                 | test2@user.com | Coach         |
 
     And the following orgs exist:
         | id | name | contact_id |

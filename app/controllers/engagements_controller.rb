@@ -4,7 +4,8 @@ require 'json'
 class EngagementsController < ApplicationController
   before_action :set_app
   before_action :set_engagement, only: [:edit, :update, :destroy, :export]
-
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
+  
   # GET /engagements/new
   def new
     @engagement = Engagement.new

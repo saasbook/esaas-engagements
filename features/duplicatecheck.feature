@@ -11,10 +11,10 @@ Background: User is trying to sign up
         | org3 | 3          |
 
     And the following users exist:
-        | name  | github_uid      | email          |
-        | user1 | esaas_developer | user1@user.com |
-        | user2 |                 | user2@user.com |
-        | user3 |                 | user3@user.com |
+        | name  | github_uid      | email          | type_user     |
+        | user1 | esaas_developer | user1@user.com | Staff         |
+        | user2 |                 | user2@user.com | Student       |
+        | user3 |                 | user3@user.com | Coach         |
     
     And I'm logged in on the orgs page
 
