@@ -24,6 +24,11 @@
     = field f, :prototype_deployment_url
     = field f, :repository_url
 
+  %fieldset
+    %legend Final GSI Comments
+    = field f, :final_rating
+    = field f, :final_comments, :text_area
+
 
   .actions
     = f.submit 'Save', :class => 'btn btn-success'
