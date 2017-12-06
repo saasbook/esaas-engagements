@@ -9,9 +9,8 @@ class PendingFeedbackController < ApplicationController
 
 	def process_response
 		feedback = params.permit(:duration, :demeanor,
-			:engaged, :engaged_text, :communication,
-			:communication_text, :understanding, :understanding_text,
-			:effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
+			:engaged, :communication, :understanding,
+			:opportunity_to_try, :effectiveness, :satisfied, :comments)
 		iteration = Iteration.find(params[:iteration_id])
 		iteration.customer_feedback = feedback.to_json
 		iteration.save
