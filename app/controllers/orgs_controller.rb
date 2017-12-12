@@ -1,5 +1,6 @@
 class OrgsController < ApplicationController
   before_action :set_org, only: [:show, :edit, :update, :destroy]
+  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /orgs
   # GET /orgs.json
@@ -66,7 +67,7 @@ class OrgsController < ApplicationController
     def org_params
       params.
         require(:org).
-        permit(:name, :description, :url, :contact_id, :comments,
-      :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct)
+        permit(:name, :description, :url, :contact_id,
+      :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
 end

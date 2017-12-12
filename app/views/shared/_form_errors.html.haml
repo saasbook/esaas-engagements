@@ -1,0 +1,7 @@
+- content_for :form_errors do
+	- if object.errors.any?
+		#error_explanation.alert.alert-danger
+			%h2{style: "margin-top: 0px"}= "#{pluralize(object.errors.count, "error")} prohibited #{object.model_name.human} from being saved:"
+			%ul
+				- object.errors.full_messages.each do |message|
+					%li= message

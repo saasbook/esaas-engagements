@@ -1,0 +1,35 @@
+.page-header
+  %h1
+    = @user.name
+    = link_to(image_tag('octocat.png'), "https://www.github.com/#{@user.github_uid}", target: '_blank') if @user.github_uid
+
+.well#description
+  %div.media
+    .media-left
+      = image_tag @user.profile_picture.url(:thumb), class: 'media-object'
+    %div.media-body
+      %h4.media-heading
+        = @user.name
+        %span.pull-right= @user.user_type.try(:humanize)
+      %div
+        %ul
+          %li
+            %strong Email:
+            = @user.email
+          %li
+            %strong Github User ID:
+            = @user.github_uid
+          %li
+            %strong Preferred Contact:
+            = @user.preferred_contact
+
+= render partial: 'comments/comments', locals: {commentable: @user}
+
+= link_to 'Edit User', edit_user_path(@user), class: 'btn btn-primary'
+= link_to 'Back', users_path, class: 'btn btn-primary'
+
+.page-header
+  %h1 Engagements
+  %span.help-block This user is participating in the following Engagement(s):
+
+= render partial: 'engagements/index', locals: {engagements: @user.participating_engagements}

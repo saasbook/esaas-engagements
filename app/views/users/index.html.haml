@@ -1,4 +1,8 @@
-%h1 Users
+.page-header
+  %h1
+    Users
+    = link_to 'New User', new_user_path, :class => 'btn btn-success pull-right'
+  .help-block Click a User name to see more information
 
 %table.table.table-condensed
   %thead
@@ -6,13 +10,15 @@
       %th Name
       %th Email
       %th GitHub username
+      %th Type
+      %th SID
       %th
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        %td= link_to(user.name, user_path(user))
         %td= mail_to user.email
         %td= link_to(user.github_uid, "https://github.com/#{user.github_uid}") unless user.github_uid.blank?
+        %td= user.user_type.try(:humanize)
+        %td= user.sid
         %td= link_to 'Edit', edit_user_path(user), :class => 'btn btn-primary'
-
-= link_to 'New User', new_user_path, :class => 'btn btn-success'

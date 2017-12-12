@@ -1,12 +1,14 @@
 class SessionController < ApplicationController
   skip_before_action :logged_in?
+  skip_before_action :auth_user?
   skip_before_action :verify_authenticity_token
+  
   
   def create
     github_uid = request.env["omniauth.auth"]["info"]["nickname"]
     if (user = User.find_by_github_uid(github_uid))
       session[:user_id] = user.id
-      redirect_to apps_path
+      redirect_to @@name_path
     else
       flash[:alert] = "No user with GitHub name '#{github_uid}'."
       redirect_to login_path
