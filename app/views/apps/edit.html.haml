@@ -1,3 +1,4 @@
-%h1 Editing App "#{@app.name}"
-= render 'form'
+.page-header
+	%h1 Editing App "#{App.find(@app.id).name}"
 
+= render 'form'

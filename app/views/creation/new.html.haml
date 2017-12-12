@@ -1,0 +1,41 @@
+= form_errors_for @error_record
+
+.page-header
+    %h1 Create New User, Org, and App
+    .help-block Staff can create a new user, org, and app at the same time. The newly created user belongs to the newly created org and owns the newly created app.
+
+= bootstrap_form_tag url: creation_path, html: {id: 'create'} do |f|
+    .row
+        %fieldset.col-sm-4
+            %legend= 'User Information'
+            = fields_for(@user, nil, builder: BootstrapForm::FormBuilder) do |user_form|
+                = user_form.text_field :name, label: 'User Name'
+                = user_form.email_field :email, label: 'Email'
+                = user_form.phone_field :preferred_contact, label: 'Preferred Contact'
+                = user_form.text_field :github_uid, label: 'Github Uid'
+                = user_form.collection_select :user_type, User.user_types, :first, ->(x){x.first.humanize}, {label: 'User Type'}, {class: 'select2'}
+                = user_form.text_field :sid, label: 'SID'
+        %fieldset.col-sm-4
+            %legend= 'Org Information'
+            = fields_for @org, nil, builder: BootstrapForm::FormBuilder do |org_form|
+                = org_form.text_field :name, label: 'Organization Name'
+                = org_form.text_field :address_line_1, label: 'Address Line 1'
+                = org_form.text_field :address_line_2, label: 'Address Line 2'
+                = org_form.text_field :city_state_zip, label: 'City State Zip'
+                = org_form.phone_field :phone, label: 'Phone'
+                = org_form.text_area :description, label: 'Organization Description'
+                = org_form.url_field :url, label: 'Url'
+                = org_form.collection_select(:coach_ids, User.all, :id, :name, {:include_blank => true, label: 'Coaches'}, {:multiple => true, class: 'select2', css: '#select_coach'})
+                = org_form.check_box :defunct, label: 'Defunct'
+        %fieldset.col-sm-4
+            %legend= 'App Information'
+            = fields_for @app, nil, builder: BootstrapForm::FormBuilder do |app_form|
+                = app_form.text_field :name, label: 'App Name'
+                = app_form.text_area :description, rows: '5', label: 'App Description'
+                = app_form.url_field :deployment_url, label: 'Deployment Url'
+                = app_form.url_field :repository_url, label: 'Repository Url'
+                = app_form.url_field :code_climate_url, label: 'Code Climate Url'
+                = app_form.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
+    = f.submit 'Submit', class: 'btn btn-success'
+    = link_to 'Cancel', apps_path, :class => 'btn btn-primary'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'

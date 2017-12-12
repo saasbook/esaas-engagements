@@ -21,11 +21,13 @@ end
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
+  gem 'selenium-webdriver', '>=2.35.1'
   gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'factory_girl_rails'
   gem 'jasmine-rails'
   gem 'database_cleaner'
+  gem 'timecop'
 end
 
 group :production do
@@ -33,6 +35,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
+gem 'json'
 gem 'figaro'
 gem 'haml'
 gem 'sass-rails', '~> 5.0'
@@ -41,6 +45,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
+gem 'bootstrap_form'
+gem 'paperclip', '~> 5.0.0'
+gem 'aws-sdk', '~> 2.3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

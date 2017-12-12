@@ -1,0 +1,14 @@
+= form_errors_for @user
+
+= bootstrap_form_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f|
+  = f.text_field :name, label: 'User Name'
+  = f.email_field :email, label: 'Email'
+  = f.phone_field :preferred_contact, label: 'Preferred Contact'
+  = f.text_field :github_uid, label: 'Github Uid'
+  = f.collection_select :user_type, User.user_types, :first, ->(x) { x.first.humanize }, {label: 'User Type'}, {class: 'select2'}
+  = f.text_field :sid, label: 'SID'
+  = f.file_field :profile_picture, label: 'Profile Picture'
+  = f.form_group do
+    = f.submit class: 'btn btn-success'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
+    = link_to 'Back', users_path, :class => 'btn btn-primary'

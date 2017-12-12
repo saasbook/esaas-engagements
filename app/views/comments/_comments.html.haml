@@ -1,0 +1,25 @@
+.well#comments
+  %h4 Comments
+  - unless commentable.class.comment_types.blank?
+    %div#filters
+      Show:
+      - commentable.class.comment_types.each do |type, value|
+        = check_box_tag type, value, true, :class => 'filter'
+        = label_tag type, type.titleize, class: type
+  :javascript
+    $('.filter').change(function() { var klass = $(".comment-list ."+$(this).attr('name')).toggle(); });
+  %div.comment-list
+    -commentable.comments.each do |comment|
+      %div.media.comment{class: comment.comment_type_name.to_s}
+        .media-left
+          = image_tag comment.user.profile_picture.url(:thumb), class: 'media-object'
+        %div.media-body
+          %h5.media-heading.username
+            = comment.user.name
+            %div.pull-right
+              = link_to 'Edit', edit_comment_path(comment), :class => 'btn btn-primary btn-xs'
+              = link_to 'Delete', comment_path(comment), :method => :delete, :class => 'btn btn-danger btn-xs'
+          %small.time= comment.created_at.strftime("%b %d, %Y at %l:%M:%S %p")
+          %div.comment-body= comment.content
+  = label :comment, :content, 'Write a comment...'
+  = render partial: 'comments/form', locals: {commentable: commentable, '@comment': @comment || Comment.new}

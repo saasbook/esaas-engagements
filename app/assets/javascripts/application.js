@@ -13,4 +13,10 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require_tree .
+//= require select2
+
+$(document).ready(function(){
+  $('.select2').select2({
+    theme: 'bootstrap'
+  });
+});

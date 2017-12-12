@@ -1,17 +1,36 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=ee2cc6a1a79507804663d52f70d8e2430664f22526f0e8b899b7202514e652a2
-    - github_key=test
-    - github_secret=test
 language: ruby
 rvm:
   - 2.3.1
+
+bundler_args: --without production
+
+env:
+  global:
+    - MOZ_HEADLESS=1
+    - CC_TEST_REPORTER_ID=82fff89ba0da7030cf339a100c267baf4fdef4dd1c534490e9dc0d95fe48cf34
+    - github_key=test
+    - github_secret=test
+
+addons:
+  firefox: latest
+
+before_install:
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+
 script:
   - bundle exec rspec
+  - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
   - bundle exec cucumber
+  - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
+
 after_script:
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
