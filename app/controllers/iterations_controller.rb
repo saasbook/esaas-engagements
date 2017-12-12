@@ -46,14 +46,14 @@ class IterationsController < ApplicationController
   end
 
   def current_iteration
-    iterations = Iteration.where(:customer_feedback => nil).all()
+    iterations = Iteration.where(:customer_feedback => [nil,""]).all()
     @iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
   end
 
   def get_customer_feedback
-    iterations = Iteration.where(:customer_feedback => nil).all()
+    iterations = Iteration.where(:customer_feedback => [nil, ""]).all()
     iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end

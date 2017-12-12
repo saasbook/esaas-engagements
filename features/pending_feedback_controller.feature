@@ -48,7 +48,7 @@ Scenario: A customer can fill out a feedback form and submit it
 #       | effectiveness_text    | They were effective    |
         | satisfied             | choose "Mostly agree"  |
 #       | satisfied_text        | I am satisfied         |
-        | comments              | No comments            |
+        | general_feedback      | No comments            |
 
     And I press "Submit"
     Then I should see "Thank you!"
