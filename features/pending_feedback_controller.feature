@@ -39,15 +39,16 @@ Scenario: A customer can fill out a feedback form and submit it
         | duration              | choose "1 hour"        |
         | demeanor              | choose "Mostly agree"  |
         | engaged               | choose "Mostly agree"  |
-        | engaged_text          | They were engaged      |
+#       | engaged_text          | They were engaged      |
         | communication         | choose "Mostly agree"  |
-        | communication_text    | They communicated well |
+#       | communication_text    | They communicated well |
         | understanding         | choose "Mostly agree"  |
-        | understanding_text    | They understood well   |
+#       | understanding_text    | They understood well   |
         | effectiveness         | choose "Mostly agree"  |
-        | effectiveness_text    | They were effective    |
+#       | effectiveness_text    | They were effective    |
         | satisfied             | choose "Mostly agree"  |
-        | satisfied_text        | I am satisfied         |
+#       | satisfied_text        | I am satisfied         |
+        | comments              | No comments            |
 
     And I press "Submit"
     Then I should see "Thank you!"
@@ -57,12 +58,12 @@ Scenario: A customer can fill out a feedback form and submit it
         | Duration               | 1 hour                 |
         | Demeanor               | Mostly agree           |
         | Engagement             | Mostly agree           |
-        | Engagement Comments    | They were engaged      |
+#       | Engagement Comments    | They were engaged      |
         | Communication          | Mostly agree           |
-        | Communication Comments | They communicated well |
+#       | Communication Comments | They communicated well |
         | Understanding          | Mostly agree           |
-        | Understanding Comments | They understood well   |
+#       | Understanding Comments | They understood well   |
         | Effectiveness          | Mostly agree           |
-        | Effectiveness Comments | They were effective    |
+#       | Effectiveness Comments | They were effective    |
         | Satisfaction           | Mostly agree           |
-        | Satisfaction Comments  | I am satisfied         |
+#       | Satisfaction Comments  | I am satisfied         |

@@ -46,14 +46,14 @@ class IterationsController < ApplicationController
   end
 
   def current_iteration
-    iterations = Iteration.where(:customer_feedback => "").all()
+    iterations = Iteration.where(:customer_feedback => nil).all()
     @iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
   end
 
   def get_customer_feedback
-    iterations = Iteration.where(:customer_feedback => "").all()
+    iterations = Iteration.where(:customer_feedback => nil).all()
     iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
@@ -66,7 +66,7 @@ class IterationsController < ApplicationController
 
         host = request.host_with_port
         url = "http://#{host}/feedback/#{eng.id}/#{iter.id}"
-        FormMailer.send_form(eng.contact.name, eng.contact.email, url, iter, eng).deliver_now
+        FormMailer.send_form(eng.app.org.contact.name, eng.app.org.contact.email, url, iter, eng).deliver_now
       end 
     end
     redirect_to current_iteration_path
