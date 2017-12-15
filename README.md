@@ -1,9 +1,8 @@
 # ESaaS Engagements Tracker
 
-
-[![Build Status](https://travis-ci.org/andrewhalle/esaas-engagements.svg?branch=master)](https://travis-ci.org/andrewhalle/esaas-engagements)
-[![Maintainability](https://api.codeclimate.com/v1/badges/808883f6b2f9359bf662/maintainability)](https://codeclimate.com/github/andrewhalle/esaas-engagements/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/808883f6b2f9359bf662/test_coverage)](https://codeclimate.com/github/andrewhalle/esaas-engagements/test_coverage)
+[![Build Status](https://travis-ci.org/saasbook/esaas-engagements.svg?branch=master)](https://travis-ci.org/saasbook/esaas-engagements)
+[![Code Climate](https://img.shields.io/codeclimate/github/saasbook/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/saasbook/esaas-engagements)
+[![Test Coverage](https://codeclimate.com/github/saasbook/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/saasbook/esaas-engagements/coverage)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
 [Heroku Deployment](https://shielded-bastion-61752.herokuapp.com/)
