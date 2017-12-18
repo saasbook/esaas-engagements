@@ -9,4 +9,5 @@
     #main.container
       = render 'layouts/nav_header'
       = render 'shared/flash_messages'
+      = yield :form_errors
       = yield

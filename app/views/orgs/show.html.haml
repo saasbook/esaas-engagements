@@ -1,0 +1,64 @@
+.page-header
+  %h1
+    = link_to_unless @org.url.blank?, @org.name, @org.url, :target => '_blank'
+
+.well#description
+  %h4 Description
+  %p= @org.description
+
+.well#contact
+  %h4 Contact Information (Organization)
+  %ul
+    %li
+      %strong Address:
+      = @org.address
+    %li
+      %strong Phone:
+      = @org.phone
+  %h4 Contact Information (Contact)
+  %ul
+    %li
+      %strong Name:
+      = @org.contact.name
+    %li
+      %strong Email:
+      = @org.contact.email
+    %li
+      %strong Preferred Contact:
+      = @org.contact.preferred_contact
+
+= render partial: 'comments/comments', locals: {commentable: @org}
+
+= link_to 'Edit Org', edit_org_path(@org), class: 'btn btn-primary'
+= link_to 'Back', orgs_path, class: 'btn btn-primary'
+
+.page-header
+  %h1
+    Apps
+    =link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
+  .help-block Click on app name to see more information.
+
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th{:colspan => 3} Assets
+      %th{:colspan => 2}
+  %tbody
+    - @org.apps.each_with_index do |app|
+      %tr
+        %td= link_to app.name, app_path(app)
+        %td
+          = app.description
+          %br
+          - app.engagements.each do |engagement|
+            %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
+            %br
+        %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deployment'), app.deployment_url, :target => '_blank'
+        %td= link_to image_tag('octocat-gray.png', size: '45x45', title: 'Repository'), app.repository_url, :target => '_blank'
+        %td= link_to image_tag('codeclimate.png', size: '45x45', title: 'CodeClimate'), app.code_climate_url, :target => '_blank'
+        %td{style: "white-space: nowrap"}
+          %div
+            = link_to 'Edit', edit_app_path(app), :class => 'btn btn-primary'
+            = link_to 'Destroy', app_path(app), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'

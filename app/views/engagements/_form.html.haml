@@ -1,36 +1,22 @@
-= form_for([@app,@engagement]) do |f| 
-  - if @engagement.errors.any?
-    #error_explanation
-      %h2 #{pluralize(@engagement.errors.count, "error")}  prohibited this engagement from being saved:
-      %ul
-        - @engagement.errors.full_messages.each do |message|
-          %li= message
+= form_errors_for @engagement
 
-  %fieldset
-    %legend Coaching Info
-    = field f, :start_date, :date_select
-    = menu_field f, :coaching_org, :model_class => Org
-    = menu_field f, :coach, :model_class => User
-    = menu_field f, :contact, :model_class => User
-
-  %fieldset
-    %legend Team Info and Work Products
-    = field f, :team_number
-    = field f, :student_names
-    = field f, :screencast_url
-    = field f, :screenshot_url
-    = field f, :poster_url
-    = field f, :presentation_url
-    = field f, :prototype_deployment_url
-    = field f, :repository_url
-
-  %fieldset
-    %legend Final GSI Comments
-    = field f, :final_rating
-    = field f, :final_comments, :text_area
-
-
-  .actions
-    = f.submit 'Save', :class => 'btn btn-success'
-    = link_to 'Back', @app, :class => 'btn btn-secondary'
-
+= bootstrap_form_for([@app, @engagement], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+    .row
+        %fieldset.col-md-6
+            %legend Coaching Info
+            = f.date_field :start_date, value: (@engagement.start_date || Time.now).strftime('%Y-%m-%d'), label: 'Start Date'
+            = f.collection_select :coach_id, User.all, :id, :name, {label: 'Coach'}, {class: 'select2'}
+        %fieldset.col-md-6
+            %legend Team Info and Work Products
+            = f.text_field :team_number, label: 'Team Number'
+            = f.text_field :student_names, label: 'Student Names'
+            = f.collection_select(:developer_ids, User.all, :id, :name, {:include_blank => true, label: 'Developers'}, {:multiple => true, class: 'select2'})
+            = f.url_field :screencast_url, label: 'Screencast Url'
+            = f.url_field :screenshot_url, label: 'Screenshot Url'
+            = f.url_field :poster_url, label: 'Poster Url'
+            = f.url_field :presentation_url, label: 'Presentation Url'
+            = f.url_field :prototype_deployment_url, label: 'Prototype Deployment Url'
+            = f.url_field :repository_url, label: 'Repository Url'
+        = f.submit class: 'btn btn-success'
+        = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
+        = link_to 'Back', @app, :class => 'btn btn-primary'

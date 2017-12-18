@@ -1,0 +1,42 @@
+.comment-list {
+	margin-bottom: 10px;
+}
+
+.comment {
+	margin-top: 0px;
+	border-color: #d3d3d3;
+	border-style: solid;
+	border-width: 1px 2px 1px 2px;
+	border-radius: 8px;
+	padding: 12px;
+}
+
+.media-object {
+	border: 2px solid #C3C3C3;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+
+.username {
+	margin-bottom: 0px;
+}
+
+.time {
+	font-size: 12px;
+	color: #a3a3a3;
+}
+
+.comment-body {
+	padding-top: 10px;
+	word-break: break-all;
+	white-space: pre-wrap;
+}
+
+#comments form textarea {
+	border-color: #d3d3d3;
+	border-radius: 10px;
+	width: 100%;
+	padding-left: 10px;
+	resize: none;
+	outline: none;
+}

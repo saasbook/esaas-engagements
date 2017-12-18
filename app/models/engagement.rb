@@ -1,22 +1,23 @@
 class Engagement < ActiveRecord::Base
   belongs_to :app
-  validates_presence_of :app_id
+  belongs_to :coach, class_name: 'User'
 
-  belongs_to :coaching_org, :class_name => 'Org'
-  validates_presence_of :coaching_org_id
-  validates_associated :coaching_org
-  
-  belongs_to :coach, :class_name => 'User'
-  validates_presence_of :coach_id
-  validates_associated :coach
+  has_one :coaching_org, through: :coach
+  has_one :client_org, through: :app, source: :org
+  has_one :client, through: :client_org, source: :contact
 
-  belongs_to :contact, :class_name => 'User'
+  has_many :iterations, dependent: :destroy
+  has_many :developers, foreign_key: :developing_engagement_id, class_name: 'User'
 
-  validates_presence_of :team_number
-  validates_presence_of :start_date
-  validates_presence_of :student_names
+  validates_presence_of :app_id, :coach_id, :team_number, :start_date
 
-  has_many :iterations
-  
   default_scope { order('start_date DESC') }
+
+  def summarize_customer_rating
+    customer_ratings = iterations.each.map{|iter| iter.customer_rating}
+    valid_count = customer_ratings.count {|rating| !rating.empty?}
+    customer_ratings.inject(iterations.create_base_rating_hash) do |cum, cur|
+      cum.merge(cur) {|_key, oldValue, newValue| oldValue + newValue / valid_count.to_f}
+    end
+  end
 end

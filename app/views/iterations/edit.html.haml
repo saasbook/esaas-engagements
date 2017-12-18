@@ -1,3 +1,42 @@
-%h1 Edit Iteration
+.page-header
+    %h1 Edit Customer Feedback
 
-= render 'iteration'
+= bootstrap_form_for @iteration, url: engagement_iteration_path(@engagement, @iteration), method: 'put', html: {id: 'edit_iteration'} do |f|
+    = f.fields_for :customer_feedback, nil do |feedback_form|
+        %fieldset.row
+            .col-sm-6
+                = f.text_field :number, label: 'Iteration Number'
+                = f.date_field :end_date, label: 'End Date'
+                = feedback_form.collection_select :duration, Iteration.duration_options, :itself, :itself, selected: @feedback['duration'], label: 'Duration'
+            .col-sm-6
+                = f.text_area :general_feedback, label: 'General Feedback', rows: 8
+        .row#customer_feedback
+            %fieldset.col-sm-6
+                %legend Demeanor
+                = feedback_form.collection_select :demeanor, Iteration.rating_options, :itself, :itself, selected: @feedback['demeanor'], label: 'Demeanor'
+                = feedback_form.text_area :demeanor_text, value: @feedback['demeanor_text'], label: 'Demeanor Comments'
+            %fieldset.col-sm-6
+                %legend Engagement
+                = feedback_form.collection_select :engaged, Iteration.rating_options, :itself, :itself, selected: @feedback['engaged'], label: 'Engagement'
+                = feedback_form.text_area :engaged_text, value: @feedback['engaged_text'], label: 'Engagement Comments'
+            %fieldset.col-sm-6
+                %legend Communication
+                = feedback_form.collection_select :communication, Iteration.rating_options, :itself, :itself, selected: @feedback['communication'], label: 'Communication'
+                = feedback_form.text_area :communication_text, value: @feedback['communication_text'], label: 'Communication Comments'
+            %fieldset.col-sm-6
+                %legend Understanding
+                = feedback_form.collection_select :understanding, Iteration.rating_options, :itself, :itself, selected: @feedback['understanding'], label: 'Understanding'
+                = feedback_form.text_area :understanding_text, value: @feedback['understanding_text'], label: 'Understanding Comments'
+            %fieldset.col-sm-6
+                %legend Effectiveness
+                = feedback_form.collection_select :effectiveness, Iteration.rating_options, :itself, :itself, selected: @feedback['effectiveness'], label: 'Effectiveness'
+                = feedback_form.text_area :effectiveness_text, value: @feedback['effectiveness_text'], label: 'Effectiveness Comments'
+            %fieldset.col-sm-6
+                %legend Satisfaction
+                = feedback_form.collection_select :satisfied, Iteration.rating_options, :itself, :itself, selected: @feedback['satisfied'], label: 'Satisfaction'
+                = feedback_form.text_area :satisfied_text, value: @feedback['satisfied_text'], label: 'Satisfaction Comments'
+    = f.form_group do
+        = f.submit class: 'btn btn-success'
+        = link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'
+        = link_to 'Back to Iteration', engagement_iterations_path(@engagement), :class => 'btn btn-primary'
+        = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
