@@ -1,5 +1,5 @@
 class AddForeignkeyFromCommentToApp < ActiveRecord::Migration
   def change
-  	add_foreign_key :comments, :apps
+#  	add_foreign_key :comments, :apps
   end
 end
