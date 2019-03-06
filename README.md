@@ -1,6 +1,6 @@
 # ESaaS Engagements Tracker
 
-[![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=master)](https://travis-ci.org/Chenlibo/esaas-engagements)
+[![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=libochen)](https://travis-ci.org/Chenlibo/esaas-engagements)
 [![Code Climate](https://img.shields.io/codeclimate/github/saasbook/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/saasbook/esaas-engagements)
 [![Test Coverage](https://codeclimate.com/github/saasbook/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/saasbook/esaas-engagements/coverage)
 
