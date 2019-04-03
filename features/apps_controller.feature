@@ -6,7 +6,7 @@ Feature: after a user logins with their github id they can create an app or modi
 
 Background: users, orgs and apps have been added to database
   Given the following apps exist:
-        | name  | description | org_id | status  |
+        | name  | description | org_id | status  | 
         | app1  | test        | 1      | pending |
         | app2  | test        | 1      | pending |
         | app3  | test        | 1      | pending |
