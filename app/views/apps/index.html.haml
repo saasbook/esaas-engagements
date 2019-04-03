@@ -28,7 +28,7 @@
       %th
   %tbody
     - @apps.each do |app|
-      %tr{:class => [app.status.to_s]}
+      %tr{:class => [app.status.to_s, app.vetting_status.to_s]}
         %td
           = app.id
           = link_to app.name, app
