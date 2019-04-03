@@ -30,6 +30,7 @@ CSV.foreach("#{Rails.root}/db/apps.csv",
 		app = App.find_or_create_by(name: row[:project]) do |a|
 			a.org = org
 			a.status = :dead
+			a.vetting_status = :vetting_pending
 			a.description = row[:description] || 'NA'
 			a.deployment_url = row[:deployment]
 			a.repository_url = row[:ropo] || 'http://'

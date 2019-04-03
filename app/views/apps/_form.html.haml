@@ -8,6 +8,7 @@
   = f.url_field :code_climate_url, label: 'Code Climate Url'
   = f.collection_select :org_id, Org.all, :id, :name, {label: 'Organization'}, {class: 'select2'}
   = f.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
+  = f.collection_select :vetting_status, App.vetting_statuses, :first, ->(x) { x.first.humanize}, {label: 'Vetting Status'}, {class: 'select2'}
   = f.form_group do
     = f.submit class: 'btn btn-success'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
