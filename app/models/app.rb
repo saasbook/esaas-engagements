@@ -5,7 +5,7 @@ class App < ActiveRecord::Base
   has_many :engagements, dependent: :destroy
   has_many :iterations, :through => :engagements
 
-  validates_presence_of :name, :description, :org_id, :status, :vetting_status
+  validates_presence_of :name, :description, :org_id, :status
   validates_presence_of :repository_url, unless: :pending?
 
   enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending]
