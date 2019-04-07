@@ -47,11 +47,11 @@ Scenario: user can reset a form for New App
 	And I fill in "Repository Url" with "github.com/mynewapp"
 	And I fill in "Code Climate Url" with "codeclimate.com/mynewapp"
 	And I select "Berkeley Student Cooperative" from "Organization"
-	And I select "Dead" from "Status"
+	And I select "Dead" from "Deployment Status"
 	And I press "Reset"
 	Then All text fields are empty for the form with selector "#new_app"
 	And the "Organization" field should contain "4"
-	And the "Status" field should contain "pending"
+	And the "Deployment Status" field should contain "pending"
 
 # Story ID: 153070009
 @javascript
@@ -160,12 +160,12 @@ Scenario: user can reset a form for Edit App
 	When I fill in "Some random app" for "App Name"
 	And I fill in "random description" for "App Description"
 	And I select "Berkeley Student Cooperative" from "Org"
-	And I select "In use" from "Status"
+	And I select "In use" from "Deployment Status"
 	And I press "Reset"
 	Then I should have filled in "AFX Dance" for "App Name"
 	And I should have filled in "Awesome!" for "App Description"
 	And the "Organization" field should contain "3"
-	And the "Status" field should contain "pending"
+	And the "Deployment Status" field should contain "pending"
 
 # Story ID: 153070009
 @javascript
