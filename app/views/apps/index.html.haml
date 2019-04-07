@@ -5,12 +5,12 @@
   .help-block Click an App name to see more information
 
 #filters
-  %div Show Development Status:
+  %div Deployment Status:
   - App.statuses.keys.each do |status|
     = check_box_tag status, 1, true, :class => 'filter'
     %span{:class => status}= status.humanize
   
-  %div Show Vetting Status:
+  %div Vetting Status:
   - App.vetting_statuses.keys.each do |vetting_status|
     = check_box_tag vetting_status, 1, true, :class => 'vetting_filter'
     %span{:class => vetting_status}= vetting_status.humanize
