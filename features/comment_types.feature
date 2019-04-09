@@ -31,6 +31,7 @@ Scenario: there are different comment types available
 	Then I should see "Contact Status"
 	And I should see "App Functionality"
 	And I should see "General"
+	And I should see "Vetting"
 
 # Story ID: 152689457
 Scenario: User can edit and choose different comment types
@@ -43,6 +44,13 @@ Scenario: User can edit and choose different comment types
 	And I check "App Functionality"
 	Then I should see "This App is AWESOME!"
 
+	Given I fill in "Write a comment..." with "This app needs to be revised."
+	And I choose "App Functionality"
+	And I press "Post"
+	And I uncheck all comment types
+	And I check "Vetting"
+	Then I should see "This app needs to be revised."
+
 # Story ID: 152689457
 @javascript
 Scenario: User can group comments by type
@@ -51,6 +59,8 @@ Scenario: User can group comments by type
 		| 1 		| add search feature			| 1 			|
 		| 2	  		| Contacted AFX Dance Manager 	| 0 			|
 		| 3	  		| I'm still a single!			| 2 			|
+		| 1	  		| This is a vetting!			| 3 			|
+
 	And I go to the app details page for "app1"
 	Then I should see "add search feature"
 	And I should see "Contacted AFX Dance Manager"
@@ -81,3 +91,9 @@ Scenario: User can group comments by type
 	Then I should see "add search feature"
 	And I should see "I'm still a single!"
 	But I should not see "Contacted AFX Dance Mangager"
+
+	When I uncheck all comment types
+	When I check "Vetting"
+	Then I should see "This is a vetting!"
+	But I should not see "I'm still a single!"
+	And I should not see "Contacted AFX Dance Mangager"
