@@ -1,11 +1,19 @@
 # ESaaS Engagements Tracker
 
+<<<<<<< HEAD
 [![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=master)](https://travis-ci.org/Chenlibo/esaas-engagements)
+=======
+[![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=cs169-sp19-t4)](https://travis-ci.org/Chenlibo/esaas-engagements)
+>>>>>>> 15c3aac5c685a7c6d3d1d062a0763c0e24720432
 [![Maintainability](https://api.codeclimate.com/v1/badges/cae96513afd6ab530342/maintainability)](https://codeclimate.com/github/Chenlibo/esaas-engagements/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cae96513afd6ab530342/test_coverage)](https://codeclimate.com/github/Chenlibo/esaas-engagements/test_coverage)
 [![Known Vulnerabilities](https://snyk.io/test/github/Chenlibo/esaas-engagements/badge.svg)](https://snyk.io/test/github/Chenlibo/esaas-engagements)
 
+<<<<<<< HEAD
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)  
+=======
+[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)
+>>>>>>> 15c3aac5c685a7c6d3d1d062a0763c0e24720432
 [Heroku Deployment](https://shielded-sea-54225.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
