@@ -1,11 +1,11 @@
 # ESaaS Engagements Tracker
 
-[![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=cs169-sp19-t4)](https://travis-ci.org/Chenlibo/esaas-engagements)
+[![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=master)](https://travis-ci.org/Chenlibo/esaas-engagements)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cae96513afd6ab530342/maintainability)](https://codeclimate.com/github/Chenlibo/esaas-engagements/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cae96513afd6ab530342/test_coverage)](https://codeclimate.com/github/Chenlibo/esaas-engagements/test_coverage)
 [![Known Vulnerabilities](https://snyk.io/test/github/Chenlibo/esaas-engagements/badge.svg)](https://snyk.io/test/github/Chenlibo/esaas-engagements)
 
-[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)
+[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)  
 [Heroku Deployment](https://shielded-sea-54225.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
@@ -27,10 +27,10 @@ The main models are:
   * `dead`: not deployed, and/or customer not actively using;  dormant
   * `development`: in active development (a team is working on it right now), whether or not deployed in
   production
-  * In use: in production use at a customer site; customer has not expressed interest in further improvements
-  * In use and wants improvements: In production, and customer is interested in further development
-  * Inactive but wants improvement: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
-  * Pending: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
+  * `In use`: in production use at a customer site; customer has not expressed interest in further improvements
+  * `In use and wants improvements`: In production, and customer is interested in further development
+  * `Inactive but wants improvement`: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
+  * `Pending`: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
 * Org: a customer organization for whom the app was developed
 * User: various subcategories, including developer (e.g. student), coach
 (mentor, GSI), customer contact.  Also a principal for authentication: as of now, only a staff member has authorization to edit/destroy.
