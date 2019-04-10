@@ -185,7 +185,7 @@ bundle exec rspec
 
 To test javascript behaviors, Cucumber uses Selenium Webdriver as default. This
 requires you to have a [geckodriver](https://github.com/mozilla/geckodriver/releases),
-and firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
+and Firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
 to configure default webdriver.
 
 If you do not want to download a new webdriver, you can skip scenarios which require
@@ -204,11 +204,11 @@ bundle exec cucumber --tags ~@javascript
 * More comprehensive customer feedback through a feedback form with ratings/comments
 * Aggregates customer feedbacks from all iterations of an engagement, and display
 averages on each category
-* `User` supports different typs (e.g. Student, Staff/Coach, Customer)
+* `User` supports different types (e.g. Student, Staff/Coach, Customer)
 * Exports `Engagement` information as a CSV file
 * each `User` contains a profile image
-  - we are using Amazon S3 to store images on production envrionment, because
-  Heroku has [emphemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
+  - we are using Amazon S3 to store images on production environment, because
+  Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
   have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
 * Authorization to edit/destroy only to "Coach"
 * Autocomplete dropdown list (select2)
@@ -222,4 +222,4 @@ averages on each category
 4. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
 5. Mailing customer feedback forms to customers for each iteration (Sendgrid)
 6. More authorizations to different types of users
-  - a user cannot edit/delete other users unless it is a staff/coach
+   * A user cannot edit/delete other users unless it is a staff/coach
