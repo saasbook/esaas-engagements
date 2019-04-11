@@ -6,6 +6,22 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
+    @status_map =  App.group(:status).count
+
+    # @development_map = @status_map.keys.each {|k| @status_map[App.statuses.keys[k]] = @status_map.delete k}
+    # @status_map.keys.each {|k| @status_map[App.statuses.keys[k]] = @status_map.delete k}
+    # @vetting_map.keys.each {|k| @vetting_map[App.vetting_statuses.keys[k]] = @vetting_map.delete k}
+
+    @development_map = {}
+    @vetting_map = {}
+    @status_map.each do |k,v|
+      if App.getVettingStatus.include? k
+        @vetting_map[App.statuses.keys[k]] = v
+      else
+        @development_map[App.statuses.keys[k]] = v
+      end
+    end
+    
     @current_user = User.find_by_id(session[:user_id])
     @apps = App.all
     respond_to do |format|
@@ -90,6 +106,6 @@ class AppsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :vetting_status, :comments)
+      params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments)
     end
 end
