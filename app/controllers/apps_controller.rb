@@ -7,11 +7,6 @@ class AppsController < ApplicationController
   # GET /apps.json
   def index
     @status_map =  App.group(:status).count
-
-    # @development_map = @status_map.keys.each {|k| @status_map[App.statuses.keys[k]] = @status_map.delete k}
-    # @status_map.keys.each {|k| @status_map[App.statuses.keys[k]] = @status_map.delete k}
-    # @vetting_map.keys.each {|k| @vetting_map[App.vetting_statuses.keys[k]] = @vetting_map.delete k}
-
     @development_map = {}
     @vetting_map = {}
     @status_map.each do |k,v|
