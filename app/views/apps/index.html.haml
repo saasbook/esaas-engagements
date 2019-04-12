@@ -9,13 +9,13 @@
     %strong Deployment Status:
   - App.getDevelopmentStatus.each do |status|
     = check_box_tag status, 1, true, :class => 'filter'
-    %span{:class => status}= status
+    %span{:class => status}= status.to_s.humanize  
 
   %div 
     %strong Vetting Status:
   - App.getVettingStatus.each do |status|
     = check_box_tag status, 1, true, :class => 'filter'
-    %span{:class => status}= status
+    %span{:class => status}= status.to_s.humanize  
 
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
