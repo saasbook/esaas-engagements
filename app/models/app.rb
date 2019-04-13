@@ -8,8 +8,10 @@ class App < ActiveRecord::Base
   validates_presence_of :name, :description, :org_id, :status
   validates_presence_of :repository_url, unless: :pending?
 
-  enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending]
-  enum vetting_status: [:vetting_pending, :on_hold, :staff_approved,:customer_informed, :customer_confirmation_received, :declined_by_staff, :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
+  enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending, :vetting_pending, :on_hold, :staff_approved,:customer_informed, :customer_confirmation_received, :declined_by_staff, :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
+  @@vetting_status = [:vetting_pending, :on_hold, :staff_approved,:customer_informed, :customer_confirmation_received, :declined_by_staff, :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
+  @@development_status = [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending]
+
   enum comment_type: [:contact_status, :app_functionality, :general, :vetting]
 
   default_scope { order(:name => :asc) }
@@ -23,6 +25,22 @@ class App < ActiveRecord::Base
 
   def pending?
     status == "pending"
+  end
+
+  def self.getVettingStatus
+    @@vetting_status
+  end
+
+  def self.getDevelopmentStatus
+    @@development_status
+  end
+
+  def inVettingStatus?
+    vetting_status.include?(self.status)
+  end
+
+  def inDevelopmentStatus?
+    development_status.include?(self.status)
   end
 
 end

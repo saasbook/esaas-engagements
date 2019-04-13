@@ -13,6 +13,33 @@ class OrgsController < ApplicationController
     @org = Org.new
   end
 
+  # Get /mail_all_orgs
+def mail_all_orgs_form
+end
+
+ # Post /mail_all_orgs
+def mail_all_orgs
+  @email_address = params[:email][:address]
+  @subject = params[:email][:subject]
+  @content = params[:email][:content]
+  
+  @vetting_checked = params.select {|k, v| v == "1"}.keys 
+  @org_email = nil
+  @org_name =  nil
+  App.all.each do |app|
+    if @vetting_checked.include? app.status
+      @org_email = app.org.contact.email
+      @org_name = app.org.contact.name
+    end
+    
+    if @org_email != nil && @org_name !=  nil
+      # FormMailer.mail_all_orgs(org.contact.name, org.contact.email, @subject, @content).deliver_now
+    end
+  end
+
+  # FormMailer.mail_all_orgs('example', 'example@berkeley.edu', @subject, @content).deliver_now
+end
+
   # GET /orgs/1/edit
   def edit
   end
@@ -71,3 +98,4 @@ class OrgsController < ApplicationController
       :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
 end
+

@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20171205201212) do
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
     t.integer  "status",           default: 5
-    t.integer  "vetting_status",           default: 9
     t.string   "name"
     t.string   "description"
     t.string   "deployment_url"
