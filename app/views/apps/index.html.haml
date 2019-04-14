@@ -28,21 +28,6 @@
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
--# #status-count
--#   %div{:align => "right"}
--#     %em Deplpyment Status Counts: 
--#     %br
--#     - @deployment_map.each do |status, count|
--#       %span=status + ": " + count.to_s
--#       %br
--#   %div{:align => "right"}
--#     %em Vetting Status Counts:
--#     %br
--#     - @vetting_map.each do |status, count|
--#       %span=status + ": " + count.to_s
--#       %br
-
-
 %table.table.table-condensed#apps_table
   %thead
     %tr
