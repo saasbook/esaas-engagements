@@ -1,12 +1,14 @@
 .page-header
-  %h1 Email to all organizations
+  %h1 Email to organizations
 
-= form_tag mail_all_orgs_path do
-  - App.getAllVettingStatuses.each_index do |idx|
-    = check_box_tag App.getAllVettingStatuses[idx], 1, true, :class => 'filter'
-    %span{:class => App.getAllVettingStatuses[idx]}= App.getAllVettingStatuses[idx]
-    - if (idx.to_i+1) % 5 == 0
-      %br
+  = form_tag mail_all_orgs_path do
+    = check_box_tag "All", 2, true, :class => 'filter'
+    %span{:class => "All"}= "All"
+    - App.getAllVettingStatuses.each_index do |idx|
+      = check_box_tag App.getAllVettingStatuses[idx], 1, false, :class => 'filter'
+      %span{:class => App.getAllVettingStatuses[idx]}= App.getAllVettingStatuses[idx]
+      - if (idx.to_i+1) % 5 == 0
+        %br
   .form-group
     =label :email, :address, 'Reply to'
     = text_field :email, :address, :class => 'form-control'
