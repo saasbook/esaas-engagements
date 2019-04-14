@@ -117,4 +117,5 @@ describe User do
             expect(@user4.participating_engagements).to eq []
         end
     end
+
 end
