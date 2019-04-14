@@ -7,14 +7,19 @@ class AppsController < ApplicationController
   # GET /apps.json
   def index
     @status_map =  App.group(:status).count
-    @development_map = {}
+    @deployment_map = {}
     @vetting_map = {}
-    @status_map.each do |k,v|
-      if App.getVettingStatus.include? k
-        @vetting_map[App.statuses.keys[k]] = v
+    @total_deploy = 0
+    @total_vet = 0
+    @status_map.each do |status, count|
+      if App.getAllVettingStatuses.include? status
+        @vetting_map[App.statuses.keys[status]] = count
+        @total_vet += count
       else
-        @development_map[App.statuses.keys[k]] = v
+        @deployment_map[App.statuses.keys[status]] = count
+        @total_deploy += count
       end
+      
     end
     
     @current_user = User.find_by_id(session[:user_id])
