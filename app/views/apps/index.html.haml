@@ -5,28 +5,43 @@
   .help-block Click an App name to see more information
 
 #filters
-  %div 
-    %strong Deployment Status:
-  - App.getDevelopmentStatus.each do |status|
-    = check_box_tag status, 1, true, :class => 'filter'
-    %span{:class => status}= status.to_s.humanize  
-
-  %div 
-    %strong Vetting Status:
-  - App.getVettingStatus.each do |status|
-    = check_box_tag status, 1, true, :class => 'filter'
-    %span{:class => status}= status.to_s.humanize  
-
+  %label.checkbox-inline
+    %div#deploy
+      %strong Deployment Status:
+      %br
+      - App.getAllDeploymentStatuses.each do |status|
+        = check_box_tag status, 1, true, :class => 'filter'
+        %span{:class => status}= status.to_s.humanize
+        %u #{@deployment_map[status.to_s].to_s}
+        %br
+    %em #{"total: " + @total_deploy.to_s}
+  %label.checkbox-inline
+    %div#vetting
+      %strong Vetting Status:
+      %br
+      - App.getAllVettingStatuses.each do |status|
+        = check_box_tag status, 1, true, :class => 'filter'
+        %span{:class => status}= status.to_s.humanize
+        %u #{@vetting_map[status.to_s].to_s}
+        %br
+    %em #{"total: " + @total_vet.to_s}
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
-%div 
-  %strong Deplpyment Status Counts: 
-  %span= @development_map
+-# #status-count
+-#   %div{:align => "right"}
+-#     %em Deplpyment Status Counts: 
+-#     %br
+-#     - @deployment_map.each do |status, count|
+-#       %span=status + ": " + count.to_s
+-#       %br
+-#   %div{:align => "right"}
+-#     %em Vetting Status Counts:
+-#     %br
+-#     - @vetting_map.each do |status, count|
+-#       %span=status + ": " + count.to_s
+-#       %br
 
-%div 
-  %strong Vetting Status Counts:
-  %span= @vetting_map
 
 %table.table.table-condensed#apps_table
   %thead

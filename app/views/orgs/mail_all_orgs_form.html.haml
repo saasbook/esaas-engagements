@@ -2,7 +2,7 @@
   %h1 Mail to all organizations
 
 = form_tag mail_all_orgs_path do
-  - App.getVettingStatus.each do |status|
+  - App.getAllVettingStatuses.each do |status|
     = check_box_tag status, 1, true, :class => 'filter'
     %span{:class => status}= status
   .form-group
