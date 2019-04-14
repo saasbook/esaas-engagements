@@ -30,7 +30,7 @@ def mail_all_orgs
     Org.all.each do |org|
         @org_email = app.org.contact.email
         @org_name = app.org.contact.name
-        FormMailer.mail_all_orgs(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+        FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
     end
   else
     App.all.each do |app|
@@ -39,7 +39,7 @@ def mail_all_orgs
         @org_name = app.org.contact.name
       end
       if @org_email != nil && @org_name !=  nil
-        FormMailer.mail_all_orgs(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+        FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
       end
     end
   end
