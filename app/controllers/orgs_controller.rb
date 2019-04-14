@@ -19,25 +19,30 @@ end
 
  # Post /mail_all_orgs
 def mail_all_orgs
-  @email_address = params[:email][:address]
+  @sender_email = params[:email][:address]
   @subject = params[:email][:subject]
   @content = params[:email][:content]
   
   @vetting_checked = params.select {|k, v| v == "1"}.keys 
   @org_email = nil
   @org_name =  nil
-  App.all.each do |app|
-    if @vetting_checked.include? app.status
-      @org_email = app.org.contact.email
-      @org_name = app.org.contact.name
+  if not params['All'].nil?
+    Org.all.each do |org|
+        @org_email = app.org.contact.email
+        @org_name = app.org.contact.name
+        FormMailer.mail_all_orgs(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
     end
-    
-    if @org_email != nil && @org_name !=  nil
-      # FormMailer.mail_all_orgs(org.contact.name, org.contact.email, @subject, @content).deliver_now
+  else
+    App.all.each do |app|
+      if @vetting_checked.include? app.status
+        @org_email = app.org.contact.email
+        @org_name = app.org.contact.name
+      end
+      if @org_email != nil && @org_name !=  nil
+        FormMailer.mail_all_orgs(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+      end
     end
   end
-
-  # FormMailer.mail_all_orgs('example', 'example@berkeley.edu', @subject, @content).deliver_now
 end
 
   # GET /orgs/1/edit
@@ -98,4 +103,3 @@ end
       :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
 end
-

@@ -205,6 +205,8 @@ GEM
       slop (~> 3.4)
     public_suffix (2.0.5)
     rack (1.6.8)
+    rack-protection (1.5.5)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7)
@@ -263,6 +265,7 @@ GEM
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
     ruby_dep (1.5.0)
+    ruby_http_client (3.3.0)
     rubyzip (1.2.1)
     sass (3.4.25)
     sass-rails (5.0.6)
@@ -279,12 +282,19 @@ GEM
     selenium-webdriver (3.7.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sendgrid-ruby (5.3.0)
+      ruby_http_client (~> 3.3.0)
+      sinatra (>= 1.4.7, < 3)
     shellany (0.0.1)
     simplecov (0.14.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.1)
+    sinatra (1.4.8)
+      rack (~> 1.5)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -343,6 +353,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   select2-rails (~> 4.0, >= 4.0.3)
   selenium-webdriver (>= 2.35.1)
+  sendgrid-ruby
   simplecov
   spring
   sqlite3
@@ -354,4 +365,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.16.0
+   1.17.3
