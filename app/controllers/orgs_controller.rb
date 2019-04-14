@@ -26,23 +26,24 @@ def mail_all_orgs
   @vetting_checked = params.select {|k, v| v == "1"}.keys 
   @org_email = nil
   @org_name =  nil
-  if not params['All'].nil?
-    Org.all.each do |org|
-        @org_email = app.org.contact.email
-        @org_name = app.org.contact.name
-        FormMailer.mail_all_orgs(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
-    end
-  else
-    App.all.each do |app|
-      if @vetting_checked.include? app.status
-        @org_email = app.org.contact.email
-        @org_name = app.org.contact.name
-      end
-      if @org_email != nil && @org_name !=  nil
-        FormMailer.mail_all_orgs(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
-      end
-    end
-  end
+  # if not params['All'].nil?
+  #   Org.all.each do |org|
+  #       @org_email = app.org.contact.email
+  #       @org_name = app.org.contact.name
+  #       FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+  #   end
+  # else
+  #   App.all.each do |app|
+  #     if @vetting_checked.include? app.status
+  #       @org_email = app.org.contact.email
+  #       @org_name = app.org.contact.name
+  #     end
+  #     if @org_email != nil && @org_name !=  nil
+  #       FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
+  #     end
+  #   end
+  # end
+  FormMailer.mail_to("@org_name", "clb729@gmail.com", @subject, @content, @sender_email).deliver_now
 end
 
   # GET /orgs/1/edit

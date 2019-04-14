@@ -5,6 +5,9 @@ ruby '2.3.1'
 gem 'rails', '4.2.7'
 gem 'omniauth-github'
 gem 'sendgrid-ruby'
+gem 'actionview-encoded_mail_to'
+gem 'sidekiq'
+gem 'redis-rails'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -17,6 +20,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem 'simplecov', :require => false
+  gem 'mailcatcher'
 end
 
 group :test do
