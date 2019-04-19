@@ -27,7 +27,7 @@ def mail_all_orgs
   @subject = params[:email][:subject]
   @content = params[:email][:content]
   
-  @vetting_checked = params.select {|k, v| v == "1"}.keys 
+  @vetting_checked = params.select {|_, v| v == "1"}.keys 
   @org_email = nil
   @org_name =  nil
   if not params['All'].nil? # selected all organizations
