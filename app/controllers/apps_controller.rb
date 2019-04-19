@@ -6,7 +6,7 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @status_map =  App.group(:status).count
+    @status_map =  App.group(:status).reorder(:status).count # should be in model?
     @deployment_map = {}
     @vetting_map = {}
     @total_deploy = 0
@@ -19,7 +19,6 @@ class AppsController < ApplicationController
         @deployment_map[App.statuses.keys[status]] = count
         @total_deploy += count
       end
-      
     end
     
     @current_user = User.find_by_id(session[:user_id])
