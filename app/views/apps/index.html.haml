@@ -8,23 +8,25 @@
   %label.checkbox-inline
     %div#deploy
       %strong Deployment Status:
+      %em #{" " + @total_deploy.to_s}
       %br
       - App.getAllDeploymentStatuses.each do |status|
         = check_box_tag status, 1, true, :class => 'filter'
         %span{:class => status}= status.to_s.humanize
-        %u #{@deployment_map[status.to_s].to_s}
+        %em #{@deployment_map[status.to_s].to_s}
         %br
-    %em #{"total: " + @total_deploy.to_s}
+    
   %label.checkbox-inline
     %div#vetting
       %strong Vetting Status:
+      %em #{" " + @total_vet.to_s}
       %br
       - App.getAllVettingStatuses.each do |status|
         = check_box_tag status, 1, true, :class => 'filter'
         %span{:class => status}= status.to_s.humanize
-        %u #{@vetting_map[status.to_s].to_s}
+        %em #{@vetting_map[status.to_s].to_s}
         %br
-    %em #{"total: " + @total_vet.to_s}
+
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
