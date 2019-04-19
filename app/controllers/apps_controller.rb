@@ -6,6 +6,22 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
+    @status_map =  App.group(:status).count
+    @deployment_map = {}
+    @vetting_map = {}
+    @total_deploy = 0
+    @total_vet = 0
+    @status_map.each do |status, count|
+      if App.getAllVettingStatuses.include? status
+        @vetting_map[App.statuses.keys[status]] = count
+        @total_vet += count
+      else
+        @deployment_map[App.statuses.keys[status]] = count
+        @total_deploy += count
+      end
+      
+    end
+    
     @current_user = User.find_by_id(session[:user_id])
     @apps = App.all
     respond_to do |format|

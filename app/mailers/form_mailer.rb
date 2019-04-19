@@ -8,4 +8,12 @@ class FormMailer < ApplicationMailer
     @team_names = eng.student_names
     mail(to: email, subject: "Iteration Feedback")
   end
+
+  def mail_all_orgs(name, email, subject, content)
+    @org_contact_name = name
+    @org_contact_email = email
+    @subject = subject
+    @content = content
+    mail(to: @org_contact_email, subject: subject)
+  end
 end

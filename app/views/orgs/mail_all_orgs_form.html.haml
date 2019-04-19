@@ -1,0 +1,19 @@
+.page-header
+  %h1 Mail to all organizations
+
+= form_tag mail_all_orgs_path do
+  - App.getAllVettingStatuses.each do |status|
+    = check_box_tag status, 1, true, :class => 'filter'
+    %span{:class => status}= status
+  .form-group
+    =label :email, :address, 'Email Address'
+    = text_field :email, :address, :class => 'form-control'
+  .form-group
+    = label :email, :subject, 'Subject'
+    = text_field :email, :subject, :class => 'form-control'
+  .form-group
+    = label :email, :content, 'Content'
+    = text_area :email, :content, :class => 'form-control'
+
+  = submit_tag 'Send To All Orgs', :class => 'btn btn-primary'
+

@@ -34,4 +34,7 @@ Rails.application.routes.draw do
   post 'creation' => 'creation#create', :as => 'create_all'
 
   get '/apps/:app_id/engagements/:id/export' => 'engagements#export', :as => 'export'
+
+  get 'mail_all_orgs' => 'orgs#mail_all_orgs_form', :as => 'mail_all_orgs_form'
+  post 'mail_all_orgs' => 'orgs#mail_all_orgs', :as => 'mail_all_orgs'
 end

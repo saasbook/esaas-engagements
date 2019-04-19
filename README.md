@@ -23,14 +23,25 @@ handed off from cohort to cohort.
 
 The main models are:
 
-* App: a deployable Web app, i.e. a student project.  An app's status may be:
-  * `dead`: not deployed, and/or customer not actively using;  dormant
-  * `development`: in active development (a team is working on it right now), whether or not deployed in
-  production
-  * `In use`: in production use at a customer site; customer has not expressed interest in further improvements
-  * `In use and wants improvements`: In production, and customer is interested in further development
-  * `Inactive but wants improvement`: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
-  * `Pending`: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
+* App: a deployable Web app, i.e. a student project.  App statuses can fall into two categories:
+  1. Deployment statuses:
+     * `dead`: Not deployed, and/or customer not actively using;  dormant
+     * `development`: In active development (a team is working on it right now), whether or not deployed in
+     production
+     * `In use`: In production use at a customer site; customer has not expressed interest in further improvements
+     * `In use and wants improvements`: In production, and customer is interested in further development
+     * `Inactive but wants improvement`: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
+     * `Pending`: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
+  2. Vetting statuses:
+     * `Vetting`: Pending (not yet vetted)
+     * `On Hold`: We need something from customer during vetting phase
+     * `Staff Approved`: Approved by the faculty during vetting phase
+     * `Customer Informed`: Staff has approved the project and we’ve informed the customer about acceptance and are waiting for them to confirm whether they meet our customer expectations
+     * `Customer Confirmation Received`: Customer has confirmed to meet our expectations
+     * `Declined by Staff`: Project declined by staff during vetting
+     * `Declined by Customer`: Engagement declined by the customer after we accepted the project
+     * `Declined by Customer – Available Next Semester`: Customer is not available this semester but will be available for next semester
+     * `Backup`: We are saving this project as a backup in case a client drops
 * Org: a customer organization for whom the app was developed
 * User: various subcategories, including developer (e.g. student), coach
 (mentor, GSI), customer contact.  Also a principal for authentication: as of now, only a staff member has authorization to edit/destroy.
@@ -149,9 +160,11 @@ After setting environment variables using `figaro`, you can access them by
 `ENV["YOURKEY"]` or `Figaro.env.YOURKEY`. Refer the [documentation](https://github.com/laserlemon/figaro) for more information.
 
 ## Uploading Images with AWS S3
+
 Since Heroku wipes out all data when dyno server is down, we used AWS S3 Bucket
 to store the images. After you open an account for AWS, you will need the following
 keys (in `config/application.yml`):
+
 ```yaml
 AWS_ACCESS_KEY_ID: <your_aws_access_key_id>
 AWS_SECRET_ACCESS_KEY: <your_aws_secret_access_key>
@@ -164,6 +177,7 @@ S3_HOST_NAME: <your_s3_host_name>
 
 We used Cucumber/Capybara for integration tests, and RSpec for unit tests. You can
 run tests using:
+
 ```shell
 bundle exec cucumber
 bundle exec rspec
@@ -171,11 +185,12 @@ bundle exec rspec
 
 To test javascript behaviors, Cucumber uses Selenium Webdriver as default. This
 requires you to have a [geckodriver](https://github.com/mozilla/geckodriver/releases),
-and firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
+and Firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
 to configure default webdriver.
 
 If you do not want to download a new webdriver, you can skip scenarios which require
 webdriver by:
+
 ```shell
 bundle exec cucumber --tags ~@javascript
 ```
@@ -189,11 +204,11 @@ bundle exec cucumber --tags ~@javascript
 * More comprehensive customer feedback through a feedback form with ratings/comments
 * Aggregates customer feedbacks from all iterations of an engagement, and display
 averages on each category
-* `User` supports different typs (e.g. Student, Staff/Coach, Customer)
+* `User` supports different types (e.g. Student, Staff/Coach, Customer)
 * Exports `Engagement` information as a CSV file
 * each `User` contains a profile image
-  - we are using Amazon S3 to store images on production envrionment, because
-  Heroku has [emphemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
+  - we are using Amazon S3 to store images on production environment, because
+  Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
   have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
 * Authorization to edit/destroy only to "Coach"
 * Autocomplete dropdown list (select2)
@@ -201,10 +216,10 @@ averages on each category
 
 # High priority feature list
 
-0. Add user contact info and a way to track user meeting notes
-0. Google or Facebook or LinkedIn login for customer contacts
-0. Manage customer feedback as a active record, not a json string
-0. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
-0. Mailing customer feedback forms to customers for each iteration (Sendgrid)
-0. More authorizations to different types of users
-  - a user cannot edit/delete other users unless it is a staff/coach
+1. Add user contact info and a way to track user meeting notes
+2. Google or Facebook or LinkedIn login for customer contacts
+3. Manage customer feedback as a active record, not a json string
+4. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
+5. Mailing customer feedback forms to customers for each iteration (Sendgrid)
+6. More authorizations to different types of users
+   * A user cannot edit/delete other users unless it is a staff/coach
