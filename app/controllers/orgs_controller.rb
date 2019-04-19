@@ -19,6 +19,10 @@ end
 
  # Post /mail_all_orgs
 def mail_all_orgs
+  # email to all selected organizations
+  # if no checkbox selected, send nothing;
+  # can specify reply_to address, subject and content
+
   @sender_email = params[:email][:address]
   @subject = params[:email][:subject]
   @content = params[:email][:content]
@@ -26,23 +30,22 @@ def mail_all_orgs
   @vetting_checked = params.select {|k, v| v == "1"}.keys 
   @org_email = nil
   @org_name =  nil
-  if not params['All'].nil?
+  if not params['All'].nil? # selected all organizations
     Org.all.each do |org|
-        @org_email = app.org.contact.email
-        @org_name = app.org.contact.name
+        @org_email = org.contact.email
+        @org_name = org.contact.name
         FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
     end
-  else
+  else # selected apps in certain vetting stages 
     App.all.each do |app|
       if @vetting_checked.include? app.status
         @org_email = app.org.contact.email
         @org_name = app.org.contact.name
       end
-      if @org_email != nil && @org_name !=  nil
-        FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
-      end
+      FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
     end
   end
+  redirect_to orgs_path, notice: 'Sent successfully.' 
 end
 
   # GET /orgs/1/edit
