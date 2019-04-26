@@ -30,6 +30,7 @@ before_script:
 
 script:
   - bundle exec rspec
+  - bundle exec rspec spec/controllers/orgs_controller.rb
   - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
   - bundle exec cucumber
   - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
