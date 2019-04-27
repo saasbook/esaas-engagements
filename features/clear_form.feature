@@ -102,7 +102,7 @@ Scenario: user can reset a form for Create New User, Org, and App
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"
 	And I fill in "Phone" with "123123123"
-	And I fill in "Organization Description" with "this is my new org"
+	And I fill in "Organization Description" with "this is my new org" using TinyMCE rich editor
 	And I fill in "Url" with "myneworg.com"
 	And I check "Defunct"
 	And I fill in "App Name" with "myNewApp"
@@ -163,7 +163,7 @@ Scenario: user can reset a form for Edit App
 	And I select "In use" from "Status"
 	And I press "Reset"
 	Then I should have filled in "AFX Dance" for "App Name"
-	And I should have filled in "Awesome!" for "App Description"
+	And I should have filled in "Awesome!" for "App Description" using TinyMCE rich editor
 	And the "Organization" field should contain "3"
 	And the "Status" field should contain "pending"
 
