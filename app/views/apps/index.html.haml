@@ -31,20 +31,38 @@
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
 %ul{:class => 'pagination'}
-  %li{:class=>'each_page'}
-    %a{:class=>"page-link", :href=>"?each_page=10"}10
-  %li{:class=>'each_page'}
-    %a{:class=>"page-link", :href=>"/?each_page=50"}50
-  %li{:class=>'each_page'}
-    %a{:class=>"page-link", :href=>"?each_page=100"}100
-  %li{:class=>'each_page'}
-    %a{:class=>"page-link", :href=>"?each_page=All"}All
+  - if @each_page == 10
+    %li{:class=>'each_page active'} 
+      %a{:class=>"page-link", :href=>"?each_page=10"}10
+  - else
+    %li{:class=>'each_page_active'}
+      %a{:class=>"page-link", :href=>"?each_page=10"}10
+  - if @each_page == 50
+    %li{:class=>'each_page active'}
+      %a{:class=>"page-link", :href=>"/?each_page=50"}50
+  - else
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"/?each_page=50"}50
+  - if @each_page == 100
+    %li{:class=>'each_page active'}
+      %a{:class=>"page-link", :href=>"?each_page=100"}100
+  - else
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"?each_page=100"}100
+  - if @each_page == @total_deploy
+    %li{:class=>'each_page active'}
+      %a{:class=>"page-link", :href=>"?each_page=All"}All
+  - else  
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"?each_page=All"}All
 
 %ul{:class => 'pagination'}
   %li{:class=>'page_num'}
     %a{:class=>"page-link", :href=>"?page_num=fst"}First
   %li{:class=>'page_num'}
     %a{:class=>"page-link", :href=>"?page_num=prv"}Previous
+  %li{:class=>'page_num disabled'}
+    %a{:class=>'page_num'}=@page_num 
   %li{:class=>'page_num'}
     %a{:class=>"page-link", :href=>"?page_num=nxt"}Next
   %li{:class=>'page_num'}
