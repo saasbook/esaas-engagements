@@ -22,7 +22,50 @@ class AppsController < ApplicationController
     end
     
     @current_user = User.find_by_id(session[:user_id])
-    @apps = App.all
+    
+    if !params[:page_num].nil? && session[:page_num].nil? then
+      session[:page_num] = 1    
+    end
+    if !params[:each_page].nil? then
+      session[:each_page] = params[:each_page]
+      session[:page_num] = 1
+    elsif session[:each_page].nil? then
+      session[:each_page] = '10'
+    end
+
+    @each_page_str = session[:each_page]
+    @page_num = session[:page_num].to_i
+    if @each_page_str == 'All' then
+      @each_page = @total_deploy
+    else
+      @each_page = @each_page_str.to_i
+    end
+    max_page_num =  (@total_deploy - 1) / @each_page + 1
+    if params[:page_num] == "prv" then
+      if @page_num > 1 then
+        @page_num = @page_num - 1
+        flash[:page_num] = ""
+      else
+        flash[:page_num] = "You are already on the FIRST page."
+      end
+    elsif params[:page_num] == "nxt" then
+      if @page_num < max_page_num then
+        @page_num = @page_num + 1
+        flash[:page_num] = ""
+      else
+        flash[:page_num] = "You are already on the LAST page."
+      end
+    else
+      flash[:page_num] = ""
+      if params[:page_num] == "fst" then
+	@page_num = 1
+      end
+      if params[:page_num] == "lst" then
+	@page_num = max_page_num
+      end
+    end
+    session[:page_num] = @page_num.to_s
+    @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }
       format.html

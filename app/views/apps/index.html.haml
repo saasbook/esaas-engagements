@@ -30,6 +30,30 @@
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
+%ul{:class => 'pagination'}
+  %li{:class=>'each_page'}
+    %a{:class=>"page-link", :href=>"?each_page=10"}10
+  %li{:class=>'each_page'}
+    %a{:class=>"page-link", :href=>"/?each_page=50"}50
+  %li{:class=>'each_page'}
+    %a{:class=>"page-link", :href=>"?each_page=100"}100
+  %li{:class=>'each_page'}
+    %a{:class=>"page-link", :href=>"?each_page=All"}All
+
+%ul{:class => 'pagination'}
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=fst"}First
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=prv"}Previous
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=nxt"}Next
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=lst"}Last
+
+- if flash[:page_num]
+  %div{:class=>"page number message"}
+    %span{:class=>"error"}=flash[:page_num]
+
 %table.table.table-condensed#apps_table
   %thead
     %tr
@@ -43,7 +67,7 @@
         %td
           = app.id
           = link_to app.name, app
-        %td= app.org.name
+        %td= link_to app.org.name, app.org
         %td
           = app.description
           %br
