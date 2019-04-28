@@ -23,6 +23,24 @@ Background: Logged in
 
     And I'm logged in on the orgs page 
 
+@javascript
+Scenario: No keyword
+    Given I search for ""
+    Then I should see "app 1"
+    And I should see "user 1"
+    And I should see "org A"
+    And I should see "Please enter a keyword in the search box."
+
+Scenario: No filter
+    Given I uncheck "App"
+    And I uncheck "Organization"
+    And I uncheck "User"
+    And I search for "1"
+    Then I should not see "org A"
+    And I should not see "user 1"
+    And I should not see "app 1"
+    And I should see "Please at least choose one category you want to search."
+
 Scenario: search for an app by name keyword
     Given I search for "1"
     Then I should see "app 1"
@@ -64,6 +82,8 @@ Scenario: search for an user by keyword
     Then I should see "user 1"
 
     Given I search for "1"
+    And I uncheck "Organization"
+    And I uncheck "App"
     Then I should see "user 1"
 
 
