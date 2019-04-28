@@ -36,7 +36,7 @@ class AppsController < ApplicationController
     @each_page_str = session[:each_page]
     @page_num = session[:page_num].to_i
     if @each_page_str == 'All' then
-      @each_page = max(1,@total_deploy)
+      @each_page = [1,@total_deploy].max
     else
       @each_page = @each_page_str.to_i
     end
