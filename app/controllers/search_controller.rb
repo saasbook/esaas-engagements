@@ -18,20 +18,17 @@ class SearchController < ApplicationController
   def results
     keyword = ("%" + params["keyword"] + "%").downcase
     filters = params[:search_filters]
+    @apps = []
+    @orgs = []
+    @users = []
     if filters.include?("App")
       @apps = App.where('lower(name) LIKE ?', keyword).all() | App.where('lower(description) LIKE ?', keyword).all()
-    else
-      @apps = []
     end
     if filters.include?("Organization")
       @orgs = Org.where('lower(name) LIKE ?', keyword).all()
-    else
-      @orgs = []
     end
     if filters.include?("User")
       @users = User.where('lower(name) LIKE ?', keyword).all()
-    else
-      @users = []
     end
   end
 end
