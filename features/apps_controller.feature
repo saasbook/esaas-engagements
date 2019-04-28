@@ -75,7 +75,7 @@ Scenario: Login to github to create a new app in non-pending deployment status
   And I am on the new_app page
   And I select "Development" from "Status"
   And I press "Create App"
-  And I should see "2 errors prohibited App from being saved:"
+  And I should see "3 errors prohibited App from being saved:"
   And I should see "App Name can't be blank"
   And I should see "App Description can't be blank"
   And I should see "Repository url can't be blank"
