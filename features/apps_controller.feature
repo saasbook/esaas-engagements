@@ -82,6 +82,7 @@ Scenario: Login to github to create a new app in non-pending deployment status
   When I fill in "App Name" with "Fake app"
   When I fill in "App Description" with "Fake app description "
   When I fill in "Deployment Url" with "http://fakeapp.com"
+  When I fill in "Repository Url" with "http://fakerepo.com"
   And I press "Create App"
   Then I should be on the apps page
   And I should see "App was successfully created."
