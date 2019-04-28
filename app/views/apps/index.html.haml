@@ -35,14 +35,14 @@
     %li{:class=>'each_page active'} 
       %a{:class=>"page-link", :href=>"?each_page=10"}10
   - else
-    %li{:class=>'each_page_active'}
+    %li{:class=>'each_page'}
       %a{:class=>"page-link", :href=>"?each_page=10"}10
   - if @each_page == 50
     %li{:class=>'each_page active'}
-      %a{:class=>"page-link", :href=>"/?each_page=50"}50
+      %a{:class=>"page-link", :href=>"?each_page=50"}50
   - else
     %li{:class=>'each_page'}
-      %a{:class=>"page-link", :href=>"/?each_page=50"}50
+      %a{:class=>"page-link", :href=>"?each_page=50"}50
   - if @each_page == 100
     %li{:class=>'each_page active'}
       %a{:class=>"page-link", :href=>"?each_page=100"}100
