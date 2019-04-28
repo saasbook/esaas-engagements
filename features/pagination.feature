@@ -89,6 +89,6 @@ Scenario: I cannot press previous in the very front page
     When I follow "All"
     When I follow "Next"
     Then I should see "app_k"
-    When I follow "Next"
+    When I follow "Next" 
     Then I should see "app_k"
     Then I should see "You are already on the LAST page."
