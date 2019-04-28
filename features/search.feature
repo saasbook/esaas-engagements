@@ -20,76 +20,105 @@ Background: Logged in
     And the following users exist:
         | name  | github_uid      | email         |
         | user 1 | esaas_developer| test@user.com |
+        | user 2 | esaas_client   | test@client.com |
 
     And I'm logged in on the orgs page 
 
 Scenario: No keyword
-    Given I search for ""
+    Given I check "Apps"
+    And I check "Organizations"
+    And I check "Users"
+    And I search for ""
     Then I should see "app 1"
     And I should see "user 1"
     And I should see "org A"
-    And I should see "Please enter a keyword in the search box."
+    And I should see "Please enter a keyword in the search box"
+
 
 Scenario: No filter
-    Given I uncheck "Apps"
-    And I uncheck "Organizations"
-    And I uncheck "Users"
-    And I search for "1"
+    Given I search for "1"
     Then I should not see "org A"
     And I should not see "user 1"
     And I should not see "app 1"
-    And I should see "Please choose at least one category."
+    And I should see "Please choose at least one category"
+
 
 Scenario: search for an app by name keyword
-    Given I uncheck "Users"
+    Given I check "Apps"
     And I search for "1"
     Then I should see "app 1"
     But I should not see "app 2"
     And I should not see "app 3"
+    And I should see "org A"
+    And I should not see "org B"
+    And I should not see "org C"
     And I should not see "user 1"
+    And I should not see "user 2"
 
-    Given I search for "app"
+    Given I check "Apps"
+    And I search for "app"
     Then I should see "app 1"
     And I should see "app 2"
     And I should see "app 3"
+    And I should see "org A"
+    And I should see "org B"
+    And I should see "org C"
+    And I should not see "user 1"
+    And I should not see "user 2"
 
 
 Scenario: search for an app by description keyword
-    Given I check "Organizations"
+    Given I check "Apps"
     And I search for "three"
     Then I should see "app 3"
     But I should not see "app 1"
     And I should not see "app 2"
+    And I should not see "org A"
+    And I should not see "org B"
+    And I should see "org C"
+    And I should not see "user 1"
+    And I should not see "user 2"
 
-    Given I search for "test"
+    Given I check "Apps"
+    And I search for "test"
     Then I should see "app 1"
     And I should see "app 2"
     And I should see "app 3"
+    And I should not see "user 1"
+    And I should not see "user 2"
+
 
 Scenario: search for an organization by keyword
-    Given I search for "org"
+    Given I check "Organizations"
+    And I search for "org"
     Then I should see "org A"
     And I should see "org B"
     And I should see "org C"
 
-    Given I search for "B"
+    Given I check "Organizations"
+    And I search for "B"
     Then I should see "org B"
     But I should not see "org A"
     And I should not see "org C"
 
 
-
 Scenario: search for an user by keyword
-    Given I search for "user"
+    Given I check "Users"
+    And I search for "user"
     Then I should see "user 1"
+    And I should see "user 2"
 
-    Given I search for "1"
-    And I uncheck "Organization"
-    And I uncheck "App"
+    Given I check "Users"
+    And I search for "1"
     Then I should see "user 1"
+    And I should not see "user 2"
 
 
 Scenario: search for all three categories by keyword
-    Given I search for "1"
+    Given I check "Apps"
+    And I check "Organizations"
+    And I check "Users"
+    And I search for "1"
     Then I should see "app 1"
     And I should see "user 1"
+    And I should not see "user 2"
