@@ -32,9 +32,9 @@ Scenario: No keyword
     And I should see "Please enter a keyword in the search box."
 
 Scenario: No filter
-    Given I uncheck "App_search"
-    And I uncheck "Organization_search"
-    And I uncheck "User_search"
+    Given I uncheck "Apps"
+    And I uncheck "Organizations"
+    And I uncheck "Users"
     And I search for "1"
     Then I should not see "org A"
     And I should not see "user 1"
@@ -42,7 +42,7 @@ Scenario: No filter
     And I should see "Please at least choose one category you want to search."
 
 Scenario: search for an app by name keyword
-    Given I uncheck "User_search"
+    Given I uncheck "Users"
     And I search for "1"
     Then I should see "app 1"
     But I should not see "app 2"
@@ -56,7 +56,7 @@ Scenario: search for an app by name keyword
 
 
 Scenario: search for an app by description keyword
-    Given I check "Organization_search"
+    Given I check "Organizations"
     And I search for "three"
     Then I should see "app 3"
     But I should not see "app 1"
