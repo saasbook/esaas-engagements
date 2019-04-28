@@ -46,7 +46,7 @@ Scenario: Login to github to create a new app
   And I should see "App was successfully created."
 
 Scenario: Login to github to create a new app in vetting status
-  #Story ID: #152298585
+  #Story ID: #165265798
   Given I am not logged in
   And I am on the apps page
   And I follow "New App"
