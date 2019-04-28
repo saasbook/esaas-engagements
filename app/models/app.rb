@@ -6,7 +6,7 @@ class App < ActiveRecord::Base
   has_many :iterations, :through => :engagements
 
   validates_presence_of :name, :description, :org_id, :status
-  validates_presence_of :repository_url, unless: :pending?
+  validates_presence_of :repository_url, unless: :repoUrlOptional?
 
   enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending, 
     :vetting_pending, :on_hold, :staff_approved,:customer_informed, :customer_confirmation_received, :declined_by_staff, 
@@ -40,11 +40,14 @@ class App < ActiveRecord::Base
   end
 
   def inVettingStatus?
-    VETTING_STATUSES.include? self.status
+    @@VETTING_STATUSES.include? status.to_sym
   end
 
   def inDeploymentStatus?
-    DEPLOYMENT_STATUSES.include? self.status
+    @@DEPLOYMENT_STATUSES.include? status.to_sym
   end
 
+  def repoUrlOptional?
+    pending? || inVettingStatus?
+  end
 end
