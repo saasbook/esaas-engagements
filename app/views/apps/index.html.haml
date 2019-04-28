@@ -43,7 +43,8 @@
         %td
           = app.id
           = link_to app.name, app
-        %td= app.org.name
+        %td
+          = link_to app.org.name, app.org
         %td
           = app.description
           %br
