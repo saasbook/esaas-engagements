@@ -13,7 +13,7 @@ class SearchController < ApplicationController
       flash[:notice] = "Please enter a keyword in the search box."
       redirect_to results_path(:keyword => "", :filters => @all_filters) and return 
     elsif filters.empty?
-      flash[:notice] = "Please at least choose one category you want to search."
+      flash[:notice] = "Please choose at least one category."
       redirect_to results_path(:keyword => "", :filters => []) and return 
     end
     flash[:notice] = "Search #{keyword} according to the filters #{filters.map{|x| x.inspect}.join(', ')}."

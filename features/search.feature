@@ -23,7 +23,6 @@ Background: Logged in
 
     And I'm logged in on the orgs page 
 
-@javascript
 Scenario: No keyword
     Given I search for ""
     Then I should see "app 1"
@@ -39,7 +38,7 @@ Scenario: No filter
     Then I should not see "org A"
     And I should not see "user 1"
     And I should not see "app 1"
-    And I should see "Please at least choose one category you want to search."
+    And I should see "Please choose at least one category."
 
 Scenario: search for an app by name keyword
     Given I uncheck "Users"
