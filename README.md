@@ -144,6 +144,7 @@ test:
   secret_key_base: test
   github_key: test
   github_secret: test
+
 development:
   secret_key_base: development
   github_key: development
@@ -221,4 +222,4 @@ averages on each category
 4. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
 5. Mailing customer feedback forms to customers for each iteration (Sendgrid)
 6. More authorizations to different types of users
-   * A user cannot edit/delete other users unless it is a staff/coach                                          
+   * A user cannot edit/delete other users unless it is a staff/coach
