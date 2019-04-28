@@ -7,17 +7,17 @@ Feature: a user can choose the number of apps show in one page
 Background: Logged in
     Given the following apps exist:
         | name  | description | org_id | status  |
-        | app1  | test        | 1      | pending |
-        | app2  | test        | 1      | pending |
-        | app3  | test        | 1      | pending |
-        | app4  | test        | 1      | pending |
-        | app5  | test        | 1      | pending |
-        | app6  | test        | 1      | pending |
-        | app7  | test        | 1      | pending |
-        | app8  | test        | 1      | pending |
-        | app9  | test        | 1      | pending |
-        | app10  | test        | 1      | pending |
-        | app11  | test        | 1      | pending |
+        | app_a  | test        | 1      | pending |
+        | app_b  | test        | 1      | pending |
+        | app_c  | test        | 1      | pending |
+        | app_d  | test        | 1      | pending |
+        | app_e  | test        | 1      | pending |
+        | app_f  | test        | 1      | pending |
+        | app_g  | test        | 1      | pending |
+        | app_h  | test        | 1      | pending |
+        | app_i  | test        | 1      | pending |
+        | app_j  | test        | 1      | pending |
+        | app_k  | test        | 1      | pending |
 
     And the following orgs exist:
         | name | contact_id |
@@ -41,54 +41,54 @@ Scenario: There are some click buttons on apps page that I can control the pagin
 Scenario: I can see all apps with selection all
     Given I am on the apps page
     When I follow "All"
-    Then I should see "app1"
-    Then I should see "app2"
-    Then I should see "app11"
+    Then I should see "app_a"
+    Then I should see "app_b"
+    Then I should see "app_k"
 
 Scenario: I can press number buttons to do pagination
     Given I am on the apps page
     When I follow "10"
-    Then I should see "app1"
-    Then I should see "app2"
-    Then I should see "app10"
-    Then I should not see "app11"
+    Then I should see "app_a"
+    Then I should see "app_b"
+    Then I should see "app_j"
+    Then I should not see "app_k"
 
 Scenario: I can use "next" and "previous" buttons to see previous or next apps
     Given I am on the apps page
     When I follow "10"
-    Then I should see "app2"
-    Then I should not see "app11"
+    Then I should see "app_b"
+    Then I should not see "app_k"
     When I follow "Next"
-    Then I should not see "app10"
-    Then I should see "app11"
+    Then I should not see "app_j"
+    Then I should see "app_k"
     When I follow "Previous"
-    Then I should see "app2"
-    Then I should not see "app11"
+    Then I should see "app_b"
+    Then I should not see "app_k"
 
 Scenario: I can click "First" or "Last" to see the first page or last page of apps
     Given I am on the apps page
     When I follow "10"
-    Then I should see "app2"
-    Then I should not see "app11"
+    Then I should see "app_b"
+    Then I should not see "app_k"
     When I follow "Last"
-    Then I should not see "app10"
-    Then I should see "app11"
+    Then I should not see "app_j"
+    Then I should see "app_k"
     When I follow "First"
-    Then I should see "app2"
-    Then I should not see "app11"
+    Then I should see "app_b"
+    Then I should not see "app_k"
 
 Scenario: I cannot press previous in the very front page
     Given I am on the apps page
     When I follow "All"
     When I follow "Previous"
-    Then I should see "app2"
+    Then I should see "app_b"
     Then I should see "You are already on the FIRST page."
 
 Scenario: I cannot press previous in the very front page
     Given I am on the apps page
     When I follow "All"
     When I follow "Next"
-    Then I should see "app11"
+    Then I should see "app_k"
     When I follow "Next"
-    Then I should see "app11"
+    Then I should see "app_k"
     Then I should see "You are already on the LAST page."
