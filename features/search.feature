@@ -25,10 +25,7 @@ Background: Logged in
     And I'm logged in on the orgs page 
 
 Scenario: No keyword
-    Given I check "Apps"
-    And I check "Organizations"
-    And I check "Users"
-    And I search for ""
+    Given I search for ""
     Then I should see "app 1"
     And I should see "user 1"
     And I should see "org A"
@@ -36,7 +33,10 @@ Scenario: No keyword
 
 
 Scenario: No filter
-    Given I search for "1"
+    Given I uncheck "Apps"
+    And I uncheck "Organizations"
+    And I uncheck "Users"
+    And I search for "1"
     Then I should not see "org A"
     And I should not see "user 1"
     And I should not see "app 1"
@@ -44,7 +44,8 @@ Scenario: No filter
 
 
 Scenario: search for an app by name keyword
-    Given I check "Apps"
+    Given I uncheck "Organizations"
+    And I uncheck "Users"
     And I search for "1"
     Then I should see "app 1"
     But I should not see "app 2"
@@ -55,7 +56,8 @@ Scenario: search for an app by name keyword
     And I should not see "user 1"
     And I should not see "user 2"
 
-    Given I check "Apps"
+    Given I uncheck "Organizations"
+    And I uncheck "Users"
     And I search for "app"
     Then I should see "app 1"
     And I should see "app 2"
@@ -68,7 +70,8 @@ Scenario: search for an app by name keyword
 
 
 Scenario: search for an app by description keyword
-    Given I check "Apps"
+    Given I uncheck "Organizations"
+    And I uncheck "Users"
     And I search for "three"
     Then I should see "app 3"
     But I should not see "app 1"
@@ -79,7 +82,8 @@ Scenario: search for an app by description keyword
     And I should not see "user 1"
     And I should not see "user 2"
 
-    Given I check "Apps"
+    Given I uncheck "Organizations"
+    And I uncheck "Users"
     And I search for "test"
     Then I should see "app 1"
     And I should see "app 2"
@@ -89,13 +93,15 @@ Scenario: search for an app by description keyword
 
 
 Scenario: search for an organization by keyword
-    Given I check "Organizations"
+    Given I uncheck "Apps"
+    And I uncheck "Users"
     And I search for "org"
     Then I should see "org A"
     And I should see "org B"
     And I should see "org C"
 
-    Given I check "Organizations"
+    Given I uncheck "Apps"
+    And I uncheck "Users"
     And I search for "B"
     Then I should see "org B"
     But I should not see "org A"
@@ -103,22 +109,21 @@ Scenario: search for an organization by keyword
 
 
 Scenario: search for an user by keyword
-    Given I check "Users"
+    Given I uncheck "Apps"
+    And I uncheck "Organizations"
     And I search for "user"
     Then I should see "user 1"
     And I should see "user 2"
 
-    Given I check "Users"
+    Given I uncheck "Apps"
+    And I uncheck "Organizations"
     And I search for "1"
     Then I should see "user 1"
     And I should not see "user 2"
 
 
 Scenario: search for all three categories by keyword
-    Given I check "Apps"
-    And I check "Organizations"
-    And I check "Users"
-    And I search for "1"
+    Given I search for "1"
     Then I should see "app 1"
     And I should see "user 1"
     And I should not see "user 2"
