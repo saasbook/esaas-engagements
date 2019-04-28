@@ -22,24 +22,27 @@ Background: User is trying to sign up
 
     And I'm logged in on the orgs page
 
-Scenario: I cannot update to a non-vetting app without URL
+Scenario: Updating the status of an app to deployment category without repo URL should fail
+    #Story ID: #165265798
     Given I am on the edit app page for app id: "1"
     When I fill in "Repository Url" with ""
-    Then I select "Staff approved" from "Status"
+    And I select "In use" from "Status"
     And I press "Update App"
-    And I should see "Repository url can't be blank"
+    Then I should see "Repository url can't be blank"
 
-Scenario: I can edit vetting app without URL
+Scenario: Edit an app in vetting category without specifying repo URL
+    #Story ID: #165265798
     Given I am on the edit app page for app id: "1"
     When I fill in "Repository Url" with ""
-    When I fill in "App Name" with "BFX Dance"
-    Then I select "Vetting pending" from "Status"
+    And I fill in "App Name" with "BFX Dance"
+    And I select "On hold" from "Status"
     And I press "Update App"
     Then I should see "App was successfully updated."
 
-Scenario: I can update a vetting app to a non-vetting app with URL
+Scenario: Updating the status of an app to deployment category with repo URL should succeed
+    #Story ID: #165265798
     Given I am on the edit app page for app id: "1"
-    Then I fill in "Repository Url" with "github.com/mynewapp"
-    Then I select "Staff approved" from "Status"
+    When I fill in "Repository Url" with "https://github.com/mynewapp"
+    And I select "Staff approved" from "Status"
     And I press "Update App"
     Then I should see "App was successfully updated."
