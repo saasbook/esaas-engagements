@@ -2,7 +2,7 @@ class SearchController < ApplicationController
 
   def search
     keyword = params["keyword"]
-    @all_filters = ["App", "Organization", "User"]
+    @all_filters = ["App_search", "Organization_search", "User_search"]
     filters = []
     @all_filters.each do |filter|
       if params[filter] == "1"
@@ -29,13 +29,13 @@ class SearchController < ApplicationController
     if filters.nil?
       return
     end
-    if filters.include?("App")
+    if filters.include?("App_search")
       @apps = App.where('lower(name) LIKE ?', keyword).all() | App.where('lower(description) LIKE ?', keyword).all()
     end
-    if filters.include?("Organization")
+    if filters.include?("Organization_search")
       @orgs = Org.where('lower(name) LIKE ?', keyword).all()
     end
-    if filters.include?("User")
+    if filters.include?("User_search")
       @users = User.where('lower(name) LIKE ?', keyword).all()
     end
   end
