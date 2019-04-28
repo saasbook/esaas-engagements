@@ -106,7 +106,7 @@ Scenario: user can reset a form for Create New User, Org, and App
 	And I fill in "Url" with "myneworg.com"
 	And I check "Defunct"
 	And I fill in "App Name" with "myNewApp"
-	And I fill in "App Description" with "this app is awesome"  using TinyMCE rich editor
+	And I fill in "App Description" with "this app is awesome" using TinyMCE rich editor
 	And I fill in "Deployment Url" with "mynewapp.com"
 	And I fill in "Repository Url" with "github.com/mynewapp"
 	And I fill in "Code Climate Url" with "codeclimate.com/mynewapp"
