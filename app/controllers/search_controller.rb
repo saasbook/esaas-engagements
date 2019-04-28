@@ -2,27 +2,23 @@ class SearchController < ApplicationController
 
   def search
     keyword = params["keyword"]
-    @all_filters = ["Apps", "Organizations", "Users"]
-    filters = []
-    @all_filters.each do |filter|
-      if params[filter] == "1"
-        filters += [filter]
-      end
+    all_filters = ["Apps", "Organizations", "Users"]
+    filters = all_filters.select {|filter| params[filter]} 
+    session[:filters] = filters
+
+    if filters.empty?
+      redirect_to results_path(:keyword => keyword), alert: "Please choose at least one category"
+    elsif keyword.empty?
+        redirect_to results_path(:keyword => ''), alert: "Please enter a keyword in the search box"
+    else
+      flash[:notice] = "Search '#{keyword}' in #{filters.map{|x| x.inspect}.join(', ')}"
+      redirect_to results_path(:keyword => keyword)
     end
-    if keyword.empty?
-      flash[:notice] = "Please enter a keyword in the search box."
-      redirect_to results_path(:keyword => "", :filters => @all_filters) and return 
-    elsif filters.empty?
-      flash[:notice] = "Please choose at least one category."
-      redirect_to results_path(:keyword => "", :filters => []) and return 
-    end
-    flash[:notice] = "Search #{keyword} according to the filters #{filters.map{|x| x.inspect}.join(', ')}."
-    redirect_to results_path(:keyword => keyword, :filters => filters)
   end
 
   def results
     keyword = ("%" + params["keyword"] + "%").downcase
-    filters = params[:filters]
+    filters = session[:filters]
     @apps = []
     @orgs = []
     @users = []
