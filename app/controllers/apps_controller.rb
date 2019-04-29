@@ -145,6 +145,7 @@ class AppsController < ApplicationController
 	      @page_num = params[:curr].to_i
       end
       max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
+      flash[:alert] = nil
       case params[:page_num] 
         when "prv" then
           if @page_num > 1 then
