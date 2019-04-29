@@ -36,7 +36,7 @@ Scenario: there are different comment types available
 # Story ID: #165105206
 @javascript
 Scenario: User can add new comments with different types
-	Given I fill in "Write a comment..." with "This app needs to be revised."
+	Given I fill in "Write a comment..." with "This app needs to be revised." using TinyMCE rich editor
 	And I choose "Vetting"
 	And I press "Post"
 	And I uncheck all comment types
@@ -50,7 +50,7 @@ Scenario: User can add new comments with different types
 # Story ID: 152689457
 @javascript
 Scenario: User can edit and choose different comment types
-	Given I fill in "Write a comment..." with "This App is AWESOME!"
+	Given I fill in "Write a comment..." with "This App is AWESOME!" using TinyMCE rich editor
 	And I press "Post"
 	When I follow "Edit"
 	And I choose "App Functionality"

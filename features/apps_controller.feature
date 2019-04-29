@@ -45,6 +45,48 @@ Scenario: Login to github to create a new app
   Then I should be on the apps page
   And I should see "App was successfully created."
 
+Scenario: Login to github to create a new app in vetting status
+  #Story ID: #165265798
+  Given I am not logged in
+  And I am on the apps page
+  And I follow "New App"
+  And I am on the login page
+  And I follow "Log in with GitHub"
+  And I am on the new_app page
+  And I select "Vetting pending" from "Status"
+  And I press "Create App"
+  And I should see "2 errors prohibited App from being saved:"
+  And I should see "App Name can't be blank"
+  And I should see "App Description can't be blank"
+  When I fill in "App Name" with "Fake app"
+  When I fill in "App Description" with "Fake app description "
+  When I fill in "Deployment Url" with "http://fakeapp.com"
+  And I press "Create App"
+  Then I should be on the apps page
+  And I should see "App was successfully created."
+
+Scenario: Login to github to create a new app in non-pending deployment status
+  #Story ID: #165265798
+  Given I am not logged in
+  And I am on the apps page
+  And I follow "New App"
+  And I am on the login page
+  And I follow "Log in with GitHub"
+  And I am on the new_app page
+  And I select "Development" from "Status"
+  And I press "Create App"
+  And I should see "3 errors prohibited App from being saved:"
+  And I should see "App Name can't be blank"
+  And I should see "App Description can't be blank"
+  And I should see "Repository url can't be blank"
+  When I fill in "App Name" with "Fake app"
+  When I fill in "App Description" with "Fake app description "
+  When I fill in "Deployment Url" with "http://fakeapp.com"
+  When I fill in "Repository Url" with "http://fakerepo.com"
+  And I press "Create App"
+  Then I should be on the apps page
+  And I should see "App was successfully created."
+
 Scenario: Login to github to edit an existing app successfully
   #Story ID: #152298585
   Given I am not logged in

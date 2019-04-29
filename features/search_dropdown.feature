@@ -31,7 +31,7 @@ Scenario: I can still create a new app as usual
   # Story ID: 153069853
   Given I am on the new app page
   When I fill in "App Name" with "Fake app"
-  When I fill in "App Description" with "Fake app description"
+  When I fill in "App Description" with "Fake app description" using TinyMCE rich editor
   When I fill in "Repository Url" with "http://fakeapp.com"
   And I click "#select2-app_org_id-container"
   And I type in "org" in ".select2-search__field"
