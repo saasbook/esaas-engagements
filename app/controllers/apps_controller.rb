@@ -23,8 +23,12 @@ class AppsController < ApplicationController
     
     @current_user = User.find_by_id(session[:user_id])
     
-    if !params[:page_num].nil? && session[:page_num].nil? then
-      session[:page_num] = '1'    
+    # Reserved for selecting pages number directly
+    #if !params[:page_num].nil? && session[:page_num].nil? then
+    #  session[:page_num] = '1'    
+    #end
+    if session[:page_num].nil? then
+      session[:page_num] = '1'
     end
     if !params[:each_page].nil? then
       session[:each_page] = params[:each_page]
@@ -141,19 +145,19 @@ class AppsController < ApplicationController
 	@page_num = params[:curr].to_i
       end
       max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
-      flash[:page_num] = ""
+      flash[:page_num_out_of_range] = nil
       case params[:page_num] 
         when "prv" then
           if @page_num > 1 then
             @page_num -= 1
           else
-            flash[:page_num] = "You are already on the FIRST page."
+            flash[:page_num_out_of_range] = "You are already on the FIRST page."
           end
         when "nxt" then
           if @page_num < max_page_num then
             @page_num += 1
           else
-            flash[:page_num] = "You are already on the LAST page."
+            flash[:page_num_out_of_range] = "You are already on the LAST page."
           end
         when "fst" then
 	        @page_num = 1

@@ -68,9 +68,9 @@
   %li{:class=>'page_num'}
     %a{:class=>"page-link", :href=>"?page_num=lst&curr=#{@page_num}"}Last
 
-- if flash[:page_num]
+- if flash[:page_num_out_of_range]
   %div{:class=>"page number message"}
-    %span{:class=>"error"}=flash[:page_num]
+    %span{:class=>"error"}=flash[:page_num_out_of_range]
 
 %table.table.table-condensed#apps_table
   %thead
