@@ -149,15 +149,15 @@ class AppsController < ApplicationController
         when "prv" then
           if @page_num > 1 then
             @page_num -= 1
-	  else
-	    flash.now[:alert] = "You are already on the FIRST page."
-	  end
+	        else
+	          flash.now[:alert] = "You are already on the FIRST page."
+	        end
         when "nxt" then
           if @page_num < max_page_num then
             @page_num += 1
-	  else
-	    flash.now[:alert] = "You are already on the LAST page."
-	  end
+	        else
+	          flash.now[:alert] = "You are already on the LAST page."
+	        end
         when "fst" then
 	        @page_num = 1
         when "lst" then
