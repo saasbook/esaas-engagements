@@ -137,6 +137,9 @@ class AppsController < ApplicationController
 
     # Give react to the page change requists.
     def change_page_num
+      if !params[:curr].nil? then
+	@page_num = params[:curr].to_i
+      end
       max_page_num =  (@total_deploy - 1) / @each_page + 1
       flash[:page_num] = ""
       case params[:page_num] 
