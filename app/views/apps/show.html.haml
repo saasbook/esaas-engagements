@@ -10,7 +10,7 @@
 
 .well#description
   %h4 Description
-  %p= @app.description
+  %p= sanitize @app.description
 
 = render partial: 'comments/comments', locals: {commentable: @app}
 

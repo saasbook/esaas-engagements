@@ -46,7 +46,7 @@
         %td
           = link_to app.org.name, app.org
         %td
-          = app.description
+          = sanitize app.description
           %br
           - app.engagements.each do |engagement|
             %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
