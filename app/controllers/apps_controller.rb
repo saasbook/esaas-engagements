@@ -135,7 +135,7 @@ class AppsController < ApplicationController
       return each_page
     end
 
-    # Give react to the page change requists.
+    # Give react to the page change requests
     def change_page_num
       if !params[:curr].nil? then
 	@page_num = params[:curr].to_i

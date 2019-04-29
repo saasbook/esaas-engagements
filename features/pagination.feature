@@ -18,10 +18,12 @@ Background: Logged in
         | app_i  | test        | 1      | pending |
         | app_j  | test        | 1      | pending |
         | app_k  | test        | 1      | pending |
+        | app_l  | test        | 2      | vetting_pending |
 
     And the following orgs exist:
         | name | contact_id |
         | org1 | 1          |
+        | org2 | 1          |
 
     And the following users exist:
         | id | name  | github_uid      | email          | user_type     |
@@ -42,53 +44,89 @@ Scenario: I can see all apps with selection all
     Given I am on the apps page
     When I follow "All"
     Then I should see "app_a"
-    Then I should see "app_b"
-    Then I should see "app_k"
+    And I should see "app_b"
+    And I should see "app_k"
+    And I should see "app_l"
 
 Scenario: I can press number buttons to do pagination
     Given I am on the apps page
     When I follow "10"
     Then I should see "app_a"
-    Then I should see "app_b"
-    Then I should see "app_j"
-    Then I should not see "app_k"
+    And I should see "app_b"
+    And I should see "app_j"
+    And I should not see "app_k"
+    And I should not see "app_l"
 
 Scenario: I can use "next" and "previous" buttons to see previous or next apps
     Given I am on the apps page
     When I follow "10"
-    Then I should see "app_b"
-    Then I should not see "app_k"
+    Then I should see "app_a"
+    And I should see "app_b"
+    And I should see "app_c"
+    And I should see "app_d"
+    And I should see "app_e"
+    And I should see "app_f"
+    And I should see "app_g"
+    And I should see "app_h"
+    And I should see "app_i"
+    And I should see "app_j"
+    And I should not see "app_k"
+    And I should not see "app_l"
     When I follow "Next"
-    Then I should not see "app_j"
-    Then I should see "app_k"
+    Then I should not see "app_a"
+    And I should not see "app_b"
+    And I should not see "app_c"
+    And I should not see "app_d"
+    And I should not see "app_e"
+    And I should not see "app_f"
+    And I should not see "app_g"
+    And I should not see "app_h"
+    And I should not see "app_i"
+    And I should not see "app_j"
+    And I should not see "app_j"
+    And I should see "app_k"
+    And I should see "app_l"
     When I follow "Previous"
-    Then I should see "app_b"
-    Then I should not see "app_k"
+    Then I should see "app_a"
+    And I should see "app_b"
+    And I should see "app_c"
+    And I should see "app_d"
+    And I should see "app_e"
+    And I should see "app_f"
+    And I should see "app_g"
+    And I should see "app_h"
+    And I should see "app_i"
+    And I should see "app_j"
+    And I should not see "app_k"
+    And I should not see "app_l"
 
 Scenario: I can click "First" or "Last" to see the first page or last page of apps
     Given I am on the apps page
     When I follow "10"
     Then I should see "app_b"
-    Then I should not see "app_k"
+    And I should not see "app_k"
+    And I should not see "app_l"
     When I follow "Last"
     Then I should not see "app_j"
-    Then I should see "app_k"
+    And I should see "app_k"
+    And I should see "app_l"
     When I follow "First"
     Then I should see "app_b"
-    Then I should not see "app_k"
+    And I should not see "app_k"
+    And I should not see "app_l"
 
 Scenario: I cannot press previous in the very front page
     Given I am on the apps page
     When I follow "All"
-    When I follow "Previous"
+    And I follow "Previous"
     Then I should see "app_b"
-    Then I should see "You are already on the FIRST page."
+    And I should see "You are already on the FIRST page."
 
 Scenario: I cannot press previous in the very front page
     Given I am on the apps page
     When I follow "All"
-    When I follow "Next"
+    And I follow "Next"
     Then I should see "app_k"
     When I follow "Next" 
     Then I should see "app_k"
-    Then I should see "You are already on the LAST page."
+    And I should see "You are already on the LAST page."
