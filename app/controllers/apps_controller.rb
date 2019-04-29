@@ -22,7 +22,27 @@ class AppsController < ApplicationController
     end
     
     @current_user = User.find_by_id(session[:user_id])
-    @apps = App.all
+    
+    # Reserved for selecting pages number directly
+    #if !params[:page_num].nil? && session[:page_num].nil? then
+    #  session[:page_num] = '1'    
+    #end
+    if session[:page_num].nil? then
+      session[:page_num] = '1'
+    end
+    if !params[:each_page].nil? then
+      session[:each_page] = params[:each_page]
+      session[:page_num] = '1'
+    elsif session[:each_page].nil? then
+      session[:each_page] = '10'
+    end
+
+    @page_num = session[:page_num].to_i
+    @each_page = app_number_per_page
+    change_page_num
+    
+    session[:page_num] = @page_num.to_s
+    @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }
       format.html
@@ -106,5 +126,42 @@ class AppsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
       params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments)
+    end
+
+
+    # Give right value to the apps number on each page based on the session[:each_page]
+    def app_number_per_page
+      if session[:each_page] == 'All' then
+        each_page = [1,@total_deploy + @total_vet].max
+      else
+	      each_page = session[:each_page].to_i
+      end
+      return each_page
+    end
+
+    # Give react to the page change requests
+    def change_page_num
+      if !params[:curr].nil? then
+	      @page_num = params[:curr].to_i
+      end
+      max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
+      case params[:page_num] 
+        when "prv" then
+          if @page_num > 1 then
+            @page_num -= 1
+	        else
+	          flash.now[:alert] = "You are already on the FIRST page."
+	        end
+        when "nxt" then
+          if @page_num < max_page_num then
+            @page_num += 1
+	        else
+	          flash.now[:alert] = "You are already on the LAST page."
+	        end
+        when "fst" then
+	        @page_num = 1
+        when "lst" then
+	        @page_num = max_page_num
+      end
     end
 end

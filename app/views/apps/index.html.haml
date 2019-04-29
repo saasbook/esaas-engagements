@@ -30,6 +30,44 @@
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
+%ul{:class => 'pagination'}
+  - if @each_page == 10
+    %li{:class=>'each_page active'} 
+      %a{:class=>"page-link", :href=>"?each_page=10"}10
+  - else
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"?each_page=10"}10
+  - if @each_page == 50
+    %li{:class=>'each_page active'}
+      %a{:class=>"page-link", :href=>"?each_page=50"}50
+  - else
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"?each_page=50"}50
+  - if @each_page == 100
+    %li{:class=>'each_page active'}
+      %a{:class=>"page-link", :href=>"?each_page=100"}100
+  - else
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"?each_page=100"}100
+  - if @each_page == @total_deploy
+    %li{:class=>'each_page active'}
+      %a{:class=>"page-link", :href=>"?each_page=All"}All
+  - else  
+    %li{:class=>'each_page'}
+      %a{:class=>"page-link", :href=>"?each_page=All"}All
+
+%ul{:class => 'pagination pull-right'}
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=fst&prev=#{@page_num}"}First
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=prv&prev=#{@page_num}"}Previous
+  %li{:class=>"page-num disabled"}
+    %a{:class=>'page_num'}=[1,@page_num].max
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=nxt&prev=#{@page_num}"}Next
+  %li{:class=>'page_num'}
+    %a{:class=>"page-link", :href=>"?page_num=lst&prev=#{@page_num}"}Last
+
 %table.table.table-condensed#apps_table
   %thead
     %tr
