@@ -128,7 +128,7 @@ class AppsController < ApplicationController
     # Give right value to the apps number on each page based on the session[:each_page]
     def app_number_per_page
       if session[:each_page] == 'All' then
-        each_page = [1,@total_deploy].max
+        each_page = [1,@total_deploy + @total_vet].max
       else
 	      each_page = session[:each_page].to_i
       end

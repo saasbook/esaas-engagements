@@ -72,13 +72,6 @@
   %div{:class=>"page number message"}
     %span{:class=>"error"}=flash[:page_num]
 
-.dropdown{:style=>"float:right;"}
-  %button{:class=>"btn btn-secondary dropdown-toggle", :type=>"button",:id=>"dropdownMenuButton",:"data-toggle"=>"dropdown",:"aria-haspopup"=>"true",:"aria-expanded"=>"false"}
-    Page Selection Button 
-  .dropdown-menu{:"aria-labelledby"=>"dropdownMenuButton"}
-    - (1..@max_page_num).each do |target_page|
-      %a{:class=>"dropdown-item",:href=>"?page_num=jmp&curr=#{target_page}"}=target_page
-
 %table.table.table-condensed#apps_table
   %thead
     %tr
