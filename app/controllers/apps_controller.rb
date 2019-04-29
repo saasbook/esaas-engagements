@@ -130,7 +130,7 @@ class AppsController < ApplicationController
       if session[:each_page] == 'All' then
         each_page = [1,@total_deploy].max
       else
-	each_page = session[:each_page].to_i
+	      each_page = session[:each_page].to_i
       end
       return each_page
     end
@@ -140,22 +140,22 @@ class AppsController < ApplicationController
       max_page_num =  (@total_deploy - 1) / @each_page + 1
       flash[:page_num] = ""
       case params[:page_num] 
-      when "prv" then
-	if @page_num > 1 then
-	  @page_num -= 1
-	else
-	  flash[:page_num] = "You are already on the FIRST page."
-	end
-      when "nxt" then
-	if @page_num < max_page_num then
-	  @page_num += 1
-	else
-	  flash[:page_num] = "You are already on the LAST page."
-	end
-      when "fst" then
-	@page_num = 1
-      when "lst" then
-	@page_num = max_page_num
+        when "prv" then
+          if @page_num > 1 then
+            @page_num -= 1
+          else
+            flash[:page_num] = "You are already on the FIRST page."
+          end
+        when "nxt" then
+          if @page_num < max_page_num then
+            @page_num += 1
+          else
+            flash[:page_num] = "You are already on the LAST page."
+          end
+        when "fst" then
+	        @page_num = 1
+        when "lst" then
+	        @page_num = max_page_num
       end
     end
 end
