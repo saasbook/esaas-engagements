@@ -42,7 +42,7 @@ Scenario: user can reset a form for New App
 	Given I am on the Apps page
 	When I follow "New App"
 	And I fill in "App Name" with "myNewApp"
-	And I fill in "App Description" with "this app is awesome"
+	And I fill in "App Description" with "this app is awesome" using TinyMCE rich editor
 	And I fill in "Deployment Url" with "mynewapp.com"
 	And I fill in "Repository Url" with "github.com/mynewapp"
 	And I fill in "Code Climate Url" with "codeclimate.com/mynewapp"
@@ -63,7 +63,7 @@ Scenario: user can reset a form for New Organization
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"
 	And I fill in "Phone" with "123123123"
-	And I fill in "Description" with "this is my new org"
+	And I fill in "Description" with "this is my new org" using TinyMCE rich editor
 	And I fill in "Url" with "myneworg.com"
 	And I select "ESaaS Developer" from "Contact"
 	And I check "Defunct"
@@ -97,16 +97,16 @@ Scenario: user can reset a form for Create New User, Org, and App
 	And I fill in "Github Uid" with "dave_id"
 	And I select "Coach" from "User Type"
 	And I fill in "SID" with "123123123"
-	And I fill in "Organization Name" with "myNewOrg"
+	And I fill in "Organization Name" with "myNewOrg" using TinyMCE rich editor
 	And I fill in "Address Line 1" with "123 esaas street"
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"
 	And I fill in "Phone" with "123123123"
-	And I fill in "Organization Description" with "this is my new org"
+	And I fill in "Organization Description" with "this is my new org" using TinyMCE rich editor
 	And I fill in "Url" with "myneworg.com"
 	And I check "Defunct"
 	And I fill in "App Name" with "myNewApp"
-	And I fill in "App Description" with "this app is awesome"
+	And I fill in "App Description" with "this app is awesome" using TinyMCE rich editor
 	And I fill in "Deployment Url" with "mynewapp.com"
 	And I fill in "Repository Url" with "github.com/mynewapp"
 	And I fill in "Code Climate Url" with "codeclimate.com/mynewapp"
@@ -146,7 +146,7 @@ Scenario: user can reset a form for New Iteration
 	And I follow "2012-03-13"
 	And I follow "Add Iteration..."
 	When I fill in "End Date" with "2012-04-15"
-	And I fill in "Customer Feedback" with "This is a general comment"
+	And I fill in "Customer Feedback" with "This is a general comment" using TinyMCE rich editor
 	And I press "Reset"
 	Then All text fields are empty for the form with selector "#new_iteration"
 	And I should have filled in "2012-07-13" for "End Date"
@@ -158,12 +158,12 @@ Scenario: user can reset a form for Edit App
 	And I follow "AFX Dance"
 	And I follow "Edit App"
 	When I fill in "Some random app" for "App Name"
-	And I fill in "random description" for "App Description"
+	And I fill in "random description" for "App Description" using TinyMCE rich editor
 	And I select "Berkeley Student Cooperative" from "Org"
 	And I select "In use" from "Status"
 	And I press "Reset"
 	Then I should have filled in "AFX Dance" for "App Name"
-	And I should have filled in "Awesome!" for "App Description"
+	And I should have filled in "Awesome!" for "App Description" using TinyMCE rich editor
 	And the "Organization" field should contain "3"
 	And the "Status" field should contain "pending"
 
@@ -175,7 +175,7 @@ Scenario: user can reset a form for Edit Org
 	And I follow "Edit Org"
 	When I fill in "2012 Larkey Lane" for "Address Line 1"
 	And I fill in "923-128-1232" for "Phone"
-	And I fill in "description for this app" for "Organization Description"
+	And I fill in "description for this app" for "Organization Description" using TinyMCE rich editor
 	And I check "Defunct"
 	And I press "Reset"
 	Then I should have filled in "Berkeley Student Cooperative" for "Organization Name"
@@ -221,17 +221,17 @@ Scenario: user can reset a form for Edit Iteration
 	When I fill in "2016-08-15" for "End Date"
 	And I select "1 hour 15 min" from "Duration"
 	And I select "Mostly disagree" from "Demeanor"
-	And I fill in "some comment" for "Demeanor Comments"
+	And I fill in "some comment" for "Demeanor Comments" using TinyMCE rich editor
 	And I select "Mostly agree" from "Engagement"
-	And I fill in "some comment" for "Engagement Comments"
+	And I fill in "some comment" for "Engagement Comments" using TinyMCE rich editor
 	And I select "Neither agree nor disagree" from "Communication"
-	And I fill in "some comment" for "Communication Comments"
+	And I fill in "some comment" for "Communication Comments" using TinyMCE rich editor
 	And I select "Strongly agree" from "Understanding"
-	And I fill in "some comment" for "Understanding Comments"
+	And I fill in "some comment" for "Understanding Comments" using TinyMCE rich editor
 	And I select "Strongly disagree" from "Effectiveness"
-	And I fill in "some comment" for "Effectiveness Comments"
+	And I fill in "some comment" for "Effectiveness Comments" using TinyMCE rich editor
 	And I select "Mostly disagree" from "Satisfaction"
-	And I fill in "some comment" for "Satisfaction Comments"
+	And I fill in "some comment" for "Satisfaction Comments" using TinyMCE rich editor
 	And I press "Reset"
 	Then I should have filled in "2017-11-27" for "End Date"
 	And the "Duration" field should contain "15 min"
