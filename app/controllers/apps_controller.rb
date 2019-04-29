@@ -145,20 +145,19 @@ class AppsController < ApplicationController
 	      @page_num = params[:curr].to_i
       end
       max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
-      flash[:alert] = nil
       case params[:page_num] 
         when "prv" then
           if @page_num > 1 then
             @page_num -= 1
-          else
-            flash[:alert] = "You are already on the FIRST page."
-          end
+	  else
+	    flash.now[:alert] = "You are already on the FIRST page."
+	  end
         when "nxt" then
           if @page_num < max_page_num then
             @page_num += 1
-          else
-            flash[:alert] = "You are already on the LAST page."
-          end
+	  else
+	    flash.now[:alert] = "You are already on the LAST page."
+	  end
         when "fst" then
 	        @page_num = 1
         when "lst" then
