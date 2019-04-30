@@ -22,9 +22,11 @@ class App < ActiveRecord::Base
   scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
 
   def as_json(options={})
-    options[:only] = [:id,:name,:description,:deployment_url,:repository_url,:most_recent_screencast_url,:most_recent_screenshot_url]
-    options[:include] = {:org => { :only => [:name,:url] }}
-    super(options)
+    super(options.merge({
+          :only => [:id,:name,:description,:deployment_url,:repository_url],
+          :methods => [:most_recent_screencast_url,:most_recent_screenshot_url],
+          :include => {:org => { :only => [:name,:url] }}
+        }))
   end
 
   def most_recent_screencast_url

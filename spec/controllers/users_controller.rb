@@ -4,7 +4,7 @@ require 'spec_helper'
 describe UsersController, type: :controller do
   before do
     allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @user_params = {:name => "user1",:email=>"user1@gmail.com",:preferred_contact=>"by email",:github_uid => "fakeuid"}
 
   end

@@ -56,11 +56,11 @@ end
 
 # Capybara driver
 Capybara.javascript_driver = :selenium
-Capybara.default_wait_time = 1
+Capybara.default_max_wait_time = 1
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-World(FactoryGirl::Syntax::Methods)
+World(FactoryBot::Syntax::Methods)

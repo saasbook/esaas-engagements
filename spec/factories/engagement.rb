@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :engagement do
   	app_id { 1 }
   	coaching_org_id { 1 }

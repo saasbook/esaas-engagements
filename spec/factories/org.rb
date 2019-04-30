@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :org do
   	name 'CS169'
   	description 'Software Engineering'

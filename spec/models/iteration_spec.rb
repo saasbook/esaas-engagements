@@ -8,13 +8,13 @@ describe Iteration do
 		end
 
 		it 'converts a string of valid JSON format into ruby Hash' do
-			@iteration = FactoryGirl.build(:iteration, :customer_feedback => "{\"a\":\"1\",\"b\":\"2\"}")
+			@iteration = FactoryBot.build(:iteration, :customer_feedback => "{\"a\":\"1\",\"b\":\"2\"}")
 			expect(@iteration.customer_feedback_to_hash).to eq({"a" => "1", "b" => "2"})
 		end
 
 		it 'returns an empty ruby Hash if customer feedback is not a valid JSON format' do
-			@iteration1 = FactoryGirl.build(:iteration, :customer_feedback => "")
-			@iteration2 = FactoryGirl.build(:iteration, :customer_feedback => "asdasd")
+			@iteration1 = FactoryBot.build(:iteration, :customer_feedback => "")
+			@iteration2 = FactoryBot.build(:iteration, :customer_feedback => "asdasd")
 			expect(@iteration1.customer_feedback_to_hash).to be_empty
 			expect(@iteration2.customer_feedback_to_hash).to be_empty
 		end
@@ -43,19 +43,19 @@ describe Iteration do
 
 	describe 'can filter the customer feedback by items with a rating' do
 		it 'selects only keys that maps to a rating' do
-			@iteration = FactoryGirl.build(:iteration)
+			@iteration = FactoryBot.build(:iteration)
 			expect(@iteration.customer_feedback_with_rating.keys).to eq(Iteration.customer_rating_keys)
 		end
 
 		it 'returns an empty hash if the customer feedback does not hae a valid JSON format' do
-			@iteration = FactoryGirl.build(:iteration, :customer_feedback => "This team is really great!")
+			@iteration = FactoryBot.build(:iteration, :customer_feedback => "This team is really great!")
 			expect(@iteration.customer_feedback_with_rating).to be_empty
 		end
 	end
 
 	describe 'turns a customer feedback into a hash with only ratings converted to scores' do
 		before :each do
-			@iteration = FactoryGirl.build(:iteration)
+			@iteration = FactoryBot.build(:iteration)
 		end
 
 		it 'calls Iteration#customer_feedback_with_rating to filter out the non-rating keys' do
@@ -68,7 +68,7 @@ describe Iteration do
 		end
 
 		it 'if customer_feedback has an invalid JSON format, it returns an empty hash' do
-			@iteration = FactoryGirl.build(:iteration, :customer_feedback => "some random invalid feedback")
+			@iteration = FactoryBot.build(:iteration, :customer_feedback => "some random invalid feedback")
 			expect(@iteration.customer_rating).to be_empty
 		end
 

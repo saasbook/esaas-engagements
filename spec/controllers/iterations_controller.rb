@@ -4,8 +4,8 @@ require 'spec_helper'
 describe IterationsController, type: :controller do
   before do
     allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
-    @iteration = FactoryGirl.create(:iteration)
-    @engagement = FactoryGirl.create(:engagement)
+    @iteration = FactoryBot.create(:iteration)
+    @engagement = FactoryBot.create(:engagement)
     @feedback_params = {:duration => "15 min", :demeanor=> "Strongly agree", \
       :engaged=> "Strongly agree", :engaged_text=> "super engaged team", :communication=> "Strongly agree", \
       :communication_text=> "super communicative team", :understanding=>"Strongly agree", \
