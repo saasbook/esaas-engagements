@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   def change_page_num
     page_num = (params[:prev] || session[:user_page_num]).to_i
     max_page_num =  (@total_user - 1) / @each_page + 1 
-    @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num}[params[:user_page_num]].to_i
+    @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num,nil=>page_num}[params[:user_page_num]].to_i
     if @page_num < 1 then
       flash.now[:alert] = "You are already on the FIRST page."
       @page_num = 1
