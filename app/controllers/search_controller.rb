@@ -5,7 +5,6 @@ class SearchController < ApplicationController
     all_filters = ["Apps", "Organizations", "Users"]
     filters = all_filters.select {|filter| params[filter]} 
     session[:filters] = filters
-
     if filters.empty?
       redirect_to results_path(:keyword => keyword), alert: "Please choose at least one category"
     elsif keyword.empty?
@@ -17,14 +16,15 @@ class SearchController < ApplicationController
   end
 
   def results
-    keyword = ("%" + params["keyword"].strip + "%").downcase
+    keyword = params["keyword"]
     @filters = session[:filters] || all_filters
     @apps = []
     @orgs = []
     @users = []
-    if @filters.nil?
+    if @filters.nil? || keyword.empty?
       return
     end
+    keyword = ("%" + keyword + "%").downcase
     if @filters.include?("Apps")
       @apps = App.where('lower(name) LIKE ?', keyword).all() | App.where('lower(description) LIKE ?', keyword).all()
     end
