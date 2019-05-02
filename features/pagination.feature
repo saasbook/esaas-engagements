@@ -6,24 +6,24 @@ Feature: a user can choose the number of apps, orgs and users show in one page
 
 Background: Logged in
     Given the following apps exist:
-        | name  | description | org_id | status  |
+        | name  | description  | org_id | status  |
         | app_a  | test        | 1      | pending |
-        | app_b  | test        | 1      | pending |
-        | app_c  | test        | 1      | pending |
-        | app_d  | test        | 1      | pending |
-        | app_e  | test        | 1      | pending |
-        | app_f  | test        | 1      | pending |
-        | app_g  | test        | 1      | pending |
-        | app_h  | test        | 1      | pending |
-        | app_i  | test        | 1      | pending |
-        | app_j  | test        | 1      | pending |
-        | app_k  | test        | 1      | pending |
-        | app_l  | test        | 2      | vetting_pending |
+        | app_b  | test        | 2      | pending |
+        | app_c  | test        | 3      | pending |
+        | app_d  | test        | 4      | pending |
+        | app_e  | test        | 5      | pending |
+        | app_f  | test        | 6      | pending |
+        | app_g  | test        | 7      | pending |
+        | app_h  | test        | 8      | pending |
+        | app_i  | test        | 9      | pending |
+        | app_j  | test        | 10     | pending |
+        | app_k  | test        | 11     | pending |
+        | app_l  | test        | 12     | vetting_pending |
 
     And the following orgs exist:
-        | name | contact_id |
+        | name  |contact_id |
         | org_a | 1         |
-        | org_b | 1         |
+        | org_b | 2         |
         | org_c | 1         |
         | org_d | 1         |
         | org_e | 1         |
@@ -36,9 +36,9 @@ Background: Logged in
         | org_l | 1         |
 
     And the following users exist:
-        | id | name  | github_uid      | email          | user_type     |
+        | id | name   | github_uid      | email          | user_type     |
         | 1  | user_a | esaas_developer | test@user.com  | coach         |
-        | 2  | user_b | esaas_developer | test@user.com  | coach         |
+        | 2  | user_b | 		| 		 | coach         |
         | 3  | user_c | esaas_developer | test@user.com  | coach         |
         | 4  | user_d | esaas_developer | test@user.com  | coach         |
         | 5  | user_e | esaas_developer | test@user.com  | coach         |
@@ -154,6 +154,7 @@ Scenario: I cannot press previous in the very front page
 
 Scenario: There are some click buttons on orgs page that I can control the pagination
     Given I am on the orgs page
+    And I follow "Log in with GitHub"
     Then I should see "10"
     And I should see "50"
     And I should see "100"
@@ -165,6 +166,7 @@ Scenario: There are some click buttons on orgs page that I can control the pagin
 
 Scenario: I can see all orgs with selection all
     Given I am on the orgs page
+    And I follow "Log in with GitHub"
     When I follow "All"
     Then I should see "org_a"
     And I should see "org_b"
@@ -173,6 +175,7 @@ Scenario: I can see all orgs with selection all
 
 Scenario: I can press number buttons to do pagination
     Given I am on the orgs page
+    And I follow "Log in with GitHub"    
     When I follow "10"
     Then I should see "org_a"
     And I should see "org_b"
@@ -182,6 +185,7 @@ Scenario: I can press number buttons to do pagination
 
 Scenario: I can use "next" and "previous" buttons to see previous or next orgs
     Given I am on the orgs page
+    And I follow "Log in with GitHub"    
     When I follow "10"
     Then I should see "org_a"
     And I should see "org_b"
@@ -225,6 +229,7 @@ Scenario: I can use "next" and "previous" buttons to see previous or next orgs
 
 Scenario: I can click "First" or "Last" to see the first page or last page of orgs
     Given I am on the orgs page
+    And I follow "Log in with GitHub"    
     When I follow "10"
     Then I should see "org_b"
     And I should not see "org_k"
@@ -240,6 +245,7 @@ Scenario: I can click "First" or "Last" to see the first page or last page of or
 
 Scenario: I cannot press previous in the very front page
     Given I am on the orgs page
+    And I follow "Log in with GitHub"    
     When I follow "All"
     And I follow "Previous"
     Then I should see "org_b"
@@ -247,6 +253,7 @@ Scenario: I cannot press previous in the very front page
 
 Scenario: I cannot press previous in the very front page
     Given I am on the orgs page
+    And I follow "Log in with GitHub"    
     When I follow "All"
     And I follow "Next"
     Then I should see "org_k"
@@ -256,6 +263,7 @@ Scenario: I cannot press previous in the very front page
 
 Scenario: There are some click buttons on users page that I can control the pagination
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     Then I should see "10"
     And I should see "50"
     And I should see "100"
@@ -267,6 +275,7 @@ Scenario: There are some click buttons on users page that I can control the pagi
 
 Scenario: I can see all users with selection all
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     When I follow "All"
     Then I should see "user_a"
     And I should see "user_b"
@@ -275,6 +284,7 @@ Scenario: I can see all users with selection all
 
 Scenario: I can press number buttons to do pagination
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     When I follow "10"
     Then I should see "user_a"
     And I should see "user_b"
@@ -284,6 +294,7 @@ Scenario: I can press number buttons to do pagination
 
 Scenario: I can use "next" and "previous" buttons to see previous or next users
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     When I follow "10"
     Then I should see "user_a"
     And I should see "user_b"
@@ -327,6 +338,7 @@ Scenario: I can use "next" and "previous" buttons to see previous or next users
 
 Scenario: I can click "First" or "Last" to see the first page or last page of users
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     When I follow "10"
     Then I should see "user_b"
     And I should not see "user_k"
@@ -342,6 +354,7 @@ Scenario: I can click "First" or "Last" to see the first page or last page of us
 
 Scenario: I cannot press previous in the very front page
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     When I follow "All"
     And I follow "Previous"
     Then I should see "user_b"
@@ -349,6 +362,7 @@ Scenario: I cannot press previous in the very front page
 
 Scenario: I cannot press previous in the very front page
     Given I am on the users page
+    And I follow "Log in with GitHub"    
     When I follow "All"
     And I follow "Next"
     Then I should see "user_k"
