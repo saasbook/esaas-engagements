@@ -1,8 +1,8 @@
-Feature: a user can choose the number of apps show in one page
+Feature: a user can choose the number of apps, orgs and users show in one page
 
     As an admin user
-    In order to view numerous apps easier
-    I want to choose number of apps in one page according to my favor
+    In order to view numerous apps, orgs and users easier
+    I want to choose number of apps, orgs and users in one page according to my favor
 
 Background: Logged in
     Given the following apps exist:
@@ -22,12 +22,33 @@ Background: Logged in
 
     And the following orgs exist:
         | name | contact_id |
-        | org1 | 1          |
-        | org2 | 1          |
+        | org_a | 1         |
+        | org_b | 1         |
+        | org_c | 1         |
+        | org_d | 1         |
+        | org_e | 1         |
+        | org_f | 1         |
+        | org_g | 1         |
+        | org_h | 1         |
+        | org_i | 1         |
+        | org_j | 1         |
+        | org_k | 1         |
+        | org_l | 1         |
 
     And the following users exist:
         | id | name  | github_uid      | email          | user_type     |
-        | 1  | user1 | esaas_developer | test@user.com  | coach         |
+        | 1  | user_a | esaas_developer | test@user.com  | coach         |
+        | 2  | user_b | esaas_developer | test@user.com  | coach         |
+        | 3  | user_c | esaas_developer | test@user.com  | coach         |
+        | 4  | user_d | esaas_developer | test@user.com  | coach         |
+        | 5  | user_e | esaas_developer | test@user.com  | coach         |
+        | 6  | user_f | esaas_developer | test@user.com  | coach         |
+        | 7  | user_g | esaas_developer | test@user.com  | coach         |
+        | 8  | user_h | esaas_developer | test@user.com  | coach         |
+        | 9  | user_i | esaas_developer | test@user.com  | coach         |
+        | 10 | user_j | esaas_developer | test@user.com  | coach         |
+        | 11 | user_k | esaas_developer | test@user.com  | coach         |
+        | 12 | user_l | esaas_developer | test@user.com  | coach         |
 
 Scenario: There are some click buttons on apps page that I can control the pagination
     Given I am on the apps page
@@ -131,39 +152,6 @@ Scenario: I cannot press previous in the very front page
     Then I should see "app_k"
     And I should see "You are already on the LAST page."
 
-Feature: a user can choose the number of orgs show in one page
-
-    As an admin user
-    In order to view numerous orgs easier
-    I want to choose number of orgs in one page according to my favor
-
-Background: Logged in
-    Given the following orgs exist:
-        | name  | description | org_id | status  |
-        | app_1  | test        | 1      | pending |
-        | app_2  | test        | 1      | pending |
-
-    And the following orgs exist:
-        | name | contact_id |
-        | org_a | 1         |
-        | org_b | 1         |
-        | org_c | 1         |
-        | org_d | 1         |
-        | org_e | 1         |
-        | org_f | 1         |
-        | org_g | 1         |
-        | org_h | 1         |
-        | org_i | 1         |
-        | org_j | 1         |
-        | org_k | 1         |
-        | org_l | 1         |
-
-
-
-    And the following users exist:
-        | id | name  | github_uid      | email          | user_type     |
-        | 1  | user1 | esaas_developer | test@user.com  | coach         |
-
 Scenario: There are some click buttons on orgs page that I can control the pagination
     Given I am on the orgs page
     Then I should see "10"
@@ -265,42 +253,6 @@ Scenario: I cannot press previous in the very front page
     When I follow "Next"
     Then I should see "org_k"
     And I should see "You are already on the LAST page."
-
-
-Feature: a user can choose the number of users show in one page
-
-    As an admin user
-    In order to view numerous users easier
-    I want to choose number of users in one page according to my favor
-    
-Background: Logged in
-    Given the following users exist:
-        | name  | description | user_id | status  |
-        | app1  | test        | 1      | pending |
-        | app2  | test        | 1      | pending |
-
-
-    And the following users exist:
-        | name | contact_id |
-        | org1 | 1          |
-        | org2 | 1          |
-
-    And the following users exist:
-        | id | name  | github_uid      | email          | user_type     |
-        | 1  | user_a | esaas_developer | test@user.com  | coach         |
-        | 2  | user_b | esaas_developer | test@user.com  | coach         |
-        | 3  | user_c | esaas_developer | test@user.com  | coach         |
-        | 4  | user_d | esaas_developer | test@user.com  | coach         |
-        | 5  | user_e | esaas_developer | test@user.com  | coach         |
-        | 6  | user_f | esaas_developer | test@user.com  | coach         |
-        | 7  | user_g | esaas_developer | test@user.com  | coach         |
-        | 8  | user_h | esaas_developer | test@user.com  | coach         |
-        | 9  | user_i | esaas_developer | test@user.com  | coach         |
-        | 10 | user_j | esaas_developer | test@user.com  | coach         |
-        | 11 | user_k | esaas_developer | test@user.com  | coach         |
-        | 12 | user_l | esaas_developer | test@user.com  | coach         |
-
-
 
 Scenario: There are some click buttons on users page that I can control the pagination
     Given I am on the users page
