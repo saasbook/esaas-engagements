@@ -18,20 +18,20 @@ class SearchController < ApplicationController
 
   def results
     keyword = ("%" + params["keyword"].strip + "%").downcase
-    filters = session[:filters]
+    @filters = session[:filters] || all_filters
     @apps = []
     @orgs = []
     @users = []
-    if filters.nil?
+    if @filters.nil?
       return
     end
-    if filters.include?("Apps")
+    if @filters.include?("Apps")
       @apps = App.where('lower(name) LIKE ?', keyword).all() | App.where('lower(description) LIKE ?', keyword).all()
     end
-    if filters.include?("Organizations")
+    if @filters.include?("Organizations")
       @orgs = Org.where('lower(name) LIKE ?', keyword).all()
     end
-    if filters.include?("Users")
+    if @filters.include?("Users")
       @users = User.where('lower(name) LIKE ?', keyword).all()
     end
   end
