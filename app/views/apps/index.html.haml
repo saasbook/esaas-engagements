@@ -32,44 +32,24 @@
 
 %ul{:class => 'pagination'}
   %li{:class=>'each_page'} 
-    %a{:class=>"page_link"} Apps per page    
-  - if @each_page == 10
-    %li{:class=>'each_page active'} 
-      %a{:class=>"page-link", :href=>"?each_page=10"}10
-  - else
-    %li{:class=>'each_page'}
-      %a{:class=>"page-link", :href=>"?each_page=10"}10
-  - if @each_page == 50
-    %li{:class=>'each_page active'}
-      %a{:class=>"page-link", :href=>"?each_page=50"}50
-  - else
-    %li{:class=>'each_page'}
-      %a{:class=>"page-link", :href=>"?each_page=50"}50
-  - if @each_page == 100
-    %li{:class=>'each_page active'}
-      %a{:class=>"page-link", :href=>"?each_page=100"}100
-  - else
-    %li{:class=>'each_page'}
-      %a{:class=>"page-link", :href=>"?each_page=100"}100
-  - if @each_page == @total_deploy
-    %li{:class=>'each_page active'}
-      %a{:class=>"page-link", :href=>"?each_page=All"}All
-  - else  
-    %li{:class=>'each_page'}
-      %a{:class=>"page-link", :href=>"?each_page=All"}All
+    %a{:class=>"page_link"} Apps per page
+  - ["10","50","100","All"].each do |num_per_page|
+    - if @each_page == @page_dict[num_per_page] then
+      %li{:class=>'each_page active'} 
+        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}"}=num_per_page
+    - else
+      %li{:class=>'each_page'}
+        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}"}=num_per_page
 
 %ul{:class => 'pagination pull-right'}
-  %li{:class=>'page_num'}
-    %a{:class=>"page-link", :href=>"?page_num=fst&prev=#{@page_num}"}First
-  %li{:class=>'page_num'}
-    %a{:class=>"page-link", :href=>"?page_num=prv&prev=#{@page_num}"}Previous
-  %li{:class=>"page-num"}
-    %a{:class=>'page_link'} Page #{[1,@page_num].max}
-  %li{:class=>'page_num'}
-    %a{:class=>"page-link", :href=>"?page_num=nxt&prev=#{@page_num}"}Next
-  %li{:class=>'page_num'}
-    %a{:class=>"page-link", :href=>"?page_num=lst&prev=#{@page_num}"}Last
-
+  - ["First","Previous","Current","Next","Last"].each do |action|
+    - if action != "Current" then 
+      %li{:class=>'page_num'}
+        %a{:class=>"page-link", :href=>"?app_page_num=#{action}&prev=#{@page_num}"}=action
+    - else
+      %li{:class=>"page-num"}
+        %a{:class=>'page_link'} Page #{[1,@page_num].max}
+ 
 %table.table.table-condensed#apps_table
   %thead
     %tr

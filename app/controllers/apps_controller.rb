@@ -23,25 +23,16 @@ class AppsController < ApplicationController
     
     @current_user = User.find_by_id(session[:user_id])
     
-    # Reserved for selecting pages number directly
-    #if !params[:page_num].nil? && session[:page_num].nil? then
-    #  session[:page_num] = '1'    
-    #end
-    if session[:page_num].nil? then
-      session[:page_num] = '1'
+    @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => (@total_deploy + @total_vet)}
+    session[:app_page_num] ||= '1'
+    session[:app_each_page] ||= '10'
+    if !params[:app_each_page].nil? then
+      session[:app_each_page] = params[:app_each_page]
+      session[:app_page_num] = '1'
     end
-    if !params[:each_page].nil? then
-      session[:each_page] = params[:each_page]
-      session[:page_num] = '1'
-    elsif session[:each_page].nil? then
-      session[:each_page] = '10'
-    end
-
-    @page_num = session[:page_num].to_i
-    @each_page = app_number_per_page
+    @each_page = @page_dict[session[:app_each_page]].to_i
     change_page_num
     
-    session[:page_num] = @page_num.to_s
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }
@@ -129,39 +120,20 @@ class AppsController < ApplicationController
     end
 
 
-    # Give right value to the apps number on each page based on the session[:each_page]
-    def app_number_per_page
-      if session[:each_page] == 'All' then
-        each_page = [1,@total_deploy + @total_vet].max
-      else
-	      each_page = session[:each_page].to_i
-      end
-      return each_page
-    end
 
     # Give react to the page change requests
     def change_page_num
-      if !params[:curr].nil? then
-	      @page_num = params[:curr].to_i
-      end
+      @page_num = (params[:prev] || session[:app_page_num]).to_i
       max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
-      case params[:page_num] 
-        when "prv" then
-          if @page_num > 1 then
-            @page_num -= 1
-	        else
-	          flash.now[:alert] = "You are already on the FIRST page."
-	        end
-        when "nxt" then
-          if @page_num < max_page_num then
-            @page_num += 1
-	        else
-	          flash.now[:alert] = "You are already on the LAST page."
-	        end
-        when "fst" then
-	        @page_num = 1
-        when "lst" then
-	        @page_num = max_page_num
+      @page_num = {"Previos"=>@page_num-1,"Next"=>@page_num+1,"First"=>1,"Last"=>max_page_num}[params[:app_page_num]].to_i
+      if @page_num < 1 then
+	flash.now[:alert] = "You are already on the FIRST page."
+	@page_num = 1
       end
+      if @page_num > max_page_num then
+	flash.now[:alert] = "You are already on the LAST page."
+  	@page_num = max_page_num
+      end	
+      session[:app_page_num] = @page_num.to_s
     end
 end
