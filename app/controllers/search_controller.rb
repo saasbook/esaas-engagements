@@ -11,13 +11,13 @@ class SearchController < ApplicationController
     elsif keyword.empty?
         redirect_to results_path(:keyword => ''), alert: "Please enter a keyword in the search box"
     else
-      flash[:notice] = "Search '#{keyword}' in #{filters.map{|x| x.inspect}.join(', ')}"
+      flash[:notice] = "Search '#{keyword.strip}' in #{filters.map{|x| x.inspect}.join(', ')}"
       redirect_to results_path(:keyword => keyword)
     end
   end
 
   def results
-    keyword = ("%" + params["keyword"] + "%").downcase
+    keyword = ("%" + params["keyword"].strip + "%").downcase
     filters = session[:filters]
     @apps = []
     @orgs = []
