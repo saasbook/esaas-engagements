@@ -64,7 +64,7 @@
   %li{:class=>'page_num'}
     %a{:class=>"page-link", :href=>"?page_num=prv&prev=#{@page_num}"}Previous
   %li{:class=>"page-num"}
-    %a{:class=>'page_link'}=[1,@page_num].max
+    %a{:class=>'page_link'} Page #{[1,@page_num].max}
   %li{:class=>'page_num'}
     %a{:class=>"page-link", :href=>"?page_num=nxt&prev=#{@page_num}"}Next
   %li{:class=>'page_num'}
