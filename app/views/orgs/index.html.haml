@@ -7,7 +7,7 @@
 
 %ul{:class => 'pagination'}
   %li{:class=>'each_page'}
-    %a{:class=>"page_link"} Users per page
+    %a{:class=>"page_link"} Orgs per page
   - ["10","50","100","All"].each do |num_per_page|
     - if @each_page == @page_dict[num_per_page] then
       %li{:class=>'each_page active'}
