@@ -19,7 +19,7 @@
   - ["First","Previous","Current","Next","Last"].each do |action|
     - if action != "Current" then
       %li{:class=>'page_num'}
-        %a{:class=>"page-link", :href=>"?user_page_num=#{action}&prev=#{@page_num}"}=action 
+        %a{:class=>"page-link", :href=>"?user_page_action=#{action}&prev=#{@page_num}"}=action 
     - else
       %li{:class=>"page-num"}
         %a{:class=>'page_link'} Page #{[1,@page_num].max}

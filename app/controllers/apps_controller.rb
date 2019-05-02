@@ -125,7 +125,7 @@ class AppsController < ApplicationController
     def change_page_num
       page_num = (params[:prev] || session[:app_page_num]).to_i
       max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
-      @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num, nil => page_num}[params[:app_page_num]].to_i
+      @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num, nil => page_num}[params[:app_page_action]].to_i
       if @page_num < 1 then
 	flash.now[:alert] = "You are already on the FIRST page."
 	@page_num = 1
