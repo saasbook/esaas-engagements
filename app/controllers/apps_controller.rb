@@ -123,12 +123,12 @@ class AppsController < ApplicationController
 
     # Give react to the page change requests
     def change_page_num
-      @page_num = (params[:prev] || session[:app_page_num]).to_i
+      page_num = (params[:prev] || session[:app_page_num]).to_i
       max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
-      @page_num = {"Previos"=>@page_num-1,"Next"=>@page_num+1,"First"=>1,"Last"=>max_page_num}[params[:app_page_num]].to_i
+      @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num}[params[:app_page_num]].to_i
       if @page_num < 1 then
 	flash.now[:alert] = "You are already on the FIRST page."
-	@page_num = 1
+	@page_num = 0
       end
       if @page_num > max_page_num then
 	flash.now[:alert] = "You are already on the LAST page."
