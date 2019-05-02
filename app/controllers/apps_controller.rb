@@ -6,30 +6,14 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    @status_map =  App.group(:status).reorder(:status).count # should be in model?
-    @deployment_map = {}
-    @vetting_map = {}
-    @total_deploy = 0
-    @total_vet = 0
-    @status_map.each do |status, count|
-      if App.getAllVettingStatuses.include? status
-        @vetting_map[App.statuses.keys[status]] = count
-        @total_vet += count
-      else
-        @deployment_map[App.statuses.keys[status]] = count
-        @total_deploy += count
-      end
-    end
-    
+    deploy_vet_map
+    @total_app = @total_deploy + @total_vet
     @current_user = User.find_by_id(session[:user_id])
     
-    @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => (@total_deploy + @total_vet)}
+    @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => @total_app}
     session[:app_page_num] ||= '1'
-    session[:app_each_page] ||= '10'
-    if !params[:app_each_page].nil? then
-      session[:app_each_page] = params[:app_each_page]
-      session[:app_page_num] = '1'
-    end
+    session[:app_each_page] = params[:app_each_page] || session[:app_each_page] || '10' 
+    session[:app_page_num] = '1'if params[:app_each_page]
     @each_page = @page_dict[session[:app_each_page]].to_i
     change_page_num
     
@@ -119,21 +103,31 @@ class AppsController < ApplicationController
       params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments)
     end
 
-
+    def deploy_vet_map
+      status_map =  App.group(:status).reorder(:status).count # should be in model?
+      @deployment_map = {}
+      @vetting_map = {}
+      @total_deploy = 0
+      @total_vet = 0
+      status_map.each do |status, count|
+        if App.getAllVettingStatuses.include? status then
+	  @vetting_map[App.statuses.keys[status]] = count
+    	  @total_vet += count
+        else
+    	  @deployment_map[App.statuses.keys[status]] = count
+	  @total_deploy += count
+        end
+      end
+    end
 
     # Give react to the page change requests
     def change_page_num
       page_num = (params[:prev] || session[:app_page_num]).to_i
-      max_page_num =  (@total_deploy + @total_vet - 1) / @each_page + 1
+      max_page_num =  (@total_app - 1) / @each_page + 1
       @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num, nil => page_num}[params[:app_page_action]].to_i
-      if @page_num < 1 then
-	flash.now[:alert] = "You are already on the FIRST page."
-	@page_num = 1
-      end
-      if @page_num > max_page_num then
-	flash.now[:alert] = "You are already on the LAST page."
-  	@page_num = max_page_num
-      end	
+      flash.now[:alert] = "You are already on the FIRST page." if @page_num == 0
+      flash.now[:alert] = "You are already on the LAST page." if @page_num == max_page_num + 1
+      @page_num = [[1,@page_num].max,max_page_num].min	
       session[:app_page_num] = @page_num.to_s
     end
 end

@@ -1,7 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.3
   DisabledByDefault: true
-
+  require: rubocop-performance
 #################### Lint ################################
 
 Lint/AmbiguousOperator:
