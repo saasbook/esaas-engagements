@@ -29,7 +29,7 @@ Scenario: No keyword
     Then I should not see "app 1"
     And I should not see "user 1"
     And I should not see "org A"
-    And I should not see "Please enter a keyword in the search box"
+    And I should see "Please enter a keyword in the search box"
 
 
 Scenario: No filter
