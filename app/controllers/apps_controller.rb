@@ -117,4 +117,3 @@ class AppsController < ApplicationController
       end
     end
 end
-
