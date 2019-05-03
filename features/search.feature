@@ -26,9 +26,9 @@ Background: Logged in
 
 Scenario: No keyword
     Given I search for ""
-    Then I should see "app 1"
-    And I should see "user 1"
-    And I should see "org A"
+    Then I should not see "app 1"
+    And I should not see "user 1"
+    And I should not see "org A"
     And I should see "Please enter a keyword in the search box"
 
 
