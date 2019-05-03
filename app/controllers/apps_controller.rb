@@ -103,6 +103,8 @@ class AppsController < ApplicationController
       params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments)
     end
 
+    # count the number of apps for each status and
+    # the total number of apps for each category
     def deploy_vet_map
       status_map =  App.group(:status).reorder(:status).count # should be in model?
       @deployment_map = {}
@@ -111,11 +113,11 @@ class AppsController < ApplicationController
       @total_vet = 0
       status_map.each do |status, count|
         if App.getAllVettingStatuses.include? status then
-	  @vetting_map[App.statuses.keys[status]] = count
-    	  @total_vet += count
+          @vetting_map[App.statuses.keys[status]] = count
+          @total_vet += count
         else
-    	  @deployment_map[App.statuses.keys[status]] = count
-	  @total_deploy += count
+          @deployment_map[App.statuses.keys[status]] = count
+          @total_deploy += count
         end
       end
     end
