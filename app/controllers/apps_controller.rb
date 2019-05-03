@@ -9,8 +9,8 @@ class AppsController < ApplicationController
     deploy_vet_map
     total_app = @total_deploy + @total_vet
     @current_user = User.find_by_id(session[:user_id])
-    page_default_and_update("app",total_app)
-    change_page_num("app",total_app)
+    page_default_and_update("app", total_app)
+    change_page_num("app", total_app)
     
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|

@@ -8,23 +8,23 @@
   %label.checkbox-inline
     %div#deploy
       %strong Deployment Status:
-      %em #{" " + @total_deploy.to_s}
+      %em #{" (" + @total_deploy.to_s + ")"}
       %br
       - App.getAllDeploymentStatuses.each do |status|
         = check_box_tag status, 1, true, :class => 'filter'
         %span{:class => status}= status.to_s.humanize
-        %em #{@deployment_map[status.to_s].to_s}
+        %em (#{@deployment_map[status.to_s].to_i})
         %br
     
   %label.checkbox-inline
     %div#vetting
       %strong Vetting Status:
-      %em #{" " + @total_vet.to_s}
+      %em #{" (" + @total_vet.to_s + ")"}
       %br
       - App.getAllVettingStatuses.each do |status|
         = check_box_tag status, 1, true, :class => 'filter'
         %span{:class => status}= status.to_s.humanize
-        %em #{@vetting_map[status.to_s].to_s}
+        %em (#{@vetting_map[status.to_s].to_i})
         %br
 
   :javascript
