@@ -9,8 +9,8 @@ class AppsController < ApplicationController
     deploy_vet_map
     total_app = @total_deploy + @total_vet
     @current_user = User.find_by_id(session[:user_id])
-    page_default_and_update("app",total_app)
-    change_page_num("app",total_app)
+    page_default_and_update("app", total_app)
+    change_page_num("app", total_app)
     
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
@@ -107,11 +107,12 @@ class AppsController < ApplicationController
       @total_deploy = 0
       @total_vet = 0
       status_map.each do |status, count|
-        if App.getAllVettingStatuses.include? status then
-          @vetting_map[App.statuses.keys[status]] = count
+        status_str = App.statuses.keys[status]
+        if App.getAllVettingStatuses.include? status_str.to_sym
+          @vetting_map[status_str] = count
           @total_vet += count
         else
-          @deployment_map[App.statuses.keys[status]] = count
+          @deployment_map[status_str] = count
           @total_deploy += count
         end
       end
