@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   before_action :auth_user?, only: [:new, :create, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
-    @users = User.all
+    total_user = User.count
+    page_default_and_update("user",total_user)
+    change_page_num("user",total_user)
+    @users = User.limit(@each_page).offset(@each_page*(@page_num-1))
   end
 
   def new
@@ -43,4 +46,5 @@ class UsersController < ApplicationController
       permit(:name,:email,:preferred_contact,:github_uid,:user_type,:sid,
         :developing_engagement_id, :coaching_org_id, :profile_picture)
   end
+
 end
