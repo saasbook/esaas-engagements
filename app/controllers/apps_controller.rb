@@ -107,11 +107,12 @@ class AppsController < ApplicationController
       @total_deploy = 0
       @total_vet = 0
       status_map.each do |status, count|
-        if App.getAllVettingStatuses.include? status then
-          @vetting_map[App.statuses.keys[status]] = count
+        status_symbol = App.statuses.keys[status]
+        if App.getAllVettingStatuses.include? App.statuses.keys[status].to_sym
+          @vetting_map[status_symbol] = count
           @total_vet += count
         else
-          @deployment_map[App.statuses.keys[status]] = count
+          @deployment_map[status_symbol] = count
           @total_deploy += count
         end
       end
