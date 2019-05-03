@@ -5,13 +5,9 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
-  @total_org = Org.count  
-  @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => @total_org}
-  session[:org_page_num] ||= '1'
-  session[:org_each_page] = params[:org_each_page] || session[:org_each_page] || '10'
-  session[:org_page_num] = '1'if params[:org_each_page]
-  @each_page = @page_dict[session[:org_each_page]].to_i
-  change_page_num
+  total_org = Org.count  
+  page_default_and_update("org",total_org)
+  change_page_num("org",total_org)
 
   @orgs = Org.includes(:apps).limit(@each_page).offset(@each_page*(@page_num-1))
   end
@@ -113,14 +109,5 @@ end
         permit(:name, :description, :url, :contact_id,
       :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
-
-    def change_page_num
-      page_num = (params[:prev] || session[:org_page_num]).to_i
-      max_page_num =  (@total_org - 1) / @each_page + 1
-      @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num, nil => page_num}[params[:org_page_action]].to_i
-      flash.now[:alert] = "You are already on the FIRST page." if @page_num == 0
-      flash.now[:alert] = "You are already on the LAST page." if @page_num == max_page_num + 1
-      @page_num = [[1,@page_num].max,max_page_num].min
-      session[:org_page_num] = @page_num.to_s
-    end      
+      
 end
