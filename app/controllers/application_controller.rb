@@ -41,4 +41,22 @@ class ApplicationController < ActionController::Base
     redirect_to path, alert: msg
   end
 
+  def page_default_and_update(name,total_item)
+    @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => total_item}
+    session["#{name}_page_num"] ||= '1'
+    session["#{name}_each_page"] = params["#{name}_each_page"] || session["#{name}_each_page"] || '10'
+    session["#{name}_page_num"] = '1'if params["#{name}_each_page"]
+    @each_page = @page_dict[session["#{name}_each_page"]].to_i
+  end    
+  
+  def change_page_num(name,total_item)
+    page_num = (params[:prev] || session["#{name}_page_num"]).to_i
+    max_page_num =  (total_item - 1) / @each_page + 1 
+    @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num, nil => page_num}[params["#{name}_page_action"]].to_i
+    flash.now[:alert] = "You are already on the FIRST page." if @page_num == 0
+    flash.now[:alert] = "You are already on the LAST page." if @page_num == max_page_num + 1
+    @page_num = [[1,@page_num].max,max_page_num].min
+    session["#{name}_page_num"] = @page_num.to_s
+  end
+
 end
