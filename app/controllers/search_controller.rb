@@ -17,11 +17,11 @@ class SearchController < ApplicationController
 
   def results
     keyword = params["keyword"]
-    @filters = session[:filters] || all_filters
+    @filters = session[:filters]
     @apps = []
     @orgs = []
     @users = []
-    if @filters.nil? || keyword.empty?
+    if no_need_to_access_database(keyword)
       return
     end
     keyword = ("%" + keyword + "%").downcase
@@ -34,5 +34,9 @@ class SearchController < ApplicationController
     if @filters.include?("Users")
       @users = User.where('lower(name) LIKE ?', keyword).all()
     end
+  end
+
+  def no_need_to_access_database(keyword)
+  	return @filters.nil? || keyword.empty?
   end
 end
