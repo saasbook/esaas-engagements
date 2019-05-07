@@ -5,12 +5,13 @@
     - unless (url = @app.code_climate_url).blank?
       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
-    = "status: #{@app.status}"
     = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
     = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 
+.well#status
+  %h4 Status: #{@app.status}
 .well#description
-  %h4 Description
+  %h4 Description 
   %p= @app.description
 
 = render partial: 'comments/comments', locals: {commentable: @app}
