@@ -9,7 +9,7 @@
 [Heroku Deployment](https://shielded-sea-54225.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
-Fox with contributions by [Andrew Halle](https://github.com/andrewhalle), 
+Fox with contributions by [Andrew Halle](https://github.com/andrewhalle),
 is to enable continuous tracking over time of customer apps developed
 by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
@@ -31,7 +31,7 @@ The main models are:
      * `In use`: In production use at a customer site; customer has not expressed interest in further improvements
      * `In use and wants improvements`: In production, and customer is interested in further development
      * `Inactive but wants improvement`: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
-     * `Pending`: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
+     * `Pending` (deprecated): a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team. **This has been replaced by the vetting statuses mentioned below. DO NOT use it anymore**
   2. Vetting statuses:
      * `Vetting`: Pending (not yet vetted)
      * `On Hold`: We need something from customer during vetting phase
@@ -103,6 +103,7 @@ has this field set to set the field for your user record.**
 You also need to be a `coach` to navigate through the app and do some core operations
 (create, update, delete). In order to give permission at database level run rails
 console on heroku server(`heroku run rails console`) and create/update a user:
+
 ```ruby
 User.create(name: 'USERNAME', email: 'USER@NAME.COM', github_uid: 'username', user_type: 'coach')
 ```
@@ -123,7 +124,7 @@ commit `application.yml.asc`.
 
 If you want to have GitHub OAuth on the development environment or on the heroku
 deployment environment, you have to register your app [here](https://github.com/settings/applications/new). After you register and obtain Client ID and Client Secret, add
-the keys to `config/application.yml`
+the keys to `config/application.yml`. Make sure you set the authorization callback URL to `<homepage-url>/auth/github/callback`
 
 ## Setting Environment Variables
 
@@ -158,6 +159,24 @@ To upload the keys to a Heroku app, run `figaro heroku:set -e production`.
 
 After setting environment variables using `figaro`, you can access them by
 `ENV["YOURKEY"]` or `Figaro.env.YOURKEY`. Refer the [documentation](https://github.com/laserlemon/figaro) for more information.
+
+## Email Configuration
+
+To enable email delivery functionality, technically you can use any third-party email delivery service as you wish. But the easiest way in this app is to register and use a [Sendgrid](https://sendgrid.com/) API key by setting
+
+```yaml
+SENDGRID_API_KEY: <your_sendgrid_api_key>
+```
+
+in `config/application.yml`
+
+For local testing purpose, this is also acceptable:
+
+```zsh
+export SENDGRID_API_KEY='<your_sendgrid_api_key>'
+```
+
+ in your favorite shell.
 
 ## Uploading Images with AWS S3
 
@@ -199,15 +218,15 @@ bundle exec cucumber --tags ~@javascript
 
 * New `App`, `Org`, and `User` can be created all at once, with proper association
 * Every user can "post" comments on an `App`, `Org`, and `User`
-  - `App` has different types of comments
-  - Any class that inherits `Commentable` can have many comments
+  + `App` has different types of comments
+  + Any class that inherits `Commentable` can have many comments
 * More comprehensive customer feedback through a feedback form with ratings/comments
 * Aggregates customer feedbacks from all iterations of an engagement, and display
 averages on each category
 * `User` supports different types (e.g. Student, Staff/Coach, Customer)
 * Exports `Engagement` information as a CSV file
 * each `User` contains a profile image
-  - we are using Amazon S3 to store images on production environment, because
+  + we are using Amazon S3 to store images on production environment, because
   Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
   have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
 * Authorization to edit/destroy only to "Coach"
