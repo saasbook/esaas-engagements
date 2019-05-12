@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205201212) do
+ActiveRecord::Schema.define(version: 20190512120142) do
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171205201212) do
     t.string   "repository_url"
     t.string   "final_rating"
     t.string   "final_comments"
+    t.string   "features"
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
