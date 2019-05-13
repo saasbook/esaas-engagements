@@ -16,10 +16,5 @@ describe OrgsController, type: :controller do
         expect(subject).to redirect_to :action => :index
       end
 
-      it 'displays a success notice if mailing to all organizations successfully' do
-        post :mail_all_orgs, :email => {:address => @test_address, :subject => @test_subject, :content => @test_content}
-        expect(flash[:notice]).to match(/^Sent successfully.$/)
-      end
-
     end
   end
