@@ -6,7 +6,7 @@ Feature: after a user logins with their github id they can create an app or modi
 
 Background: users, orgs and apps have been added to database
   Given the following apps exist:
-        | name  | description | org_id | status  | 
+        | name  | description | org_id | status  |
         | app1  | test        | 1      | pending |
         | app2  | test        | 1      | pending |
         | app3  | test        | 1      | pending |
@@ -65,6 +65,14 @@ Scenario: Login to github to create a new app in vetting status
   Then I should be on the apps page
   And I should see "App was successfully created."
 
+  Scenario: Login to github to see a app detail with its status
+    Given I am not logged in
+    And I am on the apps page
+    And I follow "app1"
+    And I am on the login page
+    And I follow "Log in with GitHub"
+    Then I should see "Status: pending"
+
 Scenario: Login to github to create a new app in non-pending deployment status
   #Story ID: #165265798
   Given I am not logged in
@@ -103,7 +111,7 @@ Scenario: Login to github to edit an existing app successfully
   Then I should be on the apps page
   And I should see "App was successfully updated."
 
-Scenario: Login to github to edit an existing app successfully
+Scenario: Login to github to falsely edit an existing app
   #Story ID: #152298585
   Given I am not logged in
   And I am on the apps page
