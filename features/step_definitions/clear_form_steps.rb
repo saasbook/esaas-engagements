@@ -17,17 +17,17 @@ Then /^the "(.*)" should not be checked$/ do |field|
 	expect(page).to have_field(field, checked: false)
 end
 
-When /^(?:|I )fill in "([^"]*)" with "([^"]*)" using TinyMCE rich editor$/ do |field, value|
-	toExecute = '$(tinymce.editors[0].setContent("'+ value + '"))'
+When /^(?:|I )fill in "([^"]*)" with "([^"]*)" using nicEdit rich editor$/ do |field, value|
+	toExecute = '$(nicEditors.editors[0].nicInstances[0].setContent("'+ value + '"))'
 	page.execute_script(toExecute)
 end
   
-When /^(?:|I )fill in "([^"]*)" for "([^"]*)" using TinyMCE rich editor$/ do |field, value|
-	toExecute = '$(tinymce.editors[0].setContent("'+ value + '"))'
+When /^(?:|I )fill in "([^"]*)" for "([^"]*)" using nicEdit rich editor$/ do |field, value|
+	toExecute = '$(nicEditors.editors[0].nicInstances[0].setContent("'+ value + '"))'
 	page.execute_script(toExecute)
 end
 
-Then /^I should have filled in "(.*)" for "(.*)" using TinyMCE rich editor$/ do |value, field|
-	toExecute = '$(tinymce.editors[0].getContent())'
+Then /^I should have filled in "(.*)" for "(.*)" using nicEdit rich editor$/ do |value, field|
+	toExecute = '$(nicEditors.editors[0].nicInstances[0].getContent())'
 	content = page.execute_script(toExecute)
 end
