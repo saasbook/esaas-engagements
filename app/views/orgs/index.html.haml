@@ -5,6 +5,27 @@
     = link_to 'New Org', new_org_path, :class => 'btn btn-success pull-right btn-space'
   .help-block Click an Organization name to see more information
 
+%ul{:class => 'pagination'}
+  %li{:class=>'each_page'}
+    %a{:class=>"page_link"} Orgs per page
+  - ["10","50","100","All"].each do |num_per_page|
+    - if @each_page == @page_dict[num_per_page] then
+      %li{:class=>'each_page active'}
+        %a{:class=>"page-link", :href=>"?org_each_page=#{num_per_page}"}=num_per_page
+    - else
+      %li{:class=>'each_page'}
+        %a{:class=>"page-link", :href=>"?org_each_page=#{num_per_page}"}=num_per_page
+
+%ul{:class => 'pagination pull-right'}
+  - ["First","Previous","Current","Next","Last"].each do |action|
+    - if action != "Current" then
+      %li{:class=>'page_num'}
+        %a{:class=>"page-link", :href=>"?org_page_action=#{action}&prev=#{@page_num}"}=action
+    - else
+      %li{:class=>"page-num"}
+        %a{:class=>'page_link'} Page #{[1,@page_num].max}
+
+
 %table.table.table-condensed
   %thead
     %tr
@@ -18,7 +39,7 @@
         %tr{:class => ("defunct" if org.defunct)}
           %td= link_to org.name, org
           %td= mail_to org.contact.email, org.contact.name
-          %td= org.description
+          %td= sanitize org.description
           %td= org.apps.map { |a| link_to a.name, app_path(a) }.join(', ').html_safe
           %td{:style => 'white-space: nowrap'}
             = link_to 'Edit', edit_org_path(org), :title => "Last update: #{org.updated_at.strftime('%c')}", :class => 'btn btn-primary'

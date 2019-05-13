@@ -5,7 +5,11 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
-    @orgs = Org.all.includes(:apps)
+  total_org = Org.count  
+  page_default_and_update("org",total_org)
+  change_page_num("org",total_org)
+
+  @orgs = Org.includes(:apps).limit(@each_page).offset(@each_page*(@page_num-1))
   end
 
   # GET /orgs/new
@@ -105,4 +109,5 @@ end
         permit(:name, :description, :url, :contact_id,
       :address_line_1, :address_line_2, :city_state_zip, :phone, :defunct, coach_ids: [])
     end
+      
 end
