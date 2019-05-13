@@ -9,7 +9,7 @@
     = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 
 .well#status
-  %h4 Status: #{@app.status.humanize}
+  %h4 Status: #{@app.status.humanize(capitalize: false)}
 .well#description
   %h4 Description
   %p= @app.description
