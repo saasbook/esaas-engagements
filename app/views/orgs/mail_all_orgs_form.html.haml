@@ -1,6 +1,7 @@
 .page-header
   %h1 Email to organizations
-
+  .help-block Please specify an email address that organizations should reply to as well as subject and message body
+  .help-block Sending large volume of emails can take a while. Please don't refresh or leave this page until completion or failure.
 = form_tag mail_all_orgs_path do
   = check_box_tag "All", 2, true, :class => 'filter'
   %span{:class => "All"}= "All"
@@ -19,5 +20,5 @@
     = label :email, :content, 'Content'
     = text_area :email, :content, :class => 'form-control'
 
-  = submit_tag 'Send To All Orgs', :class => 'btn btn-primary'
+  = submit_tag 'Send To Orgs', :class => 'btn btn-primary'
 

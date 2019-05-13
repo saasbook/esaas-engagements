@@ -8,13 +8,11 @@
     = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
     = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 
+.well#status
+  %h4 Status: #{@app.status.humanize(capitalize: false)}
 .well#description
   %h4 Description
   %p= @app.description
-
-.well#description
-  %h4 App Initial Features
-  %p= sanitize @app.features
 
 = render partial: 'comments/comments', locals: {commentable: @app}
 
