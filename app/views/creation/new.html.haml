@@ -35,6 +35,7 @@
                 = app_form.url_field :deployment_url, label: 'Deployment Url'
                 = app_form.url_field :repository_url, label: 'Repository Url'
                 = app_form.url_field :code_climate_url, label: 'Code Climate Url'
+                = app_form.text_area :features, rows: '5', label: 'App Initial Features'
                 = app_form.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Deployment Status'}, {class: 'select2'}
     = f.submit 'Submit', class: 'btn btn-success'
     = link_to 'Cancel', apps_path, :class => 'btn btn-primary'

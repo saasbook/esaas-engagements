@@ -6,6 +6,7 @@
       %th Coach
       %th Team#
       %th Developers
+      %th Features
       %th{:colspan => 3} Assets
       %th
   %tbody
@@ -20,6 +21,7 @@
           %div{:class => 'members'}
             -engagement.developers.each do |member|
               %span= member.name
+        %td= sanitize engagement.features
         %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
         %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
         %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
