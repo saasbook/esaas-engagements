@@ -12,7 +12,7 @@
   %h4 Status: #{@app.status.humanize(capitalize: false)}
 .well#description
   %h4 Description
-  %p= @app.description
+  %p= sanitize @app.description
 .well#features
   %h4 App Initial Features
   %p= sanitize @app.features

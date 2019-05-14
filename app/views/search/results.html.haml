@@ -14,7 +14,7 @@
           = link_to app.name, app
         %td= link_to app.org.name, app.org
         %td
-          = app.description
+          = sanitize app.description
           %br
           - app.engagements.each do |engagement|
             %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
@@ -36,7 +36,7 @@
         %tr{:class => ("defunct" if org.defunct)}
           %td= link_to_unless org.url.blank?, org.name, org.url, :target => '_blank'
           %td= mail_to org.contact.email, org.contact.name 
-          %td= org.description 
+          %td= sanitize org.description 
           %td
             - org.apps.each_with_index do |a, index| 
               =link_to a.name, app_path(a)
