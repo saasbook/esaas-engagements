@@ -214,6 +214,26 @@ webdriver by:
 bundle exec cucumber --tags ~@javascript
 ```
 
+# SP19 Engagement: Main Features
+
+* 9 vetting statuses added to support vetting phase. `pending` should be obsolete
+  + Staff can add vetting comments
+  + Apps listing page can show only the apps in vetting
+  + Repo URL is optional when creating a new app for vetting
+* Each `app` has `features` for vetting purpose.
+* Each `engagement` has `features` for deployment purpose
+* Display app counts per each status on apps listing page
+* The ability to "email to organizations" from single point of contact
+* Support for rich text editing and display, such as **bold**, *italic* and ordered/unordered listing
+* Pagination for `apps`, `Orgs` and `Users`
+* Enhanced search bar with checkboxes. Description of each `app` is searchable
+* Miscellaneous:
+  + Org names and user names are clickable.
+  + Clicking `Back` button when editing `app` redirects to the app's show page instead of the apps listing page
+  + Move `Edit App` and `Back` buttons to the top right of the page
+  + Show `app` status in the app's show page
+
+
 # FA17 Engagement: Main Features
 
 * New `App`, `Org`, and `User` can be created all at once, with proper association
