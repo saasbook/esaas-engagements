@@ -16,3 +16,18 @@ end
 Then /^the "(.*)" should not be checked$/ do |field|
 	expect(page).to have_field(field, checked: false)
 end
+
+When /^(?:|I )fill in "([^"]*)" with "([^"]*)" using ckeEditor rich editor$/ do |field, value|
+	toExecute = '$(myEditor.setData("'+ value + '"))'
+	page.execute_script(toExecute)
+end
+  
+When /^(?:|I )fill in "([^"]*)" for "([^"]*)" using ckeEditor rich editor$/ do |field, value|
+	toExecute = '$(myEditor.setData("'+ value + '"))'
+	page.execute_script(toExecute)
+end
+
+Then /^I should have filled in "(.*)" for "(.*)" using ckeEditor rich editor$/ do |value, field|
+	toExecute = '$(myEditor.getData())'
+	content = page.execute_script(toExecute)
+end

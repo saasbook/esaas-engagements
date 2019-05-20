@@ -20,6 +20,6 @@
               = link_to 'Edit', edit_comment_path(comment), :class => 'btn btn-primary btn-xs'
               = link_to 'Delete', comment_path(comment), :method => :delete, :class => 'btn btn-danger btn-xs'
           %small.time= comment.created_at.strftime("%b %d, %Y at %l:%M:%S %p")
-          %div.comment-body= comment.content
+          %div.comment-body= sanitize comment.content
   = label :comment, :content, 'Write a comment...'
   = render partial: 'comments/form', locals: {commentable: commentable, '@comment': @comment || Comment.new}

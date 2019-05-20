@@ -3,7 +3,7 @@ class CreationController < ApplicationController
 
     def app_params
         params.require(:app).permit(:name, :description, :deployment_url,
-            :repository_url, :code_climate_url, :org_id, :status, :comments)
+            :repository_url, :code_climate_url, :org_id, :status, :comments, :features)
     end
 
     def user_params

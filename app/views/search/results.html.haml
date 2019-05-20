@@ -12,9 +12,9 @@
         %td
           = app.id
           = link_to app.name, app
-        %td= app.org.name
+        %td= link_to app.org.name, app.org
         %td
-          = app.description
+          = sanitize app.description
           %br
           - app.engagements.each do |engagement|
             %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
@@ -36,7 +36,7 @@
         %tr{:class => ("defunct" if org.defunct)}
           %td= link_to_unless org.url.blank?, org.name, org.url, :target => '_blank'
           %td= mail_to org.contact.email, org.contact.name 
-          %td= org.description 
+          %td= sanitize org.description 
           %td
             - org.apps.each_with_index do |a, index| 
               =link_to a.name, app_path(a)
@@ -56,7 +56,7 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.name
+        %td= link_to user.name, user
         %td= mail_to user.email
         %td= link_to(user.github_uid, "https://github.com/#{user.github_uid}") unless user.github_uid.blank?
         %td= link_to 'Edit', edit_user_path(user), :class => 'btn btn-primary'

@@ -1,15 +1,17 @@
 .page-header
   %h1 Iterations for #{@engagement.app.name}
-  %h3= engagement_short_name(@engagement)
+  %h3
+    = engagement_short_name(@engagement)
+    = link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary pull-right'
+    = link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary pull-right'
+
 
 %div#stat
   - @stat.each do |key, value|
     %h4{:style => 'margin-bottom: 0px'}= key
     %div{:style => "width: #{value * 100 + 100}px", :id => "#{key}_score"}= "#{value.round(2)} / 5.0"
 
-%br
-= link_to 'Add Iteration...', new_engagement_iteration_path(@engagement), :class => 'btn btn-primary'
-= link_to 'Back to App', app_path(@engagement.app), :class => 'btn btn-primary'
+
 
 %table.table
   %thead
