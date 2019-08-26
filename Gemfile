@@ -24,10 +24,11 @@ group :test do
   gem 'selenium-webdriver', '>=2.35.1'
   gem 'rspec-rails'
   gem 'guard-rspec'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '< 5.0.0'
   gem 'jasmine-rails'
   gem 'database_cleaner'
   gem 'timecop'
+  gem 'launchy'
 end
 
 group :production do
