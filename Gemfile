@@ -4,6 +4,19 @@ ruby '2.4.5'
 
 gem 'rails', '4.2.9'
 gem 'omniauth-github'
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
+gem 'json'
+gem 'figaro'
+gem 'haml'
+gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'jquery-rails'
+gem 'jbuilder', '~> 2.0'
+gem 'bootstrap_form'
+gem 'paperclip', '~> 5.0.0'
+gem 'aws-sdk', '~> 2.3.0'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -36,20 +49,6 @@ group :production do
   gem 'pg', '< 1.0.0'
   gem 'rails_12factor'
 end
-
-gem 'select2-rails', '~> 4.0', '>= 4.0.3'
-gem 'json'
-gem 'figaro'
-gem 'haml'
-gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-gem 'jbuilder', '~> 2.0'
-gem 'bootstrap_form'
-gem 'paperclip', '~> 5.0.0'
-gem 'aws-sdk', '~> 2.3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
