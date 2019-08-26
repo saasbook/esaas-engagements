@@ -6,9 +6,10 @@
   = f.url_field :deployment_url, label: 'Deployment Url'
   = f.url_field :repository_url, label: 'Repository Url'
   = f.url_field :code_climate_url, label: 'Code Climate Url'
+  = f.text_area :features, rows: '5', label: 'App Initial Features'
   = f.collection_select :org_id, Org.all, :id, :name, {label: 'Organization'}, {class: 'select2'}
   = f.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
   = f.form_group do
     = f.submit class: 'btn btn-success'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
-    = link_to 'Back', apps_path, :class => 'btn btn-primary'
+    = link_to 'Back', @app, :class => 'btn btn-primary'

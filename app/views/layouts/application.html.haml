@@ -5,9 +5,14 @@
     = stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+						
   %body
     #main.container
       = render 'layouts/nav_header'
       = render 'shared/flash_messages'
       = yield :form_errors
       = yield
+    
+    <script>var allEditors = document.querySelectorAll('textarea');for (var i = 0; i < allEditors.length; ++i) {var temp = ClassicEditor.create(allEditors[i]);if(i == 0)temp.then( editor => {myEditor = editor;} );}</script>
+    <style> .ck-editor__editable_inline {min-height: 150px;} </style>

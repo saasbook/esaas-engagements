@@ -4,6 +4,26 @@
     = link_to 'New User', new_user_path, :class => 'btn btn-success pull-right'
   .help-block Click a User name to see more information
 
+%ul{:class => 'pagination'}
+  %li{:class=>'each_page'}
+    %a{:class=>"page_link"} Users per page
+  - ["10","50","100","All"].each do |num_per_page|
+    - if @each_page == @page_dict[num_per_page] then
+      %li{:class=>'each_page active'}
+        %a{:class=>"page-link", :href=>"?user_each_page=#{num_per_page}"}=num_per_page
+    - else
+      %li{:class=>'each_page'}
+        %a{:class=>"page-link", :href=>"?user_each_page=#{num_per_page}"}=num_per_page
+      
+%ul{:class => 'pagination pull-right'}
+  - ["First","Previous","Current","Next","Last"].each do |action|
+    - if action != "Current" then
+      %li{:class=>'page_num'}
+        %a{:class=>"page-link", :href=>"?user_page_action=#{action}&prev=#{@page_num}"}=action 
+    - else
+      %li{:class=>"page-num"}
+        %a{:class=>'page_link'} Page #{[1,@page_num].max}
+
 %table.table.table-condensed
   %thead
     %tr

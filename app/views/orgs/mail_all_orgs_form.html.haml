@@ -1,0 +1,24 @@
+.page-header
+  %h1 Email to organizations
+  .help-block Please specify an email address that organizations should reply to as well as subject and message body
+  .help-block Sending large volume of emails can take a while. Please don't refresh or leave this page until completion or failure.
+= form_tag mail_all_orgs_path do
+  = check_box_tag "All", 2, true, :class => 'filter'
+  %span{:class => "All"}= "All"
+  - App.getAllVettingStatuses.each_index do |idx|
+    = check_box_tag App.getAllVettingStatuses[idx], 1, false, :class => 'filter'
+    %span{:class => App.getAllVettingStatuses[idx]}= App.getAllVettingStatuses[idx]
+    - if (idx.to_i+1) % 5 == 0
+      %br
+  .form-group
+    =label :email, :address, 'Reply to'
+    = text_field :email, :address, :class => 'form-control'
+  .form-group
+    = label :email, :subject, 'Subject'
+    = text_field :email, :subject, :class => 'form-control'
+  .form-group
+    = label :email, :content, 'Content'
+    = text_area :email, :content, :class => 'form-control'
+
+  = submit_tag 'Send To Orgs', :class => 'btn btn-primary'
+

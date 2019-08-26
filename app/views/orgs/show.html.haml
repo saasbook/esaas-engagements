@@ -4,7 +4,7 @@
 
 .well#description
   %h4 Description
-  %p= @org.description
+  %p=sanitize @org.description
 
 .well#contact
   %h4 Contact Information (Organization)
@@ -50,7 +50,7 @@
       %tr
         %td= link_to app.name, app_path(app)
         %td
-          = app.description
+          = sanitize app.description
           %br
           - app.engagements.each do |engagement|
             %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}

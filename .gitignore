@@ -21,3 +21,6 @@ config/application.yml
 TAGS
 /coverage/
 public/system/*
+
+# Ignore MacOS files
+.DS_Store

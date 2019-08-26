@@ -1,15 +1,15 @@
 # ESaaS Engagements Tracker
 
-[![Build Status](https://travis-ci.org/saasbook/esaas-engagements.svg?branch=master)](https://travis-ci.org/saasbook/esaas-engagements)
-[![Code Climate](https://img.shields.io/codeclimate/github/saasbook/esaas-engagements.svg?style=flat-square)](https://codeclimate.com/github/saasbook/esaas-engagements)
-[![Test Coverage](https://codeclimate.com/github/saasbook/esaas-engagements/badges/coverage.svg)](https://codeclimate.com/github/saasbook/esaas-engagements/coverage)
+[![Build Status](https://travis-ci.org/Chenlibo/esaas-engagements.svg?branch=master)](https://travis-ci.org/Chenlibo/esaas-engagements)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cae96513afd6ab530342/maintainability)](https://codeclimate.com/github/Chenlibo/esaas-engagements/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/cae96513afd6ab530342/test_coverage)](https://codeclimate.com/github/Chenlibo/esaas-engagements/test_coverage)
+[![Known Vulnerabilities](https://snyk.io/test/github/Chenlibo/esaas-engagements/badge.svg)](https://snyk.io/test/github/Chenlibo/esaas-engagements)
 
-[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)
-[Heroku Deployment](https://shielded-bastion-61752.herokuapp.com/)
-
+[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)  
+[Heroku Deployment](https://shielded-sea-54225.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
-Fox with contributions by [Andrew Halle](https://github.com/andrewhalle), 
+Fox with contributions by [Andrew Halle](https://github.com/andrewhalle),
 is to enable continuous tracking over time of customer apps developed
 by the "ESaaS ecosystem" around [UC Berkeley CS169 Software
 Engineering](https://cs169.saas-class.org).
@@ -23,14 +23,25 @@ handed off from cohort to cohort.
 
 The main models are:
 
-* App: a deployable Web app, i.e. a student project.  An app's status may be:
-  * `dead`: not deployed, and/or customer not actively using;  dormant
-  * `development`: in active development (a team is working on it right now), whether or not deployed in
-  production
-  * In use: in production use at a customer site; customer has not expressed interest in further improvements
-  * In use and wants improvements: In production, and customer is interested in further development
-  * Inactive but wants improvement: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
-  * Pending: a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team
+* App: a deployable Web app, i.e. a student project.  App statuses can fall into two categories:
+  1. Deployment statuses:
+     * `dead`: Not deployed, and/or customer not actively using;  dormant
+     * `development`: In active development (a team is working on it right now), whether or not deployed in
+     production
+     * `In use`: In production use at a customer site; customer has not expressed interest in further improvements
+     * `In use and wants improvements`: In production, and customer is interested in further development
+     * `Inactive but wants improvement`: An app whose current state isn't functional enough for customer to use yet, but customer is interested in further development to make app useful
+     * `Pending` (deprecated): a customer has suggested an app they want built or improved, but a coach/instructor hasn't yet vetted whether it's a good fit for some student team. **This has been replaced by the vetting statuses mentioned below. DO NOT use it anymore**
+  2. Vetting statuses:
+     * `Vetting`: Pending (not yet vetted)
+     * `On Hold`: We need something from customer during vetting phase
+     * `Staff Approved`: Approved by the faculty during vetting phase
+     * `Customer Informed`: Staff has approved the project and we’ve informed the customer about acceptance and are waiting for them to confirm whether they meet our customer expectations
+     * `Customer Confirmation Received`: Customer has confirmed to meet our expectations
+     * `Declined by Staff`: Project declined by staff during vetting
+     * `Declined by Customer`: Engagement declined by the customer after we accepted the project
+     * `Declined by Customer – Available Next Semester`: Customer is not available this semester but will be available for next semester
+     * `Backup`: We are saving this project as a backup in case a client drops
 * Org: a customer organization for whom the app was developed
 * User: various subcategories, including developer (e.g. student), coach
 (mentor, GSI), customer contact.  Also a principal for authentication: as of now, only a staff member has authorization to edit/destroy.
@@ -92,6 +103,7 @@ has this field set to set the field for your user record.**
 You also need to be a `coach` to navigate through the app and do some core operations
 (create, update, delete). In order to give permission at database level run rails
 console on heroku server(`heroku run rails console`) and create/update a user:
+
 ```ruby
 User.create(name: 'USERNAME', email: 'USER@NAME.COM', github_uid: 'username', user_type: 'coach')
 ```
@@ -112,7 +124,7 @@ commit `application.yml.asc`.
 
 If you want to have GitHub OAuth on the development environment or on the heroku
 deployment environment, you have to register your app [here](https://github.com/settings/applications/new). After you register and obtain Client ID and Client Secret, add
-the keys to `config/application.yml`
+the keys to `config/application.yml`. Make sure you set the authorization callback URL to `<homepage-url>/auth/github/callback`
 
 ## Setting Environment Variables
 
@@ -148,10 +160,30 @@ To upload the keys to a Heroku app, run `figaro heroku:set -e production`.
 After setting environment variables using `figaro`, you can access them by
 `ENV["YOURKEY"]` or `Figaro.env.YOURKEY`. Refer the [documentation](https://github.com/laserlemon/figaro) for more information.
 
+## Email Configuration
+
+To enable email delivery functionality, technically you can use any third-party email delivery service as you wish. But the easiest way in this app is to register and use a [Sendgrid](https://sendgrid.com/) API key by setting
+
+```yaml
+SENDGRID_API_KEY: <your_sendgrid_api_key>
+```
+
+in `config/application.yml`
+
+For local testing purpose, this is also acceptable:
+
+```zsh
+export SENDGRID_API_KEY='<your_sendgrid_api_key>'
+```
+
+ in your favorite shell.
+
 ## Uploading Images with AWS S3
+
 Since Heroku wipes out all data when dyno server is down, we used AWS S3 Bucket
 to store the images. After you open an account for AWS, you will need the following
 keys (in `config/application.yml`):
+
 ```yaml
 AWS_ACCESS_KEY_ID: <your_aws_access_key_id>
 AWS_SECRET_ACCESS_KEY: <your_aws_secret_access_key>
@@ -164,6 +196,7 @@ S3_HOST_NAME: <your_s3_host_name>
 
 We used Cucumber/Capybara for integration tests, and RSpec for unit tests. You can
 run tests using:
+
 ```shell
 bundle exec cucumber
 bundle exec rspec
@@ -171,29 +204,50 @@ bundle exec rspec
 
 To test javascript behaviors, Cucumber uses Selenium Webdriver as default. This
 requires you to have a [geckodriver](https://github.com/mozilla/geckodriver/releases),
-and firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
+and Firefox browser. If you want to use other drivers (e.g. [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)) refer to [Capybara](https://github.com/teamcapybara/capybara) webpage
 to configure default webdriver.
 
 If you do not want to download a new webdriver, you can skip scenarios which require
 webdriver by:
+
 ```shell
 bundle exec cucumber --tags ~@javascript
 ```
+
+# SP19 Engagement: Main Features
+
+* 9 vetting statuses added to support vetting phase. `pending` should be obsolete
+  + Staff can add vetting comments
+  + Apps listing page can show only the apps in vetting
+  + Repo URL is optional when creating a new app for vetting
+* Each `app` has `features` for vetting purpose.
+* Each `engagement` has `features` for deployment purpose
+* Display app counts per each status on apps listing page
+* The ability to "email to organizations" from single point of contact
+* Support for rich text editing and display, such as **bold**, *italic* and ordered/unordered listing
+* Pagination for `apps`, `Orgs` and `Users`
+* Enhanced search bar with checkboxes. Description of each `app` is searchable
+* Miscellaneous:
+  + Org names and user names are clickable.
+  + Clicking `Back` button when editing `app` redirects to the app's show page instead of the apps listing page
+  + Move `Edit App` and `Back` buttons to the top right of the page
+  + Show `app` status in the app's show page
+
 
 # FA17 Engagement: Main Features
 
 * New `App`, `Org`, and `User` can be created all at once, with proper association
 * Every user can "post" comments on an `App`, `Org`, and `User`
-  - `App` has different types of comments
-  - Any class that inherits `Commentable` can have many comments
+  + `App` has different types of comments
+  + Any class that inherits `Commentable` can have many comments
 * More comprehensive customer feedback through a feedback form with ratings/comments
 * Aggregates customer feedbacks from all iterations of an engagement, and display
 averages on each category
-* `User` supports different typs (e.g. Student, Staff/Coach, Customer)
+* `User` supports different types (e.g. Student, Staff/Coach, Customer)
 * Exports `Engagement` information as a CSV file
 * each `User` contains a profile image
-  - we are using Amazon S3 to store images on production envrionment, because
-  Heroku has [emphemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
+  + we are using Amazon S3 to store images on production environment, because
+  Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
   have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
 * Authorization to edit/destroy only to "Coach"
 * Autocomplete dropdown list (select2)
@@ -201,10 +255,10 @@ averages on each category
 
 # High priority feature list
 
-0. Add user contact info and a way to track user meeting notes
-0. Google or Facebook or LinkedIn login for customer contacts
-0. Manage customer feedback as a active record, not a json string
-0. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
-0. Mailing customer feedback forms to customers for each iteration (Sendgrid)
-0. More authorizations to different types of users
-  - a user cannot edit/delete other users unless it is a staff/coach
+1. Add user contact info and a way to track user meeting notes
+2. Google or Facebook or LinkedIn login for customer contacts
+3. Manage customer feedback as a active record, not a json string
+4. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
+5. Mailing customer feedback forms to customers for each iteration (Sendgrid)
+6. More authorizations to different types of users
+   * A user cannot edit/delete other users unless it is a staff/coach
