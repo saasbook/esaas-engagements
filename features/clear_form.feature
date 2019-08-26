@@ -1,3 +1,4 @@
+@javascript
 Feature: Users can reset any form
 
 	As a user who fills out the forms
@@ -37,7 +38,7 @@ Background: Logged in
 	And I am logged in
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for New App
 	Given I am on the Apps page
 	When I follow "New App"
@@ -54,7 +55,7 @@ Scenario: user can reset a form for New App
 	And the "Status" field should contain "pending"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for New Organization
 	Given I am on the Orgs page
 	When I follow "New Org"
@@ -73,7 +74,7 @@ Scenario: user can reset a form for New Organization
 	And the "Contact" field should contain "3"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for New User
 	Given I am on the Users page
 	When I follow "New User"
@@ -88,7 +89,7 @@ Scenario: user can reset a form for New User
 	And the "User Type" field should contain "student"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for Create New User, Org, and App
 	Given I am on the create page
 	When I fill in "User Name" with "user"
@@ -116,7 +117,7 @@ Scenario: user can reset a form for Create New User, Org, and App
 	And the "Defunct" should not be checked
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for New Engagement
 	Given I am on the Apps page
 	And the time is "2012-07-16"
@@ -138,7 +139,7 @@ Scenario: user can reset a form for New Engagement
 	And the "Coach" field should contain "3"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for New Iteration
 	Given the time is "2012-07-13"
 	And I am on the Apps page
@@ -152,7 +153,7 @@ Scenario: user can reset a form for New Iteration
 	And I should have filled in "2012-07-13" for "End Date"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for Edit App
 	Given I am on the Apps page
 	And I follow "AFX Dance"
@@ -168,7 +169,7 @@ Scenario: user can reset a form for Edit App
 	And the "Status" field should contain "pending"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for Edit Org
 	Given I am on the Orgs page
 	And I follow "Berkeley Student Cooperative"
@@ -182,7 +183,7 @@ Scenario: user can reset a form for Edit Org
 	And the "Contact" field should contain "1"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for Edit User
 	Given I am on the edit user page for user id: "2"
 	When I fill in "User Name" with "Fox Armando"
@@ -196,7 +197,7 @@ Scenario: user can reset a form for Edit User
 	And the "User Type" field should contain "coach"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for Edit Engagement
 	Given I am on the Apps page
 	And I follow "AFX Dance"
@@ -212,7 +213,7 @@ Scenario: user can reset a form for Edit Engagement
 	And I should have filled in "a, b, c" for "Student Names"
 
 # Story ID: 153070009
-@javascript
+
 Scenario: user can reset a form for Edit Iteration
 	Given I am on the Apps page
 	And I follow "ESaaS Engagement Tracker"

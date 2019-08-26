@@ -19,8 +19,6 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
   validates_attachment_size :profile_picture, less_than: 5.megabytes
 
-  after_validation :cleanup_paperclip_errors
-
   enum user_type: [:student, :coach, :client]
   enum comment_type: []
 
@@ -39,8 +37,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
-  def cleanup_paperclip_errors
-  	errors.delete(:profile_picture)
-  end
 end

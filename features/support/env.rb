@@ -7,7 +7,6 @@ require 'simplecov'
 # files.
 
 require 'cucumber/rails'
-# require 'selenium-webdriver'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -55,7 +54,8 @@ end
 #
 
 # Capybara driver
-Capybara.javascript_driver = :phantomjs
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 Capybara.default_max_wait_time = 1
 
 # Possible values are :truncation and :transaction

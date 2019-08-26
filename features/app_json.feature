@@ -19,5 +19,5 @@ Scenario: List of featured apps in JSON
 	When I visit "/apps.json"
 	Then the response should be:
 		"""
-		[{"id":1,"name":"app1","description":"test1","deployment_url":null,"repository_url":"test1@test.com","org":{"name":"org1","url":null}},{"id":3,"name":"app3","description":"test3","deployment_url":null,"repository_url":"test3@test.com","org":{"name":"org1","url":null}}]
+	[{"id":1,"name":"app1","description":"test1","deployment_url":null,"repository_url":"test1@test.com","most_recent_screencast_url":"","most_recent_screenshot_url":"","org":{"name":"org1","url":null}},{"id":3,"name":"app3","description":"test3","deployment_url":null,"repository_url":"test3@test.com","most_recent_screencast_url":"","most_recent_screenshot_url":"","org":{"name":"org1","url":null}}]
 		"""

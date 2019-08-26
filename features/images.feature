@@ -37,7 +37,6 @@ Scenario: Each user can upload a image by local file
 	Then I should see "Profile Picture"
 	When I attach the file "features/upload_files/ArmandoFox.png" to "Profile Picture"
 	And I press "Update User"
-        Then show me the page
 	And I follow "Armando Fox"
 	Then I should find an image with alternate text "Armandofox"
 
