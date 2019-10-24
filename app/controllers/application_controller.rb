@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  helper_method :current_user
+
   private
   @@name_path = nil
 
@@ -15,6 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def auth_user?
+    puts session[:user_id]
+    puts User.find_by_id(session[:user_id]).inspect
     unless User.find_by_id(session[:user_id]).coach?
       redirect_path
     end
@@ -59,4 +63,10 @@ class ApplicationController < ActionController::Base
     session["#{name}_page_num"] = @page_num.to_s
   end
 
+  public
+
+  def current_user
+    return nil unless session.key? :user_id
+    User.find_by_id(session[:user_id])
+  end
 end
