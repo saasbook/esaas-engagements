@@ -6,13 +6,20 @@ class AppsController < ApplicationController
   # GET /apps
   # GET /apps.json
   def index
-    deploy_vet_map
-    total_app = @total_deploy + @total_vet
     @current_user = User.find_by_id(session[:user_id])
+    if params.key? :contact_id
+      orgs = Org.for_user(params[:contact_id])
+      @apps = App.for_orgs(orgs, limit=@each_page, offset=0)
+      deploy_vet_map(@current_user.id)
+    else
+      deploy_vet_map
+      @apps = App.limit(@each_page).offset(0)
+    end
+    total_app = @total_deploy + @total_vet
+
     page_default_and_update("app", total_app)
     change_page_num("app", total_app)
-    
-    @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
+
     respond_to do |format|
       format.json { render :json => @apps.featured }
       format.html
@@ -100,8 +107,8 @@ class AppsController < ApplicationController
 
     # count the number of apps for each status and
     # the total number of apps for each category
-    def deploy_vet_map
-      status_map =  App.group(:status).reorder(:status).count # should be in model?
+    def deploy_vet_map(orgs=nil)
+      status_map = App.status_count_for_orgs(orgs)
       @deployment_map = {}
       @vetting_map = {}
       @total_deploy = 0
