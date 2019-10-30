@@ -59,4 +59,16 @@ class App < ActiveRecord::Base
   def repoUrlOptional?
     pending? || inVettingStatus?
   end
+
+  def self.for_orgs(orgs, limit=10, offset=0)
+    App.where(:org_id => orgs).limit(limit).offset(0)
+  end
+
+  def self.status_count_for_orgs(orgs=nil)
+    if orgs == nil
+      App.group(:status).reorder(:status).count
+    else
+      App.where(:org_id => orgs).group(:status).reorder(:status).count
+    end
+  end
 end
