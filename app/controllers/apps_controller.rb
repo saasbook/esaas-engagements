@@ -19,11 +19,8 @@ class AppsController < ApplicationController
 
     page_default_and_update("app", total_app)
     change_page_num("app", total_app)
-
-    respond_to do |format|
-      format.json { render :json => @apps.featured }
-      format.html
-    end
+    
+    
   end
 
   # GET /apps/1

@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   resources :users do
     resources :comments, only: [:create, :update], module: :users
   end
+
+  resources :myprojects
+
   root :to => 'apps#index'
 
   get 'current_iteration' => 'iterations#current_iteration', :as => 'current_iteration'
@@ -37,4 +40,5 @@ Rails.application.routes.draw do
 
   get 'mail_all_orgs' => 'orgs#mail_all_orgs_form', :as => 'mail_all_orgs_form'
   post 'mail_all_orgs' => 'orgs#mail_all_orgs', :as => 'mail_all_orgs'
+
 end
