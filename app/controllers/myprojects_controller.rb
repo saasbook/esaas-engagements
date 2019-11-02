@@ -2,18 +2,13 @@ class MyprojectsController < ApplicationController
     
     def index
         @current_user = User.find_by_id(session[:user_id])
-        if params.key? :contact_id
-            orgs = Org.for_user(params[:contact_id])
-            @apps = App.for_orgs(orgs, limit=@each_page, offset=0)
-            deploy_vet_map(@current_user.id)
-        else
-        deploy_vet_map
-        @apps = App.limit(@each_page).offset(0)
-        end
+        orgs = Org.for_user(params[:contact_id])
+        @apps = App.for_orgs(orgs, limit=@each_page, offset=0).sort_by_status
+        deploy_vet_map(@current_user.id)
+        
         total_app = @total_deploy + @total_vet
         page_default_and_update("app", total_app)
         change_page_num("app", total_app)
-        @apps = App.sort_by_status
         respond_to do |format|
             format.json { render :json => @apps.featured }
             format.html
