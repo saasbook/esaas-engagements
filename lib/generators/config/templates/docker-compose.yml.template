@@ -1,0 +1,39 @@
+version: '2'
+services:
+<%- if options[:doc] -%>
+  # Container that has the rails application server
+<%- end -%>
+  rails-server:
+    container_name: rails-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes: # map volume for live reload
+      - .:/app
+    environment:
+      - RAILS_ENV=<%= options[:rails_env] %>
+      - DATABASE_URL=postgres-server
+    restart: always
+<%- if options[:aws_host_name] == 'minio-s3mock:9000' -%>
+<%- if options[:doc] -%>
+  # Container that has the Minio server that mocks the S3 API.
+  # If --aws_host_name is not set then the minio container will use be added.
+<%- end -%>
+  minio-s3mock:
+    image: minio/minio
+    volumes:
+      - /var/lib/minio/data
+    environment:
+    <%- if options[:doc] -%>
+      # Minio Access Key and Secret should match those in application.yml
+      # Minio Access Key is enforced as a safety failsafe.
+    <%- end -%>
+      - MINIO_ACCESS_KEY=<%= options[:aws_key_id] %>
+      - MINIO_SECRET_KEY=<%= options[:aws_secret_key] %>
+<%- end -%>
+  postgres-server:
+    image: postgres:latest
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data

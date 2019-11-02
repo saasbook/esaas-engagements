@@ -23,8 +23,8 @@ class App < ActiveRecord::Base
 
   enum comment_type: [:contact_status, :app_functionality, :general, :vetting]
 
-  #default_scope { order(:name => :asc) }
-  #scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
+  default_scope { order(:name => :asc) }
+  scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
   
   
    
