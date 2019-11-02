@@ -1,0 +1,24 @@
+.page-header
+  %h1
+    = @app.name
+    = image_tag('octocat.png')
+    - unless (url = @app.code_climate_url).blank?
+      = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
+      = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
+    = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
+    = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
+
+.well#github
+  %h4 Github: #{@app.repository_url}
+.well#deployment
+  %h4 Deployment: #{@app.deployment_url}
+.well#description
+  %h4 Description
+  %p= sanitize @app.description
+.well#features
+  %h4 App Initial Features
+  %p= sanitize @app.features
+.well#status
+  %h4 Status: #{@app.status.humanize(capitalize: false)}
+%h3
+  =link_to "Request Change", myprojects_path, :class => 'btn btn-primary'

@@ -15,6 +15,12 @@ class MyprojectsController < ApplicationController
         end
     end
 
+    def show
+        @app = App.find(params[:id])
+        @comments = @app.comments
+    end
+
+
     def deploy_vet_map(orgs=nil)
         status_map = App.status_count_for_orgs(orgs)
         @deployment_map = {}

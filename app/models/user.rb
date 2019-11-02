@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
     #	medium: '300x300#'
    #}, default_url: 'missing_:style.png'
 
-  validates_presence_of :name, :email
-  validates_uniqueness_of :email
+  #validates_presence_of :name, :email
+  #validates_uniqueness_of :email
   # validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
   # validates_attachment_size :profile_picture, less_than: 5.megabytes
 
