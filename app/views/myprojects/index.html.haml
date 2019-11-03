@@ -53,6 +53,7 @@
 %table.table.table-condensed#apps_table
   %thead
     %tr
+      %th ID
       %th Name
       %th Organization
       %th Description
@@ -62,6 +63,7 @@
       %tr{:class => [app.status.to_s]}
         %td
           = app.id
+        %td
           = link_to app.name, myproject_path(app.id)
         %td
           = link_to app.org.name, app.org
