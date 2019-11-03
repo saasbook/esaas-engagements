@@ -32,7 +32,7 @@ CSV.foreach("#{Rails.root}/db/apps.csv",
 			a.status = :dead
 			a.description = row[:description] || 'NA'
 			a.deployment_url = row[:deployment]
-			a.repository_url = row[:ropo] || 'http://'
+			a.repository_url = row[:repo] || 'http://'
 		end
 		contact = User.find_or_create_by(email: row[:contact_email]) do |c|
 			c.name = row[:customer] || 'Unknown'
