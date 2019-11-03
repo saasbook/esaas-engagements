@@ -15,9 +15,28 @@ class MyprojectsController < ApplicationController
         end
     end
 
+    # GET /myprojects/1
     def show
-        @app = App.find(params[:id])
-        @comments = @app.comments
+        @current_user = User.find_by_id(session[:user_id])
+        @current_user_orgs = Org.for_user(@current_user.id)
+        @current_user_apps = App.for_orgs(@current_user_orgs)
+
+        # Check if the specified app exists, and if it does, set it to @app
+        # TODO: If the app does not exist, redirect and flash error.
+        if App.exists?(params[:id])
+            @app = App.find(params[:id])
+            @comments = @app.comments
+        else
+            flash.alert = "The project with ID:#{params[:id]} does not exist."
+            redirect_to myprojects_path
+        end
+
+        # Check if @app belongs to @current_user
+        # TODO: If the app does not belong to the user, redirect and flash error.
+        if !@current_user_apps.exists?(@app.id)
+            flash.alert = "The project with ID:#{params[:id]} does not belong to you."
+            redirect_to myprojects_path
+        end
     end
 
 
