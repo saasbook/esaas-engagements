@@ -8,9 +8,14 @@ class App < ActiveRecord::Base
   validates_presence_of :name, :description, :org_id, :status
   validates_presence_of :repository_url, unless: :repoUrlOptional?
 
-  enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending, 
-    :vetting_pending, :on_hold, :staff_approved,:customer_informed, :customer_confirmation_received, :declined_by_staff, 
-    :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
+  enum status: [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, 
+                :pending, :vetting_pending, :on_hold, :staff_approved, :customer_informed, 
+                :customer_confirmation_received, :declined_by_staff,  :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
+  
+  
+  @@STATUS_ORDERS = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 2, 1, 0]
+  
+  
   # there should be more efficient ways handling status categorization
   @@VETTING_STATUSES = [:vetting_pending, :on_hold, :staff_approved,:customer_informed, 
     :customer_confirmation_received, :declined_by_staff, :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
@@ -18,9 +23,14 @@ class App < ActiveRecord::Base
 
   enum comment_type: [:contact_status, :app_functionality, :general, :vetting]
 
-  default_scope { order(:name => :asc) }
-  scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
-
+  #default_scope { order(:name => :asc) }
+  #scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
+  
+  
+   
+  
+  
+  
   def as_json(options={})
     super(options.merge({
           :only => [:id,:name,:description,:deployment_url,:repository_url],
@@ -70,5 +80,14 @@ class App < ActiveRecord::Base
     else
       App.where(:org_id => orgs).group(:status).reorder(:status).count
     end
+  end
+
+  def self.sort_by_status
+      order_by = ['CASE']
+      @@STATUS_ORDERS.each_with_index do |rank, index|
+        order_by << "WHEN status=#{rank} THEN #{index}"
+      end
+      order_by << 'END'
+      App.order(order_by.join(' '))
   end
 end
