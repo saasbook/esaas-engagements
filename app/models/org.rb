@@ -15,4 +15,8 @@ class Org < ActiveRecord::Base
   def address
   	[address_line_1, address_line_2, city_state_zip].compact.join(", ")
   end
+
+  def self.for_user(contact_id)
+    Org.where(:contact_id => contact_id)
+  end
 end
