@@ -27,15 +27,17 @@ class MyprojectsController < ApplicationController
             @app = App.find(params[:id])
             @comments = @app.comments
         else
-            flash.alert = "The project with ID:#{params[:id]} does not exist."
+            flash.alert = "You do not have any projects with ID:#{params[:id]}."
             redirect_to myprojects_path
+            return
         end
 
         # Check if @app belongs to @current_user
         # TODO: If the app does not belong to the user, redirect and flash error.
         if !@current_user_apps.exists?(@app.id)
-            flash.alert = "The project with ID:#{params[:id]} does not belong to you."
+            flash.alert = "You do not have any projects with ID:#{params[:id]}."
             redirect_to myprojects_path
+            return
         end
     end
 
