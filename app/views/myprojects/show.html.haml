@@ -5,11 +5,13 @@
     - unless (url = @app.code_climate_url).blank?
       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
-    = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
-    = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
+    = link_to 'Back', myprojects_path, class: 'btn btn-primary pull-right'
+    -#= link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 
 .well#github
   %h4 Github: #{@app.repository_url}
+.well#pivotal
+  %h4 Pivotal Tracker: #{@app.pivotal_url}
 .well#deployment
   %h4 Deployment: #{@app.deployment_url}
 .well#description
