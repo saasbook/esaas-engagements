@@ -1,8 +1,0 @@
-.bundle/
-config/application.yml
-db/development.sqlite3
-db/github_mock_login.yml
-db/test.sqlite3
-log/development.log
-tmp/
-.rake_tasks~
