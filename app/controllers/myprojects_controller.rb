@@ -22,7 +22,6 @@ class MyprojectsController < ApplicationController
         @current_user_apps = App.for_orgs(@current_user_orgs)
 
         # Check if the specified app exists, and if it does, set it to @app
-        # TODO: If the app does not exist, redirect and flash error.
         if App.exists?(params[:id])
             @app = App.find(params[:id])
             @comments = @app.comments
@@ -33,7 +32,6 @@ class MyprojectsController < ApplicationController
         end
 
         # Check if @app belongs to @current_user
-        # TODO: If the app does not belong to the user, redirect and flash error.
         if !@current_user_apps.exists?(@app.id)
             flash.alert = "You do not have any projects with ID:#{params[:id]}."
             redirect_to myprojects_path
