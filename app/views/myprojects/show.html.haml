@@ -11,7 +11,8 @@
 .well#github
   %h4 Github: #{@app.repository_url}
 .well#pivotal
-  %h4 Pivotal Tracker: #{@app.pivotal_url}
+  %h4 Pivotal Tracker:
+  -##{@app.pivotal_url}
 .well#deployment
   %h4 Deployment: #{@app.deployment_url}
 .well#description
@@ -23,4 +24,5 @@
 .well#status
   %h4 Status: #{@app.status.humanize(capitalize: false)}
 %h3
+  -# Dummy button => need to be implemented in later iteration
   =link_to "Request Change", myprojects_path, :class => 'btn btn-primary'
