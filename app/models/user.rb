@@ -9,13 +9,14 @@ class User < ActiveRecord::Base
   has_many :apps, through: :client_orgs
   has_many :client_engagements, through: :apps, source: :engagements
 
+  # TODO: fix failing test for profile_picture feature
   #has_attached_file :profile_picture, styles: {
    	#thumb: '100x100#',
     #	medium: '300x300#'
    #}, default_url: 'missing_:style.png'
 
-  #validates_presence_of :name, :email
-  #validates_uniqueness_of :email
+  validates_presence_of :name, :email
+  validates_uniqueness_of :email
   # validates_attachment_content_type :profile_picture, content_type: /\Aimage\/.*\Z/
   # validates_attachment_size :profile_picture, less_than: 5.megabytes
 
@@ -37,4 +38,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  # TODO: remove once profile picture feature is working again
+  def profile_picture
+    profile_picture_file_name
+  end
+
+  def profile_picture=(pic)
+    profile_picture_file_name = pic
+  end
 end

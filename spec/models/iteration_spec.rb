@@ -8,7 +8,7 @@ describe Iteration do
 		end
 
 		it 'converts a string of valid JSON format into ruby Hash' do
-			@iteration = FactoryBot.build(:iteration, :customer_feedback => "{\"a\":\"1\",\"b\":\"2\"}")
+			@iteration = FactoryBot.build(:iteration, :customer_feedback => '{ "a": "1", "b": "2"}')
 			expect(@iteration.customer_feedback_to_hash).to eq({"a" => "1", "b" => "2"})
 		end
 

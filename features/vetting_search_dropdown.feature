@@ -29,7 +29,7 @@ Scenario: I can search the dropdown list of status on new app page (including ve
     # id for original (deployment) status
   And I click "#select2-app_status-container"
   And I type in "dec" in ".select2-search__field"
-  Then I should see "Declined by staff" inside ".select2-results"
+  And I should see "Declined by staff" inside ".select2-results"
   And I should see "Declined by customer" inside ".select2-results"
   And I should see "Declined by customer available next sem" inside ".select2-results"
 
@@ -50,7 +50,7 @@ Scenario: I can see the dropdown list of status on new app page (including vetti
   And I should see "Staff approved" inside ".select2-results"
   And I should see "Customer informed" inside ".select2-results"
   And I should see "Customer confirmation received" inside ".select2-results"
-  And I should see "Declined by staff " inside ".select2-results"
+  And I should see "Declined by staff" inside ".select2-results"
   And I should see "Declined by customer" inside ".select2-results"
   And I should see "Declined by customer available next sem" inside ".select2-results"
   And I should see "Back up" inside ".select2-results"
