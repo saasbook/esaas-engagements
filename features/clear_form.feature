@@ -64,7 +64,7 @@ Scenario: user can reset a form for New Organization
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"
 	And I fill in "Phone" with "123123123"
-	And I fill in "Description" with "this is my new org" using ckeEditor rich editor
+	And I fill in "Organization Description" with "this is my new org" using ckeEditor rich editor
 	And I fill in "Url" with "myneworg.com"
 	And I select "ESaaS Developer" from "Contact"
 	And I check "Defunct"
@@ -98,7 +98,7 @@ Scenario: user can reset a form for Create New User, Org, and App
 	And I fill in "Github Uid" with "dave_id"
 	And I select "Coach" from "User Type"
 	And I fill in "SID" with "123123123"
-	And I fill in "Organization Name" with "myNewOrg" using ckeEditor rich editor
+	And I fill in "Organization Name" with "myNewOrg"
 	And I fill in "Address Line 1" with "123 esaas street"
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"

@@ -16,6 +16,8 @@ class IterationsController < ApplicationController
     @feedback = JSON.parse(@iteration.customer_feedback)
     rescue (Exception)
       @feedback = Hash.new
+      # flash[:alert] = "Customer Feedback does not have editable format."
+      # redirect_to engagement_iterations_path
   end
 
   def create
@@ -46,14 +48,14 @@ class IterationsController < ApplicationController
   end
 
   def current_iteration
-    iterations = Iteration.where(:customer_feedback => [nil,""]).all()
+    iterations = Iteration.where(:customer_feedback => [nil, ""]).all
     @iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
   end
 
   def get_customer_feedback
-    iterations = Iteration.where(:customer_feedback => [nil, ""]).all()
+    iterations = Iteration.where(:customer_feedback => [nil, ""]).all
     iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
@@ -82,7 +84,6 @@ class IterationsController < ApplicationController
     @engagement = Engagement.find(params[:engagement_id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def iteration_params
     params.require(:iteration).permit(:customer_feedback, :end_date, :number, :general_feedback)
   end

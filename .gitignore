@@ -24,3 +24,14 @@ public/system/*
 
 # Ignore MacOS files
 .DS_Store
+
+# Ignore application configuration
+/config/application.yml
+
+# Don't track Intellij Files
+.idea
+**/.idea/
+# Ignore the Dockerfile and docker-compose.yml
+# Use generator to create generate these files
+Dockerfile
+docker-compose.yml

@@ -6,7 +6,7 @@
 .well#description
   %div.media
     .media-left
-      = image_tag @user.profile_picture.url(:thumb), class: 'media-object'
+      = image_tag @user.profile_picture, class: 'media-object'
     %div.media-body
       %h4.media-heading
         = @user.name

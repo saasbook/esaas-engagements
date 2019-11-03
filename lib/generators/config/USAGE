@@ -1,0 +1,16 @@
+Description:
+    Creates application.yml file in config folder.
+    Also creates a Dockerfile and docker-compose file to make local development easier.
+
+Example:
+    rails generate config
+
+    This will create:
+        Dockerfile
+        docker-compose.yml
+        config/application.yml
+
+    rails generate config --no-docker
+
+    This will create:
+        config/application.yml
