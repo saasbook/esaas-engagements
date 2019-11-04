@@ -5,20 +5,33 @@
     - unless (url = @app.code_climate_url).blank?
       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
-    = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
-    = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
+    = link_to 'Back', myprojects_path, class: 'btn btn-primary pull-right'
+    -#= link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 
-.well#github
-  %h4 Github: #{@app.repository_url}
-.well#deployment
-  %h4 Deployment: #{@app.deployment_url}
+.well#status
+  %h4 Status: #{@app.status.humanize(capitalize: false)}
 .well#description
   %h4 Description
   %p= sanitize @app.description
 .well#features
   %h4 App Initial Features
   %p= sanitize @app.features
-.well#status
-  %h4 Status: #{@app.status.humanize(capitalize: false)}
+.row
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#deployment
+      %h4 Deployment
+      %p{:style => "word-wrap: break-word;"}
+        = link_to @app.deployment_url, @app.deployment_url
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#github
+      %h4 Github
+      %p{:style => "word-wrap: break-word;"}
+        = link_to @app.repository_url, @app.repository_url
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#pivotal
+      %h4 Pivotal Tracker
+      %p{:style => "word-wrap: break-word;"}
+        = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
 %h3
+  -# Dummy button => need to be implemented in later iteration
   =link_to "Request Change", myprojects_path, :class => 'btn btn-primary'

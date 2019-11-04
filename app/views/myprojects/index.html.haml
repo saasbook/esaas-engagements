@@ -49,10 +49,11 @@
     - else
       %li{:class=>"page-num"}
         %a{:class=>'page_link'} Page #{[1,@page_num].max}
- 
+
 %table.table.table-condensed#apps_table
   %thead
     %tr
+      %th ID
       %th Name
       %th Organization
       %th Description
@@ -62,7 +63,8 @@
       %tr{:class => [app.status.to_s]}
         %td
           = app.id
-          = link_to app.name, app
+        %td
+          = link_to app.name, myproject_path(app.id)
         %td
           = link_to app.org.name, app.org
         %td
