@@ -1,0 +1,39 @@
+
+<%- if options[:doc] -%>
+# SendGrid API Key can be obtained by registering at https://sendgrid.com
+# By default, we provide a locally hosted PRISM along with the Docker Compose config.
+# If the SENDGRID_API_KEY provided is 'SG.SendGrid.mock.key' then the app uses locally hosted PRISM server.
+# Alternatively, Sendgrid Provides a test mode that can be used instead of the PRISM server.
+<%- end -%>
+SENDGRID_API_KEY: <%= options[:sendgrid_key] %>
+
+<%- if options[:doc] -%>
+# Since Heroku wipes out all data when dyno server is down, we used AWS S3 Bucket to store the images.
+# By default, we provide a locally hosted Minio server with the Docker Compose config.
+#
+# https://github.com/minio/minio
+#
+# The Minio server brought up by docker-compose has been setup to require the credentials below.
+# see: docker-compose.yml
+# For production, open an account for AWS
+<%- end -%>
+AWS_ACCESS_KEY_ID: <%= options[:aws_key_id] %>
+AWS_SECRET_ACCESS_KEY: <%= options[:aws_secret_key] %>
+S3_BUCKET_NAME: <%= options[:aws_bucket_name] %>
+AWS_REGION: <%= options[:aws_region] %>
+S3_HOST_NAME: <%= options[:aws_host_name] %>
+
+test:
+  secret_key_base: <%= options[:test_secret_key] %>
+  github_key: <%= options[:test_github_key] %>
+  github_secret: <%= options[:test_github_secret] %>
+
+development:
+  secret_key_base: <%= options[:dev_secret_key] %>
+  github_key: <%= options[:dev_github_key] %>
+  github_secret: <%= options[:dev_github_secret] %>
+
+production:
+  secret_key_base: <%= options[:prod_secret_key] %>
+  github_key: <%= options[:prod_github_key] %>
+  github_secret: <%= options[:prod_github_secret] %>

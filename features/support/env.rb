@@ -55,8 +55,15 @@ end
 
 # Capybara driver
 require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
-Capybara.default_max_wait_time = 1
+Capybara.register_driver :poltergeist_debug do |app|
+  Capybara::Poltergeist::Driver.new(app, :inspector => true)
+end
+
+# Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :poltergeist_debug
+
+# Capybara.javascript_driver = :poltergeist
+Capybara.default_max_wait_time = 10
 
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :org do
-    name { 'CS169' }
+    sequence(:name) {|n| "Org-#{n}" }
     description { 'Software Engineering' }
     association :contact, :factory => :user
     address_line_1  {'1234 Berkeley St.'}

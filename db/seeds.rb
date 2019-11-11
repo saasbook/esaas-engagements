@@ -1,9 +1,13 @@
 require 'csv'
 
+raise ArgumentError, 'Seeding in Production' if Rails.env.production?
+
 # create users and orgs
 CSV.foreach("#{Rails.root}/db/user_orgs.csv", headers: true, header_converters: :symbol) do |row|
 	user = User.find_or_create_by!(email: row[:user_email]) do |u|
 		u.name = row[:user_name]
+    u.github_uid = row[:github_uid]
+    u.user_type = row[:user_type]
 	end
 	Org.find_or_create_by!(name: row[:org_name]) do |o|
 		o.contact = user
@@ -26,15 +30,16 @@ end
 # create orgs and engagements
 CSV.foreach("#{Rails.root}/db/apps.csv",
 	headers: true, header_converters: :symbol, encoding: 'iso-8859-1:utf-8') do |row|
-	if org = Org.find_by_name(row[:org_name])
+	if (org = Org.find_by_name(row[:org_name]))
 		app = App.find_or_create_by(name: row[:project]) do |a|
 			a.org = org
-			a.status = :dead
+			a.status = App.statuses.keys.sample # Status variety for dev env
 			a.description = row[:description] || 'NA'
 			a.deployment_url = row[:deployment]
-			a.repository_url = row[:ropo] || 'http://'
+			a.repository_url = row[:repo] || 'http://'
+			a.pivotal_tracker_url = row[:tracker] || 'http://'
 		end
-		contact = User.find_or_create_by(email: row[:contact_email]) do |c|
+    User.find_or_create_by(email: row[:contact_email]) do |c|
 			c.name = row[:customer] || 'Unknown'
 			c.email = row[:contact_email] || "#{row[:project]}_unknown@email.com"
 		end
@@ -57,4 +62,4 @@ end
 puts "#{App.all.size} apps, #{Engagement.all.size} engagements"
 
 # login mockup
-User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")
+User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")[Rails.env]

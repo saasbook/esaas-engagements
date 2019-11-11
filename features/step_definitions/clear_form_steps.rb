@@ -18,16 +18,19 @@ Then /^the "(.*)" should not be checked$/ do |field|
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)" using ckeEditor rich editor$/ do |field, value|
-	toExecute = '$(myEditor.setData("'+ value + '"))'
-	page.execute_script(toExecute)
+  label = find('label', :text => /^#{field}$/)
+  text_area = label.find(:xpath, '..//textarea')
+  text_area.send_keys(value)
 end
   
-When /^(?:|I )fill in "([^"]*)" for "([^"]*)" using ckeEditor rich editor$/ do |field, value|
-	toExecute = '$(myEditor.setData("'+ value + '"))'
-	page.execute_script(toExecute)
+When /^(?:|I )fill in "([^"]*)" for "([^"]*)" using ckeEditor rich editor$/ do |value, field|
+	steps %Q{
+		When I fill in "#{field}" with "#{value}" using ckeEditor rich editor
+	}
 end
 
 Then /^I should have filled in "(.*)" for "(.*)" using ckeEditor rich editor$/ do |value, field|
-	toExecute = '$(myEditor.getData())'
-	content = page.execute_script(toExecute)
+	label = find('label', :text => /^#{field}$/)
+	text_area = label.find(:xpath, '..//textarea')
+  expect(text_area).to have_text value
 end
