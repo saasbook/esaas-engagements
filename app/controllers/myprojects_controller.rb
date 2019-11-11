@@ -44,6 +44,12 @@ class MyprojectsController < ApplicationController
         @app = App.find(params[:id])
     end
 
+    def update
+        @app = App.find(params[:id])
+        @app.update_attributes!(:request => @app.request)
+		redirect_to edit_myproject_path(@app.id)
+	end
+
     def deploy_vet_map(orgs=nil)
         status_map = App.status_count_for_orgs(orgs)
         @deployment_map = {}
@@ -61,4 +67,5 @@ class MyprojectsController < ApplicationController
             end
         end
     end
+
 end
