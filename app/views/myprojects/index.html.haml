@@ -77,5 +77,4 @@
           - if @current_user.coach?
             = link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
             = link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
-          - if @current_user.client?
-            = link_to "Request Update", myproject_path(app.id), :class => 'btn btn-primary'
+          = link_to "Request Update", myproject_path(app.id), :class => 'btn btn-primary'
