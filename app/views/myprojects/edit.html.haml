@@ -1,0 +1,9 @@
+.page-header
+    %h1 Request Change for  App "#{App.find(@app.id).name}"
+
+= bootstrap_form_for(@app, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
+    = f.text_area :request, label: 'Request Information'
+    = f.form_group do
+        = link_to 'Send Request', myprojects_path, :class => 'btn btn-primary'
+        = link_to 'Back', myproject_path(@app.id), :class => 'btn btn-primary'
+        

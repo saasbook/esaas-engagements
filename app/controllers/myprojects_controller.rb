@@ -14,8 +14,6 @@ class MyprojectsController < ApplicationController
             format.json { render :json => @apps.featured }
             format.html
         end
-        
-        
     end
 
     # GET /myprojects/1
@@ -23,7 +21,7 @@ class MyprojectsController < ApplicationController
         @current_user = User.find_by_id(session[:user_id])
         @current_user_orgs = Org.for_user(@current_user.id)
         @current_user_apps = App.for_orgs(@current_user_orgs)
-
+        
         # Check if the specified app exists, and if it does, set it to @app
         if App.exists?(params[:id])
             @app = App.find(params[:id])
@@ -42,6 +40,9 @@ class MyprojectsController < ApplicationController
         end
     end
 
+    def edit
+        @app = App.find(params[:id])
+    end
 
     def deploy_vet_map(orgs=nil)
         status_map = App.status_count_for_orgs(orgs)

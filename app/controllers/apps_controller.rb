@@ -95,7 +95,9 @@ class AppsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def app_params
-    params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments, :features)
+    params.require(:app).permit(:name, :description, :deployment_url, :repository_url, 
+                              :code_climate_url, :org_id, :status, :comments, :features,
+                              :pivotal_tracker_url, :request)
   end
 
   # count the number of apps for each status and
