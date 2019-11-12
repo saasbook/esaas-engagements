@@ -4,7 +4,7 @@ class App < ActiveRecord::Base
   has_many :comments, dependent: :destroy, as: :commentable
   has_many :engagements, dependent: :destroy
   has_many :iterations, :through => :engagements
-  
+
   validates_presence_of :name, :description, :org_id, :status
   validates_presence_of :repository_url, unless: :repoUrlOptional?
   #TODO: validates_presence_of pivotal_tracker_url

@@ -15,6 +15,9 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       then '/'
+    
+    when /^the My Projects page$/
+      then myprojects_path
 
     when /^the create page$/
       then creation_path

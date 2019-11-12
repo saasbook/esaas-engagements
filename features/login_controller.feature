@@ -39,3 +39,13 @@ Scenario: not logged in so should see login with Github from create page
   #Story ID: #152298585
   Given I am on the create page
   Then I should be on the login page
+
+Scenario: not logged in so should not see "My Projects" tab
+  Given I am on the home page
+  And I am not logged in
+  Then I should not see "My Projects"
+
+Scenario: logged in so should see "My Projects" tab
+  Given I am logged in
+  Then I should see "My Projects"
+  

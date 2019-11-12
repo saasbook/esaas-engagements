@@ -17,15 +17,18 @@ ActiveRecord::Schema.define(version: 20191112010952) do
     t.text     "description"
     t.text     "features"
     t.text     "feedback"
+    t.integer  "status",        default: 0, null: false
     t.datetime "approval_time"
-    t.integer  "app_id"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "app_id",                    null: false
+    t.integer  "requester_id",              null: false
+    t.integer  "approver_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "app_edit_requests", ["app_id"], name: "index_app_edit_requests_on_app_id"
-  add_index "app_edit_requests", ["user_id"], name: "index_app_edit_requests_on_user_id"
+  add_index "app_edit_requests", ["approver_id"], name: "index_app_edit_requests_on_approver_id"
+  add_index "app_edit_requests", ["requester_id"], name: "index_app_edit_requests_on_requester_id"
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
@@ -40,7 +43,6 @@ ActiveRecord::Schema.define(version: 20191112010952) do
     t.string   "code_climate_url"
     t.text     "features"
     t.string   "pivotal_tracker_url"
-    t.string   "request"
   end
 
   add_index "apps", ["org_id"], name: "index_apps_on_org_id"

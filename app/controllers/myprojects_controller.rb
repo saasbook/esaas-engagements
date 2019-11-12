@@ -45,9 +45,11 @@ class MyprojectsController < ApplicationController
     end
 
     def update
-        @app = App.find(params[:id])
-        @app.update_attributes!(:request => @app.request)
-		redirect_to edit_myproject_path(@app.id)
+        @request = AppEditRequest.where(app_id: params[:id])
+        if @request.nil?
+            AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
+        end
+        redirect_to myprojects_path
 	end
 
     def deploy_vet_map(orgs=nil)
