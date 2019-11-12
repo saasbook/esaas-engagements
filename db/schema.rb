@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191111104035) do
+ActiveRecord::Schema.define(version: 20191112010952) do
+
+  create_table "app_edit_requests", force: :cascade do |t|
+    t.text     "description"
+    t.text     "features"
+    t.text     "feedback"
+    t.datetime "approval_time"
+    t.integer  "app_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "app_edit_requests", ["app_id"], name: "index_app_edit_requests_on_app_id"
+  add_index "app_edit_requests", ["user_id"], name: "index_app_edit_requests_on_user_id"
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
