@@ -97,7 +97,7 @@ class AppsController < ApplicationController
   def app_params
     params.require(:app).permit(:name, :description, :deployment_url, :repository_url, 
                               :code_climate_url, :org_id, :status, :comments, :features,
-                              :pivotal_tracker_url, :request)
+                              :pivotal_tracker_url)
   end
 
   # count the number of apps for each status and
