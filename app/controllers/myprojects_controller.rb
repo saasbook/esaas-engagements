@@ -4,7 +4,7 @@ class MyprojectsController < ApplicationController
     def index
         @current_user = User.find_by_id(session[:user_id])
         orgs = Org.for_user(@current_user.id)
-        @apps = App.for_orgs(orgs, limit=@each_page, offset=0).sort_by_status
+        @apps = App.for_orgs(orgs, limit=@each_page, offset=0).unscoped.sort_by_status
         deploy_vet_map(@current_user.id)
         total_app = @total_deploy + @total_vet
         page_default_and_update("app", total_app)
