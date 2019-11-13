@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :myprojects
 
+  resources :appeditrequests
+
   root :to => 'apps#index'
 
   get 'current_iteration' => 'iterations#current_iteration', :as => 'current_iteration'

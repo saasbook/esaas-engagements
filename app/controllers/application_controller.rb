@@ -45,11 +45,11 @@ class ApplicationController < ActionController::Base
   end
 
   def page_default_and_update(name, total_item)
-    @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => total_item}
-    session["#{name}_page_num"] ||= '1'
-    session["#{name}_each_page"] = params["#{name}_each_page"] || session["#{name}_each_page"] || '10'
-    session["#{name}_page_num"] = '1'if params["#{name}_each_page"]
-    @each_page = @page_dict[session["#{name}_each_page"]].to_i
+      @page_dict = {"10" => 10, "50" => 50, "100" => 100, "All" => total_item}
+      session["#{name}_page_num"] ||= '1'
+      session["#{name}_each_page"] = params["#{name}_each_page"] || session["#{name}_each_page"] || '10'
+      session["#{name}_page_num"] = '1'if params["#{name}_each_page"]
+      @each_page = @page_dict[session["#{name}_each_page"]].to_i
   end
 
   def change_page_num(name, total_item)
