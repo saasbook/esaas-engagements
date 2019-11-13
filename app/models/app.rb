@@ -14,7 +14,7 @@ class App < ActiveRecord::Base
                 :customer_confirmation_received, :declined_by_staff,  :declined_by_customer, :declined_by_customer_available_next_sem, :back_up]
   
   
-  @@STATUS_ORDERS = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 2, 1, 0]
+  @@STATUS_ORDERS = [1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 2, 3, 4, 5, 0]
   
   
   # there should be more efficient ways handling status categorization
@@ -23,12 +23,9 @@ class App < ActiveRecord::Base
   @@DEPLOYMENT_STATUSES = [:dead, :development, :in_use, :in_use_and_wants_improvement, :inactive_but_wants_improvement, :pending]
 
   enum comment_type: [:contact_status, :app_functionality, :general, :vetting]
-
+  
   default_scope { order(:name => :asc) }
   scope :featured, -> { where.not("status = ? or status = ?", App.statuses[:dead], App.statuses[:pending]) }
-  
-  
-   
   
   
   
@@ -92,3 +89,4 @@ class App < ActiveRecord::Base
       App.order(order_by.join(' '))
   end
 end
+
