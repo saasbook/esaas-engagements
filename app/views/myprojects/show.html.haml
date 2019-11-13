@@ -7,29 +7,14 @@
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
     = link_to 'Back', myprojects_path, class: 'btn btn-primary pull-right'
     -#= link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
-
-<<<<<<< HEAD
-.well#github
-  %h4 Github: #{@app.repository_url}
-.well#pivotal
-  %h4 Pivotal Tracker:
-  -##{@app.pivotal_url}
-.well#deployment
-  %h4 Deployment: #{@app.deployment_url}
-=======
 .well#status
   %h4 Status: #{@app.status.humanize(capitalize: false)}
->>>>>>> upstream/master
 .well#description
   %h4 Description
   %p= sanitize @app.description
 .well#features
   %h4 App Initial Features
   %p= sanitize @app.features
-<<<<<<< HEAD
-.well#status
-  %h4 Status: #{@app.status.humanize(capitalize: false)}
-=======
 .row
   .col-xs-4.col-sm-4.col-md-4.col-lg-4
     .well#deployment
@@ -46,7 +31,6 @@
       %h4 Pivotal Tracker
       %p{:style => "word-wrap: break-word;"}
         = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
->>>>>>> upstream/master
 %h3
   -# Dummy button => need to be implemented in later iteration
   =link_to "Request Change", edit_myproject_path(@app.id), :class => 'btn btn-primary'

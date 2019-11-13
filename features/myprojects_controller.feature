@@ -6,3 +6,4 @@ Feature: after logged in, a user should be able to see his own projects, and sen
 
 Background: Logged in, users, apps, exist
     
+    
