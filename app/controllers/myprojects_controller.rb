@@ -4,11 +4,12 @@ class MyprojectsController < ApplicationController
     def index
         @current_user = User.find_by_id(session[:user_id])
         orgs = Org.for_user(@current_user.id)
-        @apps = App.for_orgs(orgs, limit=@each_page, offset=0).sort_by_status
+        @apps = App.for_orgs(orgs, limit=@each_page, offset=0).unscoped.sort_by_status
         deploy_vet_map(@current_user.id)
         total_app = @total_deploy + @total_vet
         page_default_and_update("app", total_app)
         change_page_num("app", total_app)
+        
         respond_to do |format|
             format.json { render :json => @apps.featured }
             format.html
@@ -20,7 +21,7 @@ class MyprojectsController < ApplicationController
         @current_user = User.find_by_id(session[:user_id])
         @current_user_orgs = Org.for_user(@current_user.id)
         @current_user_apps = App.for_orgs(@current_user_orgs)
-
+        
         # Check if the specified app exists, and if it does, set it to @app
         if App.exists?(params[:id])
             @app = App.find(params[:id])
@@ -39,6 +40,17 @@ class MyprojectsController < ApplicationController
         end
     end
 
+    def edit
+        @app = App.find(params[:id])
+    end
+
+    def update
+        @request = AppEditRequest.where(app_id: params[:id])
+        if @request.nil?
+            AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
+        end
+        redirect_to myprojects_path
+	end
 
     def deploy_vet_map(orgs=nil)
         status_map = App.status_count_for_orgs(orgs)
@@ -57,4 +69,5 @@ class MyprojectsController < ApplicationController
             end
         end
     end
+
 end
