@@ -1,7 +1,29 @@
 .page-header
-    %h1 Request Change for  App "#{App.find(@app.id).name}"
+  %h1 Request Change for  App "#{App.find(@app.id).name}"
 
-= form_tag myproject_path(@app.id), :method => :put do
-  
-    = text_area :request, "Request Description"
-    = submit_tag 'Send Request', :class => 'btn btn-primary'
+= form_for myproject_path(@app.id), :method => :put do
+  .well#status
+    %h4 Status: #{@app.status.humanize(capitalize: false)}  
+  .well#description
+    %h4 Description
+    = text_area_tag :project, @description, size: "24x6"
+  .well#features
+    %h4 App Initial Features
+    = text_area_tag :project, @features, size: "24x6"
+  .row
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .well#deployment
+        %h4 Deployment
+        %p{:style => "word-wrap: break-word;"}
+          = link_to @app.deployment_url, @app.deployment_url
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .well#github
+        %h4 Github
+        %p{:style => "word-wrap: break-word;"}
+          = link_to @app.repository_url, @app.repository_url
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .well#pivotal
+        %h4 Pivotal Tracker
+        %p{:style => "word-wrap: break-word;"}
+          = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
+  = submit_tag 'Send Request', :class => 'btn btn-primary'

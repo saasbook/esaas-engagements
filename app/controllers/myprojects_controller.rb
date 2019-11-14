@@ -42,6 +42,14 @@ class MyprojectsController < ApplicationController
 
     def edit
         @app = App.find(params[:id])
+        edit_request = AppEditRequest.where(:app_id => params[:id])
+        if edit_request.exists?
+            @description = edit_request.description
+            @features = edit_request.features
+        else
+            @description = @app.description
+            @features = @app.features
+        end
     end
 
     def update
