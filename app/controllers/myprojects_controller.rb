@@ -4,7 +4,7 @@ class MyprojectsController < ApplicationController
     def index
         @current_user = User.find_by_id(session[:user_id])
         orgs = Org.for_user(@current_user.id)
-        @apps = App.for_orgs(orgs, limit=@each_page, offset=0).unscoped.sort_by_status
+        @apps = App.unscoped.for_orgs(orgs, limit=@each_page, offset=0).sort_by_status
         deploy_vet_map(@current_user.id)
         total_app = @total_deploy + @total_vet
         page_default_and_update("app", total_app)
@@ -42,15 +42,29 @@ class MyprojectsController < ApplicationController
 
     def edit
         @app = App.find(params[:id])
+        #edit_request = AppEditRequest.where(:app_id => params[:id])
+        #if edit_request.exists?
+        #    @description = edit_request.description
+        #    @features = edit_request.features
+        #else
+          #  @description = @app.description
+          #  @features = @app.features
+        #end
     end
 
     def update
-        @request = AppEditRequest.where(app_id: params[:id])
+        @app = App.find(params[:id])
+        @request = AppEditRequest.find_by_app_id(params[:id])
         if @request.nil?
             AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
         end
-        redirect_to myprojects_path
-	end
+        redirect_to view_submit_path
+    end
+    
+    def view_submit
+        @app = App.find(params[:id])
+        @request = AppEditRequest.find_by_app_id(params[:id])
+    end
 
     def deploy_vet_map(orgs=nil)
         status_map = App.status_count_for_orgs(orgs)
