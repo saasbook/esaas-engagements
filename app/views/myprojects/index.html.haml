@@ -75,4 +75,4 @@
             %br
         %td{style: 'white-space: nowrap'}
           - if current_user.coach? || current_user.client?
-            = link_to "Request Update", myproject_path(app.id), :class => 'btn btn-primary'
+            = link_to "Request Change", edit_myproject_path(app.id), :class => 'btn btn-primary'
