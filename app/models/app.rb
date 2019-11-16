@@ -4,6 +4,7 @@ class App < ActiveRecord::Base
   has_many :comments, dependent: :destroy, as: :commentable
   has_many :engagements, dependent: :destroy
   has_many :iterations, :through => :engagements
+  has_many :app_edit_requests, dependent: :destroy
 
   validates_presence_of :name, :description, :org_id, :status
   validates_presence_of :repository_url, unless: :repoUrlOptional?

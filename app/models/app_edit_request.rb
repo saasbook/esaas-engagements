@@ -9,19 +9,27 @@ class AppEditRequest < ActiveRecord::Base
   # Approved    - Coach has accepted the changes and effectively published to Apps.
   enum status: [:submitted, :reviewed, :resubmitted, :approved]
 
-   validate :at_least_one_filled
-   validate :one_open_reqeust_per_app
-   validates_presence_of :app_id, :requester_id, :status
-   
-   def at_least_one_filled
-    errors.add(:base, 'at least one of description or features should be filled') if
-       description.to_s.strip.empty? && features.to_s.strip.empty?
-   end
+  scope :featured, -> { order(:status, :created_at) }
 
-   def one_open_reqeust_per_app
-      errors.add(:base, 'only one open edit request allowed per app') unless
-      AppEditRequest.where("app_id = ? AND status != ?", app_id, :approved).count == 0
-   end
-
+  validate :at_least_one_filled
+  validate :one_open_reqeust_per_app
+  validates_presence_of :app_id, :requester_id, :status
    
+  def at_least_one_filled
+   errors.add(:base, 'at least one of description or features should be filled') if
+      description.to_s.strip.empty? && features.to_s.strip.empty?
+  end
+
+  def one_open_reqeust_per_app
+     errors.add(:base, 'only one open edit request allowed per app') unless
+     AppEditRequest.where("app_id = ? AND status != ?", app_id, :approved).count == 0
+  end
+
+  def app_name
+    App.find(self.app_id).name
+  end
+
+  def requester_name
+    User.find(self.requester_id).name
+  end
 end
