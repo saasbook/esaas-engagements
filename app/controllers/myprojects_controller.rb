@@ -9,7 +9,7 @@ class MyprojectsController < ApplicationController
         total_app = @total_deploy + @total_vet
         page_default_and_update("app", total_app)
         change_page_num("app", total_app)
-        
+
         respond_to do |format|
             format.json { render :json => @apps.featured }
             format.html
@@ -21,7 +21,7 @@ class MyprojectsController < ApplicationController
         @current_user = User.find_by_id(session[:user_id])
         @current_user_orgs = Org.for_user(@current_user.id)
         @current_user_apps = App.for_orgs(@current_user_orgs)
-        
+
         # Check if the specified app exists, and if it does, set it to @app
         if App.exists?(params[:id])
             @app = App.find(params[:id])
@@ -42,14 +42,18 @@ class MyprojectsController < ApplicationController
 
     def edit
         @app = App.find(params[:id])
-        #edit_request = AppEditRequest.where(:app_id => params[:id])
-        #if edit_request.exists?
-        #    @description = edit_request.description
-        #    @features = edit_request.features
-        #else
-          #  @description = @app.description
-          #  @features = @app.features
-        #end
+        edit_request = AppEditRequest.find_by_app_id(params[:id])
+        if edit_request&.description&.nil?
+            @description = edit_request.description
+        else
+            @description = @app.description
+        end
+
+        if edit_request&.features&.nil?
+            @features = edit_request.features
+        else
+            @features = @app.features
+        end
     end
 
     def update
