@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
 <%- if options[:doc] -%>
   # Container that has the rails application server
@@ -14,7 +14,17 @@ services:
       - .:/app
     environment:
       - RAILS_ENV=<%= options[:rails_env] %>
-      - DATABASE_URL=postgres-server
+      <%- if options[:rails_env] == 'production' -%>
+      - DATABASE_URL=<%= options[:database_url] %>
+      - SECRET_KEY_BASE=<%= options[:prod_secret_key] %>
+      - github_key=<%= options[:prod_github_key] %>
+      - github_secret=<%= options[:prod_github_secret] %>
+      <%- end -%>
+    depends_on:
+    <%- if options[:pg_host] == 'postgres-server' -%>
+      - postgres-server
+    <%- end -%>
+      - minio-s3mock
     restart: always
 <%- if options[:aws_host_name] == 'minio-s3mock:9000' -%>
 <%- if options[:doc] -%>
@@ -33,7 +43,15 @@ services:
       - MINIO_ACCESS_KEY=<%= options[:aws_key_id] %>
       - MINIO_SECRET_KEY=<%= options[:aws_secret_key] %>
 <%- end -%>
+<%- if options[:pg_host] == 'postgres-server' -%>
   postgres-server:
     image: postgres:latest
+    <%- if options[:pg_vmap] -%>
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
+    <%- end -%>
+    environment:
+      - POSTGRES_PASSWORD=<%= options[:pg_pass] %>
+      - POSTGRES_USER=<%= options[:pg_user] %>
+      - POSTGRES_DB=<%= options[:pg_dbase] %>
+<%- end -%>

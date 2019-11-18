@@ -2,16 +2,15 @@ class MyprojectsController < ApplicationController
     skip_before_filter :logged_in?, :only => :index
 
     def index
-        @current_user = User.find_by_id(session[:user_id])
-        orgs = Org.for_user(@current_user.id)
-        @apps = App.unscoped.for_orgs(orgs, limit=@each_page, offset=0).sort_by_status
-        deploy_vet_map(@current_user.id)
+        user = current_user
+        orgs = Org.for_user(user.id)
+        deploy_vet_map(orgs)
         total_app = @total_deploy + @total_vet
-        page_default_and_update("app", total_app)
-        change_page_num("app", total_app)
-
+        page_default_and_update("myprojects", total_app)
+        change_page_num("myprojects", total_app)
+        @apps = App.for_orgs(orgs, limit=@each_page, offset=@each_page*(@page_num-1))
         respond_to do |format|
-            format.json { render :json => @apps.featured }
+            format.json { render :json => @apps }
             format.html
         end
     end
@@ -27,16 +26,14 @@ class MyprojectsController < ApplicationController
             @app = App.find(params[:id])
             @comments = @app.comments
         else
-            flash.alert = "You do not have any projects with ID:#{params[:id]}."
-            redirect_to myprojects_path
-            return
+            flash.alert = "You do not have any projects with ID :#{params[:id]}."
+            redirect_to myprojects_path and return
         end
 
         # Check if @app belongs to @current_user
-        if !@current_user_apps.exists?(@app.id)
-            flash.alert = "You do not have any projects with ID:#{params[:id]}."
+        unless @current_user_apps.exists?(@app.id)
+            flash.alert = "You do not have any projects with ID :#{params[:id]}."
             redirect_to myprojects_path
-            return
         end
     end
 

@@ -70,7 +70,7 @@ class App < ActiveRecord::Base
   end
 
   def self.for_orgs(orgs, limit=10, offset=0)
-    App.where(:org_id => orgs).limit(limit).offset(0)
+    App.unscoped.where(:org_id => orgs).limit(limit).offset(offset).sort_by_status
   end
 
   def self.status_count_for_orgs(orgs=nil)
@@ -86,7 +86,7 @@ class App < ActiveRecord::Base
       @@STATUS_ORDERS.each_with_index do |rank, index|
         order_by << "WHEN status=#{rank} THEN #{index}"
       end
-      order_by << 'END'
+      order_by << 'END ASC, id ASC'
       App.order(order_by.join(' '))
   end
 end
