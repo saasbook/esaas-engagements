@@ -8,5 +8,4 @@ RUN bundle install
 RUN rake db:seed
 RUN rake db:migrate
 EXPOSE 3000
-# -d (the database url) should match the postgres service name in docker-compose.yml
-CMD ["rails", "server", "-b", "0.0.0.0", "-d", "postgresql-server"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
