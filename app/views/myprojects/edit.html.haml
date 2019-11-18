@@ -1,13 +1,6 @@
 .page-header
   %h1 Request Change for  App "#{App.find(@app.id).name}"
 
-<<<<<<< HEAD
-= form_tag myproject_path(@app.id), :method => :put do
-  
-    = text_area :request, "Request Description"
-    = submit_tag 'Send Request', :class => 'btn btn-primary'
-    = link_to 'Back', myprojects_path, class: 'btn btn-primary pull-right'
-=======
 = form_for myproject_path(@app.id), :method => :put do
   .well#status
     %h4 Status: #{@app.status.humanize(capitalize: false)}  
@@ -34,4 +27,4 @@
         %p{:style => "word-wrap: break-word;"}
           = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
   = submit_tag 'Send Request', :class => 'btn btn-primary'
->>>>>>> d0e07e43ee2a0a2f8355dd7dc9c722d3f8d341f5
+  = link_to 'Back', myprojects_path, class: 'btn btn-primary pull-right'
