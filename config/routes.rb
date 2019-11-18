@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :appeditrequests
 
   root :to => 'apps#index'
+  
+  get 'myprojects/:id/edit/submit' => 'myprojects#view_submit', :as => 'view_submit'
 
   get 'current_iteration' => 'iterations#current_iteration', :as => 'current_iteration'
   get 'get_customer_feedback' => 'iterations#get_customer_feedback', :as => 'get_customer_feedback'

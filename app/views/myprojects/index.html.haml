@@ -3,12 +3,15 @@
     Listing Apps
     = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
   .help-block Click an App name to see more information
+<<<<<<< HEAD
 
 .well
   id="top-banner" 
   title="Your ad here" Your 
   
 
+=======
+>>>>>>> 9cb8deb37994c62c50f25cdfce429a8fbc9af0ff
 #filters
   %label.checkbox-inline
     %div#deploy
@@ -20,7 +23,6 @@
         %span{:class => status}= status.to_s.humanize
         %em (#{@deployment_map[status.to_s].to_i})
         %br
-    
   %label.checkbox-inline
     %div#vetting
       %strong Vetting Status:
@@ -31,7 +33,6 @@
         %span{:class => status}= status.to_s.humanize
         %em (#{@vetting_map[status.to_s].to_i})
         %br
-
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
