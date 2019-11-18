@@ -5,7 +5,7 @@ describe AppEditRequest do
     before :each do
         @invalid_request = build(:app_edit_request)
         @request1 = build(:app_edit_request, :description => 'I want X feature')
-        @request2 = build(:app_edit_request, :description => 'X')
+        @request2 = build(:app_edit_request, :features => 'X')
     end
 
     context 'validation' do

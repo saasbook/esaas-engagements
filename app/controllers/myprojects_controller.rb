@@ -54,18 +54,12 @@ class MyprojectsController < ApplicationController
     end
 
     def update
-        @app = App.find(params[:id])
         @request = AppEditRequest.find_by_app_id(params[:id])
         if @request.nil?
-            AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
+            AppEditRequest.create!(:description => params[:description], :features => params[:features], :app_id => params[:id], :requester_id => session[:user_id])
         end
-        redirect_to view_submit_path
-    end
-    
-    def view_submit
-        @app = App.find(params[:id])
-        @request = AppEditRequest.find_by_app_id(params[:id])
-    end
+        redirect_to myproject_path(params[:id])
+	end
 
     def deploy_vet_map(orgs=nil)
         status_map = App.status_count_for_orgs(orgs)

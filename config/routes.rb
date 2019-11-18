@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :myprojects
 
+  match "/myprojects/:id/edit", to: "myprojects#update",  :via => [:get, :put]
+
   resources :appeditrequests
 
   root :to => 'apps#index'
