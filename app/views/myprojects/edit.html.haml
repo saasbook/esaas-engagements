@@ -6,10 +6,10 @@
     %h4 Status: #{@app.status.humanize(capitalize: false)}  
   .well#description
     %h4 Description
-    = text_area_tag :project, @description, size: "24x6"
+    = text_area_tag :description, @description, size: "24x6"
   .well#features
     %h4 App Initial Features
-    = text_area_tag :project, @features, size: "24x6"
+    = text_area_tag :features, @features, size: "24x6"
   .row
     .col-xs-4.col-sm-4.col-md-4.col-lg-4
       .well#deployment

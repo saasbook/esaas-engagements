@@ -54,9 +54,9 @@ class MyprojectsController < ApplicationController
     end
 
     def update
-        @request = AppEditRequest.where(app_id: params[:id])
+        @request = AppEditRequest.find_by_app_id(params[:id])
         if @request.nil?
-            AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
+            AppEditRequest.create!(:description => params[:description], :features => params[:features], :app_id => params[:id], :requester_id => session[:user_id])
         end
         redirect_to myproject_path(params[:id])
 	end
