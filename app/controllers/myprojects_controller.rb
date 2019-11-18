@@ -61,7 +61,6 @@ class MyprojectsController < ApplicationController
         if @request.nil?
             AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
         end
-        redirect_to myprojects_path
 	end
 
     def deploy_vet_map(orgs=nil)
