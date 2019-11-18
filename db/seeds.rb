@@ -1,6 +1,31 @@
 require 'csv'
 
-raise ArgumentError, 'Seeding in Production' if Rails.env.production?
+PROD_USERS = [
+		%w(mutex@berkeley.edu Alex bdzr coach),
+		%w(srujayk@gmail.com Srujay srujayk client),
+		%w(pgenerao516@gmail.com Peter Autholius coach),
+		%w(jwp@berkeley.edu Jeff jw-park coach),
+    %w(aleasabrina@gmail.com Sabrina coach),
+    %w(kingarthuralagao@gmail.com King coach),
+    %w(anthonyshao@gmail.com Anthony coach)
+]
+
+if Rails.env == 'production'
+	PROD_USERS.each do |user|
+      User.find_or_create_by!(email: user[0]) do |u|
+        u.name = user[1]
+        u.github_uid = user[2]
+        u.user_type = user[3]
+      end
+	end
+end
+
+def rand_org_user
+	if Rails.env.to_sym == :production
+		rand_user = PROD_USERS.sample
+		User.find_by(email: rand_user[0])
+	end
+end
 
 # create users and orgs
 CSV.foreach("#{Rails.root}/db/user_orgs.csv", headers: true, header_converters: :symbol) do |row|
@@ -10,17 +35,23 @@ CSV.foreach("#{Rails.root}/db/user_orgs.csv", headers: true, header_converters: 
     u.user_type = row[:user_type]
 	end
 	Org.find_or_create_by!(name: row[:org_name]) do |o|
-		o.contact = user
+		o.contact = if Rails.env.to_sym == :production
+									rand_org_user
+                else
+                  user
+                end
 		o.description = row[:org_description]
 		o.url = row[:org_url] || (user.email !~ /gmail|berkeley.edu/ && user.email =~ /@(.*)$/ ? "http://#{$1}" : nil)
 	end
 end
+
 puts "#{Org.all.size} orgs, #{User.all.size} users"
 
 # default coach/coaching org
 coach = User.find_or_create_by(email: 'fox@cs.berekley.edu') do |fox|
 	fox.name = "Armando Fox"
 end
+
 cs169 = Org.find_or_create_by(name: 'UCB CS169 Fox') do |ucbcs169|
 	ucbcs169.description = 'CS 169 at UC Berkeley'
 	ucbcs169.url = "http://cs169.saas-class.org"
@@ -62,4 +93,6 @@ end
 puts "#{App.all.size} apps, #{Engagement.all.size} engagements"
 
 # login mockup
-User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")[Rails.env]
+if %w(development test).include? Rails.env
+	User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")[Rails.env]
+end

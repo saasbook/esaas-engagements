@@ -1,33 +1,25 @@
 language: ruby
 rvm:
-  - 2.4.5
-
-bundler_args: --without production
-
+- 2.4.5
+bundler_args: "--without production"
 env:
   global:
-    - MOZ_HEADLESS=1
-    - CC_TEST_REPORTER_ID=38ba27ccf020889cac29de8fa7467c67bd15a087bc76ecdf579cc52ea50d26f2
-    - github_key=test
-    - github_secret=test
-
+  - MOZ_HEADLESS=1
+  - CC_TEST_REPORTER_ID=0772e41cb98b7322d67a0476a4b6e99f2c0961b88c9e9e0817b531ce82fc4f93
+  - github_key=test
+  - github_secret=test
 addons:
-  #firefox: latest
   chrome: stable
-
 before_install:
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
-  #- wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-  - mkdir geckodriver
-  - tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
-  #- tar -xzf geckodriver-v0.24.0-linux64.tar.gz -C geckodriver
-  - export PATH=$PATH:$PWD/geckodriver
-
+- wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+- mkdir geckodriver
+- tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
+- export PATH=$PATH:$PWD/geckodriver
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- ./cc-test-reporter before-build
 script:
   - bundle exec rspec
   - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
@@ -37,3 +29,8 @@ script:
 after_script:
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+deploy:
+  provider: heroku
+  app: murmuring-plateau-21546
+  api_key:
+    secure: tvwKX63tvqrcI++yxSMa+2G3pTyzZnUrjPaOIkynoX/okcligZQrgynLSKbGp+PjDqVlzmieloIyh5bHJKmaMJpX/aLaYmmJYrDcNet732Z/vSThRlJVG3ZHgfztDBnBJ6nQ87mwrg5V2IJWnFoyBMwk7aWlBvtBQkmFOItfqTon08V57EK1SKtGR7j3s0AWUI6EY7DNcIDhcX2kgJSgP5Z1Eh2CUGSRHI95/0cpX+myqc8r2J5lYeMrB77riM/PMazZt1EURvXojRDwZicyBtRp/VaaCEKl1oPsCgUF+lN7DXO/Tn77yGDVIVndezJX81okomEnZmLT2jx7YtB3rG0DpYG5dHPO2O6t6gXLcOO7fKKVD6pde1rjLous3VBvEKX/vODZkg1hyZ7sbD1C0A5zwgCZFizo1sVvMOsgiQ3kvye3DR1VS+rNVnJf3jIsgAFpBS9cUQDlMCYKZiSs/enG2MCrarYnJXtbzcoZAqJMqTqnw1SO5jvm4nYlW5JeyNmj7UctUmzjhomucfQTr2DiCbp5jOElB1i248Q4lyHLGCYnEhiG6YLsZ0D3DUO/x+z14WKeACTQdhXGn3NcBC5V6wcV1Je3smFV6oocSaLH2OY5Bvehlyiji0NZ0cE71leS2sFYHny8iJ87SAws7lr8lMilkMi84rGAwqdjl6A=
