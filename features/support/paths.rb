@@ -16,8 +16,11 @@ module NavigationHelpers
     when /^the home\s?page$/
       then '/'
     
-    when /^the My Projects page$/
+    when /^the my project'?s page$/i
       then myprojects_path
+
+    when /^edit my project page for (.*)$/i
+      then edit_myproject_path(App.where(name: $1).first)
 
     when /^the create page$/
       then creation_path

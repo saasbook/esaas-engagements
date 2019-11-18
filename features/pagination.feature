@@ -6,49 +6,49 @@ Feature: a user can choose the number of apps, orgs and users show in one page
 
 Background: Logged in
     Given the following apps exist:
-        | id	|name  | description  | org_id | status  |
-        | 1	|app_a  | test        | 1      | pending |
-        | 2	|app_b  | test        | 2      | pending |
-        | 3	|app_c  | test        | 3      | pending |
-        | 4	|app_d  | test        | 4      | pending |
-        | 5	|app_e  | test        | 5      | pending |
-        | 6	|app_f  | test        | 6      | pending |
-        | 7	|app_g  | test        | 7      | pending |
-        | 8	|app_h  | test        | 8      | pending |
-        | 9	|app_i  | test        | 9      | pending |
-        | 10	|app_j  | test        | 10     | pending |
-        | 11	|app_k  | test        | 11     | pending |
+        | id	|name  | description  | org_id | status          |
+        | 1	    |app_a  | test        | 1      | pending         |
+        | 2	    |app_b  | test        | 2      | pending         |
+        | 3	    |app_c  | test        | 3      | pending         |
+        | 4     |app_d  | test        | 4      | pending         |
+        | 5	    |app_e  | test        | 5      | pending         |
+        | 6	    |app_f  | test        | 6      | pending         |
+        | 7	    |app_g  | test        | 7      | pending         |
+        | 8	    |app_h  | test        | 8      | pending         |
+        | 9	    |app_i  | test        | 9      | pending         |
+        | 10	|app_j  | test        | 10     | pending         |
+        | 11	|app_k  | test        | 11     | pending         |
         | 12	|app_l  | test        | 12     | vetting_pending |
 
     And the following orgs exist:
         | id	|name  |contact_id |
-        | 1	|org_a | 1         |
-        | 2	|org_b | 2         |
-        | 3	|org_c | 1         |
-        | 4	|org_d | 1         |
-        | 5	|org_e | 1         |
-        | 6	|org_f | 1         |
-        | 7	|org_g | 1         |
-        | 8	|org_h | 1         |
-        | 9	|org_i | 1         |
+        | 1	    |org_a | 1         |
+        | 2	    |org_b | 2         |
+        | 3	    |org_c | 1         |
+        | 4	    |org_d | 1         |
+        | 5	    |org_e | 1         |
+        | 6  	|org_f | 1         |
+        | 7	    |org_g | 1         |
+        | 8	    |org_h | 1         |
+        | 9	    |org_i | 1         |
         | 10	|org_j | 1         |
         | 11	|org_k | 1         |
         | 12	|org_l | 1         |
 
     And the following users exist:
-        | id | name   | github_uid	| email			| user_type	|
-	| 1  | user_a |	esaas_developer	| test@user.com		| coach		|
-	| 2  | user_b |			| test1@user.com	| coach		|
-	| 3  | user_c | 		| test2@user.com	| coach		|
-        | 4  | user_d |			| test3@user.com	| student	|
-	| 5  | user_e |			| test4@user.com	| student	|
-        | 6  | user_f |			| test5@user.com	| coach		|
-        | 7  | user_g |			| test6@user.com	| student	|
-        | 8  | user_h |			| test7@user.com	| coach		|
-        | 9  | user_i |			| test8@user.com	| coach 	|
-        | 10 | user_j |			| test9@user.com	| student	|
-        | 11 | user_k |			| test10@user.com	| coach		|
-        | 12 | user_l |			| test11@user.com	| student	|
+        | id | name   | github_uid	    | email			    | user_type	|
+        | 1  | user_a |	esaas_developer	| test@user.com		| coach		|
+        | 2  | user_b |			        | test1@user.com	| coach		|
+        | 3  | user_c | 		        | test2@user.com	| coach		|
+        | 4  | user_d |			        | test3@user.com	| student	|
+        | 5  | user_e |			        | test4@user.com	| student	|
+        | 6  | user_f |			        | test5@user.com	| coach		|
+        | 7  | user_g |			        | test6@user.com	| student	|
+        | 8  | user_h |			        | test7@user.com	| coach		|
+        | 9  | user_i |			        | test8@user.com	| coach 	|
+        | 10 | user_j |			        | test9@user.com	| student	|
+        | 11 | user_k |			        | test10@user.com	| coach		|
+        | 12 | user_l |			        | test11@user.com	| student	|
 
 Scenario: There are some click buttons on apps page that I can control the pagination
     Given I am on the apps page
