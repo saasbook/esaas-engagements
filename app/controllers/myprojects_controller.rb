@@ -20,7 +20,7 @@ class MyprojectsController < ApplicationController
         @current_user = User.find_by_id(session[:user_id])
         @current_user_orgs = Org.for_user(@current_user.id)
         @current_user_apps = App.for_orgs(@current_user_orgs)
-
+        @current_request = AppEditRequest.find_by_app_id(params[:id])
         # Check if the specified app exists, and if it does, set it to @app
         if App.exists?(params[:id])
             @app = App.find(params[:id])
@@ -35,6 +35,7 @@ class MyprojectsController < ApplicationController
             flash.alert = "You do not have any projects with ID :#{params[:id]}."
             redirect_to myprojects_path
         end
+        
     end
 
     def edit
@@ -54,11 +55,11 @@ class MyprojectsController < ApplicationController
     end
 
     def update
-        @request = AppEditRequest.where(app_id: params[:id])
+        @request = AppEditRequest.find_by_app_id(params[:id])
         if @request.nil?
-            AppEditRequest.create!(:description => params[:request], :app_id => params[:id], :requester_id => session[:user_id])
+            AppEditRequest.create!(:description => params[:description], :features => params[:features], :app_id => params[:id], :requester_id => session[:user_id])
         end
-        redirect_to myprojects_path
+        redirect_to myproject_path(params[:id])
 	end
 
     def deploy_vet_map(orgs=nil)
