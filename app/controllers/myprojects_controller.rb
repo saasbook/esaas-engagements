@@ -35,6 +35,7 @@ class MyprojectsController < ApplicationController
             flash.alert = "You do not have any projects with ID :#{params[:id]}."
             redirect_to myprojects_path
         end
+        
     end
 
     def edit
