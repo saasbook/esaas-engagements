@@ -2,7 +2,7 @@
   %h1 
     Request Change for App "#{App.find(@app.id).name}"
     = link_to App.find(@app.id).name + ' Information', myproject_path, class: 'btn btn-primary pull-right'
-= form_for myproject_path(@app.id), :method => :put do
+= form_for @app, :url => myproject_path(@app.id), :method => :put do
   .well#status
     %h4 Status: #{@app.status.humanize(capitalize: false)}  
   .well#description
