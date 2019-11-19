@@ -9,6 +9,7 @@ class MyprojectsController < ApplicationController
         page_default_and_update("myprojects", total_app)
         change_page_num("myprojects", total_app)
         @apps = App.for_orgs(orgs, limit=@each_page, offset=@each_page*(@page_num-1))
+        @change_button_fields = @apps.map{|app| [app.id, change_button_text(app.id)]}.to_h
         respond_to do |format|
             format.json { render :json => @apps }
             format.html
@@ -17,7 +18,7 @@ class MyprojectsController < ApplicationController
 
     # GET /myprojects/1
     def show
-        @current_user = User.find_by_id(session[:user_id])
+        @current_user = current_user
         @current_user_orgs = Org.for_user(@current_user.id)
         @current_user_apps = App.for_orgs(@current_user_orgs)
         @current_request = AppEditRequest.find_by_app_id(params[:id])
@@ -25,6 +26,7 @@ class MyprojectsController < ApplicationController
         if App.exists?(params[:id])
             @app = App.find(params[:id])
             @comments = @app.comments
+            @change_button_field = change_button_text(@app.id)
         else
             flash.alert = "You do not have any projects with ID :#{params[:id]}."
             redirect_to myprojects_path and return
@@ -41,13 +43,13 @@ class MyprojectsController < ApplicationController
     def edit
         @app = App.find(params[:id])
         edit_request = AppEditRequest.find_by_app_id(params[:id])
-        if edit_request&.description&.nil?
+        unless (edit_request&.description).nil?
             @description = edit_request.description
         else
             @description = @app.description
         end
 
-        if edit_request&.features&.nil?
+        unless (edit_request&.features).nil?
             @features = edit_request.features
         else
             @features = @app.features
@@ -55,8 +57,8 @@ class MyprojectsController < ApplicationController
     end
 
     def update
-        @request = AppEditRequest.find_by_app_id(params[:id])
-        if @request.nil?
+        @request = AppEditRequest.where(app_id: params[:id])
+        if @request.empty?
             AppEditRequest.create!(:description => params[:description], :features => params[:features], :app_id => params[:id], :requester_id => session[:user_id])
         end
         redirect_to myproject_path(params[:id])
@@ -77,6 +79,15 @@ class MyprojectsController < ApplicationController
                 @deployment_map[status_str] = count
                 @total_deploy += count
             end
+        end
+    end
+
+    def change_button_text(app_id)
+        request = AppEditRequest.where(app_id: app_id)
+        if request.empty?
+            return "Request Change"
+        else
+            return "Update Request"
         end
     end
 
