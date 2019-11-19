@@ -20,7 +20,7 @@ class MyprojectsController < ApplicationController
         @current_user = User.find_by_id(session[:user_id])
         @current_user_orgs = Org.for_user(@current_user.id)
         @current_user_apps = App.for_orgs(@current_user_orgs)
-
+        @current_request = AppEditRequest.find_by_app_id(params[:id])
         # Check if the specified app exists, and if it does, set it to @app
         if App.exists?(params[:id])
             @app = App.find(params[:id])
@@ -35,6 +35,7 @@ class MyprojectsController < ApplicationController
             flash.alert = "You do not have any projects with ID :#{params[:id]}."
             redirect_to myprojects_path
         end
+        
     end
 
     def edit

@@ -2,7 +2,6 @@ class AppeditrequestsController < ActionController::Base
   before_action :auth_user?
 
   def index
-    @requests = AppEditRequest.all
     respond_to do |format|
       format.json { render :json => AppEditRequest.featured }
       format.html
