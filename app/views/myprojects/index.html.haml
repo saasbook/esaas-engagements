@@ -3,7 +3,6 @@
     Listing Apps
     = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
   .help-block Click an App name to see more information
-
 #filters
   %label.checkbox-inline
     %div#deploy
@@ -15,7 +14,6 @@
         %span{:class => status}= status.to_s.humanize
         %em (#{@deployment_map[status.to_s].to_i})
         %br
-    
   %label.checkbox-inline
     %div#vetting
       %strong Vetting Status:
@@ -26,26 +24,25 @@
         %span{:class => status}= status.to_s.humanize
         %em (#{@vetting_map[status.to_s].to_i})
         %br
-
   :javascript
       $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
 
 %ul{:class => 'pagination'}
   %li{:class=>'each_page'} 
     %a{:class=>"page_link"} Apps per page
-  - ["10","50","100","All"].each do |num_per_page|
-    - if @each_page == @page_dict[num_per_page] then
+  - %w(10 50 100 All).each do |num_per_page|
+    - if @each_page == @page_dict[num_per_page]
       %li{:class=>'each_page active'} 
-        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}"}=num_per_page
+        %a{:class=>"page-link", :href=>"?myprojects_each_page=#{num_per_page}"}=num_per_page
     - else
       %li{:class=>'each_page'}
-        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}"}=num_per_page
+        %a{:class=>"page-link", :href=>"?myprojects_each_page=#{num_per_page}"}=num_per_page
 
 %ul{:class => 'pagination pull-right'}
-  - ["First","Previous","Current","Next","Last"].each do |action|
+  - %w(First Previous Current Next Last).each do |action|
     - if action != "Current" then 
       %li{:class=>'page_num'}
-        %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}"}=action
+        %a{:class=>"page-link", :href=>"?myprojects_page_action=#{action}&prev=#{@page_num}"}=action
     - else
       %li{:class=>"page-num"}
         %a{:class=>'page_link'} Page #{[1,@page_num].max}
@@ -75,4 +72,4 @@
             %br
         %td{style: 'white-space: nowrap'}
           - if current_user.coach? || current_user.client?
-            = link_to "Request Update", myproject_path(app.id), :class => 'btn btn-primary'
+            = link_to @change_button_fields[app.id], edit_myproject_path(app.id), :class => 'btn btn-primary'
