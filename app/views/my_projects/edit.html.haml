@@ -4,6 +4,16 @@
 %div.text-center.alert{class: "alert#{@banner_class}", role: 'alert'}
   = @banner_message
 
+- unless @app_edit_request.feedback.nil?
+  %hr
+  .well
+    %h3 Staff Feedback on Request:
+    =sanitize @app_edit_request.feedback
+    .clearfix
+      .pull-right
+        Feedback By:
+        =link_to @app_edit_request.approver.name, @app_edit_request.approver
+  %hr
 =form_tag({action: :update} , method: :put) do
   =render 'form'
   =submit_tag 'Update Request', :class => 'btn btn-primary'

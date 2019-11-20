@@ -24,7 +24,7 @@ class MyApprovalRequestsController < ApplicationController
   # PATCH/PUT /my_approval_requests/1.json
   def update
     redirect_to show_my_approval_request_path(app_id: @app_edit_request.app_id),
-                alert: 'You must provide feedback for request or approve or both.' if params[:feedback].blank? && params[:approve].nil?
+                alert: 'You must provide feedback for request or approve or both.' and return if params['feedback'].blank? && params['approve'].nil?
     if update_edit_request
       redirect_to my_approval_requests_path, notice: @success_msg
     else
@@ -36,6 +36,7 @@ class MyApprovalRequestsController < ApplicationController
   private
     def update_edit_request
       # Todo: send email. Right now the client never see's feedback if the edits are approved.
+      @app_edit_request.approver = current_user
       if params[:approve]
         @app.description = (@app_edit_request.description.blank?) ? @app.features : @app_edit_request.description
         @app.features = (@app_edit_request.features.blank?) ? @app.features : @app_edit_request.features

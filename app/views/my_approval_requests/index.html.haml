@@ -20,6 +20,7 @@
         %th Organization
         %th Submitted By
         %th Submission Date
+        %th Request Status
         %th
     %tbody
       - unless @my_approval_requests.nil?
@@ -34,5 +35,8 @@
               = link_to req.requester.name, req.requester
             %td
               = req.created_at.strftime(ApplicationHelper.get_date_format)
+            %td
+              %span.label{class: "label#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}"}
+                = req.status
             %td{style: 'white-space: nowrap'}
               = link_to 'View Request', show_my_approval_request_path(app_id: req.app_id), :title => "Last update: #{req.updated_at.strftime('%c')}", :class => 'btn btn-primary'
