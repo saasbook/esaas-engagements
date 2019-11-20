@@ -8,7 +8,7 @@
     - unless (url = @app.code_climate_url).blank?
       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
-    = link_to 'Back', myprojects_path, class: 'btn btn-primary pull-right'
+    =link_to  @change_button_field, edit_myproject_path(@app.id), :class => 'btn btn-primary pull-right'
     -#= link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 .well#status
   %h4 Status: #{@app.status.humanize(capitalize: false)}
@@ -36,4 +36,4 @@
         = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
 %h3
   -# Dummy button => need to be implemented in later iteration
-  =link_to  @change_button_field, edit_myproject_path(@app.id), :class => 'btn btn-primary'
+  = link_to 'Back to My Projects', myprojects_path, class: 'btn btn-primary pull-left'
