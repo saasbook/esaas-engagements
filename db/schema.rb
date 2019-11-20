@@ -13,20 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20191112010952) do
 
-  create_table "app_edit_requests", force: :cascade do |t|
+  create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
     t.text     "description"
     t.text     "features"
     t.text     "feedback"
     t.integer  "status",        default: 0, null: false
     t.datetime "approval_time"
-    t.integer  "app_id",                    null: false
     t.integer  "requester_id",              null: false
     t.integer  "approver_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
 
-  add_index "app_edit_requests", ["app_id"], name: "index_app_edit_requests_on_app_id"
   add_index "app_edit_requests", ["approver_id"], name: "index_app_edit_requests_on_approver_id"
   add_index "app_edit_requests", ["requester_id"], name: "index_app_edit_requests_on_requester_id"
 

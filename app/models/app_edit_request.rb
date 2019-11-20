@@ -1,35 +1,47 @@
 class AppEditRequest < ActiveRecord::Base
-  belongs_to :app
+  self.primary_key = :app_id
+  belongs_to :app, foreign_key: :app_id
   belongs_to :approver, class_name: 'User'
   belongs_to :requester, class_name: 'User'
 
   # Submitted   - When the client submits but no coach has approved
   # Reviewed    - Once the coach gives feedback but has not accepted the changes. Client needs to resubmit.
   # Resubmitted - Once the client has iterated on the coach's feedback and re-submits.
-  # Approved    - Coach has accepted the changes and effectively published to Apps.
-  enum status: [:submitted, :reviewed, :resubmitted, :approved]
+  enum status: [:submitted, :reviewed, :resubmitted]
+
+  # Note: if either description.blank? or features.blank? then it is assumed that the user does not
+  # want edits for the blank field. Hence we don't display blank fields as an edit for the coach.
 
   scope :featured, -> { order(:status, :created_at) }
 
   validate :at_least_one_filled
-  validate :one_open_reqeust_per_app
+  validate :one_open_request_per_app, on: :create
+  validate :description_has_edits_if_filled
+  validate :features_has_edits_if_filled
   validates_presence_of :app_id, :requester_id, :status
-   
+
+  def description_has_edits_if_filled
+    errors.add(:base, 'Cannot submit current approved description as an edit.') if
+        !(description.to_s.strip.empty?) && (description == App.find(app_id)&.description)
+  end
+
+  def features_has_edits_if_filled
+    errors.add(:base, 'Cannot submit current approved features as an edit.') if
+        !(features.to_s.strip.empty?) && (features == App.find(app_id)&.features)
+  end
+
   def at_least_one_filled
-   errors.add(:base, 'at least one of description or features should be filled') if
-      description.to_s.strip.empty? && features.to_s.strip.empty?
+   errors.add(:base, 'At least one of description or features should be filled.') if
+      (description.to_s.strip.empty?) && (features.to_s.strip.empty?)
   end
 
-  def one_open_reqeust_per_app
-     errors.add(:base, 'only one open edit request allowed per app') unless
-     AppEditRequest.where("app_id = ? AND status != ?", app_id, :approved).count == 0
+  def one_open_request_per_app
+      unless AppEditRequest.get_request_for(app_id).nil?
+        errors.add(:base, 'There is another one edit request for this app. Only one open edit request is allowed per app.')
+    end
   end
 
-  def app_name
-    App.find(self.app_id).name
-  end
-
-  def requester_name
-    User.find(self.requester_id).name
+  def self.get_request_for(app_id)
+    AppEditRequest.where(app_id: app_id).first
   end
 end

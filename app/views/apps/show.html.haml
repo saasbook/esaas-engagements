@@ -1,3 +1,7 @@
+- unless @app_edit_request.nil?
+  .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
+    = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
+
 .page-header
   %h1
     = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
@@ -16,6 +20,54 @@
 .well#features
   %h4 App Initial Features
   %p= sanitize @app.features
+%hr
+
+.row
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#deployment
+      %h4 Deployment
+      %p{:style => "word-wrap: break-word;"}
+        = link_to @app.deployment_url, @app.deployment_url
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#github
+      %h4 Github
+      %p{:style => "word-wrap: break-word;"}
+        = link_to @app.repository_url, @app.repository_url
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#pivotal
+      %h4 Pivotal Tracker
+      %p{:style => "word-wrap: break-word;"}
+        = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
+%hr
+
+- unless @app_edit_request.nil?
+  .panel.panel-default
+    .panel-heading
+      .text-center
+        %h4 Your app Edit Request
+      .clearfix
+        .pull-left
+          %span
+            Request Status:
+          %span.label{class: "label#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}"}
+            = @app_edit_request.status
+        .pull-right
+          %span
+            Submitted Date:
+          %span.label{class: "label-primary"}
+            = @app_edit_request.created_at.strftime('%B %d, %Y')
+    .panel-body
+      %h5.app_edit_request_description Description:
+      = sanitize @app_edit_request.description
+      %hr
+      %h5.app_edit_request_features Features:
+      = sanitize @app_edit_request.features
+    .panel-footer
+      .clearfix
+        .pull-right
+          =link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id), class: 'btn btn-info'
+  %hr
+
 
 = render partial: 'comments/comments', locals: {commentable: @app}
 

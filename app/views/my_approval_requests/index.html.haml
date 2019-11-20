@@ -1,0 +1,38 @@
+- if @my_approval_requests.nil? || @my_approval_requests.empty?
+  .page-header{style: 'margin: 15px 0;'}
+    %h3.text-center
+      There are no App Edit Requests pending approval
+.panel.panel-default{style: 'margin: 15px 0;'}
+  .panel-heading
+    %h5
+      Show requests with status:
+    %br
+    =form_tag(my_approval_requests_path, enforce_utf8: false, method: :get) do
+      - AppEditRequest.statuses.keys.each do |status|
+        .form-check
+          =check_box_tag %Q{my_approvals[#{status}_status]}, true, @index_form.instance_variable_get(%Q{@#{status}_status}), class: 'form-check-input', id: %Q{filter-request-by-status-#{status}}
+          =label_tag %Q{filter-request-by-status-#{status}}, status
+      = button_tag 'Filter Requests', type: 'submit', name: '', class: 'btn btn-primary', style: 'margin: 15px, 0;'
+  %table.table.table-bordered#apps_table
+    %thead
+      %tr
+        %th App Name
+        %th Organization
+        %th Submitted By
+        %th Submission Date
+        %th
+    %tbody
+      - unless @my_approval_requests.nil?
+        - @my_approval_requests.each do |req|
+          %tr{:class => [req.app.status.to_s]}
+            %td
+              = req.app_id
+              = link_to req.app.name, req.app
+            %td
+              = link_to req.app.org.name, req.app.org
+            %td
+              = link_to req.requester.name, req.requester
+            %td
+              = req.created_at.strftime(ApplicationHelper.get_date_format)
+            %td{style: 'white-space: nowrap'}
+              = link_to 'View Request', show_my_approval_request_path(app_id: req.app_id), :title => "Last update: #{req.updated_at.strftime('%c')}", :class => 'btn btn-primary'

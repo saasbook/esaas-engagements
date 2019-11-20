@@ -1,0 +1,9 @@
+.page-header
+  %h1 Request Changes for "#{@app.name}"
+
+%div.text-center.alert{class: "alert#{@banner_class}", role: 'alert'}
+  = @banner_message
+
+=form_tag create_my_project_edit_path(app_id: @app.id), method: :post do
+  = render 'form'
+  = submit_tag 'Send Request', :class => 'btn btn-primary'

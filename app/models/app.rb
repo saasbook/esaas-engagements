@@ -89,5 +89,10 @@ class App < ActiveRecord::Base
       order_by << 'END ASC, id ASC'
       App.order(order_by.join(' '))
   end
+
+  def self.belongs_to_user(app_id, contact_id)
+    orgs = Org.for_user(contact_id)
+    App.where(org_id: orgs).where(id: app_id).count != 0
+  end
 end
 

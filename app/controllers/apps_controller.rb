@@ -22,6 +22,7 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
+    @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
   end
 
   # GET /apps/new
