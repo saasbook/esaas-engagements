@@ -38,7 +38,10 @@ class MyProjectsController < ApplicationController
             status:       :submitted,
             requester_id: session[:user_id]
         )
-        if @app_edit_request.save
+        if @app.status.to_s == 'dead'
+            @app.status = 'vetting_pending'
+        end
+        if @app_edit_request.save && @app.save
             redirect_to app_path(@app)
         else
             redirect_to new_my_project_edit_path(app_id: @app.id),
