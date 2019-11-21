@@ -30,4 +30,17 @@ module ApplicationHelper
   def self.get_date_format
     '%B %d, at %l:%m %p %Y'
   end
+
+  def edit_request_button_text(app_edit_request)
+    if request.nil?
+       "Request Change"
+    elsif !request.nil?
+      return "Update Request"
+      #TODO: enum for app model is not working correctly
+    elsif app_edit_request.app.status == 'dead'
+      return "Request New Feature"
+    else
+       "Request Change"
+    end
+  end
 end

@@ -72,4 +72,4 @@
             %br
         %td{style: 'white-space: nowrap'}
           - if current_user.coach? || current_user.client?
-            = link_to "Request Change", new_my_project_edit_path(app_id: app.id), :class => 'btn btn-primary'
+            = link_to ApplicationHelper.edit_request_button_text(@app_edit_request), new_my_project_edit_path(app_id: app.id), :class => 'btn btn-primary'
