@@ -67,11 +67,3 @@
    When I follow "app1"
    Then I should see "app1"
    Then I should see "Back"
-   Then I should see "Request Change"
-
- Scenario: A logged in user can see buttons on the Projects Information Page through the 'My Projects' index
-   Given I am logged in
-   When I follow "My Projects"
-   When I follow "app1"
-   When I follow "Back"
-   Then I should be on the my projects page

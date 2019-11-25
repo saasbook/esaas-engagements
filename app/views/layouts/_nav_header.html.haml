@@ -3,9 +3,9 @@
   %ul.nav.nav-tabs
     %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
     - if current_user
-      %li= link_to 'My Projects', myprojects_path, :role => 'presentation'
+      %li= link_to 'My Projects', my_projects_path, :role => 'presentation'
     - if current_user&.coach?
-      %li= link_to 'App Edit Requests', appeditrequests_path, :role => 'presentation'
+      %li= link_to 'App Edit Requests', my_approval_requests_path, :role => 'presentation'
     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
     %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
     %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i), :role => 'presentation'

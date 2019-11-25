@@ -1,3 +1,7 @@
+- unless @app_edit_request.nil?
+  .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
+    = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
+
 .page-header
   %h1
     = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
@@ -8,18 +12,18 @@
     = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
     = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
 
-.well#status
-  %h4 Status: #{@app.status.humanize(capitalize: false)}
-.well#description
-  %h4 Description
-  %p= sanitize @app.description
-.well#features
-  %h4 App Initial Features
-  %p= sanitize @app.features
+= render partial: 'shared/app'
+
+- unless @app_edit_request.nil?
+  = render partial: 'shared/app_edit_request'
+  .well
+    .clearfix
+      .pull-right
+        =link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id), class: 'btn btn-info'
+  %hr
+
 
 = render partial: 'comments/comments', locals: {commentable: @app}
-
-
 
 .page-header
   %h1

@@ -29,4 +29,4 @@ Scenario: A coach that is logged in can see 'My Projects' tab and have access to
   And I should see "app-description-1"
   And I should see "Request Change"
   When I follow "Request Change"
-  Then I should be on edit my project page for app-1
+  Then I should be on the new edit request page for app-1
