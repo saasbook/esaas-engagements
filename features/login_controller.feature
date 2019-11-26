@@ -53,6 +53,6 @@ Scenario: not logged in so should see "Login" tab
   Given I am not logged in
   Then I should see "Login"
 
-  Scenario: logged in so should not see "Login" tab
-    Given I am logged in
-    Then I should not see "Login"
+Scenario: logged in so should not see "Login" tab
+  Given I am logged in
+  Then I should not see "Login"
