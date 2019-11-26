@@ -22,11 +22,27 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :update], module: :users
   end
 
-  resources :myprojects
+  # my_projects routes
+  get 'my_projects' => 'my_projects#index',
+      as: :my_projects
+  get 'my_project_edit/:app_id/edit' => 'my_projects#edit',
+      as: :edit_my_project_edit
+  get 'my_project_edit/:app_id/new' => 'my_projects#new',
+      as: :new_my_project_edit
+  match 'my_project_edit/:app_id' => 'my_projects#create',
+        via: [:post], as: :create_my_project_edit
+  match 'my_project_edit/:app_id' => 'my_projects#update',
+        via: [:put, :patch], as: :update_my_project_edit
+  match 'my_project_edit/:app_id' => 'my_projects#destroy',
+        via: [:delete], as: :delete_my_project_edit
 
-  match "/myprojects/:id/edit", to: "myprojects#update",  :via => [:get, :put]
-
-  resources :appeditrequests
+  # my_approval_request routes
+  get 'my_approval_requests' => 'my_approval_requests#index',
+      as: :my_approval_requests
+  get 'my_approval_requests/:app_id' => 'my_approval_requests#show',
+      as: :show_my_approval_request
+  match 'my_approval_requests/:app_id' => 'my_approval_requests#update',
+        via: [:put, :patch], as: :approve_my_approval_requests
 
   root :to => 'apps#index'
   

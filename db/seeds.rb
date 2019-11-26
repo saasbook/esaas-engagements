@@ -2,7 +2,7 @@ require 'csv'
 
 PROD_USERS = [
 		%w(mutex@berkeley.edu Alex bdzr coach),
-		%w(srujayk@gmail.com Srujay srujayk client),
+		%w(srujayk@gmail.com Srujay srujayk coach),
 		%w(pgenerao516@gmail.com Peter Autholius coach),
 		%w(jwp@berkeley.edu Jeff jw-park coach),
     %w(aleasabrina@gmail.com Sabrina coach),

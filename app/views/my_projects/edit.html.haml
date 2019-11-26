@@ -1,0 +1,35 @@
+.page-header
+  %h1 Request Changes for "#{@app.name}"
+
+%div.text-center.alert{class: "alert#{@banner_class}", role: 'alert'}
+  = @banner_message
+
+- unless @app_edit_request.feedback.nil?
+  %hr
+  .well
+    %h3 Staff Feedback on Request:
+    =sanitize @app_edit_request.feedback
+    .clearfix
+      .pull-right
+        Feedback By:
+        =link_to @app_edit_request.approver.name, @app_edit_request.approver
+  %hr
+=form_tag({action: :update} , method: :put) do
+  =render 'form'
+  =submit_tag 'Update Request', :class => 'btn btn-primary'
+
+.panel.panel-default{style: 'margin: 15px 0;'}
+  .panel-heading.text-left
+    List of staff you can contact
+  .panel-body
+    %table.table.table-hover.table-bordered#staff_list
+      - @staff_list.each do |staff|
+        %tr
+          %td
+            = staff.name
+          %td
+            = staff.email
+
+-#TODO: use modal to confirm delete
+=form_tag(delete_my_project_edit_path(app_id: @app.id), method: :delete) do
+  =submit_tag 'Delete Request', class: 'btn btn-danger pull-left'

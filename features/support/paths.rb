@@ -17,10 +17,13 @@ module NavigationHelpers
       then '/'
     
     when /^the my project'?s page$/i
-      then myprojects_path
+      then my_projects_path
 
-    when /^edit my project page for (.*)$/i
-      then edit_myproject_path(App.where(name: $1).first)
+    when /^the update edit request page for (.*)$/i
+      then edit_my_project_edit_path(App.where(name: $1).first)
+
+    when /^the new edit request page for (.*)$/i
+      then new_my_project_edit_path(App.where(name: $1).first)
 
     when /^the create page$/
       then creation_path

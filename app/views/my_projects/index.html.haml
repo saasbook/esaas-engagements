@@ -40,7 +40,7 @@
 
 %ul{:class => 'pagination pull-right'}
   - %w(First Previous Current Next Last).each do |action|
-    - if action != "Current" then 
+    - if action != "Current"
       %li{:class=>'page_num'}
         %a{:class=>"page-link", :href=>"?myprojects_page_action=#{action}&prev=#{@page_num}"}=action
     - else
@@ -61,7 +61,7 @@
         %td
           = app.id
         %td
-          = link_to app.name, myproject_path(app.id)
+          = link_to app.name, app_path(app.id)
         %td
           = link_to app.org.name, app.org
         %td
@@ -72,4 +72,4 @@
             %br
         %td{style: 'white-space: nowrap'}
           - if current_user.coach? || current_user.client?
-            = link_to @change_button_fields[app.id], edit_myproject_path(app.id), :class => 'btn btn-primary'
+            = link_to ApplicationHelper.edit_request_button_text(app), new_my_project_edit_path(app_id: app.id), :class => 'btn btn-primary'
