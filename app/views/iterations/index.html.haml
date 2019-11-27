@@ -32,7 +32,7 @@
       %tr
         %td=iter.number
         %td=iter.end_date.strftime('%F')
-        %td=iter.general_feedback
+        %td=sanitize iter.general_feedback
         - Iteration.customer_rating_keys.each do |rating|
           %td=Iteration.rating_to_score(h[rating]) || "No Data"
         %td{:style => 'white-space: nowrap'}
