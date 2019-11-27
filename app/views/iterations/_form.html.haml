@@ -6,6 +6,6 @@
   = f.text_area :general_feedback, :rows => '6', label: 'Customer Feedback'
   = f.form_group do
     = f.submit :class => 'btn btn-success'
-    = link_to 'Back', engagement_iterations_path(@engagement), :class => 'btn btn-primary'
+    = link_to 'Back', :back, :class => 'btn btn-primary'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
 
