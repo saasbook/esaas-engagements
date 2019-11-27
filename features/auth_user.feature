@@ -165,7 +165,7 @@ Scenario: Happy Path - Can create new iteration, edit and destroy existing itera
   And I follow "2017-03-25"
   And I follow "Add Iteration"
   Then I should see "New Iteration for Engagement from"
-  And I follow "Back"
+  And I follow "Back to Iteration"
   And I press "Edit" for "2017-04-14"
   Then I should see "Edit Customer Feedback"
   And I follow "Back to Iteration"
