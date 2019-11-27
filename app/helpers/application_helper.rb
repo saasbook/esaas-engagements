@@ -21,7 +21,7 @@ module ApplicationHelper
   def self.get_edit_req_banner_message(app_edit_request)
     banner_message_by_status = {
         submitted:   'Your app edit request has been submitted to staff for review and approval. Staff has not yet reviewed/approved this request.',
-        reviewed:    'Staff has reviewed and left feedback on you edit request. Kindly review staff feedback and update the request.',
+        reviewed:    'Staff has reviewed and left feedback on your edit request. Kindly review staff feedback and update the request.',
         resubmitted: 'You resubmitted an edit request after staff left feedback but staff has not yet reviewed your updates.'
     }
     banner_message_by_status[app_edit_request&.status&.to_sym] || 'There are currently no edit requests for your app. You can request new edits for you app here.'

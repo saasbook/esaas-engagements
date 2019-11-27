@@ -147,3 +147,9 @@ Then /^I should see (\d+) (.+) starting with (?:.+) (\d+) with sequence format:$
     current_item.keys.each { |k| appears_before(table_element, current_item[k], next_item[k])}
   end
 end
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.body is the entire content of the page as a string.
+  page.body.index(e1).should be < page.body.index(e2)
+end
