@@ -29,8 +29,3 @@ script:
 after_script:
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-deploy:
-  provider: heroku
-  app: esaas-demo
-  api_key:
-    secure: L2XrbAVImlXXU+F7GdGSdp/3EY3q0aowEFJ1umsvA/Z/tOYFl0iMje8pXunmQMH2B5mbYJMDQt5kT36WJk8WxRUzRxJQbytURWN+jdmg56GrFg4B1ub/qFKl5wbI1GkjDzZ0er1I5jLFInMmfGMo5+hDONcqbzln3D5zByOrxed/nHNEbj64/R3N+1dH3qe2OqeCityeFmiPE2FUJ1seQdEZA/TRzirT8LHSI1VntoRa5yYw3TL73aZHDc4LGATRX6/BXvQZfglq4qkduqV9TSlg7YjQfz5sFVaA8YGMP69yW/hU8vxwK1yEQ2CIVa3WOEDru/d5a8ghW7K7OMoaC3txEQQ0j7o6/7SrBHT11OnkQpQ0AAw+xO6vGDe2y2qLcudx5BNvKr2ZTDGTT/iUonQOOi0y75W3tGxlZlfpr7ZVbA/vMZMjUQvZOyg4GvD+5WL2PnVoX7Z4xAop9OXyxDtpiPpA2w8eyXXkkYoieh9kMb50NRaP4EMPPKrsuQj84mxCLHBmwkMtngbUIJxOB2rf9CFVlbL7+7fJHIp1gMASkXcBENQS9B8GotHbv/a13bEJo7hghyfATp3cR0pI+enNaZaUcnaSaRNCS4SO+Kl9znh8Ac+8rw3RnX8S1Bcn52qezqKxykDJLZ+cd9VnyEU4fTffRLxLQd18fj5YCjM=
