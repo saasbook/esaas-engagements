@@ -32,7 +32,7 @@ class IterationsController < ApplicationController
   def update
     feedback = feedback_params
     @iteration.customer_feedback = feedback.to_json
-    new_params = params.require(:iteration).permit(:end_date, :general_feedback)
+    new_params = params.require(:iteration).permit(:number, :end_date, :general_feedback)
     if @iteration.save and @iteration.update(new_params)
       redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully updated.'
     else
