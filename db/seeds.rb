@@ -3,11 +3,11 @@ require 'csv'
 PROD_USERS = [
 		%w(mutex@berkeley.edu Alex bdzr coach),
 		%w(srujayk@gmail.com Srujay srujayk coach),
-		%w(pgenerao516@gmail.com Peter Autholius coach),
+		%w(pgenerao516@gmail.com Peter autholius coach),
 		%w(jwp@berkeley.edu Jeff jw-park coach),
-    %w(aleasabrina@gmail.com Sabrina coach),
-    %w(kingarthuralagao@gmail.com King coach),
-    %w(anthonyshao@gmail.com Anthony coach)
+    %w(aleasabrina@gmail.com Sabrina sabrina1 coach),
+    %w(kingarthuralagao@gmail.com King kialagao coach),
+    %w(anthonyshao@gmail.com Anthony anthony-repo coach)
 ]
 
 if Rails.env == 'production'
