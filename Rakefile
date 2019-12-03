@@ -11,6 +11,7 @@ begin
   RSpec::Core::RakeTask.new(:spec)
 
   task :default => :spec
+  task :test => [:spec, :cucumber]
 rescue LoadError
   # no rspec available
 end
