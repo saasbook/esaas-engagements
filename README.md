@@ -214,6 +214,25 @@ webdriver by:
 bundle exec cucumber --tags ~@javascript
 ```
 
+# FA17 Engagement: Main Features
+
+* New `App`, `Org`, and `User` can be created all at once, with proper association
+* Every user can "post" comments on an `App`, `Org`, and `User`
+  + `App` has different types of comments
+  + Any class that inherits `Commentable` can have many comments
+* More comprehensive customer feedback through a feedback form with ratings/comments
+* Aggregates customer feedbacks from all iterations of an engagement, and display
+averages on each category
+* `User` supports different types (e.g. Student, Staff/Coach, Customer)
+* Exports `Engagement` information as a CSV file
+* each `User` contains a profile image
+  + we are using Amazon S3 to store images on production environment, because
+  Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
+  have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
+* Authorization to edit/destroy only to "Coach"
+* Autocomplete dropdown list (select2)
+* Major Bootstrap styling
+
 # SP19 Engagement: Main Features
 
 * 9 vetting statuses added to support vetting phase. `pending` should be obsolete
@@ -234,24 +253,22 @@ bundle exec cucumber --tags ~@javascript
   + Show `app` status in the app's show page
 
 
-# FA17 Engagement: Main Features
-
-* New `App`, `Org`, and `User` can be created all at once, with proper association
-* Every user can "post" comments on an `App`, `Org`, and `User`
-  + `App` has different types of comments
-  + Any class that inherits `Commentable` can have many comments
-* More comprehensive customer feedback through a feedback form with ratings/comments
-* Aggregates customer feedbacks from all iterations of an engagement, and display
-averages on each category
-* `User` supports different types (e.g. Student, Staff/Coach, Customer)
-* Exports `Engagement` information as a CSV file
-* each `User` contains a profile image
-  + we are using Amazon S3 to store images on production environment, because
-  Heroku has [ephemeral filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem). If you want to run this app on heroku server, you will
-  have to create another Amazon S3 account and setup the configuration([Instruction](https://devcenter.heroku.com/articles/paperclip-s3)).
-* Authorization to edit/destroy only to "Coach"
-* Autocomplete dropdown list (select2)
-* Major Bootstrap styling
+# FA19 Engagements: Main Features
+* Added `My Projects` tab that allows coaches, clients and students who are logged in to see a list of apps registered under their orgs.
+* Added functionality to allow logged in users to `request edits` on their projects.
+* Added `AppEditRequest` model and migration to support the `request edits` feature above.
+* Added 3 `AppEditRequest` statuses: `submitted`, `reviewed` and `resubmitted`.
+    + `submitted` edit requests have not yet been approved or reviewed by the staff
+    + `reviewed` edit requests  have been reviewed and staff has left feedback but not approved them. Client needs to update the reqeust.
+    + `resubmitted` edit requests have been updated and resubmitted by the requester after the coach has left feedback
+* Added functionality to show the status of the edit requests on the `GET /app/:id` route that indicates the status of an edit request only to the owner of the app.
+* Added `App Edit Request` tab to show list of App Edit requests for the coaches to review.
+* Added functionality to review, leave feedback or approve edit request from the coaches' end.
+* Added a rails config generator in `lib/generators/config` to allow developers to more easily setup the application locally.
+* Added `INSTALL.md` with instructions on how to setup the application both locally and on heroku.
+* Updated gem version in `Gemfile` and `Gemfile.lock` to fix security issues with obsolete packages.
+* Changed the `Iteration` feature to allow coaches to request iteration feedback directly from a project page.
+* Added `Login` button on the toolbar for easier access to the login page
 
 # High priority feature list
 

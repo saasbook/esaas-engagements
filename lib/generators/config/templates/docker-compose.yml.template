@@ -8,6 +8,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: bin/rails server --port 3000 --binding 0.0.0.0
     ports:
       - 3000:3000
     volumes: # map volume for live reload
@@ -20,7 +21,7 @@ services:
       - github_key=<%= options[:prod_github_key] %>
       - github_secret=<%= options[:prod_github_secret] %>
       <%- end -%>
-    depends_on:
+    links:
     <%- if options[:pg_host] == 'postgres-server' -%>
       - postgres-server
     <%- end -%>
@@ -48,7 +49,7 @@ services:
     image: postgres:latest
     <%- if options[:pg_vmap] -%>
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - ./tmp/postgres-server:/var/lib/postgresql/data
     <%- end -%>
     environment:
       - POSTGRES_PASSWORD=<%= options[:pg_pass] %>
