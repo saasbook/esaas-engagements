@@ -1,11 +1,12 @@
 # Keep Ruby version in Dockerfile in sync with Ruby version in Gemfile
 FROM ruby:<%= options[:ruby_version] %>
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y postgresql-client
+RUN apt-get install -y libxml2-dev libxslt1-dev # for nokogiri
+RUN apt-get install -y sqlite3 libsqlite3-dev
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+    && apt-get install -y nodejs
+RUN npm i -g phantomjs-prebuilt --unsafe-perm # for capybara
 RUN mkdir /app
 WORKDIR /app
-COPY . /app
+ADD Gemfile* /app/
 RUN bundle install
-RUN rake db:seed
-RUN rake db:migrate
-EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
