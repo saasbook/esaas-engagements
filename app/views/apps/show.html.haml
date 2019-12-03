@@ -1,7 +1,13 @@
 - unless @app_edit_request.nil?
   .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
     = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
-
+- unless @iterations.nil?
+  - @iterations.each do |iter|
+    - if iter.customer_feedback.nil? || iter.general_feedback.nil?
+      .alert.alert-info.text-center{style: 'margin: 10px 0;'}
+        %h5
+          A staff has requested feedback for Iteration #{iter.number}.
+          = link_to "Complete Feedback Form", edit_engagement_iteration_path(@current_engagement.id, iter.id), :class => 'btn btn-primary pull-right'
 .page-header
   %h1
     = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
