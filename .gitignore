@@ -93,3 +93,6 @@ yarn-debug.log*
 .generators
 .rakeTasks
 
+# Ignore CS169 Listen Log
+/.log_cs169
+
