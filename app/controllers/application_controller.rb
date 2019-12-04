@@ -20,10 +20,6 @@ class ApplicationController < ActionController::Base
     redirect_path unless User.find_by_id(session[:user_id])&.coach?
   end
 
-  def auth_edit?
-    redirect_path unless User.find_by_id(session[:user_id])&.client? || User.find_by_id(session[:user_id])&.coach?
-  end
-
   def current_user
     User.find_by_id(session[:user_id])
   end

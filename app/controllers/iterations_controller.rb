@@ -96,4 +96,8 @@ class IterationsController < ApplicationController
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
   end
 
+  def auth_edit?
+    redirect_path unless User.find_by_id(session[:user_id])&.client? || User.find_by_id(session[:user_id])&.coach?
+  end
+
 end
