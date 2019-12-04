@@ -94,4 +94,9 @@ class IterationsController < ApplicationController
       :communication_text, :understanding, :understanding_text,
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
   end
+
+  def auth_user?
+    return current_user.coach? || current_user.client?
+  end
+  
 end

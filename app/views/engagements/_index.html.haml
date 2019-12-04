@@ -25,8 +25,9 @@
         %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
         %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
         %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
-        %td
-          = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
-          = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
-          = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
-          = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')
+        - if current_user.coach?
+          %td
+            = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
+            = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+            = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
+            = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')

@@ -1,7 +1,7 @@
 - unless @app_edit_request.nil?
   .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
     = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
-- unless @iterations.nil?
+- if app_owner(@app.id)
   - @iterations.each do |iter|
     - if iter.customer_feedback.nil? || iter.general_feedback.nil?
       .alert.alert-info.text-center{style: 'margin: 10px 0;'}
