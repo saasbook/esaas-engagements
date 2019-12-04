@@ -96,7 +96,7 @@ class IterationsController < ApplicationController
   end
 
   def auth_user?
-    User.find_by_id(session[:user_id])&.coach? || User.find_by_id(session[:user_id])&.client?
+    redirect_path unless User.find_by_id(session[:user_id])&.coach? || User.find_by_id(session[:user_id])&.client?
   end
 
 end
