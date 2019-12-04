@@ -2,7 +2,8 @@ class IterationsController < ApplicationController
 
   before_action :set_iteration, :only => [:edit,:update,:destroy]
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
-  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :auth_user?, only: [:new, :create, :update, :destroy]
+  before_action :auth_edit?, only: [:edit]
 
   def index
     @stat = @engagement.summarize_customer_rating
@@ -93,10 +94,6 @@ class IterationsController < ApplicationController
       :demeanor, :demeanor_text, :engaged, :engaged_text, :communication,
       :communication_text, :understanding, :understanding_text,
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
-  end
-
-  def auth_user?
-    redirect_path unless User.find_by_id(session[:user_id])&.coach? || User.find_by_id(session[:user_id])&.client?
   end
 
 end

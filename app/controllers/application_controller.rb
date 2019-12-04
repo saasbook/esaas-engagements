@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :app_owner
+
   private
   @@name_path = nil
 
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def auth_user?
     redirect_path unless User.find_by_id(session[:user_id])&.coach?
+  end
+
+  def auth_edit?
+    redirect_path unless User.find_by_id(session[:user_id])&.client? || User.find_by_id(session[:user_id])&.coach?
   end
 
   def current_user
@@ -61,9 +66,9 @@ class ApplicationController < ActionController::Base
     @page_num = [[1,@page_num].max,max_page_num].min
     session["#{name}_page_num"] = @page_num.to_s
   end
-
+  
   def app_owner(app_id)
-    current_user.app_ids.include? app_id && !current_user.student?
+    current_user.app_ids.include? app_id unless current_user.student?
   end
 
 end
