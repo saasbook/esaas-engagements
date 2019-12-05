@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user
+  helper_method :app_owner
 
   private
   @@name_path = nil
@@ -60,6 +61,10 @@ class ApplicationController < ActionController::Base
     flash.now[:alert] = "You are already on the LAST page." if @page_num == max_page_num + 1
     @page_num = [[1,@page_num].max,max_page_num].min
     session["#{name}_page_num"] = @page_num.to_s
+  end
+  
+  def app_owner(app_id)
+    current_user.app_ids.include? app_id unless current_user.student?
   end
 
 end

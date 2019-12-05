@@ -24,6 +24,12 @@ class AppsController < ApplicationController
   def show
     @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
     @user_owns_app = App.belongs_to_user(params[:id], session[:user_id])
+    @current_engagement = App.find(params[:id]).engagements.order("created_at").first
+    if @current_engagement.present?
+      @iterations = @current_engagement.iterations
+    else
+      @iterations = nil
+    end
   end
 
   # GET /apps/new
