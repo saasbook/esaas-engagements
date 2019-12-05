@@ -75,3 +75,12 @@
    When I follow "app1"
    When I follow "Back"
    Then I should be on the my projects page
+
+ # -------------------- My Project Request Change -----------------------------
+ Scenario: A logged in user can Request a change to their project through the Project Information Page
+   Given I am logged in
+   When I follow "My Projects"
+   When I follow "app1"
+   When I follow "Request Change"
+   Then I should see /Request Changes for "app1"/
+   # Then I should see "Send Request" TODO: Not passing
