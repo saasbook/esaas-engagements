@@ -17,6 +17,7 @@
       %li= link_to "Logout @#{current_user.github_uid}", logout_path
       %li
         = form_tag search_path, :method => :post do
+          = label_tag :keyword
           = text_field_tag "keyword", ""
           = submit_tag "Search", :class => "btn btn-primary"
           - %w(Apps Organizations Users).each do |category|
