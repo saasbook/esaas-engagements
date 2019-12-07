@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :app_owner
-
+  helper_method :get_pending_requests_count
   private
   @@name_path = nil
 
@@ -67,4 +67,7 @@ class ApplicationController < ActionController::Base
     current_user.app_ids.include? app_id unless current_user.student?
   end
 
+  def get_pending_requests_count
+    @pending_requests_count = AppEditRequest.where.not(status: 1).count
+  end
 end
