@@ -58,3 +58,7 @@ However, changes to the `Gemfile*` files will require re-building the docker ima
 Stop the docker network:
 
 `docker-compose down`
+
+To run tests in your docker machine:
+
+`docker-compose run -e "RAILS_ENV=test" rails-server rake test`
