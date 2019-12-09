@@ -46,4 +46,8 @@ class User < ActiveRecord::Base
   def profile_picture=(pic)
     profile_picture_file_name = pic
   end
+
+  def self.students
+    User.where('user_type': User.user_types[:student]).all
+  end
 end

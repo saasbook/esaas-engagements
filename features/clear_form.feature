@@ -126,7 +126,6 @@ Scenario: user can reset a form for New Engagement
 	When I fill in "2012-11-13" for "Start Date"
 	And I select "ESaaS Developer" from "Coach"
 	And I fill in "3" for "Team Number"
-	And I fill in "A,B,C" for "Student Names"
 	And I fill in "youtube.com" for "Screencast Url"
 	And I fill in "instagram.com" for "Screenshot Url"
 	And I fill in "google.com" for "Poster Url"
@@ -205,12 +204,10 @@ Scenario: user can reset a form for Edit Engagement
 	When I fill in "Start Date" with "2013-12-23"
 	And I select "Adnan Hemani" from "Coach"
 	And I fill in "Team Number" with "2223"
-	And I fill in "Student Names" with "s1, s2, s3"
 	And I press "Reset"
 	Then I should have filled in "2012-03-13" for "Start Date"
 	And the "Coach" field should contain "1"
 	And I should have filled in "13" for "Team Number"
-	And I should have filled in "a, b, c" for "Student Names"
 
 # Story ID: 153070009
 
