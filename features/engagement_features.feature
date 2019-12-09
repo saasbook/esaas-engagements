@@ -48,10 +48,9 @@ Scenario: A user can add features while creating engagement
    Given I follow "app1"
    And I create a new engagement for "app1"
    When I fill in the engagement fields as follows:
-       | field                  | value      |
-       | Team Number            | Team1      |
+       | field                  | value             |
+       | Team Number            | Team1             |
        | Features               | more features!!   |
-   And I select "user1 user2 user3" as Team members
    And I press "Create Engagement"
    Then I should see "Engagement was successfully created."
    And I should see "more features!!" 

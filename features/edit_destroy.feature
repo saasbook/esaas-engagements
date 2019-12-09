@@ -59,7 +59,6 @@ Scenario: Newly Added Engagement also has buttons
    When I fill in the engagement fields as follows:
        | field                  | value      |
        | Team Number            | Team3      |
-       | Student Names          | Student1   |
   And I press "Create Engagement"
   Then I should see "Engagement was successfully created"
   Then I should see "Team3" has button "Edit"
