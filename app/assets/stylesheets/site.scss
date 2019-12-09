@@ -35,13 +35,23 @@ a { color: #2b4988}
 
 .dropdown:hover .dropdown-menu {
     display: block;
-  }
+}
 
-  .notify-badge{
+.dropdown-menu:before {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    top: -10px;
+    left: 0;
+}
+
+.notify-badge{
     position: relative;
     right:30px;
     top: -30px;
-    background:red;
+    background:#d80044;
     text-align: center;
     border-radius: 20px 20px 20px 20px;
     color:white;
