@@ -1,0 +1,19 @@
+{
+  "name": "esaas_engagements",
+  "version": "1.0.0",
+  "description": "Enable continuous tracking over time of customer apps developed by the \"ESaaS ecosystem\" around Berkeley CS169 Software Engineering.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Autholius/esaas-engagements.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Autholius/esaas-engagements/issues"
+  },
+  "homepage": "https://github.com/Autholius/esaas-engagements#readme"
+}

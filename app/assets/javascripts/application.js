@@ -14,6 +14,7 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require select2
+//= require accessibility_tests
 
 $(document).ready(function(){
   $('.select2').select2({
