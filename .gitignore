@@ -93,5 +93,3 @@ yarn-debug.log*
 .generators
 .rakeTasks
 
-# Ignore node modules
-/node_modules
