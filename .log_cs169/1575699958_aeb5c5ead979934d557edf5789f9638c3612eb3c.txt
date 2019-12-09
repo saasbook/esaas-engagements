@@ -1,0 +1,15 @@
+a1, development
+diff --git a/app/assets/stylesheets/site.scss b/app/assets/stylesheets/site.scss
+index 436a3c4..51bf64c 100644
+--- a/app/assets/stylesheets/site.scss
++++ b/app/assets/stylesheets/site.scss
+@@ -1,5 +1,5 @@
+ body { padding: 2ex; }
+-
++a {color: #027ebc}
+ .dead { background-color: #ffcccc; }
+ .development { background-color: #b3d9ff; }
+ .in_use  { }
+
+--
+1	1	app/assets/stylesheets/site.scss

@@ -1,0 +1,32 @@
+a1, development
+diff --git a/app/controllers/iterations_controller.rb b/app/controllers/iterations_controller.rb
+index a317f83..705c324 100644
+--- a/app/controllers/iterations_controller.rb
++++ b/app/controllers/iterations_controller.rb
+@@ -96,7 +96,7 @@ class IterationsController < ApplicationController
+   end
+ 
+   def auth_user?
+-    return current_user.coach? || current_user.client?
++    User.find_by_id(session[:user_id])&.coach? || User.find_by_id(session[:user_id])&.client?
+   end
+-  
++
+ end
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 90973ac..0c15cdb 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -1,7 +1,7 @@
+ - unless @app_edit_request.nil?
+   .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
+     = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
+-- if app_owner(@app.id)
++- if app_owner(@app.id) && @iterations.present?
+   - @iterations.each do |iter|
+     - if iter.customer_feedback.nil? || iter.general_feedback.nil?
+       .alert.alert-info.text-center{style: 'margin: 10px 0;'}
+
+--
+2	2	app/controllers/iterations_controller.rb
+1	1	app/views/apps/show.html.haml

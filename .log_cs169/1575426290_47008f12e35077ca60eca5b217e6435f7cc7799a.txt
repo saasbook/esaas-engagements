@@ -1,0 +1,23 @@
+team-master-head, development
+diff --cc app/controllers/apps_controller.rb
+index 89f75fa,a942a0c..0000000
+--- a/app/controllers/apps_controller.rb
++++ b/app/controllers/apps_controller.rb
+@@@ -23,8 -23,8 +23,13 @@@ class AppsController < ApplicationContr
+    # GET /apps/1.json
+    def show
+      @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
+++<<<<<<< HEAD
+ +    @current_engagement = @engagements.order("created_at").first
+ +    if @current_engagement.nil? || !app_owner?
+++=======
++     @current_engagement = App.find(params[:id]).engagements.order("created_at").first
++     if @current_engagement.nil?
+++>>>>>>> 4f73886fc0824ab7b7ff2271132636b8350c601e
+         @iterations = nil
+       else
+         @iterations = @current_engagement.iterations
+
+--
+0	0	app/controllers/apps_controller.rb
+5	0	app/controllers/apps_controller.rb
