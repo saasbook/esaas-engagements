@@ -1,12 +1,12 @@
 #nav_header
   - klass = controller.controller_name
-  - requests_count = get_pending_requests_count
   %ul.nav.nav-tabs
     %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
     - if current_user
       %li= link_to 'My Projects', my_projects_path, :role => 'presentation'
     - if current_user&.coach?
       %li
+        - requests_count = get_pending_requests_count
         = link_to my_approval_requests_path, :role => 'presentation' do
           App Edit Requests
           - unless requests_count == 0

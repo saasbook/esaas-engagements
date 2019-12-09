@@ -32,3 +32,20 @@ a { color: #2b4988}
 .app_functionality { background-color: #ffca9d; }
 .general { background-color: #ffcccc; }
 .vetting { background-color: #ffb8f0; }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .notify-badge{
+    position: relative;
+    right:30px;
+    top: -30px;
+    background:red;
+    text-align: center;
+    border-radius: 20px 20px 20px 20px;
+    color:white;
+    padding:5px 5px;
+    font-size:10px;
+    text-decoration: none;
+}

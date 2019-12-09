@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :app_owner
   helper_method :get_pending_requests_count
+  helper_method :get_pending_iteration_feedbacks
+  helper_method :get_reviewed_apps
   private
   @@name_path = nil
 
@@ -69,5 +71,30 @@ class ApplicationController < ActionController::Base
 
   def get_pending_requests_count
     @pending_requests_count = AppEditRequest.where.not(status: 1).count
+  end
+
+  def get_pending_iteration_feedbacks
+    apps_with_iterations = @apps.joins(:iterations)
+    pending_iteration_ids = []
+    apps_with_iterations.each do |app|
+      app.iterations.each do |iter|
+        if iter.customer_feedback.nil?
+          pending_iteration_ids << iter.id
+        end
+      end
+    end
+    @pending_iterations = Iteration.where(id: pending_iteration_ids)
+  end
+  
+  def get_reviewed_apps
+    reviewed_app_ids = []
+    @apps.each do |app|
+      app.app_edit_requests.each do |req|
+        if req.status == "reviewed"
+          reviewed_app_ids << req.app_id
+        end
+      end
+    end
+    @reviewed_apps = App.where(id: reviewed_app_ids)
   end
 end
