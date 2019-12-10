@@ -176,3 +176,8 @@
    And I fill in "features" with "123abc"
    And I press "Send Request"
    Then I should see "Status: vetting pending"
+
+   Scenario: client tries to access edit my project page for an app they don't own
+   Given I am logged in
+   When I go to the update edit request page for a project with id 104
+   Then I should see "You do not have any projects with ID: 104."
