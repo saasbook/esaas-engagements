@@ -3,7 +3,8 @@
     My Projects
   .help-block Click an App name to see more information
 
-= render 'notification'
+- unless current_user.student?
+  = render 'notification'
 
 #filters
   %label.checkbox-inline

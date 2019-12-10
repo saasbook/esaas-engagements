@@ -24,10 +24,11 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
     | id | app_id | coach_id | team_number | start_date | student_names |
     | 1  | 1      | 1        | 1           | 2017-03-25 | s1, s2, s3    |
     | 2  | 1      | 1        | 2           | 2017-08-25 | s4, s5, s6    |
+
   And the following iterations exist:
-    | id | engagement_id | end_date   |
-    | 1  | 1             | 2017-04-14 |
-    | 2  | 1             | 2017-04-28 |
+    | id | engagement_id | end_date   | number |
+    | 1  | 1             | 2017-04-14 |   1    |
+    | 2  | 1             | 2017-04-28 |   2    |
   And I'm logged in on the orgs page
   And I follow "Apps"
   And I follow "app1"
@@ -48,3 +49,12 @@ Scenario: There is a "Back to Iteration" button in the Edit Iteration page and i
   And I follow "Back to Iteration"
   Then I should see "Iterations for app1"
   And I should see "2017-04-14"
+
+Scenario: Client can view and link to requested Itearation Form through dropdown menu
+  When I follow "My Projects"
+  Then I should see "We want your feedback!"
+  When I click on the "feedbacks" icon
+  Then I should see "Engagement 1 in Iteration 1"
+  Then I should see "Engagement 1 in Iteration 2"
+  When I follow "Engagement 1 in Iteration 1"
+  Then I should see "Edit Customer Feedback"

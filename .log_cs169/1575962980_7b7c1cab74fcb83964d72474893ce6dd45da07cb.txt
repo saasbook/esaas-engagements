@@ -1,0 +1,66 @@
+a1, development
+diff --git a/features/my_approval_requests.feature b/features/my_approval_requests.feature
+index 337eca3..91e4e29 100644
+--- a/features/my_approval_requests.feature
++++ b/features/my_approval_requests.feature
+@@ -130,4 +130,38 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+   Then I should see "App Edit Requests 2"
+   And I press "Filter Requests"
+   Then I should not see "app5"
+-  
+\ No newline at end of file
++
++
++Scenario: Client can view and link to reviewed requests through icon dropdown menu
++  Given I am logged in
++  When I follow "My Projects"
++  Then I should see "Your request has been reviewed!"
++  When I click on the "requests" icon
++  Then I should see "View Request Feedback for app6"
++  And I should not see "View Request Feedback for app1"
++  When I follow "View Request Feedback for app6"
++  Then I should see "Edit Request for app6"
++  Then I should see "Feedback"
++  And I should see "Update Edits"
++  And I follow "Update Edits"
++  Then I should see /Request Changes for "'app6'"/
++  When I fill in "features" with "123"
++  And I press "Update Request"
++  Then I should see "123"
++  Then I should see "App Edit Requests 3"
++  When I follow "My Projects"
++  Then I should not see "Your request has been reviewed!"
++
++Scenario: A logged-in client can delete a Change Request on the Update/Edit Request Page
++   Given I am logged in
++   When I follow "My Projects"
++   And I follow "app5"
++   And I follow "Request Change"
++   And I fill in "description" with "123abc"
++   And I fill in "features" with "123abc"
++   And I press "Send Request"
++   Then I should see "Update Request"
++   When I follow "Update Request"
++   Then I should see "Delete Request"
++   When I follow "Delete Request"
++   Then I should see "Successfully deleted edit request for: app1"
+\ No newline at end of file
+diff --git a/features/step_definitions/my_projects_steps.rb b/features/step_definitions/my_projects_steps.rb
+index 747efe0..ed8ddac 100644
+--- a/features/step_definitions/my_projects_steps.rb
++++ b/features/step_definitions/my_projects_steps.rb
+@@ -1,3 +1,7 @@
+ When /^(?:|I )follow Request Change with id (.+)$/ do |id|
+     visit new_my_project_edit_path(app_id: id)
+-  end
+\ No newline at end of file
++end
++
++When /I click on the "(.+)" icon/ do |locator|
++  find('#' + locator).click
++end
+\ No newline at end of file
+
+--
+35	1	features/my_approval_requests.feature
+5	1	features/step_definitions/my_projects_steps.rb

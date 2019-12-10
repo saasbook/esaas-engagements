@@ -27,7 +27,7 @@
       %h1
         %span.label{class: 'label-danger'}
           =image_tag('feedback.png', style: 'width: 30px;')
-          Feedback
+          =link_to 'Feedback'
       %br
       =sanitize @app_edit_request.feedback
       - unless @app_edit_request.approver.nil?
