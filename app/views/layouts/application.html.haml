@@ -1,14 +1,16 @@
 !!! 5
-%html{:lang => "en"}
+%html{lang: "en", dir: 'ltr'}
   %head
     %title ESaaS Customer Engagements
     = stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
-						
+    - if %w(test development).include? Rails.env
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.4.0/axe.min.js" integrity="sha256-3uvAwJcMTsYRtepeqr32rrpy5zZ/fMYjiKEKPZM6Rtc=" crossorigin="anonymous"></script>
+
   %body
-    #main.container
+    #main.container{role: 'main'}
       = render 'layouts/nav_header'
       = render 'shared/flash_messages'
       = yield :form_errors
