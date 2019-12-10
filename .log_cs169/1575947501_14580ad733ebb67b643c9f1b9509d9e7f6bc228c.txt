@@ -1,0 +1,17 @@
+a1, development
+diff --git a/app/views/layouts/_nav_header.html.haml b/app/views/layouts/_nav_header.html.haml
+index bd18b9c..466bbdc 100644
+--- a/app/views/layouts/_nav_header.html.haml
++++ b/app/views/layouts/_nav_header.html.haml
+@@ -10,7 +10,7 @@
+         = link_to my_approval_requests_path, :role => 'presentation' do
+           App Edit Requests
+           - unless requests_count == 0
+-            %span.label{class: 'label-danger'}
++            %span.label{class: 'label-danger',}
+               = requests_count
+             
+     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
+
+--
+1	1	app/views/layouts/_nav_header.html.haml
