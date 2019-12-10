@@ -1,0 +1,32 @@
+heads/local/master, development
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+index 9da302a..78c6d82 100644
+--- a/app/controllers/application_controller.rb
++++ b/app/controllers/application_controller.rb
+@@ -62,4 +62,8 @@ class ApplicationController < ActionController::Base
+     session["#{name}_page_num"] = @page_num.to_s
+   end
+ 
++  def app_owner?
++    return User.find(session[:user_id]).engagements.app_ids.include? params[:id]
++  end
++  
+ end
+\ No newline at end of file
+diff --git a/app/controllers/apps_controller.rb b/app/controllers/apps_controller.rb
+index a942a0c..914d670 100644
+--- a/app/controllers/apps_controller.rb
++++ b/app/controllers/apps_controller.rb
+@@ -23,7 +23,7 @@ class AppsController < ApplicationController
+   # GET /apps/1.json
+   def show
+     @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
+-    @current_engagement = App.find(params[:id]).engagements.order("created_at").first
++    @current_engagement = @engagements.order("created_at").first
+     if @current_engagement.nil?
+        @iterations = nil
+      else
+
+--
+4	0	app/controllers/application_controller.rb
+1	1	app/controllers/apps_controller.rb

@@ -18,20 +18,24 @@
     - unless @app_edit_request.description.nil?
       %h5.app_edit_request_description Description:
       =sanitize @app_edit_request.description
-    - unless @app_edit_request.description.nil? || @app_edit_request.features.nil?
-      %hr
     - unless @app_edit_request.features.nil?
+      %hr
       %h5.app_edit_request_features Features:
       =sanitize @app_edit_request.features
     - unless @app_edit_request.feedback.nil?
       %hr
-      %h5 Feedback
+      %h1
+        %span.label{class: 'label-danger'}
+          =image_tag('feedback.png', style: 'width: 30px;')
+          Feedback
+      %br
       =sanitize @app_edit_request.feedback
       - unless @app_edit_request.approver.nil?
         .clearfix
           .pull-right
             Feedback by:
             =link_to @app_edit_request.approver.name, @app_edit_request.approver
+      
   .panel-footer
     Requested By:
     = link_to @app_edit_request.requester.name, @app_edit_request.requester

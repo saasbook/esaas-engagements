@@ -1,0 +1,112 @@
+a1, development
+diff --git a/app/assets/stylesheets/site.scss b/app/assets/stylesheets/site.scss
+index 436a3c4..fc8b184 100644
+--- a/app/assets/stylesheets/site.scss
++++ b/app/assets/stylesheets/site.scss
+@@ -1,24 +1,33 @@
+ body { padding: 2ex; }
++​
++a { color: #2b4988}
++p { word-wrap: break-word;}
++table body tr p{word-wrap: break-word; table-layout:fixed;}
+ 
++.btn-success {background-color: #2d8809}
++.btn-info {background-color: #298078}
++.btn-danger {background-color: #d80044}
++​
+ .dead { background-color: #ffcccc; }
+-.development { background-color: #b3d9ff; }
++.development { background-color: #b3e9ff; }
+ .in_use  { }
+ .in_use_and_wants_improvement  { background-color: #b3ffb3;  }
+ .inactive_but_wants_improvement  { background-color: #ffff99; }
+ .defunct { background-color: #ffcccc; }
+-.pending { background-color: #ffb270; }
+-
+-.vetting_pending { background-color: #ddccff}
+-.on_hold { background-color: #decffc }
+-.staff_approved { background-color: #dfd1fa }
+-.customer_informed { background-color: #e0d4f7 }
+-.customer_confirmation_received { background-color: #e0d6f5 }
+-.declined_by_staff { background-color: #e1d9f2 }
+-.declined_by_customer { background-color: #e2dbf0 }
+-.declined_by_customer_available_next_sem { background-color: #e3deed }
+-.back_up { background-color: #e4e0eb }
+-
++.pending { background-color: #ffd0a7; }
++​
++.vetting_pending { background-color: #eecff5}
++.on_hold { background-color: #eecff5 }
++.staff_approved { background-color: #eecff5 }
++.customer_informed { background-color: #eecff5 }
++.customer_confirmation_received { background-color: #eecff5 }
++.declined_by_staff { background-color: #eecff5 }
++.declined_by_customer { background-color: #eecff5 }
++.declined_by_customer_available_next_sem { background-color: #eecff5 }
++.back_up { background-color: #eecff5 }
++​
+ .contact_status { background-color: #e0f0ff; }
+ .app_functionality { background-color: #ffca9d; }
+ .general { background-color: #ffcccc; }
+-.vetting { background-color: #F78181; }
++.vetting { background-color: #ffb8f0; }
++
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+index 9fbec3a..a6858ee 100644
+--- a/app/controllers/application_controller.rb
++++ b/app/controllers/application_controller.rb
+@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
+   protect_from_forgery with: :exception
+   helper_method :current_user
+   helper_method :app_owner
+-
++  helper_method :get_pending_requests_count
+   private
+   @@name_path = nil
+ 
+@@ -67,4 +67,7 @@ class ApplicationController < ActionController::Base
+     current_user.app_ids.include? app_id unless current_user.student?
+   end
+ 
++  def get_pending_requests_count
++    @pending_requests_count = AppEditRequest.where.not(status: 1).count
++  end
+ end
+\ No newline at end of file
+diff --git a/app/views/layouts/_nav_header.html.haml b/app/views/layouts/_nav_header.html.haml
+index a389332..429043d 100644
+--- a/app/views/layouts/_nav_header.html.haml
++++ b/app/views/layouts/_nav_header.html.haml
+@@ -1,11 +1,18 @@
+ #nav_header
+   - klass = controller.controller_name
++  - requests_count = get_pending_requests_count
+   %ul.nav.nav-tabs
+     %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
+     - if current_user
+       %li= link_to 'My Projects', my_projects_path, :role => 'presentation'
+     - if current_user&.coach?
+-      %li= link_to 'App Edit Requests', my_approval_requests_path, :role => 'presentation'
++      %li
++        = link_to my_approval_requests_path, :role => 'presentation' do
++          App Edit Requests
++          - unless requests_count == 0
++            %span.label{class: 'label-danger'}
++              = requests_count
++            
+     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
+     %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
+     %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i), :role => 'presentation'
+@@ -17,6 +24,7 @@
+       %li= link_to "Logout @#{current_user.github_uid}", logout_path
+       %li
+         = form_tag search_path, :method => :post do
++          = label_tag :keyword
+           = text_field_tag "keyword", ""
+           = submit_tag "Search", :class => "btn btn-primary"
+           - %w(Apps Organizations Users).each do |category|
+
+--
+23	14	app/assets/stylesheets/site.scss
+4	1	app/controllers/application_controller.rb
+9	1	app/views/layouts/_nav_header.html.haml

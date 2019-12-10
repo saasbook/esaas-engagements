@@ -1,0 +1,13 @@
+team-master-head, development
+diff --cc app/controllers/apps_controller.rb
+index 89f75fa,7726b69..0000000
+--- a/app/controllers/apps_controller.rb
++++ b/app/controllers/apps_controller.rb
+diff --cc app/views/apps/show.html.haml
+index b6deedb,3b0ea62..0000000
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+
+--
+0	0	app/controllers/apps_controller.rb
+0	0	app/views/apps/show.html.haml

@@ -1,0 +1,42 @@
+a1, development
+diff --git a/app/assets/stylesheets/site.scss b/app/assets/stylesheets/site.scss
+index 436a3c4..c0e2b2e 100644
+--- a/app/assets/stylesheets/site.scss
++++ b/app/assets/stylesheets/site.scss
+@@ -1,13 +1,17 @@
+ body { padding: 2ex; }
+-
++​
++a { color: #375baa}
++.btn-success {background-color: #13aa41}
++.btn-danger {background-color: #d80044}
++​
+ .dead { background-color: #ffcccc; }
+-.development { background-color: #b3d9ff; }
++.development { background-color: #b3e9ff; }
+ .in_use  { }
+ .in_use_and_wants_improvement  { background-color: #b3ffb3;  }
+ .inactive_but_wants_improvement  { background-color: #ffff99; }
+ .defunct { background-color: #ffcccc; }
+-.pending { background-color: #ffb270; }
+-
++.pending { background-color: #ffd0a7; }
++​
+ .vetting_pending { background-color: #ddccff}
+ .on_hold { background-color: #decffc }
+ .staff_approved { background-color: #dfd1fa }
+@@ -17,8 +21,8 @@ body { padding: 2ex; }
+ .declined_by_customer { background-color: #e2dbf0 }
+ .declined_by_customer_available_next_sem { background-color: #e3deed }
+ .back_up { background-color: #e4e0eb }
+-
++​
+ .contact_status { background-color: #e0f0ff; }
+ .app_functionality { background-color: #ffca9d; }
+ .general { background-color: #ffcccc; }
+-.vetting { background-color: #F78181; }
++.vetting { background-color: #F78181; }
+\ No newline at end of file
+
+--
+10	6	app/assets/stylesheets/site.scss

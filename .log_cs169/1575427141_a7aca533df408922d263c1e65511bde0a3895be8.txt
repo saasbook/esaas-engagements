@@ -1,0 +1,25 @@
+team-master-head, development
+diff --cc app/controllers/apps_controller.rb
+index 89f75fa,7726b69..0000000
+--- a/app/controllers/apps_controller.rb
++++ b/app/controllers/apps_controller.rb
+diff --cc app/views/apps/show.html.haml
+index b6deedb,3b0ea62..0000000
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@@ -8,6 -8,7 +8,10 @@@
+          %h5
+            A staff has requested feedback for Iteration #{iter.number}.
+            = link_to "Complete Feedback Form", edit_engagement_iteration_path(@current_engagement.id, iter.id), :class => 'btn btn-primary pull-right'
+++<<<<<<< HEAD
+++=======
++ 
+++>>>>>>> 5c845cc65cf405e62d10edea09a9102f80073123
+  .page-header
+    %h1
+      = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
+
+--
+0	0	app/controllers/apps_controller.rb
+0	0	app/views/apps/show.html.haml
+4	0	app/views/apps/show.html.haml
