@@ -1,0 +1,17 @@
+a1, development
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 2a03cc4..69d8256 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -7,7 +7,7 @@
+       .alert.alert-info.text-center{style: 'margin: 10px 0; vertical-align: middle;'}
+         A staff has requested feedback for Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}.
+         = link_to edit_engagement_iteration_path(iter.engagement_id, iter.id) do
+-          %span.btn{class: 'btn-primary', style: 'padding: 3px 5px; right: -250px; position: relative;'}
++          %span.btn{class: 'btn-primary', style: 'padding: 0px 0px; right: -250px; position: relative;'}
+             = 'Complete Feedback Form'
+ .page-header
+   %h1
+
+--
+1	1	app/views/apps/show.html.haml

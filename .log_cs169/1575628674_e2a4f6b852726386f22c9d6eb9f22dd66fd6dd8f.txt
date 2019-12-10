@@ -1,0 +1,18 @@
+a1, test
+diff --git a/.simplecov b/.simplecov
+index af3e302..f4bf3b6 100644
+--- a/.simplecov
++++ b/.simplecov
+@@ -1,8 +1,7 @@
+ SimpleCov.start 'rails' do
+ 	add_filter "/coverage/"
+ 	add_filter "bootstrap"
+-	add_filter "/spec/"
+-	add_filter "/features"
++	
+ 	add_filter "/config/"
+ 	add_filter "/db/"
+ 	add_filter "/tmp/"
+
+--
+1	2	.simplecov

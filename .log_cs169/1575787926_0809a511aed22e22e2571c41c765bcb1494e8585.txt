@@ -1,0 +1,20 @@
+a1, development
+diff --git a/app/views/my_projects/index.html.haml b/app/views/my_projects/index.html.haml
+index 9d6d491..0ba0040 100644
+--- a/app/views/my_projects/index.html.haml
++++ b/app/views/my_projects/index.html.haml
+@@ -1,8 +1,9 @@
+ .page-header
+   %h1
+-    Listing Apps
+-    = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
++    My Projects
+   .help-block Click an App name to see more information
++  %div.header-right
++    Feedback
+ #filters
+   %label.checkbox-inline
+     %div#deploy
+
+--
+3	2	app/views/my_projects/index.html.haml

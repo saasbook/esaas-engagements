@@ -1,0 +1,16 @@
+a1, development
+diff --git a/features/step_definitions/login_steps.rb b/features/step_definitions/login_steps.rb
+index 6d7a358..02ebad3 100644
+--- a/features/step_definitions/login_steps.rb
++++ b/features/step_definitions/login_steps.rb
+@@ -6,3 +6,7 @@ When /^(?:|I )want to destroy "([^"]*)"$/ do |field|
+   find('tr', text: field.to_s).click_link('Destroy')
+ end
+ 
++Given /^I am logged in with user id (.+)$/ do
++	steps %Q{When /^(?:|I )follow "([^"]*)"$/}
++end
++
+
+--
+4	0	features/step_definitions/login_steps.rb

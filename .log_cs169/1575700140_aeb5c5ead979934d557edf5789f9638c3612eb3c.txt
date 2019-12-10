@@ -1,0 +1,22 @@
+a1, development
+diff --git a/app/assets/stylesheets/site.scss b/app/assets/stylesheets/site.scss
+index 436a3c4..61e3ec7 100644
+--- a/app/assets/stylesheets/site.scss
++++ b/app/assets/stylesheets/site.scss
+@@ -1,10 +1,10 @@
+ body { padding: 2ex; }
+-
++a {color: #027ebc}
+ .dead { background-color: #ffcccc; }
+ .development { background-color: #b3d9ff; }
+ .in_use  { }
+-.in_use_and_wants_improvement  { background-color: #b3ffb3;  }
+-.inactive_but_wants_improvement  { background-color: #ffff99; }
++.in_use_and_wants_improvement  { background-color: #90ee90;  }
++.inactive_but_wants_improvement  { background-color: #ffffed; }
+ .defunct { background-color: #ffcccc; }
+ .pending { background-color: #ffb270; }
+ 
+
+--
+3	3	app/assets/stylesheets/site.scss

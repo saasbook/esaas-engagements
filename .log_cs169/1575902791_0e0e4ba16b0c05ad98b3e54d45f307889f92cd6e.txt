@@ -1,0 +1,61 @@
+a1, development
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 2a03cc4..42f058d 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -26,12 +26,12 @@
+ 
+ - unless @app_edit_request.nil?
+   = render partial: 'shared/app_edit_request'
+-  .well
+-    .clearfix
+-      .pull-right
+-        =link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id), class: 'btn btn-info'
+-  %hr
++  = link_to edit_my_project_edit_path(app_id: @app.id), class: 'btn', style: 'position:relative; right: -935px; background: #f49b2f; text-decoration: none' do
++    =image_tag('review.png', style: 'width: 30px; padding: 0px -10px 0px 0px')
++    %span{style: 'font-size: 20px; color: white;'}
++      Update Request
+ 
++%hr
+ 
+ = render partial: 'comments/comments', locals: {commentable: @app}
+ 
+diff --git a/app/views/shared/_app_edit_request.html.haml b/app/views/shared/_app_edit_request.html.haml
+index 7a30771..426dce0 100644
+--- a/app/views/shared/_app_edit_request.html.haml
++++ b/app/views/shared/_app_edit_request.html.haml
+@@ -18,20 +18,24 @@
+     - unless @app_edit_request.description.nil?
+       %h5.app_edit_request_description Description:
+       =sanitize @app_edit_request.description
+-    - unless @app_edit_request.description.nil? || @app_edit_request.features.nil?
+-      %hr
+     - unless @app_edit_request.features.nil?
++      %hr
+       %h5.app_edit_request_features Features:
+       =sanitize @app_edit_request.features
+     - unless @app_edit_request.feedback.nil?
+       %hr
+-      %h5 Feedback
++      %h1
++        %span.label{class: 'label-danger'}
++          =image_tag('feedback.png', style: 'width: 30px;')
++          Feedback
++      %br
+       =sanitize @app_edit_request.feedback
+       - unless @app_edit_request.approver.nil?
+         .clearfix
+           .pull-right
+             Feedback by:
+             =link_to @app_edit_request.approver.name, @app_edit_request.approver
++      
+   .panel-footer
+     Requested By:
+-    = link_to @app_edit_request.requester.name, @app_edit_request.requester
++    = link_to @app_edit_request.requester.name, @app_edit_request.requester
+\ No newline at end of file
+
+--
+5	5	app/views/apps/show.html.haml
+8	4	app/views/shared/_app_edit_request.html.haml

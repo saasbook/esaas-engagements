@@ -1,0 +1,41 @@
+a1, development
+diff --git a/app/views/apps/_form.html.haml b/app/views/apps/_form.html.haml
+index b364aac..416ef2e 100644
+--- a/app/views/apps/_form.html.haml
++++ b/app/views/apps/_form.html.haml
+@@ -12,4 +12,4 @@
+   = f.form_group do
+     = f.submit class: 'btn btn-success'
+     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
+-    = link_to 'Back', @app, :class => 'btn btn-primary'
++    = link_to 'Back', :back, :class => 'btn btn-primary'
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 0c15cdb..d460dff 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -15,7 +15,7 @@
+     - unless (url = @app.code_climate_url).blank?
+       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
+       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
+-    = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
++    = link_to 'Back', :back, class: 'btn btn-primary pull-right'
+     = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
+ 
+ = render partial: 'shared/app'
+diff --git a/features/auth_user.feature b/features/auth_user.feature
+index 339a0e6..a422cf9 100644
+--- a/features/auth_user.feature
++++ b/features/auth_user.feature
+@@ -33,7 +33,6 @@ Scenario: Happy Path - Can create new app, edit and destroy existing app if I am
+   And I press "Edit" for "app1"
+   Then I should see "Editing App"
+   And I follow "Back"
+-  And I follow "Back"
+   And I press "Destroy" for "app1"
+   Then I should see "App was successfully destroyed."
+ 
+
+--
+1	1	app/views/apps/_form.html.haml
+1	1	app/views/apps/show.html.haml
+0	1	features/auth_user.feature

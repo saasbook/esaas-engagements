@@ -1,0 +1,31 @@
+a1, development
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+index a6858ee..06c9230 100644
+--- a/app/controllers/application_controller.rb
++++ b/app/controllers/application_controller.rb
+@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
+   helper_method :current_user
+   helper_method :app_owner
+   helper_method :get_pending_requests_count
++  
+   private
+   @@name_path = nil
+ 
+diff --git a/features/step_definitions/login_steps.rb b/features/step_definitions/login_steps.rb
+index 6d7a358..03abf82 100644
+--- a/features/step_definitions/login_steps.rb
++++ b/features/step_definitions/login_steps.rb
+@@ -6,3 +6,9 @@ When /^(?:|I )want to destroy "([^"]*)"$/ do |field|
+   find('tr', text: field.to_s).click_link('Destroy')
+ end
+ 
++Given /^I am logged in with id (.+)$/ do |id|
++	visit '/orgs'
++	click_link "Log in with GitHub"
++	visit "/apps"
++end
++
+
+--
+1	0	app/controllers/application_controller.rb
+6	0	features/step_definitions/login_steps.rb

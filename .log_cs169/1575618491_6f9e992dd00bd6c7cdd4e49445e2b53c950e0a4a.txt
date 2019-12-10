@@ -1,0 +1,38 @@
+a1, test
+diff --git a/features/my_approval_requests.feature b/features/my_approval_requests.feature
+index dd8f914..b6474cd 100644
+--- a/features/my_approval_requests.feature
++++ b/features/my_approval_requests.feature
+@@ -22,6 +22,9 @@ Feature: staff should be able to approve or comment on requested feature changes
+       | id | description  | features    | feedback | status      | approval_time | app_id | requester_id    | approver_id | created_at                 | updated_at |
+       | 1  | app1         | test1       |          | submitted   |               | 101    | 2               |             | 2019-11-20 7:44:50 -0800   |            |
+       | 2  | app2         | test2       |          | submitted   |               | 102    | 2               |             | 2019-11-20 08:05:50 -0800  |            |
++      | 1  | app5         | test3       |          | submitted   |               | 105    | 2               |             | 2019-11-20 8:44:50 -0800   |            |
++      | 2  | app6         | test4       |          | submitted   |               | 106    | 2               |             | 2019-11-20 9:44:50 -0800   |            |
++
+ 
+     And the following users exist:
+       | id | name  | github_uid      | email          | user_type     |
+@@ -49,8 +52,8 @@ Scenario: A logged in coach user can see list of App Edit Requests in 'App Edit
+   Given I am logged in
+   When I follow "App Edit Requests"
+   Then I should see "app1" before "app2"
+-  And I should not see "app4"
+-  And I should not see "app3"
++  And I should see "app4"
++  And I should see "app3"
+ 
+ # -------------------- App Edit Request Show Page -----------------------------
+ Scenario: A logged in coach user can view an App Edit (Feature Change) Request through the 'App Edit Requests' index
+@@ -58,3 +61,7 @@ Scenario: A logged in coach user can view an App Edit (Feature Change) Request t
+   When I follow "App Edit Requests"
+   When I follow the App Edit Request with id 102
+   Then I should see /Edit request for "app2"/
++
++Scenario: Interactions between a coach and a client regarding Requests
++  Given I am logged in as a client
++  
+\ No newline at end of file
+
+--
+9	2	features/my_approval_requests.feature
