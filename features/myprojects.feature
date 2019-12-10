@@ -60,7 +60,7 @@
    Then I should see "p1.com"
    Then I should see "repo-url1.com"
    Then I should see "deploy-url1.com"
-   
+
  Scenario: A logged in user can see buttons on the Projects Information Page through the 'My Projects' index
    Given I am logged in
    When I follow "My Projects"
@@ -127,3 +127,16 @@
    Then I should see "p1.com"
    Then I should see "repo-url1.com"
    Then I should see "deploy-url1.com"
+
+   Scenario: A logged-in client can delete a Change Request on the Update/Edit Request Page
+   Given I am logged in
+   When I follow "My Projects"
+   And I follow "app1"
+   And I follow "Request Change"
+   And I fill in "description" with "123abc"
+   And I fill in "features" with "123abc"
+   And I press "Send Request"
+   Then I should see "Update Request"
+   When I follow "Update Request"
+   And I press "Delete Request"
+   Then I should see "Successfully deleted edit request for: app1"
