@@ -30,6 +30,5 @@
           %td
             = staff.email
 
--#TODO: use modal to confirm delete
 =form_tag(delete_my_project_edit_path(app_id: @app.id), method: :delete) do
-  =submit_tag 'Delete Request', class: 'btn btn-danger pull-left'
+  =submit_tag 'Delete Request', class: 'btn btn-danger pull-left', data: { confirm: 'Are you sure?' }

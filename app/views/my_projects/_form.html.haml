@@ -1,19 +1,19 @@
 .well#status
-  %h4 Status: #{@app.status.humanize(capitalize: false)}
+  .text-lg Status: #{@app.status.humanize(capitalize: false)}
 
-.well#description
-  %h4 Description
-  = text_area_tag :description, @description, size: "24x6"
-  %span.form-text.text-muted
+.well
+  .text-lg Description
+  = text_area_tag :description, @description, {size: "24x6", 'aria-label': 'description'}
+  %span.form-text
     - if @description == @app&.description
       The field above has been pre-filled with the current approved app's description
     - elsif @description == @app_edit_request&.description
       The field above has been pre-filled with your not-yet approved edit request for the apps's description
 
-.well#features
-  %h4 App Initial Features
-  = text_area_tag :features, @features, size: "24x6"
-  %span.form-text.text-muted
+.well
+  .text-lg App Initial Features
+  = text_area_tag :features, @features, {size: "24x6", 'aria-label': 'description'}
+  %span.form-text
     - if @features == @app&.features
       The field above has been pre-filled with the current approved app's features
     - elsif @features == @app_edit_request&.features
@@ -22,16 +22,16 @@
 .row
   .col-xs-4.col-sm-4.col-md-4.col-lg-4
     .well#deployment
-      %h4 Deployment
+      .text-lg Deployment
       %p{:style => "word-wrap: break-word;"}
-        = link_to @app.deployment_url, @app.deployment_url
+        = @app.deployment_url
   .col-xs-4.col-sm-4.col-md-4.col-lg-4
     .well#github
-      %h4 Github
+      .text-lg Github
       %p{:style => "word-wrap: break-word;"}
-        = link_to @app.repository_url, @app.repository_url
+        = @app.repository_url
   .col-xs-4.col-sm-4.col-md-4.col-lg-4
     .well#pivotal
-      %h4 Pivotal Tracker
+      .text-lg Pivotal Tracker
       %p{:style => "word-wrap: break-word;"}
-        = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
+        = @app.pivotal_tracker_url
