@@ -1,8 +1,8 @@
 
 %ul{style: 'float: right; list-style: none;'}
   - pending_iter = get_pending_iteration_feedbacks
-  %li.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
-    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "style" => "text-decoration: none"} 
+  %div#feedbacks.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
+    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#feedbacks", "style" => "text-decoration: none"} 
       =image_tag('feedback.png')
       - unless pending_iter.empty?
         %span{class: 'notify-badge'}
@@ -12,8 +12,8 @@
             %li= link_to "Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}", edit_engagement_iteration_path(iter.engagement_id, iter.id)
   
   - reviewed_apps = get_reviewed_apps
-  %li.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
-    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "style" => "text-decoration: none"} 
+  %div#requests.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
+    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#requests", "style" => "text-decoration: none"} 
       =image_tag('review.png')
       - unless reviewed_apps.empty?
         %span{class: 'notify-badge'}

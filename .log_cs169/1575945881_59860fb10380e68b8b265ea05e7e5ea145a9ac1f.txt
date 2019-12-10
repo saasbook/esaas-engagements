@@ -1,0 +1,21 @@
+master, development
+diff --git a/features/myprojects.feature b/features/myprojects.feature
+index f5fb046..6014db3 100644
+--- a/features/myprojects.feature
++++ b/features/myprojects.feature
+@@ -84,3 +84,12 @@
+    When I follow "Request Change"
+    Then I should see /Request Changes for "app1"/
+    # Then I should see "Send Request" TODO: Not passing
++
++ Scenario: A logged in user will see the "Request Change" button change to "Update Request" when a Change Request is submitted
++   Given I am logged in
++   When I follow "My Projects"
++   When I follow "app1"
++   When I follow "Request Change"
++   When I press "Send Request"
++   Then I should see "Update Request"
++   And I follow "My Projects"
+
+--
+9	0	features/myprojects.feature
