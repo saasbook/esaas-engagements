@@ -1,0 +1,16 @@
+a1, development
+diff --git a/Gemfile b/Gemfile
+index 2a3eab8..5d0a34a 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -27,6 +27,7 @@ group :development do
+   gem 'web-console', '~> 2.0'
+   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+   gem 'spring'
++  gem 'axe-matchers'
+ end
+ 
+ group :development, :test do
+
+--
+1	0	Gemfile
