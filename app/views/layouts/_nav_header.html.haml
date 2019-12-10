@@ -10,7 +10,7 @@
         = link_to my_approval_requests_path, :role => 'presentation' do
           App Edit Requests
           - unless requests_count == 0
-            %span.label{class: 'label-danger'}
+            %span.label{class: 'label-danger', style: ' font-size: 13px;'}
               = requests_count
             
     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'

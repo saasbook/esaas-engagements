@@ -1,0 +1,64 @@
+a1, development
+diff --git a/app/views/engagements/_index.html.haml b/app/views/engagements/_index.html.haml
+index b3d9d91..0bc3812 100644
+--- a/app/views/engagements/_index.html.haml
++++ b/app/views/engagements/_index.html.haml
+@@ -16,19 +16,19 @@
+         %tr
+           %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
+           %td= mail_to(engagement.client.email, engagement.client.name) if engagement.client
+-          %td= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
+-          %td= engagement.team_number
+-          %td
++          %td{style: 'max-width: 150px; overflow: hidden;'}= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
++          %td{style: 'width: 2%;'}= engagement.team_number
++          %td{{style: 'max-width: 100px; overflow: hidden;'}}
+             %div{:class => 'members'}
+               -engagement.developers.each do |member|
+                 =link_to member.name, member
+                 %br
+-          %td= sanitize engagement.features
+-          %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
+-          %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
+-          %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
++          %td{style: 'width: 5px; word-wrap: break-word;'}= sanitize engagement.features
++          %td= link_to image_tag('deployment.png', size: '35x35', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
++          %td= link_to image_tag('video.png', size: '35x35', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
++          %td= link_to image_tag('presentation.png', size: '35x35', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
+           %td
+-            = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
+-            = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+-            = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
+-            = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')
+\ No newline at end of file
++            = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary', style: 'padding: 5px 5px;')
++            = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger', style: 'padding: 5px 5px;'
++            = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info', style: 'padding: 5px 5px;')
++            = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right',  style: 'padding: 5px 10px;')
+\ No newline at end of file
+diff --git a/app/views/my_projects/_notification.html.haml b/app/views/my_projects/_notification.html.haml
+index de8cd3c..1f07a5a 100644
+--- a/app/views/my_projects/_notification.html.haml
++++ b/app/views/my_projects/_notification.html.haml
+@@ -1,7 +1,7 @@
+ 
+ %ul{style: 'float: right; list-style: none;'}
+   - pending_iter = get_pending_iteration_feedbacks
+-  %li.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
++  %li.dropdown{style: 'right: -10px; margin: 0px 10px 20px 10px;'}
+     %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "style" => "text-decoration: none"} 
+       =image_tag('feedback.png')
+       - unless pending_iter.empty?
+@@ -12,7 +12,7 @@
+             %li= link_to "Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}", edit_engagement_iteration_path(iter.engagement_id, iter.id)
+   
+   - reviewed_apps = get_reviewed_apps
+-  %li.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
++  %li.dropdown{style: 'margin: 0px 10px 0px 10px;'}
+     %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "style" => "text-decoration: none"} 
+       =image_tag('review.png')
+       - unless reviewed_apps.empty?
+
+--
+11	11	app/views/engagements/_index.html.haml
+2	2	app/views/my_projects/_notification.html.haml

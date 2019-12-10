@@ -1,0 +1,63 @@
+a1, development
+diff --git a/app/views/layouts/_nav_header.html.haml b/app/views/layouts/_nav_header.html.haml
+index bd18b9c..14b99a0 100644
+--- a/app/views/layouts/_nav_header.html.haml
++++ b/app/views/layouts/_nav_header.html.haml
+@@ -10,7 +10,7 @@
+         = link_to my_approval_requests_path, :role => 'presentation' do
+           App Edit Requests
+           - unless requests_count == 0
+-            %span.label{class: 'label-danger'}
++            %span.label{class: 'label-danger', style: ' font-size: 13px;'}
+               = requests_count
+             
+     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
+diff --git a/features/my_approval_requests.feature b/features/my_approval_requests.feature
+index a884e7e..603f5a8 100644
+--- a/features/my_approval_requests.feature
++++ b/features/my_approval_requests.feature
+@@ -50,7 +50,7 @@ Then I should see "App Edit Requests"
+ 
+ Scenario: A logged in coach user can see list of App Edit Requests in 'App Edit Requests' tab
+   Given I am logged in
+-  When I follow "App Edit Requests"
++  When I follow "App Edit Requests 2"
+   Then I should see "app1" before "app2"
+   And I should not see "app4"
+   And I should not see "app3"
+@@ -67,6 +67,7 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+           updates the approval status of the request in the  project information page 
+ 
+   Given I am logged in
++  Then I should see "App Edit Requests 2"
+   When I follow "My Projects"
+   Then I should be on the my projects page
+   When I follow "app5"
+@@ -79,6 +80,7 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+   And I fill in "features" with "login, logout"
+   Then I press "Send Request"
+   Then I should see "Your app edit request has been submitted to staff for review and approval. Staff has not yet reviewed/approved this request."
++  Then I should see "App Edit Requests 3"
+ 
+   When I follow "App Edit Requests"
+   Then I should see "app1"
+@@ -90,6 +92,7 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+   And I should see "login, logout"
+   When I fill in "feedback" with "I can only do login"
+   And I press "Post Feedback"
++  Then I should see "App Edit Requests 2"
+   And I follow the App Edit Request with id 105
+   Then I should see "reviewed"
+ 
+@@ -107,6 +110,7 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+   And I press "Update Request"
+   Then I should see "Successfully updated edit request."
+   And I should see "You resubmitted an edit request after staff left feedback but staff has not yet reviewed your updates."
++  Then I should see "App Edit Requests 2"
+ 
+   When I follow "App Edit Requests"
+   Then I should see "app1"
+
+--
+1	1	app/views/layouts/_nav_header.html.haml
+5	1	features/my_approval_requests.feature
