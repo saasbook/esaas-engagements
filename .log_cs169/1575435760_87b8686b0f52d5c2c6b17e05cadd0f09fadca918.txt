@@ -1,0 +1,54 @@
+a1, development
+diff --git a/app/controllers/iterations_controller.rb b/app/controllers/iterations_controller.rb
+index a317f83..705c324 100644
+--- a/app/controllers/iterations_controller.rb
++++ b/app/controllers/iterations_controller.rb
+@@ -96,7 +96,7 @@ class IterationsController < ApplicationController
+   end
+ 
+   def auth_user?
+-    return current_user.coach? || current_user.client?
++    User.find_by_id(session[:user_id])&.coach? || User.find_by_id(session[:user_id])&.client?
+   end
+-  
++
+ end
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 90973ac..0c15cdb 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -1,7 +1,7 @@
+ - unless @app_edit_request.nil?
+   .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
+     = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
+-- if app_owner(@app.id)
++- if app_owner(@app.id) && @iterations.present?
+   - @iterations.each do |iter|
+     - if iter.customer_feedback.nil? || iter.general_feedback.nil?
+       .alert.alert-info.text-center{style: 'margin: 10px 0;'}
+diff --git a/app/views/engagements/_index.html.haml b/app/views/engagements/_index.html.haml
+index c573a54..00bdbff 100644
+--- a/app/views/engagements/_index.html.haml
++++ b/app/views/engagements/_index.html.haml
+@@ -25,9 +25,8 @@
+         %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
+         %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
+         %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
+-        - if current_user.coach?
+-          %td
+-            = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
+-            = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+-            = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
+-            = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')
+\ No newline at end of file
++        %td
++          = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
++          = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
++          = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
++          = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')
+\ No newline at end of file
+
+--
+2	2	app/controllers/iterations_controller.rb
+1	1	app/views/apps/show.html.haml
+5	6	app/views/engagements/_index.html.haml

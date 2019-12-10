@@ -1,0 +1,101 @@
+heads/local/master, development
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+index 9da302a..476a383 100644
+--- a/app/controllers/application_controller.rb
++++ b/app/controllers/application_controller.rb
+@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
+   # For APIs, you may want to use :null_session instead.
+   protect_from_forgery with: :exception
+   helper_method :current_user
++  helper_method :app_owner
+ 
+   private
+   @@name_path = nil
+@@ -62,4 +63,8 @@ class ApplicationController < ActionController::Base
+     session["#{name}_page_num"] = @page_num.to_s
+   end
+ 
++  def app_owner
++    return User.find(session[:user_id]).app_ids.include? params[:id]
++  end
++
+ end
+\ No newline at end of file
+diff --git a/app/controllers/apps_controller.rb b/app/controllers/apps_controller.rb
+index a942a0c..11a66cc 100644
+--- a/app/controllers/apps_controller.rb
++++ b/app/controllers/apps_controller.rb
+@@ -23,12 +23,10 @@ class AppsController < ApplicationController
+   # GET /apps/1.json
+   def show
+     @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
+-    @current_engagement = App.find(params[:id]).engagements.order("created_at").first
+-    if @current_engagement.nil?
+-       @iterations = nil
+-     else
+-       @iterations = @current_engagement.iterations
+-     end
++    @current_engagement = @engagements.order("created_at").first
++    if app_owner?
++      @iterations = @current_engagement.iterations
++    end
+   end
+ 
+   # GET /apps/new
+diff --git a/app/controllers/iterations_controller.rb b/app/controllers/iterations_controller.rb
+index 5cc2bc9..022af78 100644
+--- a/app/controllers/iterations_controller.rb
++++ b/app/controllers/iterations_controller.rb
+@@ -94,4 +94,9 @@ class IterationsController < ApplicationController
+       :communication_text, :understanding, :understanding_text,
+       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
+   end
++
++  def auth_user?
++    redirect_path unless current_user.coach? || current_user.client?
++  end
++  
+ end
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index b6deedb..bc91439 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -1,8 +1,8 @@
+ - unless @app_edit_request.nil?
+   .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
+     = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
+-- unless @iterations.nil?
+-  - @iterations.each do |iter|
++- unless @iterations&.nil?
++  - @iterations&.each do |iter|
+     - if iter.customer_feedback.nil? || iter.general_feedback.nil?
+       .alert.alert-info.text-center{style: 'margin: 10px 0;'}
+         %h5
+diff --git a/app/views/engagements/_index.html.haml b/app/views/engagements/_index.html.haml
+index 00bdbff..c573a54 100644
+--- a/app/views/engagements/_index.html.haml
++++ b/app/views/engagements/_index.html.haml
+@@ -25,8 +25,9 @@
+         %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
+         %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
+         %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
+-        %td
+-          = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
+-          = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+-          = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
+-          = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')
+\ No newline at end of file
++        - if current_user.coach?
++          %td
++            = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
++            = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
++            = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
++            = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right')
+\ No newline at end of file
+
+--
+5	0	app/controllers/application_controller.rb
+4	6	app/controllers/apps_controller.rb
+5	0	app/controllers/iterations_controller.rb
+2	2	app/views/apps/show.html.haml
+6	5	app/views/engagements/_index.html.haml

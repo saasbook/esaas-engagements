@@ -9,8 +9,7 @@
         %fieldset.col-md-6
             %legend Team Info and Work Products
             = f.text_field :team_number, label: 'Team Number'
-            = f.text_field :student_names, label: 'Student Names'
-            = f.collection_select(:developer_ids, User.all, :id, :name, {:include_blank => true, label: 'Developers'}, {:multiple => true, class: 'select2'})
+            = f.collection_select(:developer_ids, User.students, :id, :name, {include_blank: true, label: 'Student Names'}, {multiple: true, class: 'select2'})
             = f.url_field :screencast_url, label: 'Screencast Url'
             = f.url_field :screenshot_url, label: 'Screenshot Url'
             = f.url_field :poster_url, label: 'Poster Url'

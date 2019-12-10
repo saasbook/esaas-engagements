@@ -5,7 +5,14 @@
     - if current_user
       %li= link_to 'My Projects', my_projects_path, :role => 'presentation'
     - if current_user&.coach?
-      %li= link_to 'App Edit Requests', my_approval_requests_path, :role => 'presentation'
+      %li
+        - requests_count = get_pending_requests_count
+        = link_to my_approval_requests_path, :role => 'presentation' do
+          App Edit Requests
+          - unless requests_count == 0
+            %span.label{class: 'label-danger'}
+              = requests_count
+            
     %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
     %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
     %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i), :role => 'presentation'
@@ -17,6 +24,7 @@
       %li= link_to "Logout @#{current_user.github_uid}", logout_path
       %li
         = form_tag search_path, :method => :post do
+          = label_tag :keyword
           = text_field_tag "keyword", ""
           = submit_tag "Search", :class => "btn btn-primary"
           - %w(Apps Organizations Users).each do |category|

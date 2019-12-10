@@ -23,12 +23,8 @@ class AppsController < ApplicationController
   # GET /apps/1.json
   def show
     @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
-    @current_engagement = App.find(params[:id]).engagements.order("created_at").first
-    if @current_engagement.present?
-      @iterations = @current_engagement.iterations
-    else
-      @iterations = nil   
-    end
+    @user_owns_app = App.belongs_to_user(params[:id], session[:user_id])
+    @iterations = App.find(params[:id]).iterations
   end
 
   # GET /apps/new
@@ -102,7 +98,7 @@ class AppsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def app_params
-    params.require(:app).permit(:name, :description, :deployment_url, :repository_url, 
+    params.require(:app).permit(:name, :description, :deployment_url, :repository_url,
                               :code_climate_url, :org_id, :status, :comments, :features,
                               :pivotal_tracker_url)
   end

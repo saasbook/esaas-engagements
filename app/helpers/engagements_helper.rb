@@ -10,4 +10,8 @@ module EngagementsHelper
     descr << ")"
     descr
   end
+
+  def self.engagement_team_number(engagement_id)
+    Engagement.find(engagement_id).team_number
+  end
 end

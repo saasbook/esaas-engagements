@@ -1,0 +1,18 @@
+a1, development
+diff --git a/features/my_approval_requests.feature b/features/my_approval_requests.feature
+index dd8f914..600e95b 100644
+--- a/features/my_approval_requests.feature
++++ b/features/my_approval_requests.feature
+@@ -22,6 +22,9 @@ Feature: staff should be able to approve or comment on requested feature changes
+       | id | description  | features    | feedback | status      | approval_time | app_id | requester_id    | approver_id | created_at                 | updated_at |
+       | 1  | app1         | test1       |          | submitted   |               | 101    | 2               |             | 2019-11-20 7:44:50 -0800   |            |
+       | 2  | app2         | test2       |          | submitted   |               | 102    | 2               |             | 2019-11-20 08:05:50 -0800  |            |
++      | 1  | app3         | test3       |          | reviewed    |               | 103    | 2               |             | 2019-11-20 8:44:50 -0800   |            |
++      | 2  | app4         | test4       |          | resubmitted |               | 104    | 2               |             | 2019-11-20 9:44:50 -0800   |            |
++
+ 
+     And the following users exist:
+       | id | name  | github_uid      | email          | user_type     |
+
+--
+3	0	features/my_approval_requests.feature

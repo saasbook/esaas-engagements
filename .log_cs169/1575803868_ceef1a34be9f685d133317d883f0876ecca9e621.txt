@@ -1,0 +1,59 @@
+a1, development
+diff --git a/app/assets/stylesheets/site.scss b/app/assets/stylesheets/site.scss
+index 6e4c442..0a982c1 100644
+--- a/app/assets/stylesheets/site.scss
++++ b/app/assets/stylesheets/site.scss
+@@ -1,12 +1,15 @@
+ body { padding: 2ex; }
+-​
+-a { color: #2b4988}
+ 
++a { color: #2b4988}
+ 
+ .btn-success {background-color: #2d8809}
++.label-success {background-color: #2d8809}
+ .btn-info {background-color: #298078}
++.label-info {background-color: #298078}
+ .btn-danger {background-color: #d80044}
+-​
++.label-danger {background-color: #d80044}
++
++
+ .dead { background-color: #ffcccc; }
+ .development { background-color: #b3e9ff; }
+ .in_use  { }
+@@ -14,7 +17,7 @@ a { color: #2b4988}
+ .inactive_but_wants_improvement  { background-color: #ffff99; }
+ .defunct { background-color: #ffcccc; }
+ .pending { background-color: #ffd0a7; }
+-​
++
+ .vetting_pending { background-color: #eecff5}
+ .on_hold { background-color: #eecff5 }
+ .staff_approved { background-color: #eecff5 }
+@@ -24,9 +27,8 @@ a { color: #2b4988}
+ .declined_by_customer { background-color: #eecff5 }
+ .declined_by_customer_available_next_sem { background-color: #eecff5 }
+ .back_up { background-color: #eecff5 }
+-​
++
+ .contact_status { background-color: #e0f0ff; }
+ .app_functionality { background-color: #ffca9d; }
+ .general { background-color: #ffcccc; }
+ .vetting { background-color: #ffb8f0; }
+-
+diff --git a/app/views/layouts/application.html.haml b/app/views/layouts/application.html.haml
+index f7144ad..70be148 100644
+--- a/app/views/layouts/application.html.haml
++++ b/app/views/layouts/application.html.haml
+@@ -1,5 +1,5 @@
+ !!! 5
+-%html
++%html{:lang => "en"}
+   %head
+     %title ESaaS Customer Engagements
+     = stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track' => true
+
+--
+8	6	app/assets/stylesheets/site.scss
+1	1	app/views/layouts/application.html.haml

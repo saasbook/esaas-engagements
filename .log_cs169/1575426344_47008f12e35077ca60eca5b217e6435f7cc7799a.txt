@@ -1,0 +1,8 @@
+team-master-head, development
+diff --cc app/controllers/apps_controller.rb
+index 89f75fa,a942a0c..0000000
+--- a/app/controllers/apps_controller.rb
++++ b/app/controllers/apps_controller.rb
+
+--
+0	0	app/controllers/apps_controller.rb

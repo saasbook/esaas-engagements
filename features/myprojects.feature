@@ -55,15 +55,75 @@
    When I follow "app1"
    Then I should see "app1"
    Then I should see "Status: pending"
-#   Then I should see "test1" #TODO: description use div later
-#   Then I should see "f1" #TODO: FEATURES use div later
-#   Then I should see "p1.com" #TODO: Pivotal tracker url use div later
-#   Then I should see "repo-url1.com" #TODO: Repo URL use div later
-#   Then I should see "deploy-url1.com" #TODO: Deployment URL use div later
-
+   Then I should see "test1"
+   Then I should see "f1"
+   Then I should see "p1.com"
+   Then I should see "repo-url1.com"
+   Then I should see "deploy-url1.com"
+   
  Scenario: A logged in user can see buttons on the Projects Information Page through the 'My Projects' index
    Given I am logged in
    When I follow "My Projects"
    When I follow "app1"
    Then I should see "app1"
    Then I should see "Back"
+   Then I should see "Request Change"
+
+ Scenario: A logged in user can see buttons on the Projects Information Page through the 'My Projects' index
+   Given I am logged in
+   When I follow "My Projects"
+   When I follow "app1"
+   When I follow "Back"
+   Then I should be on the my projects page
+
+ # -------------------- My Project Request Change -----------------------------
+ Scenario: A logged in user can Request a change to their project through the Project Information Page
+   Given I am logged in
+   When I follow "My Projects"
+   When I follow "app1"
+   When I follow "Request Change"
+   Then I should see /Request Changes for "app1"/
+   # Then I should see "Send Request" TODO: Not passing
+
+ Scenario: A logged in user will see the "Request Change" button change to "Update Request" when a Change Request is submitted
+   Given I am logged in
+   When I follow "My Projects"
+   Then I should not see "Update Request"
+   And I follow "app1"
+   And I follow "Request Change"
+   And I fill in "description" with "123abc"
+   And I fill in "features" with "123abc"
+   And I press "Send Request"
+   Then I should see "Update Request"
+   When I follow "My Projects"
+   Then I should see "Update Request"
+
+ Scenario: A logged in user can view the Projects Information Page through the 'My Projects' index
+   Given I am logged in
+   When I follow "My Projects"
+   When I follow "app1"
+   Then I should see "app1"
+   Then I should see "Status: pending"
+   Then I should see "test1"
+   Then I should see "f1"
+   Then I should see "p1.com"
+   Then I should see "repo-url1.com"
+   Then I should see "deploy-url1.com"
+   When I follow "Request Change"
+   Then I should see "app1"
+   Then I should see "test1"
+   Then I should see "f1"
+   Then I should see "p1.com"
+   Then I should see "repo-url1.com"
+   Then I should see "deploy-url1.com"
+   And I fill in "description" with "123abc"
+   And I fill in "features" with "123abcd"
+   And I press "Send Request"
+   When I follow "Update Request"
+   Then I should see "app1"
+   Then I should see "123abc"
+   Then I should see "123abcd"
+   Then I should see "p1.com"
+   Then I should see "p1.com"
+   Then I should see "repo-url1.com"
+   Then I should see "deploy-url1.com"
