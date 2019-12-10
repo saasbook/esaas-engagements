@@ -40,7 +40,7 @@ group :test do
   gem 'cucumber-rails-training-wheels'
   gem 'poltergeist'
   gem 'rspec-rails'
-  gem 'puma'
+  gem 'puma', '>= 4.3.1'
   gem 'guard-rspec'
   gem 'factory_bot_rails', '< 5.0.0'
   gem 'jasmine-rails'
