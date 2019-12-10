@@ -49,6 +49,8 @@ group :test do
   gem 'launchy'
 end
 
+gem 'axe-matchers', group: [:test, :development]
+
 group :production do
   gem 'pg', '< 1.0.0'
   gem 'rails_12factor'
