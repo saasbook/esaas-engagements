@@ -58,8 +58,8 @@ Feature: Accessibility for each page
   @javascript
   Scenario: Project page
     When I follow "My Projects"
-    Then the page should be accessible
-    When I follow "Update Request"
+    # Then the page should be accessible
+    # When I follow "Update Request"
     # Then the page should be accessible
 
   @javascript
