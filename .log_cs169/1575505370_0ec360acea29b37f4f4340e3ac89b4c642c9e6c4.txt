@@ -1,0 +1,93 @@
+add-additional-myprojects-tests, test
+diff --git a/Gemfile b/Gemfile
+index 2a3eab8..c295989 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -47,6 +47,7 @@ group :test do
+   gem 'database_cleaner'
+   gem 'timecop'
+   gem 'launchy'
++  gem 'simplecov', :require => false
+ end
+ 
+ group :production do
+@@ -67,6 +68,3 @@ end
+ 
+ # Use Capistrano for deployment
+ # gem 'capistrano-rails', group: :development
+-
+-
+-
+diff --git a/db/github_mock_login.yml b/db/github_mock_login.yml
+index a8debfe..ebe8e8c 100644
+--- a/db/github_mock_login.yml
++++ b/db/github_mock_login.yml
+@@ -2,7 +2,7 @@ development:
+   github_uid: 'fox'
+   name: 'Armando Fox'
+   email: 'fox@cs.berkeley.edu'
+-  user_type: 'coach'
++  user_type: 'client'
+ test:
+   github_uid: "esaas_developer"
+   name: "ESaas Developer"
+diff --git a/db/schema.rb b/db/schema.rb
+index 08a455c..619e498 100644
+--- a/db/schema.rb
++++ b/db/schema.rb
+@@ -13,18 +13,20 @@
+ 
+ ActiveRecord::Schema.define(version: 20191112010952) do
+ 
+-  create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
++  create_table "app_edit_requests", force: :cascade do |t|
+     t.text     "description"
+     t.text     "features"
+     t.text     "feedback"
+     t.integer  "status",        default: 0, null: false
+     t.datetime "approval_time"
++    t.integer  "app_id",                    null: false
+     t.integer  "requester_id",              null: false
+     t.integer  "approver_id"
+     t.datetime "created_at",                null: false
+     t.datetime "updated_at",                null: false
+   end
+ 
++  add_index "app_edit_requests", ["app_id"], name: "index_app_edit_requests_on_app_id"
+   add_index "app_edit_requests", ["approver_id"], name: "index_app_edit_requests_on_approver_id"
+   add_index "app_edit_requests", ["requester_id"], name: "index_app_edit_requests_on_requester_id"
+ 
+diff --git a/features/myprojects.feature b/features/myprojects.feature
+index 63948d9..f5fb046 100644
+--- a/features/myprojects.feature
++++ b/features/myprojects.feature
+@@ -75,3 +75,12 @@
+    When I follow "app1"
+    When I follow "Back"
+    Then I should be on the my projects page
++
++ # -------------------- My Project Request Change -----------------------------
++ Scenario: A logged in user can Request a change to their project through the Project Information Page
++   Given I am logged in
++   When I follow "My Projects"
++   When I follow "app1"
++   When I follow "Request Change"
++   Then I should see /Request Changes for "app1"/
++   # Then I should see "Send Request" TODO: Not passing
+diff --git a/spec/rails_helper.rb b/spec/rails_helper.rb
+index cb52f14..ef1939f 100644
+--- a/spec/rails_helper.rb
++++ b/spec/rails_helper.rb
+@@ -1,4 +1,5 @@
+ require 'simplecov'
++SimpleCov.start 'rails'
+ # This file is copied to spec/ when you run 'rails generate rspec:install'
+ ENV['RAILS_ENV'] ||= 'test'
+ require File.expand_path('../../config/environment', __FILE__)
+
+--
+1	3	Gemfile
+1	1	db/github_mock_login.yml
+3	1	db/schema.rb
+9	0	features/myprojects.feature
+1	0	spec/rails_helper.rb
