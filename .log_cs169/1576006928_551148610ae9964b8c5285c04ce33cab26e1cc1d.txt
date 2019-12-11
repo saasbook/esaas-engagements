@@ -1,0 +1,142 @@
+add-additional-myprojects-tests, development
+diff --git a/db/github_mock_login.yml b/db/github_mock_login.yml
+index a8debfe..ebe8e8c 100644
+--- a/db/github_mock_login.yml
++++ b/db/github_mock_login.yml
+@@ -2,7 +2,7 @@ development:
+   github_uid: 'fox'
+   name: 'Armando Fox'
+   email: 'fox@cs.berkeley.edu'
+-  user_type: 'coach'
++  user_type: 'client'
+ test:
+   github_uid: "esaas_developer"
+   name: "ESaas Developer"
+diff --git a/db/schema.rb b/db/schema.rb
+index 08a455c..619e498 100644
+--- a/db/schema.rb
++++ b/db/schema.rb
+@@ -13,18 +13,20 @@
+ 
+ ActiveRecord::Schema.define(version: 20191112010952) do
+ 
+-  create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
++  create_table "app_edit_requests", force: :cascade do |t|
+     t.text     "description"
+     t.text     "features"
+     t.text     "feedback"
+     t.integer  "status",        default: 0, null: false
+     t.datetime "approval_time"
++    t.integer  "app_id",                    null: false
+     t.integer  "requester_id",              null: false
+     t.integer  "approver_id"
+     t.datetime "created_at",                null: false
+     t.datetime "updated_at",                null: false
+   end
+ 
++  add_index "app_edit_requests", ["app_id"], name: "index_app_edit_requests_on_app_id"
+   add_index "app_edit_requests", ["approver_id"], name: "index_app_edit_requests_on_approver_id"
+   add_index "app_edit_requests", ["requester_id"], name: "index_app_edit_requests_on_requester_id"
+ 
+diff --git a/features/my_approval_requests.feature b/features/my_approval_requests.feature
+index 337eca3..8939ffe 100644
+--- a/features/my_approval_requests.feature
++++ b/features/my_approval_requests.feature
+@@ -63,9 +63,9 @@ Scenario: A logged in coach user can view an App Edit (Feature Change) Request t
+   When I follow the App Edit Request with id 102
+   Then I should see /Edit request for "app2"/
+ 
+-Scenario: A coach user requests an edit on his/her project and verifies that 
+-          approving the request via the App Edit Requests page correctly 
+-          updates the approval status of the request in the  project information page 
++Scenario: A coach user requests an edit on his/her project and verifies that
++          approving the request via the App Edit Requests page correctly
++          updates the approval status of the request in the  project information page
+ 
+   Given I am logged in
+   Then I should see "App Edit Requests 2"
+@@ -123,11 +123,16 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+   And I uncheck "submitted"
+   Then I press "Filter Requests"
+   Then I should not see "app1"
+-  
++
+   And I follow the App Edit Request with id 105
+   And I press "Post Feedback and Approve"
+   Then I should see /You have successfully approved edits for "app5"./
+   Then I should see "App Edit Requests 2"
+   And I press "Filter Requests"
+   Then I should not see "app5"
+-  
+\ No newline at end of file
++
++  Scenario: A logged-in client clicks on the Project information page of a project for which a change request form had been submitted but the staff has not reviewed
++  Given I am logged in
++  When I follow "My Projects"
++  And I press "app1"
++  Then I should see "Staff has not yet reviewed/approved this request."
+diff --git a/features/myprojects.feature b/features/myprojects.feature
+index 65f81a9..aee2e12 100644
+--- a/features/myprojects.feature
++++ b/features/myprojects.feature
+@@ -176,3 +176,7 @@
+    And I fill in "features" with "123abc"
+    And I press "Send Request"
+    Then I should see "Status: vetting pending"
++
++   Scenario: client tries to access edit my project page for an app they don't own
++   When I go to the update edit request page for a project with id "104"
++   Then I should see "You do not have any projects with ID: 104."
+diff --git a/features/step_definitions/my_projects_steps.rb b/features/step_definitions/my_projects_steps.rb
+index 747efe0..2d23b38 100644
+--- a/features/step_definitions/my_projects_steps.rb
++++ b/features/step_definitions/my_projects_steps.rb
+@@ -1,3 +1,7 @@
+ When /^(?:|I )follow Request Change with id (.+)$/ do |id|
+     visit new_my_project_edit_path(app_id: id)
+-  end
+\ No newline at end of file
++  end
++
++# When /I click on the “(.+)” icon/ do |locator|
++#   find(‘#’ + locator).click
++# end
+diff --git a/features/support/paths.rb b/features/support/paths.rb
+index 1c3d683..1a77c4f 100644
+--- a/features/support/paths.rb
++++ b/features/support/paths.rb
+@@ -15,12 +15,12 @@ module NavigationHelpers
+ 
+     when /^the home\s?page$/
+       then '/'
+-    
++
+     when /^the my project'?s page$/i
+       then my_projects_path
+ 
+-    when /^the update edit request page for (.*)$/i
+-      then edit_my_project_edit_path(App.where(name: $1).first)
++    when /^the update edit request page for a project with id (.*)$/i
++      then edit_my_project_edit_path(app_id: $1)
+ 
+     when /^the new edit request page for (.*)$/i
+       then new_my_project_edit_path(App.where(name: $1).first)
+diff --git a/spec/rails_helper.rb b/spec/rails_helper.rb
+index cb52f14..ef1939f 100644
+--- a/spec/rails_helper.rb
++++ b/spec/rails_helper.rb
+@@ -1,4 +1,5 @@
+ require 'simplecov'
++SimpleCov.start 'rails'
+ # This file is copied to spec/ when you run 'rails generate rspec:install'
+ ENV['RAILS_ENV'] ||= 'test'
+ require File.expand_path('../../config/environment', __FILE__)
+
+--
+1	1	db/github_mock_login.yml
+3	1	db/schema.rb
+10	5	features/my_approval_requests.feature
+4	0	features/myprojects.feature
+5	1	features/step_definitions/my_projects_steps.rb
+3	3	features/support/paths.rb
+1	0	spec/rails_helper.rb

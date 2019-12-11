@@ -8,7 +8,7 @@
        | id  | name  | description | org_id | status  | pivotal_tracker_url | repository_url | deployment_url  | features |
        | 101 | app1  | test1       | 1      | pending | p1.com              | repo-url1.com  | deploy-url1.com | f1       |
        | 102 | app2  | test2       | 1      | pending | p2.com              | repo-url2.com  | deploy-url2.com | f2       |
-       | 103 | app3  | test3       | 1      | pending | p3.com              | repo-url3.com  | deploy-url3.com | f3       |
+       | 103 | app3  | test3       | 1      | dead    | p3.com              | repo-url3.com  | deploy-url3.com | f3       |
        | 104 | app4  | test4       | 4      | pending | p3.com              | repo-url3.com  | deploy-url3.com | f3       |
 
      And the following orgs exist:
@@ -60,7 +60,7 @@
    Then I should see "p1.com"
    Then I should see "repo-url1.com"
    Then I should see "deploy-url1.com"
-   
+
  Scenario: A logged in user can see buttons on the Projects Information Page through the 'My Projects' index
    Given I am logged in
    When I follow "My Projects"
@@ -127,3 +127,57 @@
    Then I should see "p1.com"
    Then I should see "repo-url1.com"
    Then I should see "deploy-url1.com"
+
+   Scenario: A logged-in client can delete a Change Request on the Update/Edit Request Page
+   Given I am logged in
+   When I follow "My Projects"
+   And I follow "app1"
+   And I follow "Request Change"
+   And I fill in "description" with "123abc"
+   And I fill in "features" with "123abc"
+   And I press "Send Request"
+   Then I should see "Update Request"
+   When I follow "Update Request"
+   And I press "Delete Request"
+   Then I should see "Successfully deleted edit request for: app1"
+
+   Scenario: Sad path in which a logged-in client attempts to update an Edit Request without making any changes to the existing edit request
+   Given I am logged in
+   When I follow "My Projects"
+   And I follow "app1"
+   And I follow "Request Change"
+   And I fill in "description" with "123abc"
+   And I fill in "features" with "123abc"
+   And I press "Send Request"
+   Then I should see "Update Request"
+   When I follow "Update Request"
+   And I press "Update Request"
+   Then I should see "There were no updates to edits made."
+
+   Scenario: Happy path in which a logged-in client attempts to update an Edit Request after making changes to the existing edit request
+   Given I am logged in
+   When I follow "My Projects"
+   And I follow "app1"
+   And I follow "Request Change"
+   And I fill in "description" with "123abc"
+   And I fill in "features" with "123abc"
+   And I press "Send Request"
+   Then I should see "Update Request"
+   When I follow "Update Request"
+   And I fill in "description" with "new description"
+   And I press "Update Request"
+   Then I should see "Successfully updated edit request."
+
+   Scenario: A client submits a Change Request form for a currently dead app
+   Given I am logged in
+   When I follow "My Projects"
+   And I press "Request New Feature" for "app3"
+   And I fill in "description" with "new test description"
+   And I fill in "features" with "123abc"
+   And I press "Send Request"
+   Then I should see "Status: vetting pending"
+
+   Scenario: client tries to access edit my project page for an app they don't own
+   Given I am logged in
+   When I go to the update edit request page for a project with id 104
+   Then I should see "You do not have any projects with ID: 104."
