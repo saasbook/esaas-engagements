@@ -1,10 +1,13 @@
+.page-header
+  %h1
+    App Edit Requests
 - if @my_approval_requests.nil? || @my_approval_requests.empty?
   .page-header{style: 'margin: 15px 0;'}
-    %h3.text-center
+    .text-lg.text-center
       There are no App Edit Requests pending approval
 .panel.panel-default{style: 'margin: 15px 0;'}
   .panel-heading
-    %h5
+    .text-lg
       Show requests with status:
     %br
     =form_tag(my_approval_requests_path, enforce_utf8: false, method: :get) do
