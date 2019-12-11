@@ -1,0 +1,498 @@
+master, test
+diff --git a/Gemfile b/Gemfile
+index 5c2c48a..a11ade8 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -49,6 +49,8 @@ group :test do
+   gem 'launchy'
+ end
+ 
++gem 'axe-matchers', group: [:test, :development]
++
+ group :production do
+   gem 'pg', '< 1.0.0'
+   gem 'rails_12factor'
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 493848f..ae64a49 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -46,6 +46,13 @@ GEM
+       jmespath (~> 1.0)
+     aws-sdk-resources (2.3.22)
+       aws-sdk-core (= 2.3.22)
++    axe-matchers (2.5.0)
++      dumb_delegator (~> 0.8)
++      virtus (~> 1.0)
++    axiom-types (0.1.1)
++      descendants_tracker (~> 0.0.4)
++      ice_nine (~> 0.11.0)
++      thread_safe (~> 0.3, >= 0.3.1)
+     backports (3.15.0)
+     binding_of_caller (0.8.0)
+       debug_inspector (>= 0.0.1)
+@@ -68,6 +75,8 @@ GEM
+     cocaine (0.5.8)
+       climate_control (>= 0.0.3, < 1.0)
+     coderay (1.1.2)
++    coercible (1.0.0)
++      descendants_tracker (~> 0.0.1)
+     coffee-rails (4.1.1)
+       coffee-script (>= 2.2.0)
+       railties (>= 4.0.0, < 5.1.x)
+@@ -103,8 +112,12 @@ GEM
+     cucumber-wire (0.0.1)
+     database_cleaner (1.7.0)
+     debug_inspector (0.0.3)
++    descendants_tracker (0.0.4)
++      thread_safe (~> 0.3, >= 0.3.1)
+     diff-lcs (1.3)
+     docile (1.3.2)
++    dumb_delegator (0.8.0)
++    equalizer (0.0.11)
+     erubis (2.7.0)
+     execjs (2.7.0)
+     factory_bot (4.11.1)
+@@ -141,6 +154,7 @@ GEM
+     hashie (3.6.0)
+     i18n (0.9.5)
+       concurrent-ruby (~> 1.0)
++    ice_nine (0.11.2)
+     jasmine-core (3.5.0)
+     jasmine-rails (0.15.0)
+       jasmine-core (>= 1.3, < 4.0)
+@@ -320,6 +334,11 @@ GEM
+       thread_safe (~> 0.1)
+     uglifier (4.2.0)
+       execjs (>= 0.3.0, < 3)
++    virtus (1.0.5)
++      axiom-types (~> 0.1)
++      coercible (~> 1.0)
++      descendants_tracker (~> 0.0, >= 0.0.3)
++      equalizer (~> 0.0, >= 0.0.9)
+     web-console (2.3.0)
+       activemodel (>= 4.0)
+       binding_of_caller (>= 0.7.2)
+@@ -336,6 +355,7 @@ PLATFORMS
+ 
+ DEPENDENCIES
+   aws-sdk (~> 2.3.0)
++  axe-matchers
+   bootstrap-sass
+   bootstrap_form
+   byebug
+diff --git a/app/assets/stylesheets/application.scss b/app/assets/stylesheets/application.scss
+index 5df8ed9..ec25d8e 100644
+--- a/app/assets/stylesheets/application.scss
++++ b/app/assets/stylesheets/application.scss
+@@ -2,6 +2,9 @@
+ //= require select2-bootstrap
+ 
+ @import "bootstrap";
++/**
++ *= require custom.scss
++ */
+ @import "site";
+ @import "comments";
+ @import "iterations";
+\ No newline at end of file
+diff --git a/app/assets/stylesheets/site.scss b/app/assets/stylesheets/site.scss
+index ef73760..a08d241 100644
+--- a/app/assets/stylesheets/site.scss
++++ b/app/assets/stylesheets/site.scss
+@@ -2,13 +2,15 @@ body { padding: 2ex; }
+ 
+ a { color: #2b4988}
+ 
+-.btn-success {background-color: #2d8809}
+-.label-success {background-color: #2d8809}
+-.btn-info {background-color: #298078}
+-.label-info {background-color: #298078}
+-.btn-danger {background-color: #d80044}
+-.label-danger {background-color: #d80044}
+-
++.btn-success {background-color: #2d8809; }
++.label-success {background-color: #2d8809; }
++.alert-success {background-color: #2d8809; color: #ffffff }
++.btn-info {background-color: #298078; }
++.label-info {background-color: #298078; }
++.alert-info {background-color: #298078; color: #ffffff }
++.btn-danger {background-color: #d80044; }
++.label-danger {background-color: #d80044; }
++.alert-danger {background-color: #d80044; color: #ffffff }
+ 
+ .dead { background-color: #ffcccc; }
+ .development { background-color: #b3e9ff; }
+@@ -58,4 +60,10 @@ a { color: #2b4988}
+     padding:5px 5px;
+     font-size:10px;
+     text-decoration: none;
+-}
+\ No newline at end of file
++}
++
++.text-lg {
++  font-size: 18px;
++  margin: 10px 0;
++  font-weight: bold;
++}
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 50ef7aa..6ec1e28 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -28,7 +28,7 @@
+   = render partial: 'shared/app_edit_request'
+   = link_to edit_my_project_edit_path(app_id: @app.id), class: 'btn', style: 'position:relative; right: -935px; background: #f49b2f; text-decoration: none' do
+     =image_tag('review.png', style: 'width: 30px; padding: 0px -10px 0px 0px')
+-    %span{style: 'font-size: 20px; color: white;'}
++    %span{style: 'font-size: 20px; color: white;', class: 'btn-warning'}
+       Update Edits
+ 
+ %hr
+diff --git a/app/views/comments/_comments.html.haml b/app/views/comments/_comments.html.haml
+index 67053d6..34647b4 100644
+--- a/app/views/comments/_comments.html.haml
++++ b/app/views/comments/_comments.html.haml
+@@ -1,5 +1,5 @@
+ .well#comments
+-  %h4 Comments
++  .text-lg Comments
+   - unless commentable.class.comment_types.blank?
+     %div#filters
+       Show:
+diff --git a/app/views/layouts/_nav_header.html.haml b/app/views/layouts/_nav_header.html.haml
+index 14b99a0..ea31b5e 100644
+--- a/app/views/layouts/_nav_header.html.haml
++++ b/app/views/layouts/_nav_header.html.haml
+@@ -1,21 +1,21 @@
+-#nav_header
++#nav_header{role: 'navigation'}
+   - klass = controller.controller_name
+   %ul.nav.nav-tabs
+-    %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
++    %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i)
+     - if current_user
+-      %li= link_to 'My Projects', my_projects_path, :role => 'presentation'
++      %li= link_to 'My Projects', my_projects_path
+     - if current_user&.coach?
+       %li
+         - requests_count = get_pending_requests_count
+-        = link_to my_approval_requests_path, :role => 'presentation' do
++        = link_to my_approval_requests_path do
+           App Edit Requests
+           - unless requests_count == 0
+             %span.label{class: 'label-danger', style: ' font-size: 13px;'}
+               = requests_count
+             
+-    %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
+-    %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
+-    %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i), :role => 'presentation'
++    %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i)
++    %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i)
++    %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i)
+     %li= link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank'
+     - if not current_user
+       %li= link_to 'Login', my_projects_path
+@@ -29,4 +29,4 @@
+           = submit_tag "Search", :class => "btn btn-primary"
+           - %w(Apps Organizations Users).each do |category|
+             = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
+-            = label_tag category, category
+\ No newline at end of file
++            = label_tag category, category
+diff --git a/app/views/layouts/application.html.haml b/app/views/layouts/application.html.haml
+index 70be148..88402e8 100644
+--- a/app/views/layouts/application.html.haml
++++ b/app/views/layouts/application.html.haml
+@@ -1,14 +1,16 @@
+ !!! 5
+-%html{:lang => "en"}
++%html{lang: "en", dir: 'ltr'}
+   %head
+     %title ESaaS Customer Engagements
+     = stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track' => true
+     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+     = csrf_meta_tags
+     <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+-						
++    - if %w(test development).include? Rails.env
++      <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.4.0/axe.min.js" integrity="sha256-3uvAwJcMTsYRtepeqr32rrpy5zZ/fMYjiKEKPZM6Rtc=" crossorigin="anonymous"></script>
++
+   %body
+-    #main.container
++    #main.container{role: 'main'}
+       = render 'layouts/nav_header'
+       = render 'shared/flash_messages'
+       = yield :form_errors
+diff --git a/app/views/my_approval_requests/index.html.haml b/app/views/my_approval_requests/index.html.haml
+index cddc93d..f23e70b 100644
+--- a/app/views/my_approval_requests/index.html.haml
++++ b/app/views/my_approval_requests/index.html.haml
+@@ -1,10 +1,13 @@
++.page-header
++  %h1
++    App Edit Requests
+ - if @my_approval_requests.nil? || @my_approval_requests.empty?
+   .page-header{style: 'margin: 15px 0;'}
+-    %h3.text-center
++    .text-lg.text-center
+       There are no App Edit Requests pending approval
+ .panel.panel-default{style: 'margin: 15px 0;'}
+   .panel-heading
+-    %h5
++    .text-lg
+       Show requests with status:
+     %br
+     =form_tag(my_approval_requests_path, enforce_utf8: false, method: :get) do
+diff --git a/app/views/my_projects/_form.html.haml b/app/views/my_projects/_form.html.haml
+index 8544afd..21aed0b 100644
+--- a/app/views/my_projects/_form.html.haml
++++ b/app/views/my_projects/_form.html.haml
+@@ -1,19 +1,19 @@
+ .well#status
+-  %h4 Status: #{@app.status.humanize(capitalize: false)}
++  .text-lg Status: #{@app.status.humanize(capitalize: false)}
+ 
+-.well#description
+-  %h4 Description
+-  = text_area_tag :description, @description, size: "24x6"
+-  %span.form-text.text-muted
++.well
++  .text-lg Description
++  = text_area_tag :description, @description, {size: "24x6", 'aria-label': 'description'}
++  %span.form-text
+     - if @description == @app&.description
+       The field above has been pre-filled with the current approved app's description
+     - elsif @description == @app_edit_request&.description
+       The field above has been pre-filled with your not-yet approved edit request for the apps's description
+ 
+-.well#features
+-  %h4 App Initial Features
+-  = text_area_tag :features, @features, size: "24x6"
+-  %span.form-text.text-muted
++.well
++  .text-lg App Initial Features
++  = text_area_tag :features, @features, {size: "24x6", 'aria-label': 'description'}
++  %span.form-text
+     - if @features == @app&.features
+       The field above has been pre-filled with the current approved app's features
+     - elsif @features == @app_edit_request&.features
+@@ -22,16 +22,16 @@
+ .row
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+     .well#deployment
+-      %h4 Deployment
++      .text-lg Deployment
+       %p{:style => "word-wrap: break-word;"}
+-        = link_to @app.deployment_url, @app.deployment_url
++        = @app.deployment_url
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+     .well#github
+-      %h4 Github
++      .text-lg Github
+       %p{:style => "word-wrap: break-word;"}
+-        = link_to @app.repository_url, @app.repository_url
++        = @app.repository_url
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+     .well#pivotal
+-      %h4 Pivotal Tracker
++      .text-lg Pivotal Tracker
+       %p{:style => "word-wrap: break-word;"}
+-        = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
++        = @app.pivotal_tracker_url
+diff --git a/app/views/my_projects/edit.html.haml b/app/views/my_projects/edit.html.haml
+index 595715c..09fd9d8 100644
+--- a/app/views/my_projects/edit.html.haml
++++ b/app/views/my_projects/edit.html.haml
+@@ -30,6 +30,5 @@
+           %td
+             = staff.email
+ 
+--#TODO: use modal to confirm delete
+ =form_tag(delete_my_project_edit_path(app_id: @app.id), method: :delete) do
+-  =submit_tag 'Delete Request', class: 'btn btn-danger pull-left'
++  =submit_tag 'Delete Request', class: 'btn btn-danger pull-left', data: { confirm: 'Are you sure?' }
+diff --git a/app/views/shared/_app.html.haml b/app/views/shared/_app.html.haml
+index 104650b..0c366fe 100644
+--- a/app/views/shared/_app.html.haml
++++ b/app/views/shared/_app.html.haml
+@@ -1,26 +1,26 @@
+ .well#status
+-  %h4 Status: #{@app.status.humanize(capitalize: false)}
++  .text-lg Status: #{@app.status.humanize(capitalize: false)}
+ .well#description
+-  %h4 Description
++  .text-lg Description
+   %p= sanitize @app.description
+ .well#features
+-  %h4 App Initial Features
++  .text-lg App Initial Features
+   %p= sanitize @app.features
+ %hr
+ 
+ .row
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+     .well#deployment
+-      %h4 Deployment
++      .text-lg Deployment
+       %p{:style => "word-wrap: break-word;"}
+-        = link_to @app.deployment_url, @app.deployment_url
++        = @app.deployment_url
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+     .well#github
+-      %h4 Github
++      .text-lg Github
+       %p{:style => "word-wrap: break-word;"}
+-        = link_to @app.repository_url, @app.repository_url
++        = @app.repository_url
+   .col-xs-4.col-sm-4.col-md-4.col-lg-4
+     .well#pivotal
+-      %h4 Pivotal Tracker
++      .text-lg Pivotal Tracker
+       %p{:style => "word-wrap: break-word;"}
+-        = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
++        = @app.pivotal_tracker_url
+diff --git a/features/axe_core.feature b/features/axe_core.feature
+new file mode 100644
+index 0000000..01d5e01
+--- /dev/null
++++ b/features/axe_core.feature
+@@ -0,0 +1,103 @@
++@javascript
++Feature: Accessibility for each page
++
++  Background: seed data and logged as coach
++
++    Given the following apps exist:
++      | id  | name  | description | org_id |
++      | 1   | app1  | test1       | 1      |
++
++    And the following orgs exist:
++      | id | name | contact_id |
++      | 1  | org1 | 1          |
++
++    And the following users exist:
++      | id | name  | github_uid      | email          | user_type     | developing_engagement_id |
++      | 1  | user1 | esaas_developer | test@user.com  | coach         |       1                  |
++
++    And the following App Edit Requests exist:
++      | id | description  |
++      | 1  |    app1      |
++
++    And the following engagements exist:
++      | id | app_id | coach_id | team_number | start_date |
++      | 1  | 1      | 1        | 1           | 2017-03-25 |
++
++    And the following iterations exist:
++      | id | engagement_id | end_date   |
++      | 1  | 1             | 2017-04-14 |
++
++    And the following App Edit Requests exist:
++      | id | description  | features    | feedback | status      | approval_time | app_id | requester_id    | approver_id | created_at                 | updated_at |
++      | 1  | app1         | test1       |          | submitted   |               | 1      | 1               | 1           | 2019-11-20 7:44:50 -0800   |            |
++
++    And I am logged in
++
++  @javascript
++  Scenario: App page
++    When I follow "Apps"
++    And the page should be accessible
++    When I follow "New App"
++    Then the page should be accessible
++    Given I follow "Back"
++    When I follow "Edit"
++    Then the page should be accessible
++    And I press "Update App"
++    When I follow "app1"
++    #    Then the page should be accessible
++    #    When I follow "New Engagement"
++    #    Then the page should be accessible
++    #    And I follow "Back"
++    #    And I follow "Request Feedback"
++    #    Then the page should be accessible
++    #    When I press "Create Iteration"
++    #    Then the page should be accessible
++    #    When I press "Edit"
++    #    Then the page should be accessible
++
++  @javascript
++  Scenario: Project page
++    When I follow "My Projects"
++    # Then the page should be accessible
++    # When I follow "Update Request"
++    # Then the page should be accessible
++
++  @javascript
++  Scenario: App Edit Requests page
++    When I follow "App Edit Requests"
++    Then the page should be accessible
++    When I follow "View Request"
++    # Then the page should be accessible
++
++  @javascript
++  Scenario: Orgs page
++    When I follow "Orgs"
++    Then the page should be accessible
++    When I follow "org1"
++    # Then the page should be accessible
++    # When I follow "Edit Org"
++    # Then the page should be accessible
++
++  @javascript
++  Scenario: Users page
++    When I follow "Users"
++    Then the page should be accessible
++    When I follow "user1"
++    # Then the page should be accessible
++    # When I follow "Edit User"
++    # Then the page should be accessible
++
++  @javascript
++  Scenario: Create page
++    When I follow "Create"
++    Then the page should be accessible
++
++  @javascript
++  Scenario: Current Iteration page
++    When I follow "Current iteration"
++    Then the page should be accessible
++
++  @javascript
++  Scenario: Login page
++    When I follow "Logout"
++    Then the page should be accessible
+diff --git a/features/step_definitions/axe_core_steps.rb b/features/step_definitions/axe_core_steps.rb
+new file mode 100644
+index 0000000..0486999
+--- /dev/null
++++ b/features/step_definitions/axe_core_steps.rb
+@@ -0,0 +1,2 @@
++# require axe core matchers
++require 'axe/cucumber/step_definitions'
+diff --git a/features/support/env.rb b/features/support/env.rb
+index 67087ab..4011a52 100644
+--- a/features/support/env.rb
++++ b/features/support/env.rb
+@@ -62,5 +62,6 @@ Capybara.default_max_wait_time = 1
+ # The :transaction strategy is faster, but might give you threading problems.
+ # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
+ Cucumber::Rails::Database.javascript_strategy = :truncation
++Capybara.asset_host = "http://localhost:3000"
+ 
+ World(FactoryBot::Syntax::Methods)
+
+--
+2	0	Gemfile
+20	0	Gemfile.lock
+3	0	app/assets/stylesheets/application.scss
+16	8	app/assets/stylesheets/site.scss
+1	1	app/views/apps/show.html.haml
+1	1	app/views/comments/_comments.html.haml
+8	8	app/views/layouts/_nav_header.html.haml
+5	3	app/views/layouts/application.html.haml
+5	2	app/views/my_approval_requests/index.html.haml
+15	15	app/views/my_projects/_form.html.haml
+1	2	app/views/my_projects/edit.html.haml
+9	9	app/views/shared/_app.html.haml
+103	0	features/axe_core.feature
+2	0	features/step_definitions/axe_core_steps.rb
+1	0	features/support/env.rb
