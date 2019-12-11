@@ -15,12 +15,12 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       then '/'
-    
+
     when /^the my project'?s page$/i
       then my_projects_path
 
-    when /^the update edit request page for (.*)$/i
-      then edit_my_project_edit_path(App.where(name: $1).first)
+    when /^the update edit request page for a project with id (.*)$/i
+      then edit_my_project_edit_path(app_id: $1)
 
     when /^the new edit request page for (.*)$/i
       then new_my_project_edit_path(App.where(name: $1).first)

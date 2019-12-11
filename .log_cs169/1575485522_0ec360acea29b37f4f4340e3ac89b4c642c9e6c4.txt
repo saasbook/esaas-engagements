@@ -1,0 +1,187 @@
+add-additional-myprojects-tests, development
+diff --git a/Gemfile b/Gemfile
+index 2a3eab8..c295989 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -47,6 +47,7 @@ group :test do
+   gem 'database_cleaner'
+   gem 'timecop'
+   gem 'launchy'
++  gem 'simplecov', :require => false
+ end
+ 
+ group :production do
+@@ -67,6 +68,3 @@ end
+ 
+ # Use Capistrano for deployment
+ # gem 'capistrano-rails', group: :development
+-
+-
+-
+diff --git a/app/controllers/my_projects_controller.rb b/app/controllers/my_projects_controller.rb
+index fbe83a7..da08797 100644
+--- a/app/controllers/my_projects_controller.rb
++++ b/app/controllers/my_projects_controller.rb
+@@ -18,58 +18,58 @@ class MyProjectsController < ApplicationController
+     end
+ 
+     # GET /my_projects/edit/:app_id
+-    def edit
+-        redirect_to new_my_project_edit_path(app_id: params[:app_id]) and return  if @app_edit_request.nil?
+-        @staff_list = User.where(user_type: User.user_types[:coach]).order(name: :asc).all
+-    end
++    # def edit
++    #     redirect_to new_my_project_edit_path(app_id: params[:app_id]) and return  if @app_edit_request.nil?
++    #     @staff_list = User.where(user_type: User.user_types[:coach]).order(name: :asc).all
++    # end
+ 
+     # GET /my_projects/new/:app_id
+-    def new
+-        redirect_to edit_my_project_edit_path(app_id: params[:app_id]) unless @app_edit_request.nil?
+-    end
++    # def new
++    #     redirect_to edit_my_project_edit_path(app_id: params[:app_id]) unless @app_edit_request.nil?
++    # end
+ 
+     # POST /my_projects/:app_id
+-    def create
+-        redirect_to edit_my_project_edit_path(app_id: params[:app_id]) and return unless @app_edit_request.nil?
+-        @app_edit_request = AppEditRequest.new(
+-            app_id:       params[:app_id],
+-            description:  params[:description],
+-            features:     params[:features],
+-            status:       :submitted,
+-            requester_id: session[:user_id]
+-        )
+-        if @app.status.to_s == 'dead'
+-            @app.status = 'vetting_pending'
+-        end
+-        if @app_edit_request.save && @app.save
+-            redirect_to app_path(@app)
+-        else
+-            redirect_to new_my_project_edit_path(app_id: @app.id),
+-                        alert: @app_edit_request.errors.full_messages.join(" ") || 'Failed to create edit request.'
+-        end
+-    end
+-
+-    # PUT /my_projects/:app_id
+-    def update
+-        redirect_to new_my_project_edit_path and return if @app_edit_request.nil?
+-        unless update_to_edit_made(@app_edit_request)
+-            redirect_to edit_my_project_edit_path, alert: 'There were no updates to edits made.'
+-            return
+-        end
+-
+-        new_status = (@app_edit_request.submitted?) ? :submitted : :resubmitted
+-        updated = @app_edit_request.update_attributes(
+-            description: params[:description],
+-            features:    params[:features],
+-            status:      new_status,
+-        )
+-        if !updated
+-            redirect_to edit_my_project_edit_path(app_id: @app.id),
+-                        alert: @app_edit_request.errors.full_messages.join(" ") || 'Failed to save edit updates.'
+-        else
+-            redirect_to app_path(@app), notice: 'Successfully updated edit request.'
+-        end
+-    end
++    # def create
++    #     redirect_to edit_my_project_edit_path(app_id: params[:app_id]) and return unless @app_edit_request.nil?
++    #     @app_edit_request = AppEditRequest.new(
++    #         app_id:       params[:app_id],
++    #         description:  params[:description],
++    #         features:     params[:features],
++    #         status:       :submitted,
++    #         requester_id: session[:user_id]
++    #     )
++    #     if @app.status.to_s == 'dead'
++    #         @app.status = 'vetting_pending'
++    #     end
++    #     if @app_edit_request.save && @app.save
++    #         redirect_to app_path(@app)
++    #     else
++    #         redirect_to new_my_project_edit_path(app_id: @app.id),
++    #                     alert: @app_edit_request.errors.full_messages.join(" ") || 'Failed to create edit request.'
++    #     end
++    # end
++    #
++    # # PUT /my_projects/:app_id
++    # def update
++    #     redirect_to new_my_project_edit_path and return if @app_edit_request.nil?
++    #     unless update_to_edit_made(@app_edit_request)
++    #         redirect_to edit_my_project_edit_path, alert: 'There were no updates to edits made.'
++    #         return
++    #     end
++    #
++    #     new_status = (@app_edit_request.submitted?) ? :submitted : :resubmitted
++    #     updated = @app_edit_request.update_attributes(
++    #         description: params[:description],
++    #         features:    params[:features],
++    #         status:      new_status,
++    #     )
++    #     if !updated
++    #         redirect_to edit_my_project_edit_path(app_id: @app.id),
++    #                     alert: @app_edit_request.errors.full_messages.join(" ") || 'Failed to save edit updates.'
++    #     else
++    #         redirect_to app_path(@app), notice: 'Successfully updated edit request.'
++    #     end
++    # end
+ 
+     def destroy
+         if @app_edit_request.nil?
+diff --git a/db/github_mock_login.yml b/db/github_mock_login.yml
+index a8debfe..ebe8e8c 100644
+--- a/db/github_mock_login.yml
++++ b/db/github_mock_login.yml
+@@ -2,7 +2,7 @@ development:
+   github_uid: 'fox'
+   name: 'Armando Fox'
+   email: 'fox@cs.berkeley.edu'
+-  user_type: 'coach'
++  user_type: 'client'
+ test:
+   github_uid: "esaas_developer"
+   name: "ESaas Developer"
+diff --git a/db/schema.rb b/db/schema.rb
+index 08a455c..619e498 100644
+--- a/db/schema.rb
++++ b/db/schema.rb
+@@ -13,18 +13,20 @@
+ 
+ ActiveRecord::Schema.define(version: 20191112010952) do
+ 
+-  create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
++  create_table "app_edit_requests", force: :cascade do |t|
+     t.text     "description"
+     t.text     "features"
+     t.text     "feedback"
+     t.integer  "status",        default: 0, null: false
+     t.datetime "approval_time"
++    t.integer  "app_id",                    null: false
+     t.integer  "requester_id",              null: false
+     t.integer  "approver_id"
+     t.datetime "created_at",                null: false
+     t.datetime "updated_at",                null: false
+   end
+ 
++  add_index "app_edit_requests", ["app_id"], name: "index_app_edit_requests_on_app_id"
+   add_index "app_edit_requests", ["approver_id"], name: "index_app_edit_requests_on_approver_id"
+   add_index "app_edit_requests", ["requester_id"], name: "index_app_edit_requests_on_requester_id"
+ 
+diff --git a/spec/rails_helper.rb b/spec/rails_helper.rb
+index cb52f14..ef1939f 100644
+--- a/spec/rails_helper.rb
++++ b/spec/rails_helper.rb
+@@ -1,4 +1,5 @@
+ require 'simplecov'
++SimpleCov.start 'rails'
+ # This file is copied to spec/ when you run 'rails generate rspec:install'
+ ENV['RAILS_ENV'] ||= 'test'
+ require File.expand_path('../../config/environment', __FILE__)
+
+--
+1	3	Gemfile
+48	48	app/controllers/my_projects_controller.rb
+1	1	db/github_mock_login.yml
+3	1	db/schema.rb
+1	0	spec/rails_helper.rb

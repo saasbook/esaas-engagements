@@ -72,10 +72,6 @@ class MyProjectsController < ApplicationController
     end
 
     def destroy
-        if @app_edit_request.nil?
-            redirect_to my_projects_path, alert: %Q{There is not edit request for app with id: #{params[:app_id]}}
-            return
-        end
         notice = if @app_edit_request.destroy
                     %Q{Successfully deleted edit request for: #{@app.name}}
                  else
