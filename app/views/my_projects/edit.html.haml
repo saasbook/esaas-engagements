@@ -14,11 +14,17 @@
         Feedback By:
         =link_to @app_edit_request.approver.name, @app_edit_request.approver
   %hr
+
+
 =form_tag({action: :update} , method: :put) do
   =render 'form'
-  =submit_tag 'Update Request', :class => 'btn btn-primary'
+  =submit_tag 'Update Request', :class => 'btn btn-primary pull-left', style: 'margin: 0px 10px'
 
-.panel.panel-default{style: 'margin: 15px 0;'}
+=form_tag(delete_my_project_edit_path(app_id: @app.id), method: :delete) do		
+  =submit_tag 'Delete Request', class: 'btn btn-danger',  data: { confirm: 'Are you sure?' }, style: 'right: -100px'
+
+
+.panel.panel-default{style: 'margin: 15px 0px'}
   .panel-heading.text-left
     List of staff you can contact
   .panel-body
@@ -29,6 +35,3 @@
             = staff.name
           %td
             = staff.email
-
-=form_tag(delete_my_project_edit_path(app_id: @app.id), method: :delete) do
-  =submit_tag 'Delete Request', class: 'btn btn-danger pull-left', data: { confirm: 'Are you sure?' }

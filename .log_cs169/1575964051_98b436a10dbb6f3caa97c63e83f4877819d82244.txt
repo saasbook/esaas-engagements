@@ -1,0 +1,23 @@
+a1, development
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 50ef7aa..3ef52db 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -26,10 +26,10 @@
+ 
+ - unless @app_edit_request.nil?
+   = render partial: 'shared/app_edit_request'
+-  = link_to edit_my_project_edit_path(app_id: @app.id), class: 'btn', style: 'position:relative; right: -935px; background: #f49b2f; text-decoration: none' do
+-    =image_tag('review.png', style: 'width: 30px; padding: 0px -10px 0px 0px')
+-    %span{style: 'font-size: 20px; color: white;'}
+-      Update Edits
++  = link_to edit_my_project_edit_path(app_id: @app.id), id: 'Update Edits',  class: 'btn', style: 'position:relative; right: -935px; background: #f49b2f; text-decoration: none' do
++    =image_tag('review.png', style: 'width: 30px; padding: 0px -10px 0px 0px', id: 'Update Edits')
++    %span{style: 'font-size: 20px; color: white;', id: "Update Edits"}
++      ="Update Edits"
+ 
+ %hr
+ 
+
+--
+4	4	app/views/apps/show.html.haml

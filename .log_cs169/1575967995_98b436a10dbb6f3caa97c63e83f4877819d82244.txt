@@ -1,0 +1,100 @@
+a1, development
+diff --git a/app/views/apps/show.html.haml b/app/views/apps/show.html.haml
+index 50ef7aa..ba122dc 100644
+--- a/app/views/apps/show.html.haml
++++ b/app/views/apps/show.html.haml
+@@ -26,10 +26,10 @@
+ 
+ - unless @app_edit_request.nil?
+   = render partial: 'shared/app_edit_request'
+-  = link_to edit_my_project_edit_path(app_id: @app.id), class: 'btn', style: 'position:relative; right: -935px; background: #f49b2f; text-decoration: none' do
+-    =image_tag('review.png', style: 'width: 30px; padding: 0px -10px 0px 0px')
+-    %span{style: 'font-size: 20px; color: white;'}
+-      Update Edits
++  %span.label{style: 'font-size: 20px; color: white;'}
++    = image_tag('review.png', style: 'width: 30px; padding: 0px -10px 0px 0px;')
++    = link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id)
++  
+ 
+ %hr
+ 
+diff --git a/app/views/my_projects/_notification.html.haml b/app/views/my_projects/_notification.html.haml
+index b10a8d3..41bf0c8 100644
+--- a/app/views/my_projects/_notification.html.haml
++++ b/app/views/my_projects/_notification.html.haml
+@@ -1,8 +1,8 @@
+ 
+ %ul{style: 'float: right; list-style: none;'}
+   - pending_iter = get_pending_iteration_feedbacks
+-  %div#feedbacks.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
+-    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#feedbacks", "style" => "text-decoration: none"} 
++  %div#feebacks.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
++    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#", "style" => "text-decoration: none"} 
+       =image_tag('feedback.png')
+       - unless pending_iter.empty?
+         %span{class: 'notify-badge'}
+diff --git a/features/my_approval_requests.feature b/features/my_approval_requests.feature
+index 91e4e29..2a115ff 100644
+--- a/features/my_approval_requests.feature
++++ b/features/my_approval_requests.feature
+@@ -133,35 +133,22 @@ Scenario: A coach user requests an edit on his/her project and verifies that
+ 
+ 
+ Scenario: Client can view and link to reviewed requests through icon dropdown menu
++  Scenario: Client can view and link to reviewed requests through icon dropdown menu
+   Given I am logged in
+-  When I follow "My Projects"
+-  Then I should see "Your request has been reviewed!"
+-  When I click on the "requests" icon
+-  Then I should see "View Request Feedback for app6"
+-  And I should not see "View Request Feedback for app1"
+-  When I follow "View Request Feedback for app6"
+-  Then I should see "Edit Request for app6"
+-  Then I should see "Feedback"
+-  And I should see "Update Edits"
+-  And I follow "Update Edits"
+-  Then I should see /Request Changes for "'app6'"/
+-  When I fill in "features" with "123"
+-  And I press "Update Request"
+-  Then I should see "123"
+-  Then I should see "App Edit Requests 3"
+-  When I follow "My Projects"
+-  Then I should not see "Your request has been reviewed!"
+-
+-Scenario: A logged-in client can delete a Change Request on the Update/Edit Request Page
+-   Given I am logged in
+-   When I follow "My Projects"
+-   And I follow "app5"
+-   And I follow "Request Change"
+-   And I fill in "description" with "123abc"
+-   And I fill in "features" with "123abc"
+-   And I press "Send Request"
+-   Then I should see "Update Request"
+-   When I follow "Update Request"
+-   Then I should see "Delete Request"
+-   When I follow "Delete Request"
+-   Then I should see "Successfully deleted edit request for: app1"
+\ No newline at end of file
++  When I follow “My Projects”
++  Then I should see “Your request has been reviewed!”
++  When I click on the “requests” icon
++  Then I should see “View Request Feedback for app6"
++  And I should not see “View Request Feedback for app1”
++  When I follow “View Request Feedback for app6"
++  Then I should see “Edit Request for app6”
++  Then I should see “Feedback”
++  And I should see “Update Edits”
++  And I press “Update Request”
++  Then I should see /Request Changes for “‘app6’“/
++  When I fill in “features” with “123"
++  And I press “Update Request”
++  Then I should see “123"
++  Then I should see “App Edit Requests 3”
++  When I follow “My Projects”
++  Then I should not see “Your request has been reviewed!”
+\ No newline at end of file
+
+--
+4	4	app/views/apps/show.html.haml
+2	2	app/views/my_projects/_notification.html.haml
+18	31	features/my_approval_requests.feature

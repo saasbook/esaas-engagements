@@ -1,0 +1,19 @@
+a1, development
+diff --git a/app/views/my_projects/index.html.haml b/app/views/my_projects/index.html.haml
+index cfd4ce0..a9afc36 100644
+--- a/app/views/my_projects/index.html.haml
++++ b/app/views/my_projects/index.html.haml
+@@ -4,8 +4,8 @@
+   .help-block Click an App name to see more information
+ 
+ #notifications
+-- unless current_user.student?
+-  = render 'notification'
++  - unless current_user.student?
++    = render 'notification'
+ 
+ #filters
+   %label.checkbox-inline
+
+--
+2	2	app/views/my_projects/index.html.haml

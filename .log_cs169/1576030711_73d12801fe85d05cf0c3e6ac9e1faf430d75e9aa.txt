@@ -1,0 +1,50 @@
+a1, development
+diff --git a/app/views/my_projects/_notification.html.haml b/app/views/my_projects/_notification.html.haml
+index b10a8d3..4ba9e7e 100644
+--- a/app/views/my_projects/_notification.html.haml
++++ b/app/views/my_projects/_notification.html.haml
+@@ -1,26 +1,24 @@
+ 
+ %ul{style: 'float: right; list-style: none;'}
+   - pending_iter = get_pending_iteration_feedbacks
+-  %div#feedbacks.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
+-    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#feedbacks", "style" => "text-decoration: none"} 
+-      =image_tag('feedback.png')
+-      - unless pending_iter.empty?
+-        %span{class: 'notify-badge'}
+-          = 'We want your feedback!'
+-        %ul.dropdown-menu{"role" => "menu"}
+-          - pending_iter.each do |iter|
+-            %li= link_to "Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}", edit_engagement_iteration_path(iter.engagement_id, iter.id)
++  %div#feedbacks.dropdown.dropdown-toggle{style: 'float: left; margin: 0px 10px 0px 10px;' role: 'btn}
++    =image_tag('feedback.png')
++    - unless pending_iter.empty?
++      %span{class: 'notify-badge'}
++        = 'We want your feedback!'
++      %ul.dropdown-menu{"role" => "menu"}
++        - pending_iter.each do |iter|
++          %li= link_to "Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}", edit_engagement_iteration_path(iter.engagement_id, iter.id)
+   
+   - reviewed_apps = get_reviewed_apps
+   %div#requests.dropdown{style: 'float: left; margin: 0px 10px 0px 10px;'}
+-    %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#requests", "style" => "text-decoration: none"} 
+-      =image_tag('review.png')
+-      - unless reviewed_apps.empty?
+-        %span{class: 'notify-badge'}
+-          = 'Your request has been reviewed!'
+-        %ul.dropdown-menu{"role" => "menu"}
+-          - reviewed_apps.each do |app|
+-            %li= link_to "View Request Feedback for #{app.name}", app_path(app.id)
++    =image_tag('review.png')
++    - unless reviewed_apps.empty?
++      %span{class: 'notify-badge'}
++        = 'Your request has been reviewed!'
++      %ul.dropdown-menu{"role" => "menu"}
++        - reviewed_apps.each do |app|
++          %li= link_to "View Request Feedback for #{app.name}", app_path(app.id)
+         
+       
+   
+
+--
+15	17	app/views/my_projects/_notification.html.haml

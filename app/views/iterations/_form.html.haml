@@ -1,7 +1,7 @@
 = form_errors_for @iteration
 
 = bootstrap_form_for([@engagement, @iteration], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
-  = f.select :number, [1, 2, 3, 4], label: "Iteration Number"
+  = f.select :number, [1, 2, 3, 4], {}, :id => "Iteration_Number", label: "Iteration Number"
   = f.date_field :end_date, value: Time.now.strftime('%Y-%m-%d'), label: 'End Date'
   = f.text_area :general_feedback, :rows => '6', label: 'Customer Feedback'
   = f.form_group do
