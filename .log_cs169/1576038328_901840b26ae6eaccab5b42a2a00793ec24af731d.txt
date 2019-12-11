@@ -1,0 +1,94 @@
+a1, development
+diff --git a/app/views/my_projects/edit.html.haml b/app/views/my_projects/edit.html.haml
+index 56d6f51..9b4c035 100644
+--- a/app/views/my_projects/edit.html.haml
++++ b/app/views/my_projects/edit.html.haml
+@@ -14,13 +14,17 @@
+         Feedback By:
+         =link_to @app_edit_request.approver.name, @app_edit_request.approver
+   %hr
++
++
+ =form_tag({action: :update} , method: :put) do
+   =render 'form'
+-  %br
+-  =submit_tag 'Delete Request', class: 'btn btn-danger pull-right', data: { confirm: 'Are you sure?' }
+-  =submit_tag 'Update Request', :class => 'btn btn-primary'
+-  
+-.panel.panel-default{style: 'margin: 15px 0;'}
++  =submit_tag 'Update Request', :class => 'btn btn-primary pull-left', style: 'margin: 0px 10px'
++
++=form_tag(delete_my_project_edit_path(app_id: @app.id), method: :delete) do		
++  =submit_tag 'Delete Request', class: 'btn btn-danger',  data: { confirm: 'Are you sure?' }, style: 'right: -100px'
++
++
++.panel.panel-default{style: 'margin: 15px 0px'}
+   .panel-heading.text-left
+     List of staff you can contact
+   .panel-body
+diff --git a/features/iter_edit.feature b/features/iter_edit.feature
+index c13f19e..0ee55a5 100644
+--- a/features/iter_edit.feature
++++ b/features/iter_edit.feature
+@@ -22,8 +22,8 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
+ 
+   And the following engagements exist:
+     | id | app_id | coach_id | team_number | start_date | student_names |
+-    | 1  | 1      | 1        | 1           | 2017-03-25 | s1, s2, s3    |
+-    | 2  | 1      | 1        | 2           | 2017-08-25 | s4, s5, s6    |
++    | 1  | 1      | 1        | F19-8       | 2017-03-25 | s1, s2, s3    |
++    | 2  | 1      | 1        | S19-1       | 2017-08-25 | s4, s5, s6    |
+ 
+   And the following iterations exist:
+     | id | engagement_id | end_date   | number |
+@@ -54,7 +54,18 @@ Scenario: Client can view and link to requested Itearation Form through dropdown
+   When I follow "My Projects"
+   Then I should see "We want your feedback!"
+   When I click on the "feedbacks" icon
+-  Then I should see "Engagement 1 in Iteration 1"
+-  Then I should see "Engagement 1 in Iteration 2"
+-  When I follow "Engagement 1 in Iteration 1"
++  Then I should see "Engagement F19-8 in Iteration 1"
++  Then I should see "Engagement F19-8 in Iteration 2"
++  When I follow "Engagement F19-8 in Iteration 1"
+   Then I should see "Edit Customer Feedback"
++
++Scenario: Coach can request Iteration Form and select the Iteration number by a dropdown, which should be not a fixed number for client in the Form
++  When I follow "Apps"
++  And I follow "app1"
++  Then I should see "Engagements"
++  Then I should see "F19-8"
++  Then I should see "Request Feedback"
++  When I follow Request Feedback with id 1
++  Then I should see "New Iteration for Engagement from 2017-03-25"
++  When I click on the "Iteration Number"
++  
+diff --git a/features/step_definitions/engagement_steps.rb b/features/step_definitions/engagement_steps.rb
+index c593327..5062853 100644
+--- a/features/step_definitions/engagement_steps.rb
++++ b/features/step_definitions/engagement_steps.rb
+@@ -14,4 +14,8 @@ Then /^the rating for "(.*)" should be "(.*)"$/ do |metric, rating|
+   within("\##{metric}_score") do
+     expect(page).to have_content(rating)
+   end
++end
++
++When /^(?:|I )follow Request Feedback with id (.+)$/ do |id|
++  visit new_engagement_iteration_path(Engagement.find(id))
+ end
+\ No newline at end of file
+diff --git a/features/step_definitions/my_projects_steps.rb b/features/step_definitions/my_projects_steps.rb
+index 5266514..214246e 100644
+--- a/features/step_definitions/my_projects_steps.rb
++++ b/features/step_definitions/my_projects_steps.rb
+@@ -5,4 +5,3 @@ end
+ When /I click on the "(.+)" icon/ do |locator|
+   find('#' + locator).click
+ end
+-
+
+--
+9	5	app/views/my_projects/edit.html.haml
+16	5	features/iter_edit.feature
+4	0	features/step_definitions/engagement_steps.rb
+0	1	features/step_definitions/my_projects_steps.rb

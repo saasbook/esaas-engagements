@@ -22,8 +22,8 @@ Background: Logged in, users, apps, orgs, engagements and iterations exist
 
   And the following engagements exist:
     | id | app_id | coach_id | team_number | start_date | student_names |
-    | 1  | 1      | 1        | 1           | 2017-03-25 | s1, s2, s3    |
-    | 2  | 1      | 1        | 2           | 2017-08-25 | s4, s5, s6    |
+    | 1  | 1      | 1        | F19-8       | 2017-03-25 | s1, s2, s3    |
+    | 2  | 1      | 1        | S19-1       | 2017-08-25 | s4, s5, s6    |
 
   And the following iterations exist:
     | id | engagement_id | end_date   | number |
@@ -54,7 +54,28 @@ Scenario: Client can view and link to requested Itearation Form through dropdown
   When I follow "My Projects"
   Then I should see "We want your feedback!"
   When I click on the "feedbacks" icon
-  Then I should see "Engagement 1 in Iteration 1"
-  Then I should see "Engagement 1 in Iteration 2"
-  When I follow "Engagement 1 in Iteration 1"
+  Then I should see "Engagement F19-8 in Iteration 1"
+  Then I should see "Engagement F19-8 in Iteration 2"
+  When I follow "Engagement F19-8 in Iteration 1"
   Then I should see "Edit Customer Feedback"
+
+Scenario: Coach can request Iteration Form and select the Iteration number by a dropdown, which should be not a fixed number for client in the Form
+  When I follow "Apps"
+  And I follow "app1"
+  Then I should see "Engagements"
+  Then I should see "F19-8"
+  Then I should see "Request Feedback"
+  When I follow Request Feedback with id 1
+  Then I should see "New Iteration for Engagement from 2017-03-25"
+  When I click on the "Iteration Number" option
+  Then I should see "1, 2, 3, 4" inside "Iteration Number" options
+  And I choose "Iteration Number" with number 2
+  Then I press "Create Iteration"
+  Then I should see "Iteration was successfully created."
+  When I follow "My Projects"
+  Then I should see "We want your feedback!"
+  When I click on the "feedbacks" icon
+  Then I should see "Engagement F19-8 in Iteration 2"
+  When I follow "Engagement F19-8 in Iteration 2"
+  Then I should see "Edit Customer Feedback"
+  And I should see "Iteration Number" is prefilled with number 2

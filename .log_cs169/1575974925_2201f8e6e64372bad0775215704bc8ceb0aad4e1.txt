@@ -1,0 +1,89 @@
+a1, test
+diff --git a/.log_cs169/1575974806_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt b/.log_cs169/1575974806_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+new file mode 100644
+index 0000000..998686a
+--- /dev/null
++++ b/.log_cs169/1575974806_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+@@ -0,0 +1,17 @@
++a1, development
++diff --git a/app/views/shared/_app_edit_request.html.haml b/app/views/shared/_app_edit_request.html.haml
++index 912dd5d..89c807b 100644
++--- a/app/views/shared/_app_edit_request.html.haml
+++++ b/app/views/shared/_app_edit_request.html.haml
++@@ -27,7 +27,7 @@
++       %h1
++         %span.label{class: 'label-danger'}
++           =image_tag('feedback.png', style: 'width: 30px;')
++-          =link_to 'Feedback'
+++            Feedback
++       %br
++       =sanitize @app_edit_request.feedback
++       - unless @app_edit_request.approver.nil?
++
++--
++1	1	app/views/shared/_app_edit_request.html.haml
+diff --git a/.log_cs169/1575974815_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt b/.log_cs169/1575974815_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+new file mode 100644
+index 0000000..7c08711
+--- /dev/null
++++ b/.log_cs169/1575974815_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+@@ -0,0 +1,17 @@
++a1, development
++diff --git a/app/views/shared/_app_edit_request.html.haml b/app/views/shared/_app_edit_request.html.haml
++index 912dd5d..426dce0 100644
++--- a/app/views/shared/_app_edit_request.html.haml
+++++ b/app/views/shared/_app_edit_request.html.haml
++@@ -27,7 +27,7 @@
++       %h1
++         %span.label{class: 'label-danger'}
++           =image_tag('feedback.png', style: 'width: 30px;')
++-          =link_to 'Feedback'
+++          Feedback
++       %br
++       =sanitize @app_edit_request.feedback
++       - unless @app_edit_request.approver.nil?
++
++--
++1	1	app/views/shared/_app_edit_request.html.haml
+diff --git a/.log_cs169/1575974849_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt b/.log_cs169/1575974849_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+new file mode 100644
+index 0000000..7c08711
+--- /dev/null
++++ b/.log_cs169/1575974849_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+@@ -0,0 +1,17 @@
++a1, development
++diff --git a/app/views/shared/_app_edit_request.html.haml b/app/views/shared/_app_edit_request.html.haml
++index 912dd5d..426dce0 100644
++--- a/app/views/shared/_app_edit_request.html.haml
+++++ b/app/views/shared/_app_edit_request.html.haml
++@@ -27,7 +27,7 @@
++       %h1
++         %span.label{class: 'label-danger'}
++           =image_tag('feedback.png', style: 'width: 30px;')
++-          =link_to 'Feedback'
+++          Feedback
++       %br
++       =sanitize @app_edit_request.feedback
++       - unless @app_edit_request.approver.nil?
++
++--
++1	1	app/views/shared/_app_edit_request.html.haml
+diff --git a/app/views/shared/_app_edit_request.html.haml b/app/views/shared/_app_edit_request.html.haml
+index 912dd5d..426dce0 100644
+--- a/app/views/shared/_app_edit_request.html.haml
++++ b/app/views/shared/_app_edit_request.html.haml
+@@ -27,7 +27,7 @@
+       %h1
+         %span.label{class: 'label-danger'}
+           =image_tag('feedback.png', style: 'width: 30px;')
+-          =link_to 'Feedback'
++          Feedback
+       %br
+       =sanitize @app_edit_request.feedback
+       - unless @app_edit_request.approver.nil?
+
+--
+17	0	.log_cs169/1575974806_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+17	0	.log_cs169/1575974815_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+17	0	.log_cs169/1575974849_2201f8e6e64372bad0775215704bc8ceb0aad4e1.txt
+1	1	app/views/shared/_app_edit_request.html.haml

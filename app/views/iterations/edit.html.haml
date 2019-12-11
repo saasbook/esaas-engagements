@@ -6,7 +6,7 @@
         %fieldset.row
             .col-sm-6
                 - if current_user&.coach?
-                    = f.select :number, [1, 2, 3, 4], {}, label: "Iteration Number"
+                    = f.select :number, [1, 2, 3, 4], {}, :id => "Iteration Number", label: "Iteration Number"
                     = f.date_field :end_date, label: 'End Date'
                 - if not current_user&.coach?
                     = f.text_field :number, label: "Iteration Number", readonly: "readonly"
