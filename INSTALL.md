@@ -7,7 +7,7 @@ Run this command in the directory containing the project to generate configs wit
 `rails g config`
 
 This generates the following files:
-```markdown
+```
 Dockerfile
 docker-compose.yml
 .esaas-engagements-config.json
@@ -18,7 +18,7 @@ The above files are `.gitignore`d to avoid checking in secret credentials.
 To view the list of available options for the config generator run the following command:
 `rails g config --help`
 
-## 1b. (Optional) Edit the config cache and re-run config generator
+### 1b. (Optional) Edit the config cache and re-run config generator
 You can now edit the `.esaas-engagements-config.json` with custom values eg. setup a SendGrid API key after setting one up from their website.
 After customizing the `.esaas-engagements-config.json` you can re-run `rails g config` to regenerate the config files with these new values.
 `.esaas-engagements-config.json` files stores your config values and uses them to regenerate `config/application.yml` and your docker files.
@@ -27,9 +27,9 @@ After customizing the `.esaas-engagements-config.json` you can re-run `rails g c
 You can now start the application locally either on "bare-metal" or inside `docker`.
 
 ###  2a. "Bare metal" Approach
-For this approach your laptop need to have dependencies such as `nodejs` and `phantomjs` (for testing) installed either using Homebrew(MacOS), Chocoletey(PC) or your Linux package manager.
+For this approach your laptop need to have dependencies such as `nodejs` and `phantomjs` (for testing) installed either using Homebrew(MacOS), Chocolatey(PC) or your Linux package manager.
 
-`rails s`
+`bundle install --path vendor/bundle && rails s`
 
 ### 2b. Docker Approach
 For this approach you do not need to have dependencies on your host machine installed manually.
@@ -64,7 +64,7 @@ To run tests in your docker machine:
 `docker-compose run -e "RAILS_ENV=test" rails-server rake test`
 
 
-## Deploying to heroku. 
+## 3.Deploying to heroku. 
 Read the documentation for [working with Rails 4 on Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails4).
 
 If you want to deploy to heroku you should ideally re-clone the repository in a new folder different from your local development folder.
