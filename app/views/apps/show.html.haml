@@ -4,10 +4,10 @@
 - if app_owner(@app.id) && @iterations.present?
   - @iterations.each do |iter|
     - if iter.customer_feedback.nil? || iter.general_feedback.nil?
-      .alert.alert-info.text-center{style: 'margin: 10px 0; vertical-align: middle;'}
+      .alert.alert-info.text-center{style: 'margin: 10px 0; vertical-align: middle; padding:17px;'}
         A staff has requested feedback for Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}.
         = link_to edit_engagement_iteration_path(iter.engagement_id, iter.id) do
-          %span.btn{class: 'btn-primary', style: 'padding: 3px 5px; right: -250px; position: relative;'}
+          %span.btn{class: 'pull-right btn-primary', style: 'padding: 3px 5px; margin-top: -4px; border-color: white;'}
             = 'Complete Feedback Form'
 .page-header
   %h1
