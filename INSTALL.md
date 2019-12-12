@@ -62,3 +62,16 @@ Stop the docker network:
 To run tests in your docker machine:
 
 `docker-compose run -e "RAILS_ENV=test" rails-server rake test`
+
+
+## Deploying to heroku. 
+Read the documentation for [working with Rails 4 on Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails4).
+
+If you want to deploy to heroku you should ideally re-clone the repository in a new folder different from your local development folder.
+Re-run `rails g config --no-docker` in the new clone.
+Edit the `.esaas-engagements.json` with values you want to use in production 
+eg. if you have a `SENDGRID` key you want to use for production, overwrite the json key for the key with appropriate values.
+
+Now run `figaro heroku:set -e production -a YOUR+HEROKU+APP+NAME+HERE`.
+
+Replace `YOUR+HEROKU+APP+NAME+HERE` with `example-app` if your heroku app is at `example-app.herokuapp.com`.
