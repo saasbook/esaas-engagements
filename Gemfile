@@ -19,9 +19,6 @@ gem 'bootstrap_form'
 gem 'paperclip', '~> 5.2.1'
 gem 'aws-sdk', '~> 2.3.0'
 
-# Code Snippet Added by Course Staff for Logging
-gem 'listen', '~> 3.0'
-
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -69,6 +66,3 @@ end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-
-
