@@ -24,10 +24,10 @@
       =sanitize @app_edit_request.features
     - unless @app_edit_request.feedback.nil?
       %hr
-      %h1
-        %span.label{class: 'label-danger'}
+      %div{style: 'font-size: 20px; font-weight: 500;'}
+        %span
           =image_tag('feedback.png', style: 'width: 30px;')
-          Feedback
+          Staff Feedback:
       %br
       =sanitize @app_edit_request.feedback
       - unless @app_edit_request.approver.nil?
@@ -35,7 +35,7 @@
           .pull-right
             Feedback by:
             =link_to @app_edit_request.approver.name, @app_edit_request.approver
-      
+
   .panel-footer
     Requested By:
     = link_to @app_edit_request.requester.name, @app_edit_request.requester
