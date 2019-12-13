@@ -27,10 +27,10 @@
 - unless @app_edit_request.nil?
   = render partial: 'shared/app_edit_request'
 
-%div{style: 'height: 30px;'}
-  %span{class: 'btn pull-right update-edits-btn'}
-    = image_tag('review.png', style: 'width: 22px; height: 22px;')
-    = link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id), class: 'btn'
+  %div{style: 'height: 30px;'}
+    %span{class: 'btn pull-right update-edits-btn'}
+      = image_tag('review.png', style: 'width: 22px; height: 22px;')
+      = link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id), class: 'btn'
 %hr
 
 = render partial: 'comments/comments', locals: {commentable: @app}
