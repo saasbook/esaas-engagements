@@ -52,9 +52,9 @@ Scenario: A logged in coach user can view an App Edit (Feature Change) Request t
   When I follow the App Edit Request with id 102
   Then I should see /Edit request for "app2"/
 
-Scenario: A coach user requests an edit on his/her project and verifies that 
-          approving the request via the App Edit Requests page correctly 
-          updates the approval status of the request in the  project information page 
+Scenario: A coach user requests an edit on his/her project and verifies that
+          approving the request via the App Edit Requests page correctly
+          updates the approval status of the request in the  project information page
   Given I am logged in
   Then I should see "App Edit Requests 2"
   When I follow "My Projects"
@@ -111,7 +111,7 @@ Scenario: A coach user requests an edit on his/her project and verifies that
   And I uncheck "submitted"
   Then I press "Filter Requests"
   Then I should not see "app1"
-  
+
   And I follow the App Edit Request with id 105
   And I press "Post Feedback and Approve"
   Then I should see /You have successfully approved edits for "app5"./
@@ -124,10 +124,9 @@ Scenario: Client can view and link to reviewed requests through icon dropdown me
   When I follow "My Projects"
   Then I should see "Your request has been reviewed!"
   When I click on the "requests" icon
-  Then I should see "View Request Feedback for app6"
-  And I should not see "View Request Feedback for app1"
-  When I follow "View Request Feedback for app6"
+  Then I should see "View Feedback for app6"
+  And I should not see "View Feedback for app1"
+  When I follow "View Feedback for app6"
   Then I should see "Edit Request for app6"
   Then I should see "test6"
   Then I should see "f6"
-  

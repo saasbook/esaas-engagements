@@ -50,13 +50,13 @@ Scenario: There is a "Back to Iteration" button in the Edit Iteration page and i
   Then I should see "Iterations for app1"
   And I should see "2017-04-14"
 
-Scenario: Client can view and link to requested Itearation Form through dropdown menu
+Scenario: Client can view and link to requested Iteration Form through dropdown menu
   When I follow "My Projects"
   Then I should see "We want your feedback!"
   When I click on the "feedbacks" icon
-  Then I should see "Engagement F19-8 in Iteration 1"
-  Then I should see "Engagement F19-8 in Iteration 2"
-  When I follow "Engagement F19-8 in Iteration 1"
+  Then I should see "app1: Iteration 1 Feedback Form"
+  Then I should see "app1: Iteration 2 Feedback Form"
+  When I follow "app1: Iteration 1 Feedback Form"
   Then I should see "Edit Customer Feedback"
 
 Scenario: Coach can request Iteration Form and select the Iteration number by a dropdown, which should be not a fixed number for client in the Form
@@ -75,7 +75,7 @@ Scenario: Coach can request Iteration Form and select the Iteration number by a 
   When I follow "My Projects"
   Then I should see "We want your feedback!"
   When I click on the "feedbacks" icon
-  Then I should see "Engagement F19-8 in Iteration 2"
-  When I follow "Engagement F19-8 in Iteration 2"
+  Then I should see "app1: Iteration 2 Feedback Form"
+  When I follow "app1: Iteration 2 Feedback Form"
   Then I should see "Edit Customer Feedback"
   And I should see "Iteration Number" is prefilled with number 2
