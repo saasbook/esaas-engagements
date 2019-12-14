@@ -1,6 +1,11 @@
 # Setup For Localhost Development
 
 ## 1. Generate new config files 
+After cloning the project from github.
+Run:
+
+`bundle install --without production --path vendor/bundle`
+
 The following command makes it easy to get started with the configurations required to run the application.
 Run this command in the directory containing the project to generate configs with reasonable defaults:
 
