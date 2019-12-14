@@ -40,3 +40,7 @@ end
 Then /^I should see "(.*)" is prefilled with number (.+)$/ do |selector, value|
   expect(page).to have_select(selector, :selected => value)
 end
+
+Then /^(?:|I )should see a link "(.*?)" for "(.*?)"$/ do |link, url|
+  page.should have_link(link, :href => url)
+end
