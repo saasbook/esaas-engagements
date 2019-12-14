@@ -36,19 +36,12 @@ describe AppEditRequest do
                 )
                 allow(App).to receive(:find).with(@app.id).and_return(@app)
             end
-          it 'should be invalid if description is filled but is the same as app description' do
-            req_with_same_description = FactoryBot.build(
-                :app_edit_request,
-                app_id: @app.id,
-                description: "same description"
-            )
-            expect(req_with_same_description).to_not be_valid
-          end
-          it 'should be invalid if features is filled but is the same as app features' do
+          it 'should be invalid if features and description are the same' do
             req_with_same_features = FactoryBot.build(
                 :app_edit_request,
                 app_id: @app.id,
-                features: 'same features'
+                features: 'same features',
+                description: 'same description'
             )
             expect(req_with_same_features).to_not be_valid
           end
