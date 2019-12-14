@@ -136,10 +136,11 @@ class ConfigGenerator < Rails::Generators::Base
   end
 
   def generate_app_config
-    template 'application.yml.template', 'config/application.yml'
+    template 'application.yml.erb', 'config/application.yml'
     if @options[:docker]
-      template 'Dockerfile.template', 'Dockerfile'
-      template 'docker-compose.yml.template', 'docker-compose.yml'
+      template 'Dockerfile.erb', 'Dockerfile'
+      template 'docker-compose.yml.erb', 'docker-compose.yml'
+      template '.dockerignore', '.dockerignore'
     end
 
     # Cache config

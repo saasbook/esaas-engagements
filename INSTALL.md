@@ -40,11 +40,11 @@ Build the docker image:
 
 Run migrations:
 
-`docker-compose run rails-server rake db:migrate`
+`docker-compose run rails-server bundle exec rake db:migrate`
 
 Seed the database:
 
-`docker-compose run rails-server rake db:seed`
+`docker-compose run rails-server bundle exec rake db:seed`
 
 Since there is volume mapping, you only need to run migrations and the seed once, not unless there is a new migration or changes to `seed.rb`.
 
@@ -61,8 +61,11 @@ Stop the docker network:
 
 To run tests in your docker machine:
 
-`docker-compose run -e "RAILS_ENV=test" rails-server rake test`
+`docker-compose run -e "RAILS_ENV=test" rails-server bundle exec rake test`
 
+To ssh into the docker instance, run the following command after `docker-compose up -d`:
+
+`docker exec -it rails-server /bin/bash`
 
 ## 3.Deploying to heroku. 
 Read the documentation for [working with Rails 4 on Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails4).
