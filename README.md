@@ -269,6 +269,7 @@ averages on each category
 * Updated gem version in `Gemfile` and `Gemfile.lock` to fix security issues with obsolete packages.
 * Changed the `Iteration` feature to allow coaches to request iteration feedback directly from a project page.
 * Added `Login` button on the toolbar for easier access to the login page
+* Changed default bootstrap color schemes and added various labels/tags to make the webpage more accessible
 
 # High priority feature list
 
