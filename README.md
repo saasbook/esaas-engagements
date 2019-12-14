@@ -254,6 +254,7 @@ averages on each category
 
 
 # FA19 Engagements: Main Features
+* Contributors: [Jungwoo Park](https://github.com/jw-park), [Anthony Shao](https://github.com/anthony-repo), [Sabrina Suhair](https://github.com/Sabrina1), [Peter Generao](https://github.com/Autholius), [Alex Mutwiri](https://github.com/bdzr), [King Arthur Alagao](https://github.com/Kialagao)
 * Added `My Projects` tab that allows coaches, clients and students who are logged in to see a list of apps registered under their orgs.
 * Added functionality to allow logged in users to `request edits` on their projects.
 * Added `AppEditRequest` model and migration to support the `request edits` feature above.
@@ -269,13 +270,17 @@ averages on each category
 * Updated gem version in `Gemfile` and `Gemfile.lock` to fix security issues with obsolete packages.
 * Changed the `Iteration` feature to allow coaches to request iteration feedback directly from a project page.
 * Added `Login` button on the toolbar for easier access to the login page
+* Changed default bootstrap color schemes and added various labels/tags to make the webpage more accessible
+* Added notification features for both `coach` and `client`:
+    + Coach: A badge next to the `App Edit Requests` tab, showing the number of `submitted` and `resubmitted` requests.
+    + Client: Two notification icons on `My Projects` index page, one of which will notify the user when `Iteration` Feedback Form has been requested from a `coach`, and the other when a `coach` has reviewed a request.
 
 # High priority feature list
 
 1. Add user contact info and a way to track user meeting notes
 2. Google or Facebook or LinkedIn login for customer contacts
-3. Manage customer feedback as a active record, not a json string
-4. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
+3. ~~Manage customer feedback as a active record, not a json string~~ *(Completed)*
+4. ~~Add multiple user types (e.g. CS169 staff can be both a coach and a client)~~ *(Completed)*
 5. Mailing customer feedback forms to customers for each iteration (Sendgrid)
 6. More authorizations to different types of users
    * A user cannot edit/delete other users unless it is a staff/coach
