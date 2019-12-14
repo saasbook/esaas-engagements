@@ -254,7 +254,7 @@ averages on each category
 
 
 # FA19 Engagements: Main Features
-* *Contributors: [Jungwoo Park](https://github.com/jw-park), [Anthony Shao](https://github.com/anthony-repo), [Sabrina Suhair](https://github.com/Sabrina1), [Peter Generao](https://github.com/Autholius), [Alex Mutwiri](https://github.com/bdzr), [King Arthur Alagao](https://github.com/Kialagao)
+* Contributors: [Jungwoo Park](https://github.com/jw-park), [Anthony Shao](https://github.com/anthony-repo), [Sabrina Suhair](https://github.com/Sabrina1), [Peter Generao](https://github.com/Autholius), [Alex Mutwiri](https://github.com/bdzr), [King Arthur Alagao](https://github.com/Kialagao)
 * Added `My Projects` tab that allows coaches, clients and students who are logged in to see a list of apps registered under their orgs.
 * Added functionality to allow logged in users to `request edits` on their projects.
 * Added `AppEditRequest` model and migration to support the `request edits` feature above.
