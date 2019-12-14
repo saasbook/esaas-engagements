@@ -270,6 +270,9 @@ averages on each category
 * Changed the `Iteration` feature to allow coaches to request iteration feedback directly from a project page.
 * Added `Login` button on the toolbar for easier access to the login page
 * Changed default bootstrap color schemes and added various labels/tags to make the webpage more accessible
+* Added notification features for both `coach` and `client`:
+    + Coach: A badge next to the `App Edit Requests` tab, showing the number of `submitted` and `resubmitted` requests.
+    + Client: Two notification icons on `My Projects` index page, one of which will notify the user when `Iteration` Feedback Form has been requested from a `coach`, and the other when a `coach` has reviewed a request.
 
 # High priority feature list
 
