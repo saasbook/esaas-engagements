@@ -1,0 +1,15 @@
+# Ignore the directories that are volume mapped
+app/**
+features/**
+spec/**
+config/**
+lib/**
+
+# Ignore folders that should not conflict with host folder
+.bundle/**
+coverage/**
+db/*.sqlite3
+log/**
+tmp/**
+vendor/**
+public/assets/**
