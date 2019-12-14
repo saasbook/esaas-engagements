@@ -16,18 +16,12 @@ class AppEditRequest < ActiveRecord::Base
 
   validate :at_least_one_filled
   validate :one_open_request_per_app, on: :create
-  validate :description_has_edits_if_filled
-  validate :features_has_edits_if_filled
+  validate :at_least_one_change_was_made
   validates_presence_of :app_id, :requester_id, :status
 
-  def description_has_edits_if_filled
-    errors.add(:base, 'Cannot submit current approved description as an edit.') if
-        !(description.to_s.strip.empty?) && (description == App.find(app_id)&.description)
-  end
-
-  def features_has_edits_if_filled
-    errors.add(:base, 'Cannot submit current approved features as an edit.') if
-        !(features.to_s.strip.empty?) && (features == App.find(app_id)&.features)
+  def at_least_one_change_was_made
+    errors.add(:base, 'Cannot submit a form with no changes made.') if
+        (features == App.find(app_id)&.features) && (description == App.find(app_id)&.description)
   end
 
   def at_least_one_filled
