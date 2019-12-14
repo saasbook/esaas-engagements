@@ -186,3 +186,13 @@ Scenario: Sad Path - Cannot create new iteration, edit and destroy existing iter
   Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
   And I press "Destroy" for "2017-04-14"
   Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
+
+  Scenario: Happy Path - Can view engagements on the information page when the app is owned or the user is coach
+  #Story ID: 153042639
+    Given the following users exist:
+      | id | name  | github_uid      | email          | user_type     |
+      | 1  | user1 | esaas_developer | test@user.com  | client        |
+    And I am logged in
+    And I follow "Apps"
+    And I follow "app1"
+    Then I should see "Engagements"
