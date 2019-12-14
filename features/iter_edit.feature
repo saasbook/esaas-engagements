@@ -59,7 +59,7 @@ Scenario: Client can view and link to requested Iteration Form through dropdown 
   When I follow "app1: Iteration 1 Feedback Form"
   Then I should see "Edit Customer Feedback"
 
-Scenario: Coach can request Iteration Form and select the Iteration number by a dropdown, which should be not a fixed number for client in the Form
+Scenario: Coach can request Iteration Form and select the Iteration number by a dropdown, which should be a fixed number for client in the Form
   When I follow "Apps"
   And I follow "app1"
   Then I should see "Engagements"

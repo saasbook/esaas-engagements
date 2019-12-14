@@ -34,6 +34,7 @@ public/system/*
 
 # Ignore the generated Dockerfile and docker-compose.yml
 # Use generator to generate these files
+.dockerignore
 Dockerfile
 docker-compose.yml
 .esaas-engagements-config.json

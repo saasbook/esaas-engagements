@@ -128,6 +128,11 @@ the keys to `config/application.yml`. Make sure you set the authorization callba
 
 ## Setting Environment Variables
 
+There are two options on how to setup environment variables for local and remote development.
+
+1. You can manually create the `config/application.yml` as listed in the steps below or
+2. You could use the `rails g config` as listed in the steps in the [INSTALL.md](INSTALL.md) file.
+
 We used `figaro` gem to upload app environment variables. You can add secret keys
 in `config/application.yml`. **Important**: since you are storing security-sensitive
 information, remember to add this file to `.gitignore`. The following keys are

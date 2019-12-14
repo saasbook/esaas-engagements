@@ -64,4 +64,5 @@ Capybara.default_max_wait_time = 1
 Cucumber::Rails::Database.javascript_strategy = :truncation
 Capybara.asset_host = "http://localhost:3000"
 
+require 'factory_bot'
 World(FactoryBot::Syntax::Methods)
