@@ -6,7 +6,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/jaspak/esaas-engagements/badge.svg)](https://snyk.io/test/github/jaspak/esaas-engagements)
 
 [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)  
-[Heroku Deployment](https://shielded-sea-54225.herokuapp.com/)
+[Heroku Deployment](https://esaas-demo.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
 Fox with contributions by [Andrew Halle](https://github.com/andrewhalle),
