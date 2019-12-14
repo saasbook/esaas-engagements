@@ -254,6 +254,13 @@ averages on each category
 
 
 # FA19 Engagements: Main Features
+* *Contributors:*
+    + [Jungwoo Park](https://github.com/jw-park)
+    + [Anthony Shao](https://github.com/anthony-repo)
+    + [Sabrina Suhair](https://github.com/Sabrina1)
+    + [Peter Generao](https://github.com/Autholius)
+    + [Alex Mutwiri](https://github.com/bdzr)
+    + [King Arthur Alagao](https://github.com/Kialagao)
 * Added `My Projects` tab that allows coaches, clients and students who are logged in to see a list of apps registered under their orgs.
 * Added functionality to allow logged in users to `request edits` on their projects.
 * Added `AppEditRequest` model and migration to support the `request edits` feature above.
@@ -275,8 +282,8 @@ averages on each category
 
 1. Add user contact info and a way to track user meeting notes
 2. Google or Facebook or LinkedIn login for customer contacts
-3. Manage customer feedback as a active record, not a json string
-4. Add multiple user types (e.g. CS169 staff can be both a coach and a client)
+3. ~~Manage customer feedback as a active record, not a json string~~
+4. ~~Add multiple user types (e.g. CS169 staff can be both a coach and a client)~~
 5. Mailing customer feedback forms to customers for each iteration (Sendgrid)
 6. More authorizations to different types of users
    * A user cannot edit/delete other users unless it is a staff/coach
