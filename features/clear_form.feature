@@ -64,7 +64,7 @@ Scenario: user can reset a form for New Organization
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"
 	And I fill in "Phone" with "123123123"
-	And I fill in "Description" with "this is my new org" using ckeEditor rich editor
+	And I fill in "Organization Description" with "this is my new org" using ckeEditor rich editor
 	And I fill in "Url" with "myneworg.com"
 	And I select "ESaaS Developer" from "Contact"
 	And I check "Defunct"
@@ -98,7 +98,7 @@ Scenario: user can reset a form for Create New User, Org, and App
 	And I fill in "Github Uid" with "dave_id"
 	And I select "Coach" from "User Type"
 	And I fill in "SID" with "123123123"
-	And I fill in "Organization Name" with "myNewOrg" using ckeEditor rich editor
+	And I fill in "Organization Name" with "myNewOrg"
 	And I fill in "Address Line 1" with "123 esaas street"
 	And I fill in "Address Line 2" with "#789"
 	And I fill in "City State Zip" with "Berkeley, CA 90000"
@@ -126,7 +126,6 @@ Scenario: user can reset a form for New Engagement
 	When I fill in "2012-11-13" for "Start Date"
 	And I select "ESaaS Developer" from "Coach"
 	And I fill in "3" for "Team Number"
-	And I fill in "A,B,C" for "Student Names"
 	And I fill in "youtube.com" for "Screencast Url"
 	And I fill in "instagram.com" for "Screenshot Url"
 	And I fill in "google.com" for "Poster Url"
@@ -205,12 +204,10 @@ Scenario: user can reset a form for Edit Engagement
 	When I fill in "Start Date" with "2013-12-23"
 	And I select "Adnan Hemani" from "Coach"
 	And I fill in "Team Number" with "2223"
-	And I fill in "Student Names" with "s1, s2, s3"
 	And I press "Reset"
 	Then I should have filled in "2012-03-13" for "Start Date"
 	And the "Coach" field should contain "1"
 	And I should have filled in "13" for "Team Number"
-	And I should have filled in "a, b, c" for "Student Names"
 
 # Story ID: 153070009
 

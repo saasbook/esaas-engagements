@@ -11,11 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190512131914) do
+ActiveRecord::Schema.define(version: 20191112010952) do
+
+  create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
+    t.text     "description"
+    t.text     "features"
+    t.text     "feedback"
+    t.integer  "status",        default: 0, null: false
+    t.datetime "approval_time"
+    t.integer  "requester_id",              null: false
+    t.integer  "approver_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "app_edit_requests", ["approver_id"], name: "index_app_edit_requests_on_approver_id"
+  add_index "app_edit_requests", ["requester_id"], name: "index_app_edit_requests_on_requester_id"
 
   create_table "apps", force: :cascade do |t|
     t.integer  "org_id"
-    t.integer  "status",           default: 5
+    t.integer  "status",              default: 5
     t.string   "name"
     t.string   "description"
     t.string   "deployment_url"
@@ -25,6 +40,7 @@ ActiveRecord::Schema.define(version: 20190512131914) do
     t.text     "comments"
     t.string   "code_climate_url"
     t.text     "features"
+    t.string   "pivotal_tracker_url"
   end
 
   add_index "apps", ["org_id"], name: "index_apps_on_org_id"

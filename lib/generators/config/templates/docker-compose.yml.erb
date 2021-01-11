@@ -1,0 +1,106 @@
+version: '3'
+services:
+  <%- if options[:doc] -%>
+  # Container that has the rails application server
+  <%- end -%>
+  rails-server:
+    container_name: rails-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - /bin/bash
+      - -c
+      - |
+        bundle exec rake db:migrate
+        bundle exec rake db:seed
+        bundle exec rails s -p 3000 -b 0.0.0.0
+    ports:
+      - 3000:3000
+    <%- if options[:doc] -%>
+    # map volume for live reload
+    <%- end -%>
+    volumes:
+      <%- if options[:doc] -%>
+      # Map the app directory to allow for live reload from the docker machine,
+      # so that as one works on the app, changes reflect in the docker instance.
+      <%- end -%>
+      - ./app/:/app/app
+      - ./features/:/app/features/
+      - ./spec/:/app/spec/
+      - ./config/:/app/config/
+      - ./lib/:/app/lib/
+      <%- if options[:doc] -%>
+      # Some Folders will cause conflict if mapped onto the host folder
+      # However, we still want them to be persistent across restarts
+      # Since we want to view the capybara and coverage files on host browser, map those directly.
+      <%- end -%>
+      - ./coverage/:/app/coverage/
+      - db_volume:/app/db/
+      - dot_bundle_volume:/app/.bundle/
+      - log_volume:/app/log/
+      - ./tmp/capybara/:/app/tmp/capybara/
+      - vendor_volume:/app/vendor/
+      - public_assets_volume:/app/public/assets/
+    <%- if options[:rails_env] == 'production' -%>
+    environment:
+      - RAILS_ENV=<%= options[:rails_env] %>
+      - DATABASE_URL=<%= options[:database_url] %>
+      - SECRET_KEY_BASE=<%= options[:prod_secret_key] %>
+      - github_key=<%= options[:prod_github_key] %>
+      - github_secret=<%= options[:prod_github_secret] %>
+    <%- end -%>
+    links:
+      <%- if options[:pg_host] == 'postgres-server' && options[:rails_env] == 'production' -%>
+      - postgres-server
+      <%- end -%>
+      - minio-s3mock
+    restart: always
+<%- if options[:aws_host_name] == 'minio-s3mock:9000' -%>
+  <%- if options[:doc] -%>
+  # Container that has the Minio server that mocks the S3 API.
+  # If --aws_host_name is not set then the minio container will use be added.
+  <%- end -%>
+  minio-s3mock:
+    image: minio/minio
+    volumes:
+      - minio_data_volume:/var/lib/minio/data
+    environment:
+      <%- if options[:doc] -%>
+      # Minio Access Key and Secret should match those in application.yml
+      # Minio Access Key is enforced as a safety failsafe.
+      <%- end -%>
+      - MINIO_ACCESS_KEY=<%= options[:aws_key_id] %>
+      - MINIO_SECRET_KEY=<%= options[:aws_secret_key] %>
+<%- end -%>
+<%- if options[:pg_host] == 'postgres-server' && options[:rails_env] == 'production' -%>
+  postgres-server:
+    image: postgres:latest
+      <%- if options[:pg_vmap] -%>
+    volumes:
+      - pg_data_volume:/var/lib/postgresql/data
+      <%- end -%>
+    environment:
+      - POSTGRES_PASSWORD=<%= options[:pg_pass] %>
+      - POSTGRES_USER=<%= options[:pg_user] %>
+      - POSTGRES_DB=<%= options[:pg_dbase] %>
+<%- end -%>
+<%- if options[:doc] -%>
+# Use named volumes to avoid conflict between host folders like vendor with ones in the docker machine
+<%- end -%>
+volumes:
+  <%- if options[:doc] -%>
+  # Persistent volumes for the Minio and Postgres sidecar containers
+  <%- end -%>
+  minio_data_volume:
+  pg_data_volume:
+  <%- if options[:doc] -%>
+  # Persistent volumes for folders that may cause conflict with host folders
+  <%- end -%>
+  coverage_volume:
+  db_volume:
+  dot_bundle_volume:
+  log_volume:
+  tmp_volume:
+  vendor_volume:
+  public_assets_volume:

@@ -1,31 +1,34 @@
-%table.table
-  %thead
-    %tr
-      %th Started
-      %th Contact
-      %th Coach
-      %th Team#
-      %th Developers
-      %th Features
-      %th{:colspan => 3} Assets
-      %th
-  %tbody
-    - engagements.each do |engagement|
-      - app = engagement.app
+.table-responsive
+  %table.table
+    %thead
       %tr
-        %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
-        %td= mail_to(engagement.client.email, engagement.client.name) if engagement.client
-        %td= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
-        %td= engagement.team_number
-        %td
-          %div{:class => 'members'}
-            -engagement.developers.each do |member|
-              %span= member.name
-        %td= sanitize engagement.features
-        %td= link_to image_tag('deployment.png', size: '45x45', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
-        %td= link_to image_tag('video.png', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
-        %td= link_to image_tag('presentation.png', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
-        %td
-          = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary')
-          = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
-          = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info')
+        %th Started
+        %th Contact
+        %th Coach
+        %th Team#
+        %th Students
+        %th Features
+        %th{:colspan => 3} Assets
+        %th
+    %tbody
+      - engagements.each do |engagement|
+        - app = engagement.app
+        %tr
+          %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
+          %td= mail_to(engagement.client.email, engagement.client.name) if engagement.client
+          %td{style: 'max-width: 150px; overflow: hidden;'}= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
+          %td{style: 'width: 2%;'}= engagement.team_number
+          %td{{style: 'max-width: 100px; overflow: hidden;'}}
+            %div{:class => 'members'}
+              -engagement.developers.each do |member|
+                =link_to member.name, member
+                %br
+          %td{style: 'width: 5px; word-wrap: break-word;'}= sanitize engagement.features
+          %td= link_to image_tag('deployment.png', size: '35x35', title: 'Deploy'), engagement.prototype_deployment_url, :target => '_blank'
+          %td= link_to image_tag('video.png', size: '35x35', title: 'Screencast'), engagement.screencast_url, :target => '_blank'
+          %td= link_to image_tag('presentation.png', size: '35x35', title: 'Presentation'), engagement.presentation_url, :target => '_blank'
+          %td
+            = link_to('Edit', edit_app_engagement_path(app,engagement), :class => 'btn btn-primary', style: 'padding: 5px 5px;')
+            = link_to 'Destroy', app_engagement_path(app,engagement), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger', style: 'padding: 5px 5px;'
+            = link_to('CSV', export_path(app,engagement), :class => 'btn btn-info', style: 'padding: 5px 5px;')
+            = link_to('Request Feedback', new_engagement_iteration_path(engagement), :class => 'btn btn-success pull-right',  style: 'padding: 5px 10px;')

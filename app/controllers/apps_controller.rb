@@ -11,7 +11,7 @@ class AppsController < ApplicationController
     @current_user = User.find_by_id(session[:user_id])
     page_default_and_update("app", total_app)
     change_page_num("app", total_app)
-    
+
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }
@@ -22,6 +22,9 @@ class AppsController < ApplicationController
   # GET /apps/1
   # GET /apps/1.json
   def show
+    @app_edit_request = ApplicationHelper.get_edit_request_for session[:user_id], params[:id]
+    @user_owns_app = App.belongs_to_user(params[:id], session[:user_id])
+    @iterations = App.find(params[:id]).iterations
   end
 
   # GET /apps/new
@@ -87,34 +90,36 @@ class AppsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_app
-      @app = App.find(params[:id])
-      @engagements = @app.engagements
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_app
+    @app = App.find(params[:id])
+    @engagements = @app.engagements
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def app_params
-      params.require(:app).permit(:name, :description, :deployment_url, :repository_url, :code_climate_url, :org_id, :status, :comments, :features)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def app_params
+    params.require(:app).permit(:name, :description, :deployment_url, :repository_url,
+                              :code_climate_url, :org_id, :status, :comments, :features,
+                              :pivotal_tracker_url)
+  end
 
-    # count the number of apps for each status and
-    # the total number of apps for each category
-    def deploy_vet_map
-      status_map =  App.group(:status).reorder(:status).count # should be in model?
-      @deployment_map = {}
-      @vetting_map = {}
-      @total_deploy = 0
-      @total_vet = 0
-      status_map.each do |status, count|
-        status_str = App.statuses.keys[status]
-        if App.getAllVettingStatuses.include? status_str.to_sym
-          @vetting_map[status_str] = count
-          @total_vet += count
-        else
-          @deployment_map[status_str] = count
-          @total_deploy += count
-        end
+  # count the number of apps for each status and
+  # the total number of apps for each category
+  def deploy_vet_map
+    status_map =  App.group(:status).reorder(:status).count # should be in model?
+    @deployment_map = {}
+    @vetting_map = {}
+    @total_deploy = 0
+    @total_vet = 0
+    status_map.each do |status, count|
+      status_str = App.statuses.keys[status]
+      if App.getAllVettingStatuses.include? status_str.to_sym
+        @vetting_map[status_str] = count
+        @total_vet += count
+      else
+        @deployment_map[status_str] = count
+        @total_deploy += count
       end
     end
+  end
 end

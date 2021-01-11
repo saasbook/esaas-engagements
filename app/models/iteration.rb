@@ -39,8 +39,13 @@ class Iteration < ActiveRecord::Base
   end
 
   def self.ratings
-  	{"Strongly agree" => 5, "Mostly agree" => 4, "Neither agree nor disagree" => 3, \
-  		"Mostly disagree" => 2, "Strongly disagree" => 1}
+  	{
+        "Strongly agree" => 5,
+        "Mostly agree" => 4,
+        "Neither agree nor disagree" => 3,
+        "Mostly disagree" => 2,
+        "Strongly disagree" => 1
+    }
   end
 
   def self.rating_to_score(rating)
@@ -48,10 +53,23 @@ class Iteration < ActiveRecord::Base
   end
 
   def self.rating_options
-    ['Strongly agree', 'Mostly agree', 'Neither agree nor disagree', 'Mostly disagree', 'Strongly disagree']
+    [
+        'Strongly agree',
+        'Mostly agree',
+        'Neither agree nor disagree',
+        'Mostly disagree',
+        'Strongly disagree'
+    ]
   end
 
   def self.duration_options
-    ['15 min', '30 min', '45 min', '1 hour', '1 hour 15 min', '1 hour 30 min', 'Longer than 1 hour 30 min']
+    [
+        '15 min',
+        '30 min',
+        '45 min',
+        '1 hour',
+        '1 hour 15 min',
+        '1 hour 30 min',
+        'Longer than 1 hour 30 min']
   end
 end

@@ -62,5 +62,7 @@ Capybara.default_max_wait_time = 1
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+Capybara.asset_host = "http://localhost:3000"
 
+require 'factory_bot'
 World(FactoryBot::Syntax::Methods)

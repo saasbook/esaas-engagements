@@ -1,3 +1,14 @@
+- unless @app_edit_request.nil?
+  .alert.text-center{class: "alert#{ApplicationHelper.get_edit_req_banner_class(@app_edit_request)}", style: 'margin: 10px 0;' }
+    = ApplicationHelper.get_edit_req_banner_message(@app_edit_request)
+- if app_owner(@app.id) && @iterations.present?
+  - @iterations.each do |iter|
+    - if iter.customer_feedback.nil? || iter.general_feedback.nil?
+      .alert.alert-info.text-center{style: 'margin: 10px 0; vertical-align: middle; padding:17px;'}
+        A staff has requested feedback for Engagement #{EngagementsHelper.engagement_team_number(iter.engagement_id)} in Iteration #{iter.number}.
+        = link_to edit_engagement_iteration_path(iter.engagement_id, iter.id) do
+          %span.btn{class: 'pull-right btn-primary', style: 'padding: 3px 5px; margin-top: -4px; border-color: white;'}
+            = 'Complete Feedback Form'
 .page-header
   %h1
     = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
@@ -5,26 +16,30 @@
     - unless (url = @app.code_climate_url).blank?
       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'
-    = link_to 'Back', apps_path, class: 'btn btn-primary pull-right'
-    = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
+    = link_to 'Back', :back, class: 'btn btn-primary pull-right'
+    - if current_user.coach?
+      = link_to 'Edit App', edit_app_path(@app), class: 'btn btn-primary pull-right btn-space'
+    - if (current_user.coach? || current_user.client?) && @user_owns_app
+      = link_to ApplicationHelper.edit_request_button_text(@app), new_my_project_edit_path(app_id: @app.id), class: 'btn btn-primary pull-right btn-space'
 
-.well#status
-  %h4 Status: #{@app.status.humanize(capitalize: false)}
-.well#description
-  %h4 Description
-  %p= sanitize @app.description
-.well#features
-  %h4 App Initial Features
-  %p= sanitize @app.features
+= render partial: 'shared/app'
+
+- unless @app_edit_request.nil?
+  = render partial: 'shared/app_edit_request'
+
+  %div{style: 'height: 30px;'}
+    %span{class: 'btn pull-right update-edits-btn'}
+      = image_tag('review.png', style: 'width: 22px; height: 22px;')
+      = link_to 'Update Edits', edit_my_project_edit_path(app_id: @app.id), class: 'btn'
+%hr
 
 = render partial: 'comments/comments', locals: {commentable: @app}
 
+- if (User.find_by_id(session[:user_id])&.coach?) || (User.find_by_id(session[:user_id])&.app_ids.include? @app.id)
+  .page-header
+    %h1
+      Engagements
+      = link_to 'New Engagement', new_app_engagement_path(@app), :class => 'btn btn-success pull-right'
+    .help-block Click on engagement start date to view or edit Iterations.
 
-
-.page-header
-  %h1
-    Engagements
-    = link_to 'New Engagement', new_app_engagement_path(@app), :class => 'btn btn-success pull-right'
-  .help-block Click on engagement start date to view or edit Iterations.
-
-= render partial: 'engagements/index', locals: {engagements: @app.engagements}
+  = render partial: 'engagements/index', locals: {engagements: @app.engagements}

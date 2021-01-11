@@ -1,0 +1,26 @@
+.well#status
+  .text-lg Status: #{@app.status.humanize(capitalize: false)}
+.well#description
+  .text-lg Description
+  %p= sanitize @app.description
+.well#features
+  .text-lg App Initial Features
+  %p= sanitize @app.features
+%hr
+
+.row
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#deployment
+      .text-lg Deployment
+      %p{:style => "word-wrap: break-word;"}
+        = @app.deployment_url
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#github
+      .text-lg Github
+      %p{:style => "word-wrap: break-word;"}
+        = @app.repository_url
+  .col-xs-4.col-sm-4.col-md-4.col-lg-4
+    .well#pivotal
+      .text-lg Pivotal Tracker
+      %p{:style => "word-wrap: break-word;"}
+        = @app.pivotal_tracker_url

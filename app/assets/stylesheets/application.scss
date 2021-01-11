@@ -2,6 +2,9 @@
 //= require select2-bootstrap
 
 @import "bootstrap";
+/**
+ *= require custom.scss
+ */
 @import "site";
 @import "comments";
 @import "iterations";

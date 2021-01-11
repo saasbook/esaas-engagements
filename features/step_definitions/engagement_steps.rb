@@ -15,3 +15,32 @@ Then /^the rating for "(.*)" should be "(.*)"$/ do |metric, rating|
     expect(page).to have_content(rating)
   end
 end
+
+When /^(?:|I )follow Request Feedback with id (.+)$/ do |id|
+  visit new_engagement_iteration_path(Engagement.find(id))
+end
+
+When /I click on the "(.+)" option/ do |selector|
+  selector.gsub!(/ /, "_")
+  find('#' + selector).click
+end
+
+Then /^I should see "(.+)" inside "(.*)" options/ do |value, selector|
+  selector.gsub!(/ /, "_")
+  value.split(",").each do |v|
+    find_field(selector).all("option").find("option[value=#{value}]")
+  end
+end
+
+When /^I choose "(.*)" with number (.+)$/ do |selector, value|
+  selector.gsub!(/ /, "_")
+  find_field(selector).find("option[value=#{value}]").click
+end
+
+Then /^I should see "(.*)" is prefilled with number (.+)$/ do |selector, value|
+  expect(page).to have_select(selector, :selected => value)
+end
+
+Then /^(?:|I )should see a link "(.*?)" for "(.*?)"$/ do |link, url|
+  page.should have_link(link, :href => url)
+end

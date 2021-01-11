@@ -10,4 +10,12 @@ module EngagementsHelper
     descr << ")"
     descr
   end
+
+  def self.engagement_team_number(engagement_id)
+    Engagement.find(engagement_id).team_number
+  end
+
+  def self.engagement_app_name(engagement_id)
+    App.where(id: Engagement.find(engagement_id).app_id).first.name
+  end
 end

@@ -1,18 +1,32 @@
-#nav_header
+#nav_header{role: 'navigation'}
   - klass = controller.controller_name
   %ul.nav.nav-tabs
-    %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i), :role => 'presentation'
-    %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i), :role => 'presentation'
-    %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i), :role => 'presentation'
-    %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i), :role => 'presentation'
+    %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i)
+    - if current_user
+      %li= link_to 'My Projects', my_projects_path
+    - if current_user&.coach?
+      %li
+        - requests_count = get_pending_requests_count
+        = link_to my_approval_requests_path do
+          App Edit Requests
+          - unless requests_count == 0
+            %span.label{class: 'label-danger', style: ' font-size: 13px;'}
+              = requests_count
+            
+    %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i)
+    %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i)
+    %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i)
     %li= link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank'
-    - if @current_user
+    - if not current_user
+      %li= link_to 'Login', my_projects_path
+    - if current_user
       %li= link_to "Current iteration", current_iteration_path
-      %li= link_to "Logout @#{@current_user.github_uid}", logout_path
+      %li= link_to "Logout @#{current_user.github_uid}", logout_path
       %li
         = form_tag search_path, :method => :post do
+          = label_tag :keyword
           = text_field_tag "keyword", ""
           = submit_tag "Search", :class => "btn btn-primary"
-          - ["Apps", "Organizations", "Users"].each do |category|
+          - %w(Apps Organizations Users).each do |category|
             = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
             = label_tag category, category

@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
+# Keep Ruby version in Gemfile in sync with Ruby version in Dockerfile
 ruby '2.4.5'
 
-gem 'rails', '4.2.9'
+gem 'rails', '4.2.11.1'
 gem 'omniauth-github'
 gem 'select2-rails', '~> 4.0', '>= 4.0.3'
 gem 'json'
@@ -11,11 +12,11 @@ gem 'haml'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap_form'
-gem 'paperclip', '~> 5.0.0'
+gem 'paperclip', '~> 5.2.1'
 gem 'aws-sdk', '~> 2.3.0'
 
 group :development do
@@ -36,14 +37,16 @@ group :test do
   gem 'cucumber-rails-training-wheels'
   gem 'poltergeist'
   gem 'rspec-rails'
-  gem 'puma'
+  gem 'puma', '>= 4.3.1'
   gem 'guard-rspec'
-  gem 'factory_bot_rails', '< 5.0.0'
+  gem 'factory_bot_rails', '>= 4.11.1', '< 5.0.0'
   gem 'jasmine-rails'
   gem 'database_cleaner'
   gem 'timecop'
   gem 'launchy'
 end
+
+gem 'axe-matchers', group: [:test, :development]
 
 group :production do
   gem 'pg', '< 1.0.0'
@@ -63,6 +66,3 @@ end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-
-

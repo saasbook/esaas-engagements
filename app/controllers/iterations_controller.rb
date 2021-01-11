@@ -2,7 +2,8 @@ class IterationsController < ApplicationController
 
   before_action :set_iteration, :only => [:edit,:update,:destroy]
   before_action :set_engagement, :except => [:current_iteration, :get_customer_feedback]
-  before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :auth_user?, only: [:new, :create, :destroy]
+  before_action :auth_edit?, only: [:edit, :update]
 
   def index
     @stat = @engagement.summarize_customer_rating
@@ -16,6 +17,8 @@ class IterationsController < ApplicationController
     @feedback = JSON.parse(@iteration.customer_feedback)
     rescue (Exception)
       @feedback = Hash.new
+      # flash[:alert] = "Customer Feedback does not have editable format."
+      # redirect_to engagement_iterations_path
   end
 
   def create
@@ -30,7 +33,7 @@ class IterationsController < ApplicationController
   def update
     feedback = feedback_params
     @iteration.customer_feedback = feedback.to_json
-    new_params = params.require(:iteration).permit(:end_date, :general_feedback)
+    new_params = params.require(:iteration).permit(:number, :end_date, :general_feedback)
     if @iteration.save and @iteration.update(new_params)
       redirect_to engagement_iterations_path(@engagement), notice: 'Iteration was successfully updated.'
     else
@@ -46,14 +49,14 @@ class IterationsController < ApplicationController
   end
 
   def current_iteration
-    iterations = Iteration.where(:customer_feedback => [nil,""]).all()
+    iterations = Iteration.where(:customer_feedback => [nil, ""]).all
     @iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
   end
 
   def get_customer_feedback
-    iterations = Iteration.where(:customer_feedback => [nil, ""]).all()
+    iterations = Iteration.where(:customer_feedback => [nil, ""]).all
     iterations = iterations.map do |iter|
       [iter, iter.engagement]
     end
@@ -82,7 +85,6 @@ class IterationsController < ApplicationController
     @engagement = Engagement.find(params[:engagement_id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def iteration_params
     params.require(:iteration).permit(:customer_feedback, :end_date, :number, :general_feedback)
   end
@@ -93,4 +95,9 @@ class IterationsController < ApplicationController
       :communication_text, :understanding, :understanding_text,
       :effectiveness, :effectiveness_text, :satisfied, :satisfied_text)
   end
+
+  def auth_edit?
+    redirect_path unless User.find_by_id(session[:user_id])&.client? || User.find_by_id(session[:user_id])&.coach?
+  end
+
 end
