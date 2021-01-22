@@ -1,0 +1,23 @@
+%h1 Apps
+%table.table.table-condensed.table-striped#apps_table
+  %thead
+    %tr
+      %th{width: "12%"} Name
+      %th{width: "12%"} Info
+      %th Description
+  %tbody
+    - @apps.each do |app|
+      %tr
+        %td
+          = link_to app.name, app
+        %td
+          - if app.deployment_url.present?
+            = link_to 'View Live', app.deployment_url
+          - else
+            %span No Live app
+          %br
+          %strong: Organization:
+          %br
+          = link_to app.org.name, app.org
+        %td
+          = sanitize app.description

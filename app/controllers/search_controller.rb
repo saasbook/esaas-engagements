@@ -1,9 +1,10 @@
 class SearchController < ApplicationController
+  skip_before_filter :logged_in?, :only => :public_search
 
   def search
     keyword = params["keyword"]
     all_filters = ["Apps", "Organizations", "Users"]
-    filters = all_filters.select {|filter| params[filter]} 
+    filters = all_filters.select {|filter| params[filter]}
     session[:filters] = filters
     if filters.empty?
       redirect_to results_path(:keyword => keyword), alert: "Please choose at least one category"
@@ -36,7 +37,12 @@ class SearchController < ApplicationController
     end
   end
 
+  def public_search
+    keyword = "%#{params[:keyword]}%".downcase
+    @apps = App.where('lower(name) LIKE ? OR lower(description) LIKE ?', keyword, keyword).all()
+  end
+
   def no_need_to_access_database(keyword)
-  	return @filters.nil? || keyword.empty?
+    return @filters.nil? || keyword.empty?
   end
 end
