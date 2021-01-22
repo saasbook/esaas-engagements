@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   def search
     keyword = params["keyword"]
     all_filters = ["Apps", "Organizations", "Users"]
-    filters = all_filters.select {|filter| params[filter]} 
+    filters = all_filters.select {|filter| params[filter]}
     session[:filters] = filters
     if filters.empty?
       redirect_to results_path(:keyword => keyword), alert: "Please choose at least one category"
@@ -17,6 +17,7 @@ class SearchController < ApplicationController
 
   def results
     keyword = params["keyword"]
+    condensed_view = params[:condensed].present?
     @filters = session[:filters]
     @apps = []
     @orgs = []
@@ -34,9 +35,11 @@ class SearchController < ApplicationController
     if @filters.include?("Users")
       @users = User.where('lower(name) LIKE ?', keyword).all()
     end
+
+    render 'results-condensed' and return if condensed_view
   end
 
   def no_need_to_access_database(keyword)
-  	return @filters.nil? || keyword.empty?
+    return @filters.nil? || keyword.empty?
   end
 end
