@@ -20,7 +20,7 @@ Given(/^the following users exist:$/) do |table|
 end
 
 Given(/^I search for "([^"]*)"$/) do |arg1|
-  # puts body   really good debugging trick
+  # puts body really good debugging trick
   fill_in "keyword", with: arg1
   click_on "Search"
 end
@@ -29,4 +29,9 @@ Given(/^I'm logged in on the orgs page$/) do
   visit "/orgs"
   click_link "Log in with GitHub"
   visit "/orgs"
+end
+
+Given(/^I publicly search for "([^"]*)"$/) do |arg1|
+  # puts body really good debugging trick
+  visit "/public_search?keyword=#{arg1}"
 end

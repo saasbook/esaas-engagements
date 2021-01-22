@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]
   get 'auth/failure' => 'session#failure'
   get 'logout' => 'session#destroy'
-  
+
   # route /apps/:app_id/engagements/:engagement_id
   resources :apps do
     resources :engagements, :except => :index
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
         via: [:put, :patch], as: :approve_my_approval_requests
 
   root :to => 'apps#index'
-  
+
   get 'myprojects/:id/edit/submit' => 'myprojects#view_submit', :as => 'view_submit'
 
   get 'current_iteration' => 'iterations#current_iteration', :as => 'current_iteration'
@@ -54,6 +54,8 @@ Rails.application.routes.draw do
   post 'feedback/:engagement_id/:iteration_id' => 'pending_feedback#process_response', :as => 'feedback_process_response'
   post 'search' => 'search#search', :as => 'search'
   get 'results' => 'search#results', :as => 'results'
+  get 'results' => 'search#public_search', :as => 'public_search'
+
 
   get 'creation' => 'creation#new', :as => 'creation'
   post 'creation' => 'creation#create', :as => 'create_all'

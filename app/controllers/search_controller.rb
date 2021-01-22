@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  skip_before_filter :logged_in?, :only => :public_search
 
   def search
     keyword = params["keyword"]
@@ -17,7 +18,6 @@ class SearchController < ApplicationController
 
   def results
     keyword = params["keyword"]
-    condensed_view = params[:condensed].present?
     @filters = session[:filters]
     @apps = []
     @orgs = []
@@ -35,8 +35,11 @@ class SearchController < ApplicationController
     if @filters.include?("Users")
       @users = User.where('lower(name) LIKE ?', keyword).all()
     end
+  end
 
-    render 'results-condensed' and return if condensed_view
+  def public_search
+    keyword = "%#{params[:keyword]}%".downcase
+    @apps = App.where('lower(name) LIKE ? OR lower(description) LIKE ?', keyword, keyword).all()
   end
 
   def no_need_to_access_database(keyword)
