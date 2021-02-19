@@ -1,12 +1,12 @@
 # ESaaS Engagements Tracker
 
-[![Build Status](https://travis-ci.org/jaspak/esaas-engagements.svg?branch=master)](https://travis-ci.org/jaspak/esaas-engagements)
-[![Maintainability](https://api.codeclimate.com/v1/badges/59d3a23ad4ebfce891be/maintainability)](https://codeclimate.com/github/jaspak/esaas-engagements/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/59d3a23ad4ebfce891be/test_coverage)](https://codeclimate.com/github/jaspak/esaas-engagements/test_coverage)
+[![Build Status](https://travis-ci.org/zfred219/esaas-engagements.svg?branch=master)](https://travis-ci.org/zfred219/esaas-engagements)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4f34f3ba42625e63922e/maintainability)](https://codeclimate.com/github/zfred219/esaas-engagements/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4f34f3ba42625e63922e/test_coverage)](https://codeclimate.com/github/zfred219/esaas-engagements/test_coverage)
 [![Known Vulnerabilities](https://snyk.io/test/github/jaspak/esaas-engagements/badge.svg)](https://snyk.io/test/github/jaspak/esaas-engagements)
 
-[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)  
-[Heroku Deployment](https://esaas-demo.herokuapp.com/)
+[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2070245)  
+[Heroku Deployment](https://esaas-team8.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
 Fox with contributions by [Andrew Halle](https://github.com/andrewhalle),
