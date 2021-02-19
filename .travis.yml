@@ -7,7 +7,7 @@ bundler_args: "--without production"
 env:
   global:
   - MOZ_HEADLESS=1
-  - CC_TEST_REPORTER_ID=0772e41cb98b7322d67a0476a4b6e99f2c0961b88c9e9e0817b531ce82fc4f93
+  - CC_TEST_REPORTER_ID=365a8b5a2c901eb95955132e18d83d677de9b5d7c02e1e86db3b1305d324ef09
   - github_key=test
   - github_secret=test
 
