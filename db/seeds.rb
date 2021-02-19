@@ -57,4 +57,4 @@ end
 puts "#{App.all.size} apps, #{Engagement.all.size} engagements"
 
 # login mockup
-User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")
+User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["development"]
