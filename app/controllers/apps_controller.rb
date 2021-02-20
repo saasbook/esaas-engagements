@@ -12,6 +12,58 @@ class AppsController < ApplicationController
     page_default_and_update("app", total_app)
     change_page_num("app", total_app)
 
+    # Check to see if params already has deployment statuses
+    contains_at_least_one_status = false
+    App.getAllDeploymentStatuses.each do |status|
+      if params.key? status
+        contains_at_least_one_status = true
+        break
+      end
+    end
+
+    # Add deployment statuses to params if not already existing
+    @deployment_statuses = Hash.new
+    if not contains_at_least_one_status
+      # First time: add all statuses to params
+      App.getAllDeploymentStatuses.each do |status|
+        params[status] = 1
+        @deployment_statuses = params
+      end
+    else
+      App.getAllDeploymentStatuses.each do |status|
+        # Get existing statuses from params
+        if params.key? status
+          @deployment_statuses = params
+        end
+      end
+    end
+
+    # Repeat for Vetting STATUSES
+    contains_at_least_one_v_status = false
+    App.getAllVettingStatuses.each do |status|
+      if params.key? status
+        contains_at_least_one_v_status = true
+        break
+      end
+    end
+
+    @vetting_statuses = Hash.new
+    if not contains_at_least_one_v_status
+      App.getAllVettingStatuses.each do |status|
+        params[status] = 1
+        @vetting_statuses = params
+      end
+    else
+      App.getAllVettingStatuses.each do |status|
+        if params.key? status
+          @vetting_statuses = params
+        end
+      end
+    end
+
+    puts "CURRENT DEPLOYMENT STATUSES IN PARAMS"
+    puts params
+
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }
