@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
     @page_num = [[1,@page_num].max,max_page_num].min
     session["#{name}_page_num"] = @page_num.to_s
   end
-  
+
   def app_owner(app_id)
     current_user.app_ids.include? app_id unless current_user.student?
   end
@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
     end
     @pending_iterations = Iteration.where(id: pending_iteration_ids)
   end
-  
+
   def get_reviewed_apps
     reviewed_app_ids = []
     @apps.each do |app|
