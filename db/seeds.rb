@@ -17,6 +17,7 @@ puts "#{Org.all.size} orgs, #{User.all.size} users"
 coach = User.find_or_create_by(email: 'fox@cs.berekley.edu') do |fox|
 	fox.name = "Armando Fox"
 	fox.github_uid = 'fox'
+	fox.user_type = 'coach'
 end
 cs169 = Org.find_or_create_by(name: 'UCB CS169 Fox') do |ucbcs169|
 	ucbcs169.description = 'CS 169 at UC Berkeley'
