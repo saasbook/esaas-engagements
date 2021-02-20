@@ -6,12 +6,12 @@
 
 - $filters = ""
 #filters
-  %label.checkbox-inline
-    %div#deploy
-      %strong Deployment Status:
-      %em #{" (" + @total_deploy.to_s + ")"}
-      %br
-      = form_tag "/", :method => :get do
+  = form_tag "/", :method => :get do
+    %label.checkbox-inline
+      %div#deploy
+        %strong Deployment Status:
+        %em #{" (" + @total_deploy.to_s + ")"}
+        %br
         - App.getAllDeploymentStatuses.each do |status|
           - if @deployment_statuses.key? status
             - $filters = $filters + "&" + status.to_s + "=1"
@@ -21,18 +21,23 @@
           %span{:class => status}= status.to_s.humanize
           %em (#{@deployment_map[status.to_s].to_i})
           %br
-        = submit_tag 'Apply Filters'
 
-  %label.checkbox-inline
-    %div#vetting
-      %strong Vetting Status:
-      %em #{" (" + @total_vet.to_s + ")"}
-      %br
-      - App.getAllVettingStatuses.each do |status|
-        = check_box_tag status, 1, true, :class => 'filter'
-        %span{:class => status}= status.to_s.humanize
-        %em (#{@vetting_map[status.to_s].to_i})
+    %label.checkbox-inline
+      %div#vetting
+        %strong Vetting Status:
+        %em #{" (" + @total_vet.to_s + ")"}
         %br
+        - App.getAllVettingStatuses.each do |status|
+          - if @vetting_statuses.key? status
+            - $filters = $filters + "&" + status.to_s + "=1"
+            = check_box_tag status, 1, true, :class => 'filter'
+          - else
+            = check_box_tag status, 1, false, :class => 'no_filter'
+          %span{:class => status}= status.to_s.humanize
+          %em (#{@vetting_map[status.to_s].to_i})
+          %br
+        %br
+        = submit_tag 'Apply Filters'
 
   :javascript
       //$('.filter').change(function() {var klass = $("#apps_table ."+$(this).attr('name')).toggle();});
