@@ -2,13 +2,14 @@ project:
   name: 'esaas-engagements'
   owner: 'cs169'
   teamId: '8'
+  coach: 'Cassidy Hardin'
   identities:
     pivotal:
       url: 'https://www.pivotaltracker.com/n/projects/2070245'
     heroku:
       url: 'https://esaas-team8.herokuapp.com/' 
     travis:
-      url: 'https://travis-ci.org/github/zfred219/q2q'
+      url: 'https://travis-ci.org/github/zfred219/esaas-engagements'
     codeclimate:
       url: 'https://codeclimate.com/github/zfred219/esaas-engagements'
   members:
