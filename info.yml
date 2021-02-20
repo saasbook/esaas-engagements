@@ -1,0 +1,32 @@
+project:
+  name: 'esaas-engagements'
+  owner: 'cs169'
+  teamId: '8'
+  identities:
+    pivotal:
+      url: 'https://www.pivotaltracker.com/n/projects/2070245'
+    heroku:
+      url: 'https://esaas-team8.herokuapp.com/' 
+    travis:
+      url: 'https://travis-ci.org/github/zfred219/q2q'
+    codeclimate:
+      url: 'https://codeclimate.com/github/zfred219/esaas-engagements'
+  members:
+    member1:
+      name: 'Fred'
+      surname: 'Zhang' 
+      githubUsername: 'zfred219'
+      pivotalUsername: 'fredzhang3'
+      herokuEmail: 'zkx219@gmail.com'
+    member2:
+      name: 'Kevin'
+      surname: 'Lo' 
+      githubUsername: 'databears-cal'
+      pivotalUsername: 'klo824'
+      herokuEmail: 'kevin_lo@berkeley.edu'
+    member3:
+      name: 'Enjia'
+      surname: 'Xu' 
+      githubUsername: 'EnjiaXu'
+      pivotalUsername: 'fredzhang3'
+      herokuEmail: 'enjiaxu.work@gmail.com'
