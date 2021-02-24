@@ -86,5 +86,16 @@ describe Engagement do
 
     end
     
+    # Story ID: 176932021
+    describe 'convert start date to semester' do
+        it 'converts spring semesters' do
+            #@user1 = User.create(:name => 'user1', :email => 'user1@email.com')
+            #@org = Org.create(:name => 'org', :contact => @user1)
+            #@app = App.create(:name => 'app', :description => 'wow', :org_id => 1, :status => :pending )
+            #@app.org = @org
+            @eng = Engagement.create(:app_id => 1, :coach_id => 1, :team_number => '1', :start_date => DateTime.new(2017,2,3))
+            expect(@eng.get_semester()).to eq('SP17')
+        end
+    end
 
 end
