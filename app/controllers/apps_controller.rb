@@ -64,6 +64,13 @@ class AppsController < ApplicationController
     puts "CURRENT DEPLOYMENT STATUSES IN PARAMS"
     puts params
 
+    @filtered_count = 0
+    App.find_each do |app|
+      if @deployment_statuses.key? app.status.to_sym
+        @filtered_count += 1
+      end
+    end
+
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }
