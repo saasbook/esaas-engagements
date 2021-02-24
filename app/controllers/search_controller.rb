@@ -33,7 +33,11 @@ class SearchController < ApplicationController
       @orgs = Org.where('lower(name) LIKE ?', keyword).all()
     end
     if @filters.include?("Users")
-      @users = User.where('lower(name) LIKE ?', keyword).all()
+      emails = User.where('lower(email) LIKE ?', keyword).all()
+      name = User.where('lower(name) LIKE ?', keyword).all()
+      github = User.where('lower(github_uid) LIKE ?', keyword).all()
+
+      @users = (emails + name + github).uniq
     end
   end
 
