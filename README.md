@@ -4,7 +4,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/4f34f3ba42625e63922e/maintainability)](https://codeclimate.com/github/zfred219/esaas-engagements/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4f34f3ba42625e63922e/test_coverage)](https://codeclimate.com/github/zfred219/esaas-engagements/test_coverage)
 [![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_8-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-GH-zfred219_esaas-engagements/main)
-[![Known Vulnerabilities](https://snyk.io/test/github/jaspak/esaas-engagements/badge.svg)](https://snyk.io/test/github/jaspak/esaas-engagements)
 [<img src="assets/pivotal_tracker_logo.png">](https://www.pivotaltracker.com/n/projects/2070245) 
 
 [Heroku Deployment](https://esaas-team8.herokuapp.com/)
