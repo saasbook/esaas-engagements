@@ -38,6 +38,7 @@
           %br
         %br
         = submit_tag 'Apply Filters'
+        #{@filtered_count.to_s + ' results'}
 
   :javascript
       //$('.filter').change(function() {var klass = $("#apps_table ."+$(this).attr('name')).toggle();});
