@@ -2,6 +2,7 @@
   %table.table
     %thead
       %tr
+        %th Semester
         %th Started
         %th Contact
         %th Coach
@@ -14,6 +15,7 @@
       - engagements.each do |engagement|
         - app = engagement.app
         %tr
+          %td= engagement.get_semester()
           %td= link_to engagement.start_date.strftime('%F'), engagement_iterations_path(engagement)
           %td= mail_to(engagement.client.email, engagement.client.name) if engagement.client
           %td{style: 'max-width: 150px; overflow: hidden;'}= [engagement.coach.try(:name),engagement.coaching_org.try(:name)].join(', ')
