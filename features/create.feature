@@ -57,7 +57,7 @@ Scenario: User can submit successfully if form is complete
         | User Name           | Fakeuser              |
         | Email               | fakeuser@berkeley.edu |
         | Preferred Contact   | 555-555-5555          |
-        | Github Uid          | fakegithubuid         |
+        | GitHub Username     | fakegithubuid         |
     And I fill in the "Org Information" fields as follows:
         | field                     | value                  |
         | Organization Name         | Group 20               |

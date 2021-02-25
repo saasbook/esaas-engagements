@@ -31,7 +31,7 @@ Scenario: There is a form on users page that I can use to create a user
     And I should see "User Name"
     And I should see "Email"
     And I should see "Preferred Contact"
-    And I should see "Github Uid"
+    And I should see "GitHub Username"
 
 Scenario: I can create a user
     Given I am on the new user page
@@ -68,5 +68,3 @@ Scenario: When I click back I go back to the users page
     Given I am on the new user page
     And I follow "Back"
     Then I am on the users page
-
-
