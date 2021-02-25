@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_pending_iteration_feedbacks
   helper_method :get_reviewed_apps
   private
-  @@name_path = "/my_projects"
+  @@name_path = "/apps"
 
   def logged_in?
     @@name_path = request.env['PATH_INFO']
