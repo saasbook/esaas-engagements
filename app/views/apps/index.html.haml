@@ -7,7 +7,7 @@
 - $filters = ""
 #filters
   = form_tag "/", :method => :get do
-    %label.checkbox-inline
+    .checkbox-inline
       %div#deploy
         %strong Deployment Status:
         %em #{" (" + @total_deploy.to_s + ")"}
@@ -18,11 +18,12 @@
             = check_box_tag status, 1, true, :class => 'filter'
           - else
             = check_box_tag status, 1, false, :class => 'no_filter'
-          %span{:class => status}= status.to_s.humanize
+          %span{:class => status}
+            = label_tag status
           %em (#{@deployment_map[status.to_s].to_i})
           %br
 
-    %label.checkbox-inline
+    .checkbox-inline
       %div#vetting
         %strong Vetting Status:
         %em #{" (" + @total_vet.to_s + ")"}
@@ -33,7 +34,8 @@
             = check_box_tag status, 1, true, :class => 'filter'
           - else
             = check_box_tag status, 1, false, :class => 'no_filter'
-          %span{:class => status}= status.to_s.humanize
+          %span{:class => status}
+            = label_tag status
           %em (#{@vetting_map[status.to_s].to_i})
           %br
         %br
