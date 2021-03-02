@@ -2666,7 +2666,7 @@ input[type="search"] {
   margin-bottom: 0;
   font-weight: normal;
   vertical-align: middle;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
