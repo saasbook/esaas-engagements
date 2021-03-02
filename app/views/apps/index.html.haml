@@ -18,7 +18,8 @@
             = check_box_tag status, 1, true, :class => 'filter'
           - else
             = check_box_tag status, 1, false, :class => 'no_filter'
-          %span{:class => status}= status.to_s.humanize
+          %span{:class => status}
+            = label_tag status
           %em (#{@deployment_map[status.to_s].to_i})
           %br
 
@@ -33,7 +34,8 @@
             = check_box_tag status, 1, true, :class => 'filter'
           - else
             = check_box_tag status, 1, false, :class => 'no_filter'
-          %span{:class => status}= status.to_s.humanize
+          %span{:class => status}
+            = label_tag status
           %em (#{@vetting_map[status.to_s].to_i})
           %br
         %br
