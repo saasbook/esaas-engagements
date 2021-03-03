@@ -86,3 +86,8 @@ a { color: #2b4988}
   padding-bottom: 5px;
   padding-left: 3px;
 }
+
+.required::after {
+    content: " *";
+    color: red;
+}
