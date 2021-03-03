@@ -25,21 +25,28 @@ class SearchController < ApplicationController
     if no_need_to_access_database(keyword)
       return
     end
-    keyword = ("%" + keyword + "%").downcase
+    
     if @filters.include?("Apps")
+      keyword = ("%" + keyword + "%").downcase
       @apps = App.where('lower(name) LIKE ?', keyword).all() | App.where('lower(description) LIKE ?', keyword).all()
     end
     if @filters.include?("Organizations")
+      keyword = ("%" + keyword + "%").downcase
       @orgs = Org.where('lower(name) LIKE ?', keyword).all()
     end
     if @filters.include?("Users")
+      keyword = ("%" + keyword + "%").downcase
       emails = User.where('lower(email) LIKE ?', keyword).all()
       name = User.where('lower(name) LIKE ?', keyword).all()
       github = User.where('lower(github_uid) LIKE ?', keyword).all()
       @users = (emails + name + github).uniq
     end
     if @filters.include?("Semesters")
-        @apps = App.joins(:engagements).select("apps.*, semester").where("lower(semester) LIKE ?", keyword).all
+      keywords = keyword.downcase.split(/(?<=[a-z])\s*(?=\d)/).map{|string| "%" + string + "%"}
+      if (keywords.length == 1) 
+        keywords[1] = keywords[0]
+      end
+      @apps = App.joins(:engagements).select("apps.*, semester").where("lower(semester) LIKE ? AND lower(semester) LIKE ?", keywords[0], keywords[1]).all
       # else 
       #   @apps = @apps.joins(:engagements).where("lower(semester) LIKE ?", keyword).all
     end
