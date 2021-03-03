@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 
   def search
     keyword = params["keyword"]
-    all_filters = ["Apps", "Organizations", "Users"]
+    all_filters = ["Apps", "Organizations", "Users", "Semesters"]
     filters = all_filters.select {|filter| params[filter]}
     session[:filters] = filters
     if filters.empty?
@@ -36,8 +36,12 @@ class SearchController < ApplicationController
       emails = User.where('lower(email) LIKE ?', keyword).all()
       name = User.where('lower(name) LIKE ?', keyword).all()
       github = User.where('lower(github_uid) LIKE ?', keyword).all()
-
       @users = (emails + name + github).uniq
+    end
+    if @filters.include?("Semesters")
+        @apps = App.joins(:engagements).select("apps.*, semester").where("lower(semester) LIKE ?", keyword).all
+      # else 
+      #   @apps = @apps.joins(:engagements).where("lower(semester) LIKE ?", keyword).all
     end
   end
 
@@ -49,4 +53,9 @@ class SearchController < ApplicationController
   def no_need_to_access_database(keyword)
     return @filters.nil? || keyword.empty?
   end
+
+  
+
+
 end
+

@@ -51,7 +51,11 @@ CSV.foreach("#{Rails.root}/db/apps.csv",
 			e.presentation_url = row[:link_to_presentation_slides]
 			e.prototype_deployment_url = row[:deployment]
 			e.student_names = row[:students] || 'Unknown'
+			e.semester = "#{row[:semester]}" || nil
 		end
+
+
+
 	else
 		puts "No org #{row[:org_name]}"
 	end
