@@ -10,7 +10,11 @@ class MyProjectsController < ApplicationController
         total_app = @total_deploy + @total_vet
         page_default_and_update("myprojects", total_app)
         change_page_num("myprojects", total_app)
-        @apps = App.for_orgs(orgs, limit=@each_page, offset=@each_page*(@page_num-1))
+        if @each_page*(@page_num-1) >= 0
+          @apps = App.for_orgs(orgs, limit=@each_page, offset=@each_page*(@page_num-1))
+        else
+          @apps = App.for_orgs(orgs, limit=@each_page, offset=0)
+        end
         respond_to do |format|
             format.json { render :json => @apps }
             format.html
