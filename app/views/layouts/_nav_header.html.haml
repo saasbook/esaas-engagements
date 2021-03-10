@@ -27,6 +27,6 @@
           = label_tag :keyword
           = text_field_tag "keyword", ""
           = submit_tag "Search", :class => "btn btn-primary"
-          - %w(Apps Organizations Users).each do |category|
+          - %w(Apps Organizations Users Semesters).each do |category|
             = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
             = label_tag category, category
