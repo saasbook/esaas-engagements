@@ -41,13 +41,12 @@ class SearchController < ApplicationController
       github = User.where('lower(github_uid) LIKE ?', keyword).all()
       @users = (emails + name + github).uniq
     end
-    if @filters.include?("Semesters") && !@filters.include?("Apps")
+    if @filters.include?("Semesters")
+      tempApp = @filters.include?("Apps") ? @apps : []
       keywords = keyword.downcase.split(/(?<=[a-z])\s*(?=\d)/).map{|string| "%" + string + "%"}
       keywords.length == 1 ? keywords[1] = keywords[0] : nil
       @apps = App.joins(:engagements).select("apps.*, semester").where("lower(semester) LIKE ? AND lower(semester) LIKE ?", keywords[0], keywords[1]).all
-      # TODO: both check apps and semester keyword 
-      # else 
-      #   @apps = @apps.joins(:engagements).where("lower(semester) LIKE ?", keyword).all
+      @apps = @apps + tempApp
     end
   end
 
