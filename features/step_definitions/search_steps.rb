@@ -23,8 +23,6 @@ end
 Given(/^I search for "([^"]*)"$/) do |arg1|
   # puts body really good debugging trick
   fill_in "keyword", with: arg1
-  puts Engagement.all
-  puts App.first
   click_on "Search"
 end
 
