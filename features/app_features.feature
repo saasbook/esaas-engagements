@@ -50,7 +50,7 @@ Scenario: A user can add initial features while creating apps
     When I fill in "App Description" with "Fake app description"
     When I fill in "App Initial Features" with "Fake app features"
     And I press "Create App"
-    And I follow "Fake app" 
+    And I follow "Fake app"
     Then I should see "App Initial Features"
     And I should see "Fake app features"
 
@@ -60,6 +60,27 @@ Scenario: A user can add initial features while editing apps
    And I follow "Edit App"
    When I fill in "App Initial Features" with "app1 features"
    And I press "Update App"
-   And I follow "app1" 
+   And I follow "app1"
    Then I should see "App Initial Features"
    And I should see "app1 features"
+
+# Testing pivotal tracker url in app create
+Scenario: A user can add pivotal tracker url while creating apps
+   Given I follow "New App"
+   When I fill in "App Name" with "Pivotal tracker app"
+   And I fill in "App Description" with "App with pivotal tracker url"
+   And I fill in "Pivotal Tracker Url" with "https://www.pivotaltracker.com/12345"
+   And I press "Create App"
+   And I follow "Pivotal tracker app"
+   Then I should see "Pivotal Tracker"
+   And I should see "https://www.pivotaltracker.com/12345"
+
+# Testing pivotal tracker url in app edit
+Scenario: A user can add pivotal tracker url while editing apps
+   Given I follow "app1"
+   And I follow "Edit App"
+   When I fill in "Pivotal Tracker Url" with "https://www.pivotaltracker.com/12345"
+   And I press "Update App"
+   And I follow "app1"
+   Then I should see "Pivotal Tracker"
+   And I should see "https://www.pivotaltracker.com/12345"
