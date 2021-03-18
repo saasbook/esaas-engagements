@@ -35,3 +35,11 @@ script:
 after_script:
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: G4wwSCCVMRwFMJA56ITKtsw1F6cte/U11jvQAMbMObaDagNVLsX8gVhc1DzJSmllPfPWFBKQ6i60KstgSBxsDFx7wgfe3ZVEje8U2nhSO/JLv+GzAAANge11Sxb2XkIidg0LW4Iz0eGBdOObbXhKF+p6lT5ef1pcDxNJmJKZcpSvqjkaa7dsI9e0v9a+4AMBuQ9N81g1eYP1h4mQ62JpVD7JS6dv3m0fvF89lnn1Cc1WFm1biF8/asIDW2gH+Zpmm4FSFYspmyPfCdeuHj1q1dxqujqht1sKGbwh7S0V7XR76gzlLo784IqtsGlkiVoNuqPNy1qI0JvxuzlvfS9D2oB/1wLZKD52Y0u1TZ4jTg9XzW1/LpaJtK/OHYg/wSij3pZTR/MhXuv5QJtZjAH4ODIrh1irVHbNEGlvotHwTD/fp2OfSwMKqOex94i8WbxlE3YpPcqzl7DK3tQpysQgSp7J8xwMGhSbesiBISx2dh8lpyEX28GmB4KgoHC8Wk6wLGx7FcXMVAalg+bNS8hXtH6bKE0y0YIVUB/yCEtTG+m/sXcOuukEZCc8G+W2eCGg4aZ74+hJblpoKukpMDB4GYI6Tc0+ncXL0Cd2GPa0qfir+eKu4zdh0P/Oqva6SIAYD5OXFTJYwq3nenB2U3bYAx10nNpZo+0bDmiomBAQihY=
+  run:
+  - bundle exec rake db:migrate
+  - bundle exec rake db:reset
