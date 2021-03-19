@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20210303105028) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "repository_url"
+    t.string   "pivotal_tracker_url"
     t.string   "final_rating"
     t.string   "final_comments"
     t.string   "features"

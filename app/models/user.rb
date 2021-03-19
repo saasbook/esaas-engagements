@@ -58,7 +58,6 @@ class User < ActiveRecord::Base
       row = (row.select { |key,_| keys.include? key }).to_h
       if User.find_by("email" => row["email"]).nil?
         u = User.create(row)
-        print(row)
       end
     end
   end
