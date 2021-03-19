@@ -23,9 +23,7 @@ class Org < ActiveRecord::Base
   def self.import(file)
     keys = ['name', 'description', 'url', 'contact_id', "address_line_1", "address_line_2", "city_state_zip", "phone"]
     CSV.foreach(file.path, headers: true) do |row|
-      print(row.to_h)
       row = row.select { |key,_| keys.include? key }
-      print(row.to_h)
       Org.create(row.to_h)
     end
   end
