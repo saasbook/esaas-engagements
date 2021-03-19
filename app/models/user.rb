@@ -1,3 +1,4 @@
+require 'csv'
 class User < ActiveRecord::Base
   belongs_to :coaching_org, class_name: 'Org'
   belongs_to :developing_engagement, class_name: 'Engagement'
@@ -49,5 +50,16 @@ class User < ActiveRecord::Base
 
   def self.students
     User.where('user_type': User.user_types[:student]).all
+  end
+
+  def self.import(file)
+    keys = ['name', 'email', 'github_uid', 'user_type']
+    CSV.foreach(file.path, headers: true) do |row|
+      row = (row.select { |key,_| keys.include? key }).to_h
+      if User.find_by("email" => row["email"]).nil?
+        u = User.create(row)
+        print(row)
+      end
+    end
   end
 end
