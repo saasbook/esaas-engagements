@@ -14,12 +14,20 @@ Rails.application.routes.draw do
   resources :engagements, :only => [] do # don't route engagements by themselves
     resources :iterations
   end
+
+  get 'orgs/import' => 'orgs#import'
+
   resources :orgs do
     resources :comments, :only => [:create, :update], module: :orgs
+    collection {post :import}
   end
   resources :comments, :only => [:edit, :destroy]
+
+  get 'users/import' => 'users#import'
+
   resources :users do
     resources :comments, only: [:create, :update], module: :users
+    collection {post :import}
   end
 
   # my_projects routes
