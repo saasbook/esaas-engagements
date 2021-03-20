@@ -57,8 +57,6 @@ Scenario: There are some click buttons on apps page that I can control the pagin
     And I should see "100"
     And I should see "All"
     And I should see "First"
-    And I should see "Previous"
-    And I should see "Next"
     And I should see "Last"
 
 Scenario: I can see all apps with selection all
@@ -93,7 +91,7 @@ Scenario: I can use "next" and "previous" buttons to see previous or next apps
     And I should see "app_j"
     And I should not see "app_k"
     And I should not see "app_l"
-    When I follow "Next"
+    When I follow "2"
     Then I should not see "app_a"
     And I should not see "app_b"
     And I should not see "app_c"
@@ -107,7 +105,7 @@ Scenario: I can use "next" and "previous" buttons to see previous or next apps
     And I should not see "app_j"
     And I should see "app_k"
     And I should see "app_l"
-    When I follow "Previous"
+    When I follow "1"
     Then I should see "app_a"
     And I should see "app_b"
     And I should see "app_c"
@@ -136,21 +134,22 @@ Scenario: I can click "First" or "Last" to see the first page or last page of ap
     And I should not see "app_k"
     And I should not see "app_l"
 
-Scenario: I cannot press previous in the very front page
-    Given I am on the apps page
-    When I follow "All"
-    And I follow "Previous"
-    Then I should see "app_b"
-    And I should see "You are already on the FIRST page."
+# These scenarios now obsolete since front end redesign prevents it from happening
+#Scenario: I cannot press previous in the very front page
+#    Given I am on the apps page
+#    When I follow "All"
+#    And I follow "Previous"
+#    Then I should see "app_b"
+#    And I should see "You are already on the FIRST page."
 
-Scenario: I cannot press previous in the very front page
-    Given I am on the apps page
-    When I follow "All"
-    And I follow "Next"
-    Then I should see "app_k"
-    When I follow "Next"
-    Then I should see "app_k"
-    And I should see "You are already on the LAST page."
+#Scenario: I cannot press previous in the very front page
+#    Given I am on the apps page
+#    When I follow "All"
+#    And I follow "Next"
+#    Then I should see "app_k"
+#    When I follow "Next"
+#    Then I should see "app_k"
+#    And I should see "You are already on the LAST page."
 
 Scenario: There are some click buttons on orgs page that I can control the pagination
     Given I am on the orgs page

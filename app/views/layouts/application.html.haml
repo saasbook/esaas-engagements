@@ -10,6 +10,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.4.0/axe.min.js" integrity="sha256-3uvAwJcMTsYRtepeqr32rrpy5zZ/fMYjiKEKPZM6Rtc=" crossorigin="anonymous"></script>
 
   %body
+    .sidenav{role: 'navigation', title: 'filters'}
+      = yield :filters
+        
     #main.container{role: 'main'}
       = render 'layouts/nav_header'
       = render 'shared/flash_messages'
