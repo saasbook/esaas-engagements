@@ -1,45 +1,37 @@
 language: ruby
 rvm:
-  - 2.4.5
-
+- 2.4.5
 bundler_args: "--without production"
-
 env:
   global:
   - MOZ_HEADLESS=1
   - CC_TEST_REPORTER_ID=365a8b5a2c901eb95955132e18d83d677de9b5d7c02e1e86db3b1305d324ef09
   - github_key=test
   - github_secret=test
-
 addons:
   chrome: stable
-
 before_install:
 - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
 - mkdir geckodriver
 - tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
 - export PATH=$PATH:$PWD/geckodriver
-
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
   > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
-- ./cc-test-reporter before-build
-
+- "./cc-test-reporter before-build"
 script:
-  - bundle exec rspec
-  - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
-  - bundle exec cucumber
-  - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
-
+- bundle exec rspec
+- "./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json"
+- bundle exec cucumber
+- "./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json"
 after_script:
-  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 deploy:
-  provider: heroku
   api_key:
-    secure: G4wwSCCVMRwFMJA56ITKtsw1F6cte/U11jvQAMbMObaDagNVLsX8gVhc1DzJSmllPfPWFBKQ6i60KstgSBxsDFx7wgfe3ZVEje8U2nhSO/JLv+GzAAANge11Sxb2XkIidg0LW4Iz0eGBdOObbXhKF+p6lT5ef1pcDxNJmJKZcpSvqjkaa7dsI9e0v9a+4AMBuQ9N81g1eYP1h4mQ62JpVD7JS6dv3m0fvF89lnn1Cc1WFm1biF8/asIDW2gH+Zpmm4FSFYspmyPfCdeuHj1q1dxqujqht1sKGbwh7S0V7XR76gzlLo784IqtsGlkiVoNuqPNy1qI0JvxuzlvfS9D2oB/1wLZKD52Y0u1TZ4jTg9XzW1/LpaJtK/OHYg/wSij3pZTR/MhXuv5QJtZjAH4ODIrh1irVHbNEGlvotHwTD/fp2OfSwMKqOex94i8WbxlE3YpPcqzl7DK3tQpysQgSp7J8xwMGhSbesiBISx2dh8lpyEX28GmB4KgoHC8Wk6wLGx7FcXMVAalg+bNS8hXtH6bKE0y0YIVUB/yCEtTG+m/sXcOuukEZCc8G+W2eCGg4aZ74+hJblpoKukpMDB4GYI6Tc0+ncXL0Cd2GPa0qfir+eKu4zdh0P/Oqva6SIAYD5OXFTJYwq3nenB2U3bYAx10nNpZo+0bDmiomBAQihY=
+    secure: e4waz7s4mCSdOFGfDFHpDWbcgokgl6pWjXZNTUQriNgHCQLBCqoMPiTFT0ieqmdVxbn98SywU/OJZAQuAq0gkQ1KjQAaiq/7bz/jv9KFQ4JNEsn1Eyj6rTC4sVRJIP2M7Vf5Q466Q7uwiafVawhbBLsXm22DpUoK5QnqVeG50e/zjYowGLkrprcZaTWxCaWQv0+S4EnVnYL1tv6YN0EUiJ2JFLCfGEQiFOQJ+eKoMyezxtGptnyRleHRDez1PEoqVvWJkkWwjdT3QVYbYaeSoaL4tJlDFmRu3m7PX7tDe247pYDuwvhoUojlgqP9p/TwI0Zf9XBMdIdRc0PkxxSxK9GX3s9kjhi+TBQ8UwqT4D2zE1F/rb1b8EfyZ/+bxmiuKQOBNDrQHl8eb/0B/WrKVUGB3qA3PHPJrGaQVx0Lkn5d8DSMM1yoh8CxM8BisbHXfbEi4MFRfZHQE2bIBAw4k/WoaMzNJ6d2/PIo+fVil4i9GWxfdqpeMQCBknE1xWqJn6gRxzzbFjfMkC5LqVmbTYUjtGnZP59V2POsbza/Xjx/sS6ltnC7Istsv+wq3PZrn1ONervA2SuytoqhLzOIsxxWgVym/goxF/wSjXJTk9CbfE7SXDOlFosNABJy3onKC4KALQJN5sdXbXU5DuOeJZcRR8W4QIRzXS4AHqNHUZg=
   run:
   - bundle exec rake db:migrate
   - bundle exec rake db:reset
+
+
