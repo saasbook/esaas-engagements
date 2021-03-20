@@ -35,6 +35,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def import
+    User.import(params[:file])
+    redirect_to users_path, notice: 'User was successfully imported.'
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
