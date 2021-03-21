@@ -4,46 +4,45 @@
     = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
   .help-block Click an App name to see more information
 
-- $filters = ""
-#filters
-  = form_tag "/", :method => :get do
-    .checkbox-inline
+  - content_for :filters do
+    - $filters = ""
+    = form_tag "/", :method => :get do
       %div#deploy
         %strong Deployment Status:
         %em #{" (" + @total_deploy.to_s + ")"}
         %br
-        - App.getAllDeploymentStatuses.each do |status|
-          - if @deployment_statuses.key? status
-            - $filters = $filters + "&" + status.to_s + "=1"
-            = check_box_tag status, 1, true, :class => 'filter'
-          - else
-            = check_box_tag status, 1, false, :class => 'no_filter'
-          %span{:class => status}
-            = label_tag status
-          %em (#{@deployment_map[status.to_s].to_i})
-          %br
-
-    .checkbox-inline
+        .checkbox-inline
+          - App.getAllDeploymentStatuses.each do |status|
+            - if @deployment_statuses.key? status
+              - $filters = $filters + "&" + status.to_s + "=1"
+              = check_box_tag status, 1, true, :class => 'filter'
+            - else
+              = check_box_tag status, 1, false, :class => 'no_filter'
+            = label_tag status do
+              %span{:class => status}
+                = status.to_s.humanize
+            %em (#{@deployment_map[status.to_s].to_i})
+            %br
+      %br
       %div#vetting
         %strong Vetting Status:
         %em #{" (" + @total_vet.to_s + ")"}
         %br
-        - App.getAllVettingStatuses.each do |status|
-          - if @vetting_statuses.key? status
-            - $filters = $filters + "&" + status.to_s + "=1"
-            = check_box_tag status, 1, true, :class => 'filter'
-          - else
-            = check_box_tag status, 1, false, :class => 'no_filter'
-          %span{:class => status}
-            = label_tag status
-          %em (#{@vetting_map[status.to_s].to_i})
-          %br
+        .checkbox-inline
+          - App.getAllVettingStatuses.each do |status|
+            - if @vetting_statuses.key? status
+              - $filters = $filters + "&" + status.to_s + "=1"
+              = check_box_tag status, 1, true, :class => 'filter'
+            - else
+              = check_box_tag status, 1, false, :class => 'no_filter'
+            = label_tag status do
+              %span{:class => status}
+                = status.to_s.humanize
+            %em (#{@vetting_map[status.to_s].to_i})
+            %br
         %br
         = submit_tag 'Apply Filters'
         #{@filtered_count.to_s + ' results'}
-
-  :javascript
-      //$('.filter').change(function() {var klass = $("#apps_table ."+$(this).attr('name')).toggle();});
 
 %ul{:class => 'pagination'}
   %li{:class=>'each_page'}
@@ -58,12 +57,20 @@
 
 %ul{:class => 'pagination pull-right'}
   - ["First","Previous","Current","Next","Last"].each do |action|
-    - if action != "Current" then
+    - if action == "First" || action == "Last" then
       %li{:class=>'page_num'}
         %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters}=action
+    - elsif action == "Previous" then
+      - unless @page_num <= 1 then 
+        %li{:class=>'page_num'}
+          %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num-1}
+    - elsif action == "Next" then
+      - unless @page_num >= @max_page_num then
+        %li{:class=>'page_num'}
+          %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num+1}
     - else
-      %li{:class=>"page-num"}
-        %a{:class=>'page_link'} Page #{[1,@page_num].max}
+      %li{:class=>"page-num active"}
+        %a{:class=>'page_link'} #{[1,@page_num].max}
 
 %table.table.table-condensed#apps_table
   %thead
