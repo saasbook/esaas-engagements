@@ -25,13 +25,15 @@ script:
 - "./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json"
 - bundle exec cucumber
 - "./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json"
-after_script:
 
 deploy:
   provider: heroku
   api_key:
-    secure: e4waz7s4mCSdOFGfDFHpDWbcgokgl6pWjXZNTUQriNgHCQLBCqoMPiTFT0ieqmdVxbn98SywU/OJZAQuAq0gkQ1KjQAaiq/7bz/jv9KFQ4JNEsn1Eyj6rTC4sVRJIP2M7Vf5Q466Q7uwiafVawhbBLsXm22DpUoK5QnqVeG50e/zjYowGLkrprcZaTWxCaWQv0+S4EnVnYL1tv6YN0EUiJ2JFLCfGEQiFOQJ+eKoMyezxtGptnyRleHRDez1PEoqVvWJkkWwjdT3QVYbYaeSoaL4tJlDFmRu3m7PX7tDe247pYDuwvhoUojlgqP9p/TwI0Zf9XBMdIdRc0PkxxSxK9GX3s9kjhi+TBQ8UwqT4D2zE1F/rb1b8EfyZ/+bxmiuKQOBNDrQHl8eb/0B/WrKVUGB3qA3PHPJrGaQVx0Lkn5d8DSMM1yoh8CxM8BisbHXfbEi4MFRfZHQE2bIBAw4k/WoaMzNJ6d2/PIo+fVil4i9GWxfdqpeMQCBknE1xWqJn6gRxzzbFjfMkC5LqVmbTYUjtGnZP59V2POsbza/Xjx/sS6ltnC7Istsv+wq3PZrn1ONervA2SuytoqhLzOIsxxWgVym/goxF/wSjXJTk9CbfE7SXDOlFosNABJy3onKC4KALQJN5sdXbXU5DuOeJZcRR8W4QIRzXS4AHqNHUZg=
-  run:
+    secure: "ec0W2pdQxDtfQLUWorq+uZmn/fxOW2Vmbv9ndNXvbJnGPvQy5sbHYFR73F+9FHe4xXEE16fKwGHYtOW3O8VsdoJCH8vVMQjTEfo9EOpJ89ppPSzSBRd2rvmMv772behqEI8D865Wy1AVj59bPlm2hyQi5dZb0ZcyCLG/PRSaztzkeuEBgnd4gORFW3501tUF57jGbwYCsmgYEb36l2g+m9heT5P5UeYznvX77RYrsWxQOKz3/e648oU/vX1hs9m9Cza8baMujQK90nBCP/B/o0iNG06UA/UiH4j1CuwuEd0e5gk1JbN+0OT9Gjs0qKdDNaRR+83R+4xo+VBEaaP+yubF7hGYPzvqa0OBVeCXrzh0OxrcTxm00Fbkm+IrjbInwY8BqYKXvIygXlU53q22d8d1ByT4ixz8hHf2bH3Y0w/6O1NANYGicVUhTWexnCT3dHiQWu64PB44PHzNDOtgduF1cjudnUnE8Shctb5y8y1v7XZ/M1xMlF7ycFnFXUGFhNloSPbXKhym+tflydwNkOWmsMal51q036mSA6gyg9RAEzDdN3FLLG7dyUHAxsRJg/y7VMdEuYDrS9W/DVODRCqmX4lbTElKBAELz1w8VWl0X00UZQn9fxWG7KGZJtqhQnII6VjC4U06mSZlR/NccUjcljlrjN1SZoMLtHy6AyQ="
+  app: esaas-team8
+  on:
+    repo: zfred219/esaas-engagements
+  after_deploy:
   - bundle exec rake db:migrate
   - bundle exec rake db:reset
 
