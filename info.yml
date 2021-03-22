@@ -19,3 +19,34 @@ project:
       githubUsername: 'zfred219'
       pivotalUsername: 'fredzhang3'
       herokuEmail: 'zkx219@gmail.com'
+    member2:
+      name: 'Enjia'
+      surname: 'Xu' 
+      githubUsername: 'EnjiaXu'
+      pivotalUsername: 'ENJIAXU'
+      herokuEmail: 'enjiaxu.work@gmail.com'
+    member3:
+      name: 'Wesley'
+      surname: 'Wang' 
+      githubUsername: 'wwang3990'
+      pivotalUsername: 'wangwesley'
+      herokuEmail: 'wesley_wang_99@berkeley.edu'
+    member4:
+      name: 'Kevin'
+      surname: 'Lo' 
+      githubUsername: 'databears-cal'
+      pivotalUsername: 'klo824'
+      herokuEmail: 'kevin_lo@berkeley.edu'
+    member5:
+      name: 'Jeremy'
+      surname: 'Lee' 
+      githubUsername: 'jrmylee'
+      pivotalUsername: 'jrmylee'
+      herokuEmail: 'jrmylee@berkeley.edu'
+    member6:
+      name: 'Robert'
+      surname: 'Qiu' 
+      githubUsername: 'robertqiu110'
+      pivotalUsername: 'robertqiu1'
+      herokuEmail: 'robertqiu10@gmail.com'
+    
