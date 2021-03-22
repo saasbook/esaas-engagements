@@ -25,7 +25,11 @@ script:
 - "./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json"
 - bundle exec cucumber
 - "./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json"
+after_script:
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
+  
 deploy:
   provider: heroku
   api_key:
