@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "/project_matching" => 'matching#index', :as => "project_matching"
+
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'
   match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]
