@@ -1,0 +1,27 @@
+%h1
+  Matching #{@mockMatching} Progress
+
+
+%table.table.table-condensed#apps_table
+  %thead
+    %tr
+    %th 
+      %h3
+        Students
+    %th
+      %h3
+        Status
+  %tbody
+    - @mockStudents.each do |mockStudent|
+      %tr
+        %td{:height => "70"}
+          %span.badge.alert-danger.h4 
+            = mockStudent[0]
+        %td
+          - if mockStudent[1] == "In Progress" then
+            %span.badge.alert-danger 
+              = mockStudent[1]
+            %button.btn.btn-primary.primary-button.btn-sm Send Notification
+          - else
+            %span.badge.alert-success 
+              = mockStudent[1]

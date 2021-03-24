@@ -2,7 +2,7 @@ class MatchingController < ApplicationController
 
   
   def index
-    @mockMatchings = [["Matching 1", "Complete"], ["Matching 2", "In Progress"], ["Matching 3", "Complete"]]
+    @mockMatchings = [["Matching 1", "Complete", 1], ["Matching 2", "In Progress", 2], ["Matching 3", "Complete", 3]]
 
   end
 
@@ -10,4 +10,16 @@ class MatchingController < ApplicationController
   def new
     
   end
+
+  def show
+    @mockMatching = params[:matching_id]
+    
+  end
+
+  def progress
+    @mockMatching = params[:matching_id]
+    @mockStudents = [["Student 1", "Complete", 1], ["Student 2", "In Progress", 2], ["Student 3", "Complete", 3]]
+
+  end
+
 end
