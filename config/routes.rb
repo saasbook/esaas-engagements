@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  get '/project_matching/new' => 'matching#new', :as => "project_matching_new"
   get "/project_matching" => 'matching#index', :as => "project_matching"
 
   # OmniAuth authentication with GitHub

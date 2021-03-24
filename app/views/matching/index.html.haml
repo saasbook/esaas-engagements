@@ -1,0 +1,21 @@
+.page-header
+  %h1
+    Project Matching
+    = link_to 'New Matching', project_matching_new_path, :class => 'btn btn-success pull-right'
+  .help-block Click an Matching to see more information
+
+
+%table.table.table-condensed#apps_table
+  %thead
+    %tr
+      %th Matching Name
+      %th Status
+  %tbody
+    - @mockMatchings.each do |mockMatching|
+      %tr
+        %td 
+          = mockMatching[0]
+        %td 
+          = mockMatching[1]
+  
+
