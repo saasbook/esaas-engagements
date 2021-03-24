@@ -8,14 +8,20 @@
 %table.table.table-condensed#apps_table
   %thead
     %tr
-      %th Matching Name
-      %th Status
+      %th 
+        %h3
+          Matching Name
+      %th
+        %h3
+          Status
   %tbody
     - @mockMatchings.each do |mockMatching|
       %tr
+        %td{style: 'white-space: nowrap'}
+          = link_to mockMatching[0], project_matching_new_path,  :class => 'btn btn-primary'
         %td 
-          = mockMatching[0]
-        %td 
-          = mockMatching[1]
-  
+          - if mockMatching[1] == "In Progress" then
+            = link_to mockMatching[1], project_matching_new_path, :class => 'btn btn-danger'
+          - else
+            = link_to mockMatching[1], project_matching_new_path, :class => 'btn btn-success'
 
