@@ -20,11 +20,11 @@ Given(/^the following users exist:$/) do |table|
 end
 
 Given (/^the following engagements exist for "([^"]*)":$/) do |app_name, table|
-  app = App.find_by_name(app_name)
+  @app = App.find_by_name(app_name)
   table.hashes.each do |hash|
-		app.engagements.create(hash)
+		@app.engagements.create(hash)
 	end
-  puts app.engagements.first.semester
+  @app.save!
 end
 
 Given(/^I search for "([^"]*)"$/) do |arg1|

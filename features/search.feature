@@ -6,10 +6,10 @@ Feature: searching to quickly find apps according to name/organization/descripti
 
 Background: Logged in
     Given the following apps exist:
-        | name   | description             | org_id | status  |
-        | app 1  | this is one test        | 1      | pending |
-        | app 2  | this is two test        | 2      | pending |
-        | app 3  | this is three test      | 3      | pending |
+        | name   | description             | org_id | status  | id |
+        | app 1  | this is one test        | 1      | pending | 1  |
+        | app 2  | this is two test        | 2      | pending | 2  |
+        | app 3  | this is three test      | 3      | pending | 3  |
 
     And the following orgs exist:
         | name  | contact_id |
@@ -22,20 +22,22 @@ Background: Logged in
         | user 1 | esaas_developer| test@user.com |
         | user 2 | esaas_client   | test@client.com |
     
+    # Notice model engagement ask for the presence of all for terms for engagement to be valid
+    # otherwise it's destroyed automatically # BrUh...
     And the following engagements exist for "app 1":
-        | app_id | semester    |
-        | 1 | FALL 2016   |
-        | 1 | FALL 2015   |
+        | app_id | semester    | coach_id | team_number | start_date |
+        | 1      | FALL 2015   |    1     |    1        | 03/26      |
+        | 1      | FALL 2016   |    1     |    1        | 03/26      |
 
     And the following engagements exist for "app 2": 
-        | semester    |
-        | Spring 2016 |
-        | FALL 2015   |
+        | app_id | semester    | coach_id | team_number | start_date |
+        |  2     | Spring 2016 |    1     |    1        | 03/26      |
+        |  2     | FALL 2015   |    1     |    1        | 03/26      |
 
     And the following engagements exist for "app 3":
-        | semester    |
-        | FALL 2016   |
-        | Spring 2015 |
+        | app_id | semester    | coach_id | team_number | start_date |
+        |  3     | Spring 2015 |    1     |    1        | 03/26      |
+        |  3     | Fall 2016   |    1     |    1        | 03/26      |
 
     And I'm logged in on the orgs page 
 
@@ -154,34 +156,62 @@ Scenario: search for all four categories by keyword
 
 
 Scenario: search for engagement semesters only with semester
-    # Given I uncheck "Apps"
-    # And I uncheck "Organizations"
-    # And I uncheck "Users"
+    Given I uncheck "Apps"
+    And I uncheck "Organizations"
+    And I uncheck "Users"
+    Then I search for "FALL 2015"
+    Then I should see "app 1"
+    And I should see "app 2"
+    And I should not see "app 3"
+    Then I search for "Spring 2016"
+    Then I should see "app 2"
+    And I should not see "app 1"
+    And I should not see "app 3"
+    
+Scenario: search for engagement semesters with all checked
+    Given I search for "FALL 2016"
+    Then I should see "app 1"
+    And I should not see "app 2"
+    And I should see "app 3"
+
+Scenario: search for engagement semesters with fuzzy input semester
+    Given I uncheck "Apps"
+    And I uncheck "Organizations"
+    And I uncheck "Users"
     Then I search for "fa"
     Then I should see "app 1"
-    # And I should see "app 2"
-    # And I should see "app 3"
-    # Then I search for "spring"
-    # Then I should see "app 2"
-    # And I should see "app 3"
-    # And I should not see "app 1"
+    And I should see "app 2"
+    And I should see "app 3"
 
-Scenario: search for engagement semesters only with year
+    Given I search for "spring"
+    Then I should not see "app 1"
+    And I should see "app 2"
+    And I should see "app 3"
+
+
+Scenario: search for engagement semesters with fuzzy input year
     Given I uncheck "Apps"
     And I uncheck "Organizations"
     And I uncheck "Users"
     And I search for "15"
-    # Then I should see "app 1"
-    # Then I search for "2013"
-    # Then I should see "app 3"
+    Then I should see "app 1"
+    And I search for "2015"
+    Then I should see "app 1"
+    Then I should see "app 2"
+    Then I should see "app 3"
 
-Scenario: search for engagement semesters only with semester and year
+    Given I search for "2013"
+    Then I should not see "app 1"
+    Then I should not see "app 2"
+    Then I should not see "app 3"
+
+Scenario: search for engagement semesters only with fuzzy input semester and year
     Given I uncheck "Apps"
     And I uncheck "Organizations"
     And I uncheck "Users"
-    And I search for "SPRING 2013"
-    Then I should see "app 3"
-    # And I search for "Fa15"
-    # Then I should see "app 1"
+    And I search for "Fa15"
+    Then I should see "app 1"
+    Then I should see "app 2"
+    Then I should not see "app 3"
     
 
