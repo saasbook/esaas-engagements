@@ -6,10 +6,10 @@ Feature: searching to quickly find apps according to name/organization/descripti
 
 Background: Logged in
     Given the following apps exist:
-        | id   | name   | description             | org_id | status  |
-        |  1   | app 1  | this is one test        | 1      | pending |
-        |  2   | app 2  | this is two test        | 2      | pending |
-        |  3   | app 3  | this is three test      | 3      | pending |
+        | name   | description             | org_id | status  |
+        | app 1  | this is one test        | 1      | pending |
+        | app 2  | this is two test        | 2      | pending |
+        | app 3  | this is three test      | 3      | pending |
 
     And the following orgs exist:
         | name  | contact_id |
@@ -22,13 +22,20 @@ Background: Logged in
         | user 1 | esaas_developer| test@user.com |
         | user 2 | esaas_client   | test@client.com |
     
-    And the following engagements exist:
-        | app_id  | semester    |
-        | 1       | FALL 2016   |
-        | 1       | FALL 2015   |
-        | 2       | SPRING 2016 |
-        | 2       | FALL 2016   |
-        | 3       | SPRING 2013 |
+    And the following engagements exist for "app 1":
+        | app_id | semester    |
+        | 1 | FALL 2016   |
+        | 1 | FALL 2015   |
+
+    And the following engagements exist for "app 2": 
+        | semester    |
+        | Spring 2016 |
+        | FALL 2015   |
+
+    And the following engagements exist for "app 3":
+        | semester    |
+        | FALL 2016   |
+        | Spring 2015 |
 
     And I'm logged in on the orgs page 
 
@@ -147,15 +154,17 @@ Scenario: search for all four categories by keyword
 
 
 Scenario: search for engagement semesters only with semester
-    Given I uncheck "Apps"
-    And I uncheck "Organizations"
-    And I uncheck "Users"
-    And I search for "fa"
-    # Then I should see "app 1"
+    # Given I uncheck "Apps"
+    # And I uncheck "Organizations"
+    # And I uncheck "Users"
+    Then I search for "fa"
+    Then I should see "app 1"
     # And I should see "app 2"
+    # And I should see "app 3"
     # Then I search for "spring"
     # Then I should see "app 2"
     # And I should see "app 3"
+    # And I should not see "app 1"
 
 Scenario: search for engagement semesters only with year
     Given I uncheck "Apps"
@@ -171,7 +180,7 @@ Scenario: search for engagement semesters only with semester and year
     And I uncheck "Organizations"
     And I uncheck "Users"
     And I search for "SPRING 2013"
-    # Then I should see "app 3"
+    Then I should see "app 3"
     # And I search for "Fa15"
     # Then I should see "app 1"
     

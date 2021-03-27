@@ -19,6 +19,13 @@ Given(/^the following users exist:$/) do |table|
   end
 end
 
+Given (/^the following engagements exist for "([^"]*)":$/) do |app_name, table|
+  app = App.find_by_name(app_name)
+  table.hashes.each do |hash|
+		app.engagements.create(hash)
+	end
+  puts app.engagements.first.semester
+end
 
 Given(/^I search for "([^"]*)"$/) do |arg1|
   # puts body really good debugging trick
