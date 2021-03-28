@@ -1,2 +1,21 @@
 %h1
   Matching #{@mockMatching}
+
+
+
+%body
+  %form 
+    %label{:for => 'name'} Preference for A, B, C projects:
+    %input{:type => 'text', :id => "input"}
+
+:javascript
+  $("#input").on('input', function() {
+    $.ajax({
+      url: "store",
+      data: {"preference": $("#input").val()},
+      type: "POST",
+      success: function (data) {
+        console.log("success AJAX")
+      }
+    });
+  })

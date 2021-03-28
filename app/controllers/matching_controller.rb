@@ -22,4 +22,11 @@ class MatchingController < ApplicationController
 
   end
 
+  def store
+      @match = Matching.find_or_create_by(:id => 1)
+      preference = @match.preference.append(params[:preference])
+      @match.update_attributes(:preference => preference)
+  end
+
+
 end
