@@ -24,7 +24,7 @@ class MatchingController < ApplicationController
 
   def store
       @match = Matching.find_or_create_by(:id => 1)
-      preference = @match.preference.append(params[:preference])
+      preference = params[:preference].split(",", 3)
       @match.update_attributes(:preference => preference)
   end
 
