@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  # Notice order 
+  get 'matching/new', :as => "project_matching_new"
+  get "/matching" => 'matching#index', :as => "project_matching"
+  get 'matching/:matching_id' => 'matching#show', :as => "show_my_matching"
+  get "/matching/:matching_id/progress" => 'matching#progress', :as => "matching_progress"
+
+
+ 
+
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'
   match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]
