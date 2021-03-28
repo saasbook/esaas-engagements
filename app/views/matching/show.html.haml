@@ -3,7 +3,7 @@
   %head
     = stylesheet_link_tag "matching"
 
-  - if @mockMatching == "1" then
+  - if @mockMatching == "3" then
     %h1
       AJAX Matching #{@mockMatching}
     %body
@@ -30,25 +30,18 @@
         %div.card-body
           %h3
             Current Order
-            %ul.mt-5{:style => "list-style: none; padding-left: 0;", :id => "matching"}
+          %ul.mt-5{:style => "list-style: none; padding-left: 0;", :id => "matching"}
+            - @mockProjects.each do |mockProject|
               %li
                 %div.card.mb-3
-                  %div.card-header Project 1
+                  %div.card-header.bg-dark.text-light 
+                    = mockProject[0]
                   %div.card-body
                     %blockquote.blockquote.mb-0
-                      %p This project is about one thing...
-              %li 
-                %div.card.mb-3
-                  %div.card-header Project 2
-                  %div.card-body
-                    %blockquote.blockquote.mb-0
-                      %p This Project is about another thing...
-              %li 
-                %div.card.mb-3
-                  %div.card-header Project 3
-                  %div.card-body
-                    %blockquote.blockquote.mb-0
-                      %p This Project is about future thing...
+                      %p 
+                        = mockProject[1]
+
+
     :javascript
       var el = document.getElementById('matching');
       var sortable = new Sortable(el, {
