@@ -26,20 +26,38 @@
     %h1
       Sortable Matching #{@mockMatching}
     %body
-      %div.card.mt-5
-        %div.card-body
-          %h3
-            Current Order
-          %ul.mt-5{:style => "list-style: none; padding-left: 0;", :id => "matching"}
-            - @mockProjects.each do |mockProject|
-              %li
-                %div.card.mb-3
-                  %div.card-header.bg-dark.text-light 
-                    = mockProject[0]
-                  %div.card-body
-                    %blockquote.blockquote.mb-0
-                      %p 
-                        = mockProject[1]
+      .container
+      .card-columns.d-flex.justify-content-center
+        %div.card.mt-5.w-25
+          %div.card-body
+            %h3
+              Ranking
+              %ul.mt-5{:style => "list-style: none; padding-left: 0"}
+                - count = 0
+                - @mockProjects.each do |mockProject|
+                  - count += 1
+                  %li.mt-2
+                    %div.card.mb-3
+                      %div.card-header.bg-secondary.text-light 
+                        Rank 
+                        = count
+                      %div.card-body
+                        %blockquote.blockquote.mb-0
+                          %p 
+        %div.card.mt-5
+          %div.card-body
+            %h3.pull-right.pb-5.pr-5
+              Matching
+            %ul.p-5{:style => "list-style: none; margin-bottom: 3", :id => "matching"}
+              - @mockProjects.each do |mockProject|
+                %li.mt-4 
+                  %div.card.mb-3
+                    %div.card-header.bg-dark.text-light 
+                      = mockProject[0]
+                    %div.card-body
+                      %blockquote.blockquote.mb-0
+                        %p 
+                          = mockProject[1]
 
 
     :javascript
