@@ -1,19 +1,30 @@
-%h1
-  Matching #{@mockMatching}
+  - if @mockMatching == "1" then
+    %h1
+      AJAX Matching #{@mockMatching}
+    %body
+      %form 
+        %label{:for => 'name'} Preference for A, B, C projects:
+        %input{:type => 'text', :id => "input"}
 
-%body
-  %form 
-    %label{:for => 'name'} Preference for A, B, C projects:
-    %input{:type => 'text', :id => "input"}
-
-:javascript
-  $("#input").on('input', function() {
-    $.ajax({
-      url: "store",
-      data: {"preference": $("#input").val()},
-      type: "POST",
-      success: function (data) {
-        console.log("success AJAX")
-      }
-    });
-  })
+    :javascript
+      $("#input").on('input', function() {
+        $.ajax({
+          url: "store",
+          data: {"preference": $("#input").val()},
+          type: "POST",
+          success: function (data) {
+            console.log("success AJAX")
+          }
+        });
+      })
+  - else 
+    %h1
+      Sortable Matching #{@mockMatching}
+    %body
+      %div.card.bg-secondary.text-white
+        %div.card-header Quote 
+        %div.card-body
+          %blockquote.blockquote.mb-0
+            %p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis nam nobis placeat sed numquam tempora itaque dolorem velit reprehenderit. Molestiae dolorum assumenda eligendi quaerat odit voluptatum voluptatibus perspiciatis fugit sapiente.
+    %h3 LOL
+            
