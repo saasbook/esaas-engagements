@@ -22,10 +22,26 @@
   %h1
     Sortable Matching #{@mockMatching}
   %body
-    %div.card.text-white
-      %div.card-header Quote 
+    %div.card.mt-5
       %div.card-body
-        %blockquote.blockquote.mb-0
-          %p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis nam nobis placeat sed numquam tempora itaque dolorem velit reprehenderit. Molestiae dolorum assumenda eligendi quaerat odit voluptatum voluptatibus perspiciatis fugit sapiente.
-  %h3 LOL
-            
+        %h3
+          Current Order
+          %ul.mt-5{:style => "list-style: none; padding-left: 0;"}
+            %li
+              %div.card.mb-3
+                %div.card-header Project 1
+                %div.card-body
+                  %blockquote.blockquote.mb-0
+                    %p This project is about one thing...
+            %li 
+              %div.card.mb-3
+                %div.card-header Project 2
+                %div.card-body
+                  %blockquote.blockquote.mb-0
+                    %p This Project is about another thing...
+            %li 
+              %div.card.mb-3
+                %div.card-header Project 3
+                %div.card-body
+                  %blockquote.blockquote.mb-0
+                    %p This Project is about future thing...
