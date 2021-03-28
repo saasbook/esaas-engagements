@@ -36,19 +36,31 @@
                 - count = 0
                 - @mockProjects.each do |mockProject|
                   - count += 1
-                  %li.mt-2
-                    %div.card.mb-3
-                      %div.card-header.bg-secondary.text-light 
-                        Rank 
-                        = count
-                      %div.card-body
-                        %blockquote.blockquote.mb-0
-                          %p 
+                  - if count == 1 then
+                    %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
+                      %div.card.mb-3
+                        %div.card-header.bg-secondary.text-light 
+                          Rank 
+                          = count
+                        %div.card-body
+                          %blockquote.blockquote.mb-0
+                            %p 
+                  - else 
+                    %li.mt-2
+                      %div.card.mb-3
+                        %div.card-header.bg-secondary.text-light 
+                          Rank 
+                          = count
+                        %div.card-body
+                          %blockquote.blockquote.mb-0
+                            %p 
+
         %div.card.mt-5
           %div.card-body
-            %h3.pull-right.pb-5.pr-5
+            %h3.pr-5.text-right
               Matching
-            %ul.p-5{:style => "list-style: none; margin-bottom: 3", :id => "matching"}
+              .help-block.h4 Drag projects below to rank them
+            %ul.p-3{:style => "list-style: none; margin-bottom: 3", :id => "matching"}
               - @mockProjects.each do |mockProject|
                 %li.mt-4 
                   %div.card.mb-3
@@ -66,6 +78,10 @@
         animation: 150,
         ghostClass: 'blue-background-class'
       });
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
 
       $(".matching").on('matching', function() {
         $.ajax({
