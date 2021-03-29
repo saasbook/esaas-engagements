@@ -53,7 +53,7 @@ end
 #   end
 #
 options = {
-  :window_size => [1920, 6000]
+  :window_size => [6000, 3000]
 }
 # Capybara driver
 require 'capybara/poltergeist'

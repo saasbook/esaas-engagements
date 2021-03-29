@@ -20,7 +20,7 @@ end
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)" using ckeEditor rich editor$/ do |field, value|
   label = find('label', :text => /^#{field}$/)
   text_area = label.find(:xpath, '..//textarea')
-  page.save_and_open_screenshot(full: true)
+#   page.save_and_open_screenshot(full: true)
   text_area.send_keys(value)
 end
   
@@ -33,5 +33,5 @@ end
 Then /^I should have filled in "(.*)" for "(.*)" using ckeEditor rich editor$/ do |value, field|
 	label = find('label', :text => /^#{field}$/)
 	text_area = label.find(:xpath, '..//textarea')
-  expect(text_area).to have_text value
+  	expect(text_area).to have_text value
 end
