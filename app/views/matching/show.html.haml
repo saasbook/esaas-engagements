@@ -18,20 +18,25 @@
                   - count += 1
                   - if count == 0 then
                     %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
-                    = yield :list
+                      %div.card.mb-3
+                        %div.card-header.bg-secondary.text-light 
+                          Rank 
+                          = count+1
+                        %div.card-body
+                          %blockquote.blockquote.mb-0
+                            %p.rank
+                              = @currentPreference[count]
                   - else 
                     %li.mt-2
-                    = yield :list
-                      
-                  - content_for :list do
-                    %div.card.mb-3
-                      %div.card-header.bg-secondary.text-light 
-                        Rank 
-                        = count+1
-                      %div.card-body
-                        %blockquote.blockquote.mb-0
-                          %p.rank
-                            = @currentPreference[count]
+                      %div.card.mb-3
+                        %div.card-header.bg-secondary.text-light 
+                          Rank 
+                          = count+1
+                        %div.card-body
+                          %blockquote.blockquote.mb-0
+                            %p.rank
+                              = @currentPreference[count]
+                  -# - content_for :list do
 
         %div.card.mt-5
           %div.card-body
