@@ -17,6 +17,7 @@ class MatchingController < ApplicationController
                       ["BCal API Integration", "Unified portal for event requests and calendar management after transition from Oracle Calendar. ", 2],
                       ["CS61 series Lab assistant check-in", "Sign in portal for the 61 series lab assistants ", 3]]
     @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    # respond_with @currency_symbol
   end
 
   def progress
@@ -29,6 +30,5 @@ class MatchingController < ApplicationController
       preference = params[:preference]
       @match.update_attributes(:preference => preference)
   end
-
 
 end

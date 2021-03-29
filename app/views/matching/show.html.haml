@@ -12,7 +12,7 @@
           %div.card-body
             %h3
               Ranking
-              %ul.mt-5{:style => "list-style: none; padding-left: 0"}
+              %ul.mt-5{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
                 - @mockProjects.each do |mockProject|
                   - count += 1
@@ -21,7 +21,7 @@
                       %div.card.mb-3
                         %div.card-header.bg-secondary.text-light 
                           Rank 
-                          = count
+                          = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
                             %p  
@@ -31,7 +31,7 @@
                       %div.card.mb-3
                         %div.card-header.bg-secondary.text-light 
                           Rank 
-                          = count
+                          = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
                             %p 
@@ -64,14 +64,30 @@
                   $(".project").each((i, projectHTML) => {
                     arr.push(projectHTML.innerText);
                   });
+
                   $.ajax({
                     url: "store",
                     data: {"preference": arr},
                     type: "POST",
                     success: function (data) {
-                      console.log("success AJAX")
+                      console.log("success AJAX POST")
                     }
                   });
+
+                  $("#rank").change(() => {
+                    console.log($(this));
+                    $.ajax({
+                      url: "show",
+                      type: "GET",
+                      data: {currPref: currPref},
+                      success: function (data) {
+                        console.log("success AJAX GET")
+                        console.log(data)
+                      }
+                    });
+                  });
+                  
+                  
                 }
       });
 
