@@ -13,9 +13,11 @@ class MatchingController < ApplicationController
 
   def show
     @mockMatching = params[:matching_id]
-    @mockProjects = [["AFX Dance", "Create a website that allows admins of different levels in AFX Dance to organize their audition process and pick dancers.", 3],
-                      ["BCal API Integration", "Unified portal for event requests and calendar management after transition from Oracle Calendar. ", 2],
-                      ["CS61 series Lab assistant check-in", "Sign in portal for the 61 series lab assistants ", 3]]
+    @mockProjectsHash = {
+                        "AFX Dance": "Create a website that allows admins of different levels in AFX Dance to organize their audition process and pick dancers.",
+                        "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
+                        "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
+                        }
     @currentPreference = Matching.find_or_create_by(:id => 1).preference
   end
 

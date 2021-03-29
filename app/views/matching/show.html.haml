@@ -14,28 +14,24 @@
               Ranking
               %ul.mt-5{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
-                - @mockProjects.each do |mockProject|
+                - @currentPreference.each do |currentPreference|
                   - count += 1
                   - if count == 0 then
                     %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
-                      %div.card.mb-3
-                        %div.card-header.bg-secondary.text-light 
-                          Rank 
-                          = count+1
-                        %div.card-body
-                          %blockquote.blockquote.mb-0
-                            %p.rank
-                              = @currentPreference[count]
+                    = yield :list
                   - else 
                     %li.mt-2
-                      %div.card.mb-3
-                        %div.card-header.bg-secondary.text-light 
-                          Rank 
-                          = count+1
-                        %div.card-body
-                          %blockquote.blockquote.mb-0
-                            %p.rank
-                              = @currentPreference[count]
+                    = yield :list
+                      
+                  - content_for :list do
+                    %div.card.mb-3
+                      %div.card-header.bg-secondary.text-light 
+                        Rank 
+                        = count+1
+                      %div.card-body
+                        %blockquote.blockquote.mb-0
+                          %p.rank
+                            = @currentPreference[count]
 
         %div.card.mt-5
           %div.card-body
@@ -43,15 +39,15 @@
               Matching
               .help-block.h4 Drag projects below to rank them
             %ul.p-3{:style => "list-style: none; margin-bottom: 3", :id => "matching"}
-              - @mockProjects.each do |mockProject|
+              - @currentPreference.each do |currentPreference|
                 %li.mt-4 
                   %div.card.mb-3
                     %div.card-header.bg-dark.text-light.project
-                      = mockProject[0]
+                      = currentPreference
                     %div.card-body
                       %blockquote.blockquote.mb-0
                         %p 
-                          = mockProject[1]
+                          = @mockProjectsHash[currentPreference.to_sym]
 
 
     :javascript
@@ -73,7 +69,7 @@
                       console.log("success AJAX POST")
                     }
                   });
-
+                  // Maybe combine
                   $.ajax({
                     url: "",
                     type: "GET",
@@ -84,8 +80,6 @@
                       })
                     }
                   });
-                  
-                  
                 }
       });
 
