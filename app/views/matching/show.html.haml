@@ -24,7 +24,7 @@
                           = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
-                            %p  
+                            %p.rank
                             = @currentPreference[count]
                   - else 
                     %li.mt-2
@@ -34,7 +34,7 @@
                           = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
-                            %p 
+                            %p.rank
                               = @currentPreference[count]
 
         %div.card.mt-5
@@ -74,17 +74,15 @@
                     }
                   });
 
-                  $("#rank").change(() => {
-                    console.log($(this));
-                    $.ajax({
-                      url: "show",
-                      type: "GET",
-                      data: {currPref: currPref},
-                      success: function (data) {
-                        console.log("success AJAX GET")
-                        console.log(data)
-                      }
-                    });
+                  $.ajax({
+                    url: "",
+                    type: "GET",
+                    success: function (data) {
+                      console.log("success AJAX GET")
+                      $(".rank").each((i, rankName) => {
+                        rankName.innerText = arr[i]
+                      })
+                    }
                   });
                   
                   
