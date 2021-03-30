@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/matching" => 'matching#index', :as => "project_matching"
   get 'matching/:matching_id' => 'matching#show', :as => "show_my_matching"
   get "/matching/:matching_id/progress" => 'matching#progress', :as => "matching_progress"
+  post "/matching/store" => 'matching#store'
 
 
  

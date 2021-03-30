@@ -61,8 +61,8 @@ class AppsController < ApplicationController
       end
     end
 
-    puts "CURRENT DEPLOYMENT STATUSES IN PARAMS"
-    puts params
+    # puts "CURRENT DEPLOYMENT STATUSES IN PARAMS"
+    # puts params
 
     @filtered_count = 0
     App.find_each do |app|
