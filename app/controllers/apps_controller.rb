@@ -61,8 +61,8 @@ class AppsController < ApplicationController
       end
     end
 
-    puts "CURRENT DEPLOYMENT STATUSES IN PARAMS"
-    puts params
+    # puts "CURRENT DEPLOYMENT STATUSES IN PARAMS"
+    # puts params
 
     @filtered_count = 0
     App.find_each do |app|
@@ -71,6 +71,7 @@ class AppsController < ApplicationController
       end
     end
 
+    ## limit first several + offset to count start
     @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
     respond_to do |format|
       format.json { render :json => @apps.featured }

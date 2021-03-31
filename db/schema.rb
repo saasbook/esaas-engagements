@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191112010952) do
+ActiveRecord::Schema.define(version: 20210328005651) do
 
   create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
     t.text     "description"
@@ -73,10 +73,10 @@ ActiveRecord::Schema.define(version: 20191112010952) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "repository_url"
-    t.string   "pivotal_tracker_url"
     t.string   "final_rating"
     t.string   "final_comments"
     t.string   "features"
+    t.string   "semester"
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
@@ -92,6 +92,12 @@ ActiveRecord::Schema.define(version: 20191112010952) do
     t.datetime "updated_at"
     t.string   "number"
     t.string   "general_feedback"
+  end
+
+  create_table "matchings", force: :cascade do |t|
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.text     "preference"
   end
 
   create_table "orgs", force: :cascade do |t|

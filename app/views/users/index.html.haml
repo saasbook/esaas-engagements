@@ -1,7 +1,13 @@
 .page-header
-  %h1
-    Users
-    = link_to 'New User', new_user_path, :class => 'btn btn-success pull-right'
+  %div{:class => 'header-div'}
+    %h1
+      Users
+    %div{:class => 'header-right'}
+      = form_tag('users/import', :enctype =>"multipart/form-data") do |f|
+        = submit_tag('Import', :class => 'btn btn-primary pull-right')
+        = file_field_tag :file, :class => 'btn btn-primary pull-right', aria: {:label => 'Import'}
+      = link_to 'New User', new_user_path, :class => 'btn btn-success pull-right'
+
   .help-block Click a User name to see more information
 
 %ul{:class => 'pagination'}

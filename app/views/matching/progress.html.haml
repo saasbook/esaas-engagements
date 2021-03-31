@@ -1,0 +1,29 @@
+%h1
+  Matching #{@mockMatching} Progress
+
+%div.progress
+  %div.progress-bar.bg-success{:style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
+    66.6%
+%table.table.table-condensed#apps_table
+  %thead
+    %tr
+    %th 
+      %h3
+        Students
+    %th
+      %h3
+        Status
+  %tbody
+    - @mockStudents.each do |mockStudent|
+      %tr
+        %td{:height => "70"}
+          %span.badge.alert-primary.h4
+            = mockStudent[0]
+        %td
+          - if mockStudent[1] == "In Progress" then
+            %span.badge.alert-danger
+              = mockStudent[1]
+            %button.btn.btn-outline-secondary.btn-sm Send Reminder
+          - else
+            %span.badge.alert-success 
+              = mockStudent[1]

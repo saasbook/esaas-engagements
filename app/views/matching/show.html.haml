@@ -1,0 +1,95 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "matching"
+
+    %h1
+      Sortable Matching #{@mockMatching}
+    %body
+      .container
+      .card-columns.d-flex.justify-content-center
+        %div.card.mt-5.w-25
+          %div.card-body
+            %h3
+              Ranking
+              %ul.mt-5{:style => "list-style: none; padding-left: 0", :id => "rank"}
+                - count = -1
+                - @currentPreference.each do |currentPreference|
+                  - count += 1
+                  - if count == 0 then
+                    %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
+                      %div.card.mb-3
+                        %div.card-header.bg-secondary.text-light 
+                          Rank 
+                          = count+1
+                        %div.card-body
+                          %blockquote.blockquote.mb-0
+                            %p.rank
+                              = @currentPreference[count]
+                  - else 
+                    %li.mt-2
+                      %div.card.mb-3
+                        %div.card-header.bg-secondary.text-light 
+                          Rank 
+                          = count+1
+                        %div.card-body
+                          %blockquote.blockquote.mb-0
+                            %p.rank
+                              = @currentPreference[count]
+                  -# - content_for :list do
+
+        %div.card.mt-5
+          %div.card-body
+            %h3.pr-5.text-right
+              Matching
+              .help-block.h4 Drag projects below to rank them
+            %ul.p-3{:style => "list-style: none; margin-bottom: 3", :id => "matching"}
+              - @currentPreference.each do |currentPreference|
+                %li.mt-4 
+                  %div.card.mb-3
+                    %div.card-header.bg-dark.text-light.project
+                      = currentPreference
+                    %div.card-body
+                      %blockquote.blockquote.mb-0
+                        %p 
+                          = @mockProjectsHash[currentPreference.to_sym]
+
+
+    :javascript
+      const el = document.getElementById('matching');
+      const sortable = new Sortable(el, {
+        animation: 150,
+        ghostClass: 'blue-background-class',
+        onSort: function(e) {
+                  const arr = [];
+                  $(".project").each((i, projectHTML) => {
+                    arr.push(projectHTML.innerText);
+                  });
+
+                  $.ajax({
+                    url: "store",
+                    data: {"preference": arr},
+                    type: "POST",
+                    success: function (data) {
+                      console.log("success AJAX POST")
+                    }
+                  });
+                  // Maybe combine
+                  $.ajax({
+                    url: "",
+                    type: "GET",
+                    success: function (data) {
+                      console.log("success AJAX GET")
+                      $(".rank").each((i, rankName) => {
+                        rankName.innerText = arr[i]
+                      })
+                    }
+                  });
+                }
+      });
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+
+      

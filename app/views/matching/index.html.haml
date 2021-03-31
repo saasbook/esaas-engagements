@@ -1,0 +1,38 @@
+.page-header
+  %h1
+    Project Matchings
+    = link_to 'New Matching', project_matching_new_path, :class => 'btn btn-success pull-right'
+  .help-block Click an Matching to see more information
+
+- if current_user&.coach?
+  %table.table.table-condensed#apps_table
+    %thead
+      %tr
+        %th 
+          %h3
+            Matching Name
+        %th
+          %h3
+            Status
+    %tbody
+      - @mockMatchings.each do |mockMatching|
+        %tr
+          %td{:height => "70"}
+            = link_to mockMatching[0], show_my_matching_path(mockMatching[2]),  :class => 'btn btn-primary'
+          %td
+            - if mockMatching[1] == "In Progress" then
+              = link_to mockMatching[1], matching_progress_path(mockMatching[2]), :class => 'btn btn-danger btn-sm pill'
+            - else
+              %span.badge.alert-success
+                = mockMatching[1]
+- else 
+  %table.table.table-condensed#apps_table
+    %thead
+      %tr
+        %th 
+          %h3
+            Projects
+        %th
+          %h3
+            Ranking
+  

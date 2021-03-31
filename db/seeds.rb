@@ -53,7 +53,14 @@ CSV.foreach("#{Rails.root}/db/apps.csv",
 			e.presentation_url = row[:link_to_presentation_slides]
 			e.prototype_deployment_url = row[:deployment]
 			e.student_names = row[:students] || 'Unknown'
+			
+			# say only spring and summer based on csv
+			semester = "#{row[:semester]}"
+			e.semester = (semester[0] == "F" ? "FALL" : "SPRING") + " 20" +semester[1,3]
 		end
+
+
+
 	else
 		puts "No org #{row[:org_name]}"
 	end

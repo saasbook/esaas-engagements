@@ -20,9 +20,6 @@ class EngagementsController < ApplicationController
   def create
     @engagement = @app.engagements.build(engagement_params)
     if @engagement.save
-      if engagement_params[:pivotal_tracker_url]
-        @app.update_attribute(:pivotal_tracker_url, engagement_params[:pivotal_tracker_url])
-      end
       redirect_to @app, notice: 'Engagement was successfully created.'
     else
       render :new
@@ -33,11 +30,6 @@ class EngagementsController < ApplicationController
   # PATCH/PUT /engagements/1.json
   def update
     if @engagement.update(engagement_params)
-      if engagement_params[:pivotal_tracker_url]
-        if @app.engagements.order("start_date").last == @engagement
-          @app.update_attribute(:pivotal_tracker_url, engagement_params[:pivotal_tracker_url])
-        end
-      end
       redirect_to @app, notice: 'Engagement was successfully updated.'
     else
       render :edit
@@ -88,6 +80,6 @@ class EngagementsController < ApplicationController
       permit(:coach_id, :coaching_org_id, :contact_id, :app_id, :team_number,
              :start_date, :screencast_url, :poster_preview_url, :poster_url,
              :presentation_url, :prototype_deployment_url, :student_names,
-             :repository_url, :pivotal_tracker_url, :final_rating, :final_comments, :features, developer_ids: [])
+             :repository_url, :final_rating, :final_comments, :features, developer_ids: [])
   end
 end
