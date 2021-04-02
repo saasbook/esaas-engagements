@@ -5,11 +5,11 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
-  total_org = Org.count  
-  page_default_and_update("org",total_org)
-  change_page_num("org",total_org)
-
-  @orgs = Org.includes(:apps).limit(@each_page).offset(@each_page*(@page_num-1))
+    total_org = Org.count
+    page_default_and_update("org",total_org)
+    change_page_num("org",total_org)
+    offset = @each_page*(@page_num-1) < 0 ? 0 : @each_page*(@page_num-1)
+    @orgs = Org.includes(:apps).limit(@each_page).offset(offset)
   end
 
   # GET /orgs/new
@@ -18,30 +18,29 @@ class OrgsController < ApplicationController
   end
 
   # Get /mail_all_orgs
-def mail_all_orgs_form
-end
-
- # Post /mail_all_orgs
-def mail_all_orgs
-  # email to all selected organizations
-  # if no checkbox selected, send nothing;
-  # can specify reply_to address, subject and content
-
-  @sender_email = params[:email][:address]
-  @subject = params[:email][:subject]
-  @content = params[:email][:content]
-  
-  @vetting_checked = params.select {|_, v| v == "1"}.keys 
-  @org_email = nil
-  @org_name =  nil
-  nothing_to_send = @vetting_checked.empty? && params['All'].nil?
-  if nothing_to_send
-    redirect_to orgs_path, alert: "Please select at least one box"
-  else
-    send_mail
-    redirect_to orgs_path, notice: 'Sent successfully.'
+  def mail_all_orgs_form
   end
-end
+
+  # Post /mail_all_orgs
+  def mail_all_orgs
+    # email to all selected organizations
+    # if no checkbox selected, send nothing;
+    # can specify reply_to address, subject and content
+    @sender_email = params[:email][:address]
+    @subject = params[:email][:subject]
+    @content = params[:email][:content]
+
+    @vetting_checked = params.select {|_, v| v == "1"}.keys
+    @org_email = nil
+    @org_name =  nil
+    nothing_to_send = @vetting_checked.empty? && params['All'].nil?
+    if nothing_to_send
+      redirect_to orgs_path, alert: "Please select at least one box"
+    else
+      send_mail
+      redirect_to orgs_path, notice: 'Sent successfully.'
+    end
+  end
 
   # GET /orgs/1/edit
   def edit
@@ -113,7 +112,7 @@ end
             @org_name = org.contact.name
             FormMailer.mail_to(@org_name, @org_email, @subject, @content, @sender_email).deliver_now
         end
-      else # selected apps in certain vetting stages 
+      else # selected apps in certain vetting stages
         App.all.each do |app|
           if @vetting_checked.include? app.status
             @org_email = app.org.contact.email
@@ -122,5 +121,5 @@ end
           end
         end
       end
-    end      
+    end
 end
