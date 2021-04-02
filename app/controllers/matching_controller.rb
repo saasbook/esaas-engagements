@@ -18,7 +18,7 @@ class MatchingController < ApplicationController
                         "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
-    @currentPreference = Matching.find_or_create_by(:id => 1, :preference => ["lol"]).preference
+    @currentPreference = Matching.new(:id => 1, :preference => ["lol", "hah"]).preference
   end
 
   def progress
