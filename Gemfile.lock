@@ -374,6 +374,7 @@ DEPENDENCIES
   jquery-rails
   json
   launchy
+  mimemagic (~> 0.3.10)
   omniauth-github
   paperclip (~> 5.2.1)
   pg (< 1.0.0)
