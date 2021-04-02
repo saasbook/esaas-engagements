@@ -5,7 +5,8 @@ class UsersController < ApplicationController
     total_user = User.count
     page_default_and_update("user",total_user)
     change_page_num("user",total_user)
-    @users = User.limit(@each_page).offset(@each_page*(@page_num-1))
+    offset = @each_page*(@page_num-1) < 0 ? 0 : @each_page*(@page_num-1)
+    @users = User.limit(@each_page).offset(offset)
   end
 
   def new
@@ -51,5 +52,4 @@ class UsersController < ApplicationController
       permit(:name,:email,:preferred_contact,:github_uid,:user_type,:sid,
         :developing_engagement_id, :coaching_org_id, :profile_picture)
   end
-
 end
