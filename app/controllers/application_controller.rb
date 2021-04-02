@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
 
   def change_page_num(name, total_item)
     page_num = (params[:prev] || session["#{name}_page_num"]).to_i
-    @max_page_num =  (total_item - 1) / @each_page + 1
+    @max_page_num = (total_item - 1) / @each_page + 1
     @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>@max_page_num, nil => page_num}[params["#{name}_page_action"]].to_i
     flash.now[:alert] = "You are already on the FIRST page." if @page_num == 0
     flash.now[:alert] = "You are already on the LAST page." if @page_num == @max_page_num + 1

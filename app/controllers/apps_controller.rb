@@ -72,7 +72,8 @@ class AppsController < ApplicationController
     end
 
     ## limit first several + offset to count start
-    @apps = App.limit(@each_page).offset(@each_page*(@page_num-1))
+    offset = @each_page*(@page_num-1) < 0 ? 0 : @each_page*(@page_num-1)
+    @apps = App.limit(@each_page).offset(offset)
     respond_to do |format|
       format.json { render :json => @apps.featured }
       format.html
