@@ -1,5 +1,3 @@
-require 'json'
-
 class MatchingController < ApplicationController
 
   
@@ -21,7 +19,7 @@ class MatchingController < ApplicationController
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
                     
-    @currentPreference = JSON.parse Matching.find_or_create_by(:id => 1, :preference => ["lol", "hah"]).preference
+    @currentPreference = Matching.find_or_create_by(:preference => ["lol", "hah"]).preference
   end
 
   def progress
