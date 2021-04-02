@@ -15,7 +15,7 @@
               Ranking
               %ul.mt-5{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
-                - @currentPreference = JSON.parse @currentPreference
+                -# - @currentPreference = JSON.parse @currentPreference
                 - @currentPreference.each do |currentPreference|
                   - count += 1
                   - if count == 0 then

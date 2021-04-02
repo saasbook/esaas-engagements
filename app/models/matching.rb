@@ -1,3 +1,3 @@
 class Matching < ActiveRecord::Base
-    # serialize :preference, Array
+    serialize :preference, Array
 end
