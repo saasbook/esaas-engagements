@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210328005651) do
+ActiveRecord::Schema.define(version: 20210328005618) do
 
   create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
     t.text     "description"
