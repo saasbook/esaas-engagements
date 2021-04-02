@@ -203,3 +203,10 @@ Scenario: Sad Path - if unauthenticated user login, there should be correspondin
   Then I should see "No user with GitHub name 'esaas_developer'."
   And I should see "Login to ESaaS Engagements"
   And I should see "Log in with GitHub"
+
+
+Scenario: Sad Path - If there github return callback error or potential Oauth call error
+  Given I login with github callback error
+  Then I should see "Authentication failed, please try again."
+  And I should see "Login to ESaaS Engagements" 
+  And I should see "Log in with GitHub"
