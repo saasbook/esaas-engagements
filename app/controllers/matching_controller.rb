@@ -19,6 +19,8 @@ class MatchingController < ApplicationController
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
     @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    puts Matching.find_or_create_by(:id => 1) 
+    puts @currentPreference
   end
 
   def progress
