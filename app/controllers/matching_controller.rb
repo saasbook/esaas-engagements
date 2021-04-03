@@ -8,7 +8,6 @@ class MatchingController < ApplicationController
 
   # GET /matching/new
   def new
-    
   end
 
   def show
@@ -18,8 +17,9 @@ class MatchingController < ApplicationController
                         "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
-                    
-    @currentPreference = Matching.find_or_create_by(:preference => ["lol", "hah"]).preference
+    @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    puts Matching.find_or_create_by(:id => 1) 
+    puts @currentPreference
   end
 
   def progress

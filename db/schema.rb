@@ -95,9 +95,9 @@ ActiveRecord::Schema.define(version: 20210328005618) do
   end
 
   create_table "matchings", force: :cascade do |t|
-    t.string   "preference", default: "--- []\n"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "preference"
   end
 
   create_table "orgs", force: :cascade do |t|
