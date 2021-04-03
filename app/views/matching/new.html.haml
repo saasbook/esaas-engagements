@@ -2,4 +2,57 @@
   %h1
     Create Matching
     
-= render 'form'
+
+= bootstrap_form_tag url: creation_path, html: {id: 'create'} do |f|
+  %form#components.form-horizontal{role: "form"}
+    .row 
+      %fieldset
+        .tab-content
+          #input.tab-pane.active
+            .component
+              %fieldset.col-sm-6
+                .component
+                  / Button Drop Down
+                  .form-group
+                    %label.col-md-6.control-label{for: "buttondropdown"} Project List
+                    %p
+                      .col-md-6
+                        .input-group
+                          %input#buttondropdown.form-control{name: "buttondropdown", placeholder: "placeholder", type: "text"}/
+                          .input-group-btn
+                            %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                              Projects
+                              %span.caret
+                            %ul.dropdown-menu.pull-right
+                              %li
+                                %a{href: "#"} Project one
+                              %li
+                                %a{href: "#"} Project two
+                              %li
+                                %a{href: "#"} Project three
+
+              %fieldset.col-sm-6
+                .component
+                  / Button Drop Down
+                  .form-group
+                    %label.col-md-6.control-label{for: "buttondropdown"} Student List
+                    .col-md-6
+                      .input-group
+                        %input#buttondropdown.form-control{name: "buttondropdown", placeholder: "placeholder", type: "text"}/
+                        .input-group-btn
+                          %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+                            Students
+                            %span.caret
+                          %ul.dropdown-menu.pull-right
+                            %li
+                              %a{href: "#"} Student one
+                            %li
+                              %a{href: "#"} Student two
+                            %li
+                              %a{href: "#"} Student three
+    %br  
+    %br 
+    %br 
+    %br      
+    = f.submit 'Submit', class: 'btn btn-success'
+    = link_to 'Cancel', project_matching_path, :class => 'btn btn-danger'

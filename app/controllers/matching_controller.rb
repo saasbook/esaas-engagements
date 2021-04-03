@@ -2,12 +2,21 @@ class MatchingController < ApplicationController
 
   
   def index
-    @mockMatchings = [["Matching 1", "Complete", 1], ["Matching 2", "In Progress", 2], ["Matching 3", "Complete", 3]]
+    @matchings = Matching.all
+    @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    if not current_user&.coach?
+      render 'index'
+    else 
+      render 'show'
+    end
+    
+    # [["Matching 1", "Complete", 1], ["Matching 2", "In Progress", 2], ["Matching 3", "Complete", 3]]
 
   end
 
   # GET /matching/new
   def new
+
   end
 
   def show
