@@ -8,7 +8,7 @@ class MatchingController < ApplicationController
 
   # GET /matching/new
   def new
-    
+    Matching.new()
   end
 
   def show
