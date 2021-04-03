@@ -5,6 +5,11 @@
 
     %h1
       Project Matching #{@mockMatching}
+
+    %div.button.btn-dark.pull-right.h6.mr-5{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
+      .tick
+        Submit
+      
     %body
       .container
       .card-columns.d-flex.justify-content-center
@@ -56,6 +61,7 @@
                           = @mockProjectsHash[currentPreference.to_sym]
 
 
+
     :javascript
       const el = document.getElementById('matching');
       const sortable = new Sortable(el, {
@@ -86,6 +92,10 @@
                       })
                     }
                   });
+
+                  if ($(".tick").innerHTML !== "Submit") {
+                    $(".tick").innerHTML = "Submit";
+                  }
                 }
       });
 
@@ -93,4 +103,15 @@
         $('[data-toggle="tooltip"]').tooltip()
       })
 
+
+      let button = document.querySelector('.button');
+      let buttonText = document.querySelector('.tick');
+      const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>";
+      buttonText.innerHTML = "Submit";
+      button.addEventListener('click', function() {
+        if (buttonText.innerHTML === "Submit") {
+          buttonText.innerHTML = tickMark;
+        }
+        this.classList.add('button__circle');
+      });
       
