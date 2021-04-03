@@ -1,26 +1,26 @@
 
-.page-header
+.page-header.jumbotron.mt-4.my-4
   %h1
     Project Matchings
-    = link_to 'New Matching', project_matching_new_path, :class => 'btn btn-success pull-right'
-  .help-block Click an Matching to see more information
+    = link_to 'New Matching', project_matching_new_path, :class => 'btn btn-info pull-right'
+  .help-block Click a matching to see more information
 
 -# For coach only -> show all ongoing matching
 %table.table.table-condensed#apps_table
   %thead
     %tr
-      %th 
-        %h3
-          Matching Name
-      %th
-        %h3
-          Status
+      %th.h4
+        Matching Name
+      %th.h4
+        Status
+      %th.h4
+        OPERATION
   %tbody
     - @matchings.each do |matching|
       %tr
-        %td{:height => "70"}
+        %td.align-middle{:height => "70"}
           = link_to matching.id, show_my_matching_path(matching.id),  :class => 'btn btn-primary'
-        %td
+        %td.align-middle
           - if matching.id == "In Progress" then
             = link_to matching.id, matching_progress_path(matching.id), :class => 'btn btn-danger btn-sm pill'
           - else
@@ -30,7 +30,7 @@
 -# - elsif (true)
 -#   - render 'matching/show'
 -# - else 
--#   - redirect_to app_path
+-#   - redirect_to app_pat4
 
 
   -# %table.table.table-condensed#apps_table

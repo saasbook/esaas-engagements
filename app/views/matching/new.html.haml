@@ -1,4 +1,4 @@
-%h1
+%h1.jumbotron
   Create Matching
   
 = bootstrap_form_for([@matching], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
@@ -39,9 +39,9 @@
           %div.card-body
             = f.collection_select(:teams, User.students, :id, :name, {label: 'Student Names'}, {multiple: true, class: 'select2'})
       %div.btn.btn-dark.pull-right{:id => "e_button"} Add another Engagement
-    = f.submit "Submit", class: 'btn btn-success'
-    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
-    = link_to 'Back', @matching, :class => 'btn btn-primary'
+    = f.submit "Submit", class: 'btn btn-success m-2'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary m-2'
+    = link_to 'Back', @matching, :class => 'btn btn-primary m-2'
 
   :javascript
     //$("#e_button").on("click", () => {
