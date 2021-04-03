@@ -4,7 +4,7 @@ class MatchingController < ApplicationController
   def index
     @matchings = Matching.all
     @currentPreference = Matching.find_or_create_by(:id => 1).preference
-    if not current_user&.coach?
+    if current_user&.coach?
       render 'index'
     else 
       render 'show'
@@ -16,7 +16,7 @@ class MatchingController < ApplicationController
 
   # GET /matching/new
   def new
-
+    @matching = Matching.first
   end
 
   def show

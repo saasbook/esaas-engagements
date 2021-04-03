@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # Notice order 
   get 'matching/new', :as => "project_matching_new"
-  get "/matching" => 'matching#index', :as => "project_matching"
+  get "/matching" => 'matching#index'
   get 'matching/:matching_id' => 'matching#show', :as => "show_my_matching"
   get "/matching/:matching_id/progress" => 'matching#progress', :as => "matching_progress"
   post "/matching/store" => 'matching#store'

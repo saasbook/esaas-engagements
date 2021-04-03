@@ -1,58 +1,14 @@
-.page-header
-  %h1
-    Create Matching
-    
-
-= bootstrap_form_tag url: creation_path, html: {id: 'create'} do |f|
-  %form#components.form-horizontal{role: "form"}
-    .row 
-      %fieldset
-        .tab-content
-          #input.tab-pane.active
-            .component
-              %fieldset.col-sm-6
-                .component
-                  / Button Drop Down
-                  .form-group
-                    %label.col-md-6.control-label{for: "buttondropdown"} Project List
-                    %p
-                      .col-md-6
-                        .input-group
-                          %input#buttondropdown.form-control{name: "buttondropdown", placeholder: "placeholder", type: "text"}/
-                          .input-group-btn
-                            %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                              Projects
-                              %span.caret
-                            %ul.dropdown-menu.pull-right
-                              %li
-                                %a{href: "#"} Project one
-                              %li
-                                %a{href: "#"} Project two
-                              %li
-                                %a{href: "#"} Project three
-
-              %fieldset.col-sm-6
-                .component
-                  / Button Drop Down
-                  .form-group
-                    %label.col-md-6.control-label{for: "buttondropdown"} Student List
-                    .col-md-6
-                      .input-group
-                        %input#buttondropdown.form-control{name: "buttondropdown", placeholder: "placeholder", type: "text"}/
-                        .input-group-btn
-                          %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
-                            Students
-                            %span.caret
-                          %ul.dropdown-menu.pull-right
-                            %li
-                              %a{href: "#"} Student one
-                            %li
-                              %a{href: "#"} Student two
-                            %li
-                              %a{href: "#"} Student three
-    %br  
-    %br 
-    %br 
-    %br      
-    = f.submit 'Submit', class: 'btn btn-success'
-    = link_to 'Cancel', project_matching_path, :class => 'btn btn-danger'
+%h1
+  Create Matching
+  
+= bootstrap_form_for([@matching], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+  .row
+    %fieldset.col-md-6
+      %legend Projects
+    %fieldset.col-md-6
+      %legend Engagements
+      = f.collection_select(:id, User.students, :id, :name, {include_blank: true, label: 'Student Names'}, {multiple: true, class: 'select2'})
+      = f.text_field :preference, label: 'Team Number'
+    = f.submit "Login", class: 'btn btn-success'
+    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
+    = link_to 'Back', @matching, :class => 'btn btn-primary'
