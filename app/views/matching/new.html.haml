@@ -7,24 +7,47 @@
   .row
     %fieldset.col-md-6
       %legend Projects
+      .container-fluid{:id => "e_container"}
+        %div.card.text-center.mb-5
+          %div.card-header
+            // Must use = instead of - to run it
+            = "Team" + teamCount.to_s
+          %div.card-body
+            = f.collection_select(:teams, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2'})
+        %div.card.text-center.mb-5
+          %div.card-header
+            // Must use = instead of - to run it
+            = "Team" + teamCount.to_s
+          %div.card-body
+            = f.collection_select(:teams, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2'})
+      %div.btn.btn-dark.pull-right{:id => "e_button"} Add another project
       
     %fieldset.col-md-6
       %legend Engagements
+      -# %input{:type => "number"}
       .container-fluid{:id => "e_container"}
-        %div.card.text-center
+        %div.card.text-center.mb-5
           %div.card-header
             // Must use = instead of - to run it
             = "Team" + teamCount.to_s
           %div.card-body
             = f.collection_select(:teams, User.students, :id, :name, {label: 'Student Names'}, {multiple: true, class: 'select2'})
-      %div.btn.btn-dark.pull-right.mt-5{:id => "e_button"} Add another Engagement
+        %div.card.text-center.mb-5
+          %div.card-header
+            // Must use = instead of - to run it
+            = "Team" + teamCount.to_s
+          %div.card-body
+            = f.collection_select(:teams, User.students, :id, :name, {label: 'Student Names'}, {multiple: true, class: 'select2'})
+      %div.btn.btn-dark.pull-right{:id => "e_button"} Add another Engagement
     = f.submit "Submit", class: 'btn btn-success'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
     = link_to 'Back', @matching, :class => 'btn btn-primary'
 
-:javascript
-  $("#e_button").on("click", () => {
-    const e_container = $("#e_container")
-    e_container.append("<div> lol <div>")
-  })
-  
+  :javascript
+    //$("#e_button").on("click", () => {
+      //const e_container = $("#e_container")
+      // Get number of children
+      //const team_number = e_container.children().length + 1
+      //e_container.append($("#e_container").clone().html())
+    //})
+    
