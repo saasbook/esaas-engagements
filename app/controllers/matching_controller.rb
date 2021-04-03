@@ -3,7 +3,7 @@ class MatchingController < ApplicationController
   
   def index
     @matchings = Matching.all
-    @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    @currentPreference = Matching.find_or_create_by(:id => 1).preferences
     if current_user&.coach?
       render 'index'
     else 
@@ -26,7 +26,7 @@ class MatchingController < ApplicationController
                         "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
-    @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    @currentPreference = Matching.find_or_create_by(:id => 1).preferences
   end
 
   def progress
@@ -36,8 +36,8 @@ class MatchingController < ApplicationController
 
   def store
       @match = Matching.find_or_create_by(:id => 1)
-      preference = params[:preference]
-      @match.update_attributes(:preference => preference)
+      preference = params[:preferences]
+      @match.update_attributes(:preferences => preference)
   end
 
 end

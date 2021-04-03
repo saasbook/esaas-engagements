@@ -2,13 +2,29 @@
   Create Matching
   
 = bootstrap_form_for([@matching], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+  - appCount = 1
+  - teamCount = 1
   .row
     %fieldset.col-md-6
       %legend Projects
+      
     %fieldset.col-md-6
       %legend Engagements
-      = f.collection_select(:id, User.students, :id, :name, {include_blank: true, label: 'Student Names'}, {multiple: true, class: 'select2'})
-      = f.text_field :preference, label: 'Team Number'
-    = f.submit "Login", class: 'btn btn-success'
+      .container-fluid{:id => "e_container"}
+        %div.card.text-center
+          %div.card-header
+            // Must use = instead of - to run it
+            = "Team" + teamCount.to_s
+          %div.card-body
+            = f.collection_select(:teams, User.students, :id, :name, {label: 'Student Names'}, {multiple: true, class: 'select2'})
+      %div.btn.btn-dark.pull-right.mt-5{:id => "e_button"} Add another Engagement
+    = f.submit "Submit", class: 'btn btn-success'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary'
     = link_to 'Back', @matching, :class => 'btn btn-primary'
+
+:javascript
+  $("#e_button").on("click", () => {
+    const e_container = $("#e_container")
+    e_container.append("<div> lol <div>")
+  })
+  
