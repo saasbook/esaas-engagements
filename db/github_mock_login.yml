@@ -9,6 +9,7 @@ test:
   email: "esaas_developer@saasbook.info"
   user_type: 'coach'
 
+# 2021 Spring
 test_student:
   github_uid: "esaas_student_github"
   name: "ESaas Student"
