@@ -8,3 +8,15 @@ test:
   name: "ESaas Developer"
   email: "esaas_developer@saasbook.info"
   user_type: 'coach'
+
+test_student:
+  github_uid: "esaas_student_github"
+  name: "ESaas Student"
+  email: "esaas_student@saasbook.info"
+  user_type: 'student'
+
+test_client:
+  github_uid: "esaas_client_github"
+  name: "ESaas Client"
+  email: "esaas_client@saasbook.info"
+  user_type: 'client'
