@@ -27,6 +27,8 @@ cs169 = Org.find_or_create_by(name: 'UCB CS169 Fox') do |ucbcs169|
 	ucbcs169.contact = coach
 end
 
+
+
 # create orgs and engagements
 CSV.foreach("#{Rails.root}/db/apps.csv",
 	headers: true, header_converters: :symbol, encoding: 'iso-8859-1:utf-8') do |row|
