@@ -26,7 +26,7 @@ class MatchingController < ApplicationController
                         "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
-    @currentPreference = ["AFX Dance"]
+    @currentPreference = ["AFX Dance", "BCal API Integration", "CS61 series Lab assistant check-in"]
     # Matching.find_or_create_by(:id => 1).preferences
   end
 
