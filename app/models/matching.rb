@@ -1,3 +1,6 @@
 class Matching < ActiveRecord::Base
-    serialize :preference, Array
+    serialize :preferences, Hash
+    serialize :teams, Hash
+    serialize :result, Hash
+    serialize :projects, Array
 end

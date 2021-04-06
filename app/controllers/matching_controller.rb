@@ -2,13 +2,21 @@ class MatchingController < ApplicationController
 
   
   def index
-    @mockMatchings = [["Matching 1", "Complete", 1], ["Matching 2", "In Progress", 2], ["Matching 3", "Complete", 3]]
+    @matchings = Matching.all
+    @currentPreference = Matching.find_or_create_by(:id => 1).preferences
+    if current_user&.coach?
+      render 'index'
+    else 
+      render 'show'
+    end
+    
+    # [["Matching 1", "Complete", 1], ["Matching 2", "In Progress", 2], ["Matching 3", "Complete", 3]]
 
   end
 
   # GET /matching/new
   def new
-    
+    @matching = Matching.first
   end
 
   def show
@@ -18,7 +26,7 @@ class MatchingController < ApplicationController
                         "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
                         "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
                         }
-    @currentPreference = Matching.find_or_create_by(:id => 1).preference
+    @currentPreference = Matching.find_or_create_by(:id => 1).preferences
   end
 
   def progress
@@ -28,8 +36,8 @@ class MatchingController < ApplicationController
 
   def store
       @match = Matching.find_or_create_by(:id => 1)
-      preference = params[:preference]
-      @match.update_attributes(:preference => preference)
+      preference = params[:preferences]
+      @match.update_attributes(:preferences => preference)
   end
 
 end

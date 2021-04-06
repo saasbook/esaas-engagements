@@ -196,3 +196,17 @@ Scenario: Sad Path - Cannot create new iteration, edit and destroy existing iter
     And I follow "Apps"
     And I follow "app1"
     Then I should see "Engagements"
+
+
+Scenario: Sad Path - if unauthenticated user login, there should be corresponding alert
+  Given I try to logged in with my github account
+  Then I should see "No user with GitHub name 'esaas_developer'."
+  And I should see "Login to ESaaS Engagements"
+  And I should see "Log in with GitHub"
+
+
+Scenario: Sad Path - If there github return callback error or potential Oauth call error
+  Given I login with github callback error
+  Then I should see "Authentication failed, please try again."
+  And I should see "Login to ESaaS Engagements" 
+  And I should see "Log in with GitHub"

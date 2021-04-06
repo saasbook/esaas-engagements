@@ -3,32 +3,39 @@
   %head
     = stylesheet_link_tag "matching"
 
-    %h1
-      Sortable Matching #{@mockMatching}
+    %h1.jumbotron.bg-white.header.p-5
+      Project Matching #{@mockMatching}
+
+
+    %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
+      .tick
+        Submit
+    // Scroll bar TODO:
     %body
       .container
       .card-columns.d-flex.justify-content-center
         %div.card.mt-5.w-25
           %div.card-body
-            %h3
+            %h3.pl-3
               Ranking
-              %ul.mt-5{:style => "list-style: none; padding-left: 0", :id => "rank"}
+              .help-block.h4 Your Preference
+              %ul.pt-3{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
                 - @currentPreference.each do |currentPreference|
                   - count += 1
                   - if count == 0 then
-                    %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
-                      %div.card.mb-3
-                        %div.card-header.bg-secondary.text-light 
+                    %li.mt-4{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
+                      %div.card.mb-4
+                        %div.card-header.bg-secondary.text-light
                           Rank 
                           = count+1
-                        %div.card-body
+                        %div.card-body.mb-3
                           %blockquote.blockquote.mb-0
                             %p.rank
                               = @currentPreference[count]
                   - else 
                     %li.mt-2
-                      %div.card.mb-3
+                      %div.card.mb-4
                         %div.card-header.bg-secondary.text-light 
                           Rank 
                           = count+1
@@ -43,7 +50,7 @@
             %h3.pr-5.text-right
               Matching
               .help-block.h4 Drag projects below to rank them
-            %ul.p-3{:style => "list-style: none; margin-bottom: 3", :id => "matching"}
+            %ul.p-3{:style => "list-style: none;", :id => "matching"}
               - @currentPreference.each do |currentPreference|
                 %li.mt-4 
                   %div.card.mb-3
@@ -51,11 +58,13 @@
                       = currentPreference
                     %div.card-body
                       %blockquote.blockquote.mb-0
-                        %p 
+                        %p
                           = @mockProjectsHash[currentPreference.to_sym]
 
 
+
     :javascript
+      // For AJAX sortable store
       const el = document.getElementById('matching');
       const sortable = new Sortable(el, {
         animation: 150,
@@ -85,11 +94,28 @@
                       })
                     }
                   });
+
+                  // Change back to submit button as potentially need to save
+                  if ($(".tick").innerHTML !== "Submit") {
+                    $(".tick").innerHTML = "Submit";
+                  }
                 }
       });
 
+      // For tool tip
       $(function () {
         $('[data-toggle="tooltip"]').tooltip()
       })
 
+      // For Submit animation
+      let button = document.querySelector('.button');
+      let buttonText = document.querySelector('.tick');
+      const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>";
+      buttonText.innerHTML = "Submit";
+      button.addEventListener('click', function() {
+        if (buttonText.innerHTML === "Submit") {
+          buttonText.innerHTML = tickMark;
+        }
+        this.classList.add('button__circle');
+      });
       
