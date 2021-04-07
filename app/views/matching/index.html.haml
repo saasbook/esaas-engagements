@@ -1,7 +1,7 @@
 .page-header.jumbotron.mt-4.my-4
   %h1
     Project Matchings
-    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Popover title" } New Matching
+    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" } New Matching
   .help-block Click a matching to see more information
   
 -# For coach only -> show all ongoing matching
@@ -13,7 +13,7 @@
       %th.h4
         Status
       %th.h4
-        OPERATION
+        Operation
   %tbody
     - @matchings.each do |matching|
       %tr
@@ -30,14 +30,8 @@
 
 
 :javascript
-  // return html
-  $('#popover').popover({ 
-    html : true,
-    content: function() {
-      return $("#popover-content").html() 
-    }
-  });
-  
+
+  //TODO: need validation
   // Bootstrap Function for popover when click New matching
   $(function () {
     $('[data-toggle="popover"]').popover({
@@ -48,17 +42,26 @@
     content: 
     `
     <div id="PopoverContent">
-      <form>
+      <form action="matching/new" method="get">
         <div class="form-group">
           <label for="exampleInputEmail1">Matching Title</label>
-          <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Enter Title">
+          <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Enter Title" >
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Number of Engagements</label>
           <input type="text" class="form-control" id="exampleInputPassword1" placeholder="0">
         </div>
-        <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="submit" class="btn btn-dark">Next</button>
       </form>
     </div>`
     })
   });
+
+  $(document).on('click',  (e) => {
+    $('[data-toggle="popover"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+    });
+  });
+  
