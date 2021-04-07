@@ -5,6 +5,7 @@ I want to do a string matching within the dropdown menu
 
 Background: user and orgs have been added to database
 # The following tables are not needed for the feature, just copied from the original file
+  Given I will be logged in as "coach" type
   And the following orgs exist:
         | id | name     | contact_id |
         | 1  | Berkeley | 1          |
