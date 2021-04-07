@@ -24,18 +24,18 @@
                 - @currentPreference.each do |currentPreference|
                   - count += 1
                   - if count == 0 then
-                    %li.mt-4{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
-                      %div.card.mb-4
+                    %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
+                      %div.card.mb-5
                         %div.card-header.bg-secondary.text-light
                           Rank 
                           = count+1
-                        %div.card-body.mb-3
+                        %div.card-body
                           %blockquote.blockquote.mb-0
                             %p.rank
                               = @currentPreference[count]
                   - else 
                     %li.mt-2
-                      %div.card.mb-4
+                      %div.card.mb-5
                         %div.card-header.bg-secondary.text-light 
                           Rank 
                           = count+1
@@ -52,8 +52,8 @@
               .help-block.h4 Drag projects below to rank them
             %ul.p-3{:style => "list-style: none;", :id => "matching"}
               - @currentPreference.each do |currentPreference|
-                %li.mt-4 
-                  %div.card.mb-3
+                %li.mt-2
+                  %div.card.mb-5
                     %div.card-header.bg-dark.text-light.project
                       = currentPreference
                     %div.card-body
