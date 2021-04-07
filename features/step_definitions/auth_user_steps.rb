@@ -1,8 +1,12 @@
-# When /^(?:|I ) will be logged in as ([^"]*) type$/ do |type|
+
+# NOTICE: 
+#When logged in as different type, 
+#it's necessary to mention each type this "will" log in as some type
+# Otherwise, previous type will store in cache/session? and failed all tests.
 Given /^(?:|I )will be logged in as "([^"]*)" type$/ do |type|
   case type.downcase
     when "coach"
-      user = YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["test_coach"] 
+      user = YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["test"] 
       puts user
     when "student"
       user = YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["test_student"]
@@ -23,7 +27,4 @@ Given /^(?:|I )will be logged in as "([^"]*)" type$/ do |type|
                               }
                             }
                           )
-  # visit '/login'
-  # click_link "Log in with GitHub"
-  # visit "/apps"
 end
