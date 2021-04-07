@@ -61,6 +61,7 @@
 body {
 	--def: #FFF; 	
 	--inv: #414344;
+  --faded:  #e7e7e7
 }
 
 .header {  
@@ -77,24 +78,23 @@ body {
   0% {
     left: 20%;
     width: 50%;
+    color: var(--def);
+    background: var(--inv);
   }
   25% {
     color: var(--def);
+    background: var(--inv);
   }
   75% {
     left: 0;
-    color: var(--def);
-    
+    color: var(--inv);
   }
   100% {
-    color: var(--def);
-    background: var(--inv);
+    color: var(--inv);
+    background: var(--faded);
     width: 100%;
   }
 }
-
-
-
 
 
   /* ~~~~~~~ INIT. BTN ~~~~~~~ */

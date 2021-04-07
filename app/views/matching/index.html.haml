@@ -1,10 +1,9 @@
-
 .page-header.jumbotron.mt-4.my-4
   %h1
     Project Matchings
-    = link_to 'New Matching', project_matching_new_path, :class => 'btn btn-success pull-right mt-3'
+    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" } New Matching
   .help-block Click a matching to see more information
-
+  
 -# For coach only -> show all ongoing matching
 %table.table.table-condensed#apps_table
   %thead
@@ -14,7 +13,7 @@
       %th.h4
         Status
       %th.h4
-        OPERATION
+        Operation
   %tbody
     - @matchings.each do |matching|
       %tr
@@ -26,20 +25,43 @@
           - else
             %span.badge.alert-success
               = matching.id
--# Else TODO: need be qualified students in matching model
--# - elsif (true)
--#   - render 'matching/show'
--# - else 
--#   - redirect_to app_pat4
+
+  
 
 
-  -# %table.table.table-condensed#apps_table
-  -#   %thead
-  -#     %tr
-  -#       %th 
-  -#         %h3
-  -#           Projects
-  -#       %th
-  -#         %h3
-  -#           Ranking
+:javascript
+
+  //TODO: need validation
+  // Bootstrap Function for popover when click New matching
+  $(function () {
+    $('[data-toggle="popover"]').popover({
+    container: 'body',
+    html: true,
+    placement: 'bottom',
+    sanitize: false,
+    content: 
+    `
+    <div id="PopoverContent">
+      <form action="matching/new" method="get">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Matching Title</label>
+          <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Enter Title" >
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Number of Engagements</label>
+          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="0">
+        </div>
+        <button type="submit" class="btn btn-dark">Next</button>
+      </form>
+    </div>`
+    })
+  });
+
+  $(document).on('click',  (e) => {
+    $('[data-toggle="popover"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+    });
+  });
   
