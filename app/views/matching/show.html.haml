@@ -64,40 +64,32 @@
 
 
     :javascript
+
+      let currentRank = []
+
       // For AJAX sortable store
       const el = document.getElementById('matching');
       const sortable = new Sortable(el, {
         animation: 150,
-        ghostClass: 'blue-background-class',
+        // ghostClass: 'blue-background-class',
         onSort: function(e) {
                   const arr = [];
                   $(".project").each((i, projectHTML) => {
                     arr.push(projectHTML.innerText);
                   });
 
-                  $.ajax({
-                    url: "store",
-                    data: {"preference": arr},
-                    type: "POST",
-                    success: function (data) {
-                      console.log("success AJAX POST")
-                    }
-                  });
-                  // Maybe combine
-                  $.ajax({
-                    url: "",
-                    type: "GET",
-                    success: function (data) {
-                      console.log("success AJAX GET")
-                      $(".rank").each((i, rankName) => {
+                  $(".rank").each((i, rankName) => {
                         rankName.innerText = arr[i]
-                      })
-                    }
-                  });
+                  })
+                  // Store current ranking choice in arr preparing submit
+                  currentRank = arr;
 
+                  
+                  
                   // Change back to submit button as potentially need to save
-                  if ($(".tick").innerHTML !== "Submit") {
-                    $(".tick").innerHTML = "Submit";
+                  if ($(".tick")[0].innerHTML !== "Submit") {
+                    $(".tick")[0].innerHTML = "Submit";
+                    document.querySelector('.button').classList.remove('button__circle')
                   }
                 }
       });
@@ -112,10 +104,20 @@
       let buttonText = document.querySelector('.tick');
       const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>";
       buttonText.innerHTML = "Submit";
-      button.addEventListener('click', function() {
+      button.addEventListener('click', async function() {
+        await $.ajax({
+          url: "store",
+          data: {"preference": currentRank},
+          type: "POST",
+          success: function (data) {
+            console.log("success AJAX POST")
+          }
+        }).then(() => {
+        // await aysnc
         if (buttonText.innerHTML === "Submit") {
           buttonText.innerHTML = tickMark;
+          this.classList.add('button__circle');
         }
-        this.classList.add('button__circle');
+        })
       });
       
