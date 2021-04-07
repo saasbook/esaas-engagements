@@ -1,7 +1,9 @@
-When /^(?:|I )am logged in as "([^"]*)" type$/ do |type|
-  case type
+# When /^(?:|I ) will be logged in as ([^"]*) type$/ do |type|
+Given /^(?:|I )will be logged in as "([^"]*)" type$/ do |type|
+  case type.downcase
     when "coach"
-      user = YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["test"] 
+      user = YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["test_coach"] 
+      puts user
     when "student"
       user = YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["test_student"]
     when "client"
@@ -17,11 +19,11 @@ When /^(?:|I )am logged in as "([^"]*)" type$/ do |type|
                                   :name => user['name'],
                                   :nickname => user['github_uid'],
                                   :email => user['email'],
-                                  # :type_user => user
+                                  :type_user => user["staff"]
                               }
                             }
                           )
-  visit '/login'
-  click_link "Log in with GitHub"
-  visit "/apps"
+  # visit '/login'
+  # click_link "Log in with GitHub"
+  # visit "/apps"
 end

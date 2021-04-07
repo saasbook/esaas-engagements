@@ -3,7 +3,9 @@ development:
   name: 'Armando Fox'
   email: 'fox@cs.berkeley.edu'
   user_type: 'coach'
-test:
+
+
+test_coach:
   github_uid: "esaas_developer"
   name: "ESaas Developer"
   email: "esaas_developer@saasbook.info"

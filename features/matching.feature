@@ -4,6 +4,6 @@ Feature: Test matching feature
    So that I can easily choose my preference for projects
 
 
-Scenario: I can log in as a student
-  Given I am logged in as "student" type
+# Scenario: I can log in as a student
+#   Given I am logged in as "student" type
   
