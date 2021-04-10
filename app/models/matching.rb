@@ -4,7 +4,10 @@ class Matching < ActiveRecord::Base
     serialize :result, Hash
     serialize :projects, Array
 
+    @@STATUSES = ['Collecting Responses', 'Responses Collected', 'Completed']
+
     validates_presence_of :name, :teams, :projects
+    validates_inclusion_of :status, in: @@STATUSES
 
     # given :preferences exist, produces a matching between team_number and app_id, stores in :result
     def match

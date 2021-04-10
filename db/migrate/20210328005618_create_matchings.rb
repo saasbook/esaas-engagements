@@ -8,7 +8,7 @@ class CreateMatchings < ActiveRecord::Migration
       t.text :projects
       t.text :description
       t.text :result
-      
+      t.string :status, null: false, default: 'Collecting Responses'
     end
   end
 end

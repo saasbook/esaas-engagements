@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210328005651) do
+ActiveRecord::Schema.define(version: 20210328005618) do
 
   create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
     t.text     "description"
@@ -95,14 +95,15 @@ ActiveRecord::Schema.define(version: 20210328005651) do
   end
 
   create_table "matchings", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "name"
     t.text     "preferences"
     t.text     "teams"
     t.text     "projects"
     t.text     "description"
     t.text     "result"
+    t.string   "status",      default: "Collecting Responses", null: false
   end
 
   create_table "orgs", force: :cascade do |t|
