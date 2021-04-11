@@ -17,8 +17,6 @@ class MatchingController < ApplicationController
   # GET /matching/new
   def new
     @matching = Matching.first
-    puts params
-    puts "LOL"
   end
 
   def show

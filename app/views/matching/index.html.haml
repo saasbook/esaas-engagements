@@ -17,16 +17,16 @@
   %tbody
     - @matchings.each do |matching|
       %tr
-        %td.align-middle{:height => "70"}
-          = link_to matching.id, show_my_matching_path(matching.id),  :class => 'btn btn-primary'
+        %td.align-middle{:height => "70"} 
+          = link_to matching.name, matching_progress_path(matching.id) ,  :class => 'btn btn-primary'
         %td.align-middle
-          - if matching.id == "In Progress" then
-            = link_to matching.id, matching_progress_path(matching.id), :class => 'btn btn-danger btn-sm pill'
+          - if matching.status == "In Progress" then
+            = link_to matching.status, show_my_matching_path(matching.id), :class => 'btn btn-danger btn-sm pill'
           - else
             %span.badge.alert-success
-              = matching.id
+              = matching.status
 
-  
+  -# show_my_matching_path(matching.id)
 
 
 :javascript
