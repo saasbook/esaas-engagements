@@ -1,40 +1,56 @@
--# !!!
--# %html
--#   %head
--#     = stylesheet_link_tag "apps"
+!!!
+%html
+  %head
+    = stylesheet_link_tag "apps"
+
+#notifications
+  - unless current_user.student?
+    = render 'notification'
 
 .page-header
   %h1
     My Projects
   .help-block Click an App name to see more information
 
-#notifications
-  - unless current_user.student?
-    = render 'notification'
-
-#filters
-  %label.checkbox-inline
-    %div#deploy
-      %strong Deployment Status:
-      %em #{" (" + @total_deploy.to_s + ")"}
-      %br
-      - App.getAllDeploymentStatuses.each do |status|
-        = check_box_tag status, 1, true, :class => 'filter'
-        %span{:class => status}= status.to_s.humanize
-        %em (#{@deployment_map[status.to_s].to_i})
+  - content_for :filters do
+    - $filters = ""
+    = form_tag "/my_projects", :method => :get do
+      %div#deploy
+        %strong Deployment Status:
+        %em #{" (" + @total_deploy.to_s + ")"}
         %br
-  %label.checkbox-inline
-    %div#vetting
-      %strong Vetting Status:
-      %em #{" (" + @total_vet.to_s + ")"}
+        .checkbox-inline
+          - App.getAllDeploymentStatuses.each do |status|
+            - if @deployment_statuses.key? status
+              - $filters = $filters + "&" + status.to_s + "=1"
+              = check_box_tag status, 1, true, :class => 'filter'
+            - else
+              = check_box_tag status, 1, false, :class => 'no_filter'
+            = label_tag status do
+              %span{:class => status}
+                = status.to_s.humanize
+            %em (#{@deployment_map[status.to_s].to_i})
+            %br
       %br
-      - App.getAllVettingStatuses.each do |status|
-        = check_box_tag status, 1, true, :class => 'filter'
-        %span{:class => status}= status.to_s.humanize
-        %em (#{@vetting_map[status.to_s].to_i})
+      %div#vetting
+        %strong Vetting Status:
+        %em #{" (" + @total_vet.to_s + ")"}
         %br
-  :javascript
-      $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
+        .checkbox-inline
+          - App.getAllVettingStatuses.each do |status|
+            - if @vetting_statuses.key? status
+              - $filters = $filters + "&" + status.to_s + "=1"
+              = check_box_tag status, 1, true, :class => 'filter'
+            - else
+              = check_box_tag status, 1, false, :class => 'no_filter'
+            = label_tag status do
+              %span{:class => status}
+                = status.to_s.humanize
+            %em (#{@vetting_map[status.to_s].to_i})
+            %br
+        %br
+        = submit_tag 'Apply Filters'
+        #{@filtered_count.to_s + ' results'}
 
 %ul{:class => 'pagination'}
   %li{:class=>'each_page'} 
@@ -48,13 +64,21 @@
         %a{:class=>"page-link", :href=>"?myprojects_each_page=#{num_per_page}"}=num_per_page
 
 %ul{:class => 'pagination pull-right'}
-  - %w(First Previous Current Next Last).each do |action|
-    - if action != "Current"
+  - ["First","Previous","Current","Next","Last"].each do |action|
+    - if action == "First" || action == "Last" then
       %li{:class=>'page_num'}
-        %a{:class=>"page-link", :href=>"?myprojects_page_action=#{action}&prev=#{@page_num}"}=action
+        %a{:class=>"page-link", :href=>"?myprojects_page_action=#{action}&prev=#{@page_num}" + $filters}=action
+    - elsif action == "Previous" then
+      - unless @page_num <= 1 then 
+        %li{:class=>'page_num'}
+          %a{:class=>"page-link", :href=>"?myprojects_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num-1}
+    - elsif action == "Next" then
+      - unless @page_num >= @max_page_num then
+        %li{:class=>'page_num'}
+          %a{:class=>"page-link", :href=>"?myprojects_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num+1}
     - else
-      %li{:class=>"page-num"}
-        %a{:class=>'page_link'} Page #{[1,@page_num].max}
+      %li{:class=>"page-num active"}
+        %a{:class=>'page_link'} #{[1,@page_num].max}
 
 %table.table.table-condensed#apps_table
   %thead
@@ -66,19 +90,20 @@
       %th
   %tbody
     - @apps.each do |app|
-      %tr{:class => [app.status.to_s]}
-        %td
-          = app.id
-        %td
-          = link_to app.name, app_path(app.id)
-        %td
-          = link_to app.org.name, app.org
-        %td
-          = sanitize app.description
-          %br
-          - app.engagements.each do |engagement|
-            %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
+      - if @deployment_statuses.key? app.status.to_sym
+        %tr{:class => [app.status.to_s]}
+          %td
+            = app.id
+          %td
+            = link_to app.name, app_path(app.id)
+          %td
+            = link_to app.org.name, app.org
+          %td
+            = sanitize app.description
             %br
-        %td{style: 'white-space: nowrap'}
-          - if current_user.coach? || current_user.client?
-            = link_to ApplicationHelper.edit_request_button_text(app), new_my_project_edit_path(app_id: app.id), :class => 'btn btn-primary'
+            - app.engagements.each do |engagement|
+              %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
+              %br
+          %td{style: 'white-space: nowrap'}
+            - if current_user.coach? || current_user.client?
+              = link_to ApplicationHelper.edit_request_button_text(app), new_my_project_edit_path(app_id: app.id), :class => 'btn btn-primary'
