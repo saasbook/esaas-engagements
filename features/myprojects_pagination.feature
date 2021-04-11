@@ -47,19 +47,19 @@ Scenario: A client with many apps should see the first 10 apps by default
   Then I should see 10 apps starting with app 1 with sequence format:
     | name  | description     |
     | app   | app-description |
-  When I follow "Next"
+  When I follow "2"
   Then I should see 10 apps starting with app 11 with sequence format:
     | name  | description     |
     | app   | app-description |
-  When I follow "Next"
+  When I follow "3"
   Then I should see 10 apps starting with app 21 with sequence format:
     | name  | description     |
     | app   | app-description |
-  When I follow "Next"
+  When I follow "4"
   Then I should see 10 apps starting with app 31 with sequence format:
     | name  | description     |
     | app   | app-description |
-  When I follow "Previous"
+  When I follow "3"
   Then I should see 10 apps starting with app 21 with sequence format:
     | name  | description     |
     | app   | app-description |
@@ -71,7 +71,7 @@ Scenario: A client with many apps should see the first 10 apps by default
   Then I should see 100 apps starting with app 1 with sequence format:
     | name  | description     |
     | app   | app-description |
-  When I follow "Next"
+  When I follow "2"
   Then I should see 100 apps starting with app 101 with sequence format:
     | name  | description     |
     | app   | app-description |

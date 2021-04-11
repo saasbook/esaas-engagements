@@ -8,8 +8,67 @@ class MyProjectsController < ApplicationController
         orgs = Org.for_user(user.id)
         deploy_vet_map(orgs)
         total_app = @total_deploy + @total_vet
+        # Make total number of apps non-zero
+        total_app = [total_app, 1].max
         page_default_and_update("myprojects", total_app)
         change_page_num("myprojects", total_app)
+        
+        # Check to see if params already has deployment statuses
+        contains_at_least_one_status = false
+        App.getAllDeploymentStatuses.each do |status|
+          if params.key? status
+            contains_at_least_one_status = true
+            break
+          end
+        end
+    
+        # Add deployment statuses to params if not already existing
+        @deployment_statuses = Hash.new
+        if not contains_at_least_one_status
+          # First time: add all statuses to params
+          App.getAllDeploymentStatuses.each do |status|
+            params[status] = 1
+            @deployment_statuses = params
+          end
+        else
+          App.getAllDeploymentStatuses.each do |status|
+            # Get existing statuses from params
+            if params.key? status
+              @deployment_statuses = params
+            end
+          end
+        end
+    
+        # Repeat for Vetting STATUSES
+        contains_at_least_one_v_status = false
+        App.getAllVettingStatuses.each do |status|
+          if params.key? status
+            contains_at_least_one_v_status = true
+            break
+          end
+        end
+    
+        @vetting_statuses = Hash.new
+        if not contains_at_least_one_v_status
+          App.getAllVettingStatuses.each do |status|
+            params[status] = 1
+            @vetting_statuses = params
+          end
+        else
+          App.getAllVettingStatuses.each do |status|
+            if params.key? status
+              @vetting_statuses = params
+            end
+          end
+        end
+    
+        @filtered_count = 0
+        App.unscoped.where(:org_id => orgs).find_each do |app|
+          if @deployment_statuses.key? app.status.to_sym
+            @filtered_count += 1
+          end
+        end
+
         offset = @each_page*(@page_num-1) < 0 ? 0 : @each_page*(@page_num-1)
         @apps = App.for_orgs(orgs, limit=@each_page, offset=offset)
         respond_to do |format|

@@ -42,7 +42,7 @@ Scenario: Sad Path - Cannot create new app, edit and destroy existing app if I a
     | id | name  | github_uid      | email          | user_type     |
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
-  And I follow "Apps"
+  And I am on the Apps page
   And I follow "New App"
   Then I should see "Error: Only Staff can create an app"
   And I press "Edit" for "app1"
@@ -72,7 +72,7 @@ Scenario: Sad Path - Cannot create new org, edit and destroy existing org if I a
     | id | name  | github_uid      | email          | user_type     |
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
-  And I follow "Orgs"
+  And I am on the Orgs page
   And I follow "New Org"
   Then I should see "Error: Only Staff can create, edit and destroy orgs"
   And I press "Edit" for "org1"
@@ -95,7 +95,7 @@ Scenario: Sad Path - Cannot create new user, edit and destroy existing user if I
     | id | name  | github_uid      | email          | user_type     |
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
-  And I follow "Users"
+  And I am on the Users page
   And I follow "New User"
   Then I should see "Error: Only Staff can create and edit users"
   And I press "Edit" for "user1"
@@ -116,7 +116,7 @@ Scenario: Sad Path - Cannot use the Create page and submit the form if I am not 
     | id | name  | github_uid      | email          | user_type     |
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
-  And I follow "Create"
+  And I am on the create page
   Then I should see "Error: Only Staff can create apps, orgs, users"
 
 Scenario: Happy Path - Can create new engagement, edit and destroy existing engagement if I am Staff
@@ -142,7 +142,7 @@ Scenario: Sad Path - Cannot create new engagement, edit and destroy existing eng
     | id | name  | github_uid      | email          | user_type     |
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
-  And I follow "Apps"
+  And I am on the Apps page
   Given I follow "app1"
   And I follow "New Engagement"
   Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
@@ -177,7 +177,7 @@ Scenario: Sad Path - Cannot create new iteration, edit and destroy existing iter
     | id | name  | github_uid      | email          | user_type     |
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
-  And I follow "Apps"
+  And I am on the Apps page
   And I follow "app1"
   And I follow "2017-03-25"
   And I follow "Add Iteration"
