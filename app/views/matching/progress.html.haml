@@ -1,8 +1,14 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "progress"
+
 %h1
   Matching #{@mockMatching} Progress
+  %div.btn.btn-success.pull-right{:disabled => 'disabled', "data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"} Begin Matching
 
 %div.progress
-  %div.progress-bar.bg-success{:style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
+  %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
     66.6%
 %table.table.table-condensed#apps_table
   %thead
@@ -28,4 +34,13 @@
             %span.badge.alert-success 
               = mockStudent[1]
 
-// Once reach 100% enable button
+
+      
+  :javascript
+    // For tool tip
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+
+    //TODO: Once reach 100% enable button
