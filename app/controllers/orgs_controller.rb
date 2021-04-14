@@ -1,6 +1,7 @@
 class OrgsController < ApplicationController
   before_action :set_org, only: [:show, :edit, :update, :destroy]
   before_action :auth_user?, only: [:new, :create, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:import]
 
   # GET /orgs
   # GET /orgs.json
