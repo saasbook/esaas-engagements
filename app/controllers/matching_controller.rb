@@ -33,7 +33,7 @@ class MatchingController < ApplicationController
   end
 
   def show
-    @mockMatching = params[:matching_id]
+    @matching = Matching.find(params[:matching_id])
     @mockProjectsHash = {
                         "AFX Dance": "Create a website that allows admins of different levels in AFX Dance to organize their audition process and pick dancers.",
                         "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",

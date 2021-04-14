@@ -1,9 +1,15 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "progress"
+
 %h1
-  Matching Progress for #{@matching.name}
+  Matching #{@mockMatching} Progress
+  %div.btn.btn-success.pull-right{:disabled => 'disabled', "data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"} Begin Matching
 
 %div.progress
-  %div.progress-bar.bg-success{:style=>"width: 0.00%;", :aria_valuenow=>"0.00", :aria_valuemin=>"0", :aria_valuemax=>"100"}
-    0.00%
+  %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
+    66.6%
 %table.table.table-condensed#apps_table
   %thead
     %tr
@@ -28,7 +34,7 @@
       %tr
         %td{:height => "70"}
           %span.badge.bg-primary.h4
-            = e.team_number
+            = link_to e.team_number, show_my_matching_path(matching_id: @matching.id), :class => 'text-light'
         %td
           %span.badge.bg-dark.h4
             = User.find(e.coach_id).name
@@ -50,3 +56,12 @@
           //  %span.badge.alert-success
           //    = mockStudent[1]
 = link_to 'Back', '/matching', :class => 'btn btn-primary m-2'
+
+:javascript
+  // For tool tip
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
+
+  //TODO: Once reach 100% enable button

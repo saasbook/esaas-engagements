@@ -4,7 +4,7 @@
     = stylesheet_link_tag "matching"
 
     %h1.jumbotron.header.p-5
-      Project Matching #{@mockMatching}
+      Project Matching #{@matching.name}
 
 
     %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
@@ -27,17 +27,17 @@
                     %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
                       %div.card.mb-5
                         %div.card-header.bg-secondary.text-light
-                          Rank 
+                          Rank
                           = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
                             %p.rank
                               = @currentPreference[count]
-                  - else 
+                  - else
                     %li.mt-2
                       %div.card.mb-5
-                        %div.card-header.bg-secondary.text-light 
-                          Rank 
+                        %div.card-header.bg-secondary.text-light
+                          Rank
                           = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
@@ -65,7 +65,7 @@
 
     :javascript
       let currentRank = []
-      // For sortable 
+      // For sortable
       const el = document.getElementById('matching');
       const sortable = new Sortable(el, {
         animation: 150,
@@ -117,4 +117,3 @@
         }
         })
       });
-      

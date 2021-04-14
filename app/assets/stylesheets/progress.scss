@@ -1,0 +1,28 @@
+.progress{
+    height: 27px;
+    margin: 0;
+    overflow: visible;
+    border-radius: 50px;
+}
+.progress .progress-bar{
+    border-radius: 50px;
+}
+.progress .progress-value{
+    position: relative;
+    left: -45px;
+    top: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+}
+.progress-bar.active{
+    animation: reverse progress-bar-stripes 0.80s linear infinite, animate-positive 1s;
+}
+
+@-webkit-keyframes animate-positive{
+    0% { width: 0%; }
+}
+@keyframes animate-positive {
+    0% { width: 0%; }
+}
