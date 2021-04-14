@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210328005618) do
+ActiveRecord::Schema.define(version: 20210414075312) do
 
   create_table "app_edit_requests", primary_key: "app_id", force: :cascade do |t|
     t.text     "description"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20210328005618) do
     t.string   "final_comments"
     t.string   "features"
     t.string   "semester"
+    t.integer  "matching_id"
   end
 
   add_index "engagements", ["app_id"], name: "index_engagements_on_app_id"
@@ -95,15 +96,15 @@ ActiveRecord::Schema.define(version: 20210328005618) do
   end
 
   create_table "matchings", force: :cascade do |t|
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "name"
-    t.text     "preferences"
-    t.text     "teams"
     t.text     "projects"
+    t.text     "preferences"
     t.text     "description"
     t.text     "result"
-    t.string   "status",      default: "Collecting Responses", null: false
+    t.string   "status",          default: "Collecting responses", null: false
+    t.text     "last_edit_users"
   end
 
   create_table "orgs", force: :cascade do |t|

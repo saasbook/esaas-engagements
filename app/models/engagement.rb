@@ -1,6 +1,7 @@
 class Engagement < ActiveRecord::Base
   belongs_to :app
   belongs_to :coach, class_name: 'User'
+  belongs_to :matching
 
   has_one :coaching_org, through: :coach
   has_one :client_org, through: :app, source: :org
@@ -9,8 +10,8 @@ class Engagement < ActiveRecord::Base
   has_many :iterations, dependent: :destroy
   has_many :developers, foreign_key: :developing_engagement_id, class_name: 'User'
 
-  validates_presence_of :app_id, :coach_id, :team_number, :start_date
-
+  validates_presence_of :coach_id, :team_number, :start_date
+  #:app_id,
   default_scope { order('start_date DESC') }
 
   def summarize_customer_rating

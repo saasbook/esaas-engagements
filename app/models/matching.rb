@@ -1,13 +1,31 @@
 class Matching < ActiveRecord::Base
-    serialize :preferences, Hash
-    serialize :teams, Hash
-    serialize :result, Hash
+    has_many :engagements
     serialize :projects, Array
+    serialize :preferences, Hash
+    serialize :result, Hash
+    serialize :last_edit_users, Hash
 
-    @@STATUSES = ['Collecting Responses', 'Responses Collected', 'Completed']
+    @@STATUSES = ['Collecting responses', 'Responses collected', 'Completed']
 
-    validates_presence_of :name, :teams, :projects
+    validates_presence_of :name, :projects
     validates_inclusion_of :status, in: @@STATUSES
+    accepts_nested_attributes_for :engagements
+
+    def self.initialize_hash(engagements)
+      h = {}
+      engagements.each do |e|
+        h.store(e.team_number, 0)
+      end
+      h
+    end
+
+    def self.engagement_status(last_edit_user)
+      if last_edit_user == 0
+        return 'Not responded yet'
+      else
+        return 'Responded'
+      end
+    end
 
     # given :preferences exist, produces a matching between team_number and app_id, stores in :result
     def match

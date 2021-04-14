@@ -1,29 +1,52 @@
 %h1
-  Matching #{@mockMatching} Progress
+  Matching Progress for #{@matching.name}
 
 %div.progress
-  %div.progress-bar.bg-success{:style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
-    66.6%
+  %div.progress-bar.bg-success{:style=>"width: 0.00%;", :aria_valuenow=>"0.00", :aria_valuemin=>"0", :aria_valuemax=>"100"}
+    0.00%
 %table.table.table-condensed#apps_table
   %thead
     %tr
-    %th 
+    %th
+      %h3
+        Team Number
+    %th
+      %h3
+        Coach
+    %th
       %h3
         Students
     %th
       %h3
         Status
+    %th
+      %h3
+        Start Date
+
   %tbody
-    - @mockStudents.each do |mockStudent|
+    - @engagements.each do |e|
       %tr
         %td{:height => "70"}
-          %span.badge.alert-primary.h4
-            = mockStudent[0]
+          %span.badge.bg-primary.h4
+            = e.team_number
         %td
-          - if mockStudent[1] == "In Progress" then
-            %span.badge.alert-danger
-              = mockStudent[1]
-            %button.btn.btn-outline-secondary.btn-sm Send Reminder
-          - else
-            %span.badge.alert-success 
-              = mockStudent[1]
+          %span.badge.bg-dark.h4
+            = User.find(e.coach_id).name
+        %td
+          - @students[e].each do |n|
+            %span.badge.alert-primary.bg-light.text-dark.h4
+              = n
+        %td
+          %span.badge.h4
+            = Matching.engagement_status(@matching.last_edit_users[e.team_number])
+        %td
+          %span.badge.bg-white.text-dark.h4
+            = e.start_date.strftime("%B %d, %Y")
+          //- if mockStudent[1] == "In Progress" then
+          //  %span.badge.alert-danger
+          //    = mockStudent[1]
+          //  %button.btn.btn-outline-secondary.btn-sm Send Reminder
+          //- else
+          //  %span.badge.alert-success
+          //    = mockStudent[1]
+= link_to 'Back', '/matching', :class => 'btn btn-primary m-2'

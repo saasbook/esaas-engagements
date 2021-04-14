@@ -3,7 +3,7 @@
     Project Matchings
     .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" } New Matching
   .help-block Click a matching to see more information
-  
+
 -# For coach only -> show all ongoing matching
 %table.table.table-condensed#apps_table
   %thead
@@ -18,15 +18,14 @@
     - @matchings.each do |matching|
       %tr
         %td.align-middle{:height => "70"}
-          = link_to matching.id, show_my_matching_path(matching.id),  :class => 'btn btn-primary'
+          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-primary'
         %td.align-middle
-          - if matching.id == "In Progress" then
-            = link_to matching.id, matching_progress_path(matching.id), :class => 'btn btn-danger btn-sm pill'
-          - else
-            %span.badge.alert-success
-              = matching.id
+          %span.badge.h4
+            = matching.status
+        %td.align-middle
+          = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger'
 
-  
+
 
 
 :javascript
@@ -39,17 +38,13 @@
     html: true,
     placement: 'bottom',
     sanitize: false,
-    content: 
+    content:
     `
     <div id="PopoverContent">
-      <form action="matching/new" method="get">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Matching Title</label>
-          <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="Enter Title" >
-        </div>
+      <form action="/matching/new" method="get">
         <div class="form-group">
           <label for="exampleInputPassword1">Number of Engagements</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="0">
+          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="0">
         </div>
         <button type="submit" class="btn btn-dark">Next</button>
       </form>
@@ -59,9 +54,8 @@
 
   $(document).on('click',  (e) => {
     $('[data-toggle="popover"]').each(function () {
-        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {                
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
             (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
         }
     });
   });
-  
