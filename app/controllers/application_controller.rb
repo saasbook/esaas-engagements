@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :logged_in?
+  before_filter :check_student
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -96,5 +97,17 @@ class ApplicationController < ActionController::Base
       end
     end
     @reviewed_apps = App.where(id: reviewed_app_ids)
+  end
+
+  # Denies access if user is a student
+  def check_student
+    @@name_path = request.env['PATH_INFO']
+    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/")
+      begin
+        redirect_to :back, alert: "You do not have access to that page."
+      rescue Exception
+        redirect_to "/", alert: "You do not have access to that page."
+      end
+    end
   end
 end
