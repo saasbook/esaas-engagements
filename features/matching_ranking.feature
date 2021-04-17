@@ -5,6 +5,6 @@ Feature: Test Ranking page feature
 
 
 Scenario: Hover the mouse over some elements
-    Given I am on the ranking page
-    When I hover the mouse over "submit" element
-    Then I should see "deadline"
+   #  Given I am on the ranking page
+   #  When I hover the mouse over "submit" element
+   #  Then I should see "deadline"
