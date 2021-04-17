@@ -10,7 +10,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
                                      :name => user['name'],
                                      :nickname => user['github_uid'],
                                      :email => user['email'],
-                                     :type_user => user['staff']
+                                     :type_user => user['user_type']
                                  }
                              })
   end
