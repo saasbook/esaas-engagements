@@ -34,7 +34,7 @@
     - @engagements.each do |e|
       %tr
         %td{:height => "70"}
-          %span.badge.bg-primary.h4
+          .btn.btn-dark.h4
             = link_to e.team_number, show_engagement_matching_path(matching_id: @matching.id, engagement_id: e.id), :class => 'text-light'
         %td
           %span.badge.bg-dark.h4
@@ -56,7 +56,7 @@
           //- else
           //  %span.badge.alert-success
           //    = mockStudent[1]
-= link_to 'Back', '/matching', :class => 'btn btn-primary m-2'
+-# = link_to 'Back', '/matching', :class => 'btn btn-secondary m-2'
 
 :javascript
   // For tool tip
