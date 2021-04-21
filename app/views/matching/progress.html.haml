@@ -7,9 +7,10 @@
   Matching #{@matching.id} Progress
   %div.btn.btn-success.pull-right{:disabled => 'disabled', "data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"} Begin Matching
 
+- responded_percentage = Matching.calculate_respond_percentage(@matching.last_edit_users).to_s + "%"
 %div.progress
-  %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
-    66.6%
+  %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: #{responded_percentage};", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
+    = responded_percentage
 %table.table.table-condensed#apps_table
   %thead
     %tr

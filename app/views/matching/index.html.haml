@@ -19,7 +19,7 @@
     - @matchings.each do |matching|
       %tr
         %td.align-middle{:height => "70"}
-          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-primary'
+          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-dark'
         %td.align-middle
           %span.badge.h4
             = matching.status
