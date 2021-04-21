@@ -67,8 +67,6 @@ class MatchingController < ApplicationController
     @match = Matching.find_or_create_by(:id => 1)
     preference = params[:preferences]
 
-    
-
     @match.update_attributes(:preferences => preference)
   end
 
