@@ -26,6 +26,7 @@ class MatchingController < ApplicationController
     if @matching.save
       @matching.update(result: Matching.initialize_hash(@matching.engagements))
       @matching.update(last_edit_users: Matching.initialize_hash(@matching.engagements))
+      @matching.update(preferences: Matching.initialize_preferences(@matching.engagements, @matching.projects))
       redirect_to '/matching', notice: 'Matching was successfully created.'
     else
       redirect_to '/matching', notice: 'Invalid matching fields.'

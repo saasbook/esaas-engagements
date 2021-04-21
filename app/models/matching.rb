@@ -19,6 +19,14 @@ class Matching < ActiveRecord::Base
       h
     end
 
+    def self.initialize_preferences(engagements, projects)
+      h = {}
+      engagements.each do |e|
+        h.store(e.team_number, projects)
+      end
+      h
+    end
+
     def self.engagement_status(last_edit_user)
       if last_edit_user == 0
         return 'Not responded yet'
