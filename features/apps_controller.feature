@@ -28,10 +28,10 @@ Background: users, orgs and apps have been added to database
 Scenario: Login to github to create a new app
   #Story ID: #152298585
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I press "Create App"
   And I should see "2 errors prohibited App from being saved:"
@@ -48,10 +48,10 @@ Scenario: Login to github to create a new app
 Scenario: Login to github to create a new app in vetting status
   #Story ID: #165265798
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I select "Vetting pending" from "Status"
   And I press "Create App"
@@ -67,19 +67,19 @@ Scenario: Login to github to create a new app in vetting status
 
   Scenario: Login to github to see a app detail with its status
     Given I am not logged in
-    And I am on the apps page
-    And I follow "app1"
     And I am on the login page
     And I follow "Log in with GitHub"
+    And I am on the apps page
+    And I follow "app1"
     Then I should see "Status: pending"
 
 Scenario: Login to github to create a new app in non-pending deployment status
   #Story ID: #165265798
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I select "Development" from "Status"
   And I press "Create App"
@@ -98,10 +98,10 @@ Scenario: Login to github to create a new app in non-pending deployment status
 Scenario: Login to github to edit an existing app successfully
   #Story ID: #152298585
   Given I am not logged in
-  And I am on the apps page
-  And I want to edit "app1"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I want to edit "app1"
   And I should see "Editing App"
   When I fill in "App Name" with "Fake app"
   When I fill in "App Description" with "Fake app description "
@@ -114,10 +114,10 @@ Scenario: Login to github to edit an existing app successfully
 Scenario: Login to github to falsely edit an existing app
   #Story ID: #152298585
   Given I am not logged in
-  And I am on the apps page
-  And I want to edit "app1"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I want to edit "app1"
   And I should see "Editing App"
   When I fill in "App Name" with ""
   And I press "Update App"
@@ -126,12 +126,9 @@ Scenario: Login to github to falsely edit an existing app
 Scenario: Login to github to delete an existing app successfully
   #Story ID: #152298585
   Given I am not logged in
-  And I am on the apps page
-  And I want to destroy "app1"
   And I am on the login page
   And I follow "Log in with GitHub"
-  Then I should see "Write a comment"
-  And I follow "Apps"
+  And I am on the apps page
   And I want to destroy "app1"
   Then I should see "App was successfully destroyed."
   And I am on the apps page

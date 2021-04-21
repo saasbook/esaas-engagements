@@ -43,12 +43,7 @@ Scenario: Sad Path - Cannot create new app, edit and destroy existing app if I a
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
   And I am on the Apps page
-  And I follow "New App"
-  Then I should see "Error: Only Staff can create an app"
-  And I press "Edit" for "app1"
-  Then I should see "Error: Only Staff can edit an app"
-  And I press "Destroy" for "app1"
-  Then I should see "Error: Only Staff can destroy an app"
+  Then I should see "You do not have access to that page."
 
 Scenario: Happy Path - Can create new org, edit and destroy existing org if I am Staff
   #Story ID: 153042639
@@ -73,12 +68,7 @@ Scenario: Sad Path - Cannot create new org, edit and destroy existing org if I a
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
   And I am on the Orgs page
-  And I follow "New Org"
-  Then I should see "Error: Only Staff can create, edit and destroy orgs"
-  And I press "Edit" for "org1"
-  Then I should see "Error: Only Staff can create, edit and destroy orgs"
-  And I press "Destroy" for "org1"
-  Then I should see "Error: Only Staff can create, edit and destroy orgs"
+  Then I should see "You do not have access to that page."
 
 Scenario: Happy Path - Can create new user and edit existing user if I am Staff
   Given the following users exist:
@@ -96,10 +86,7 @@ Scenario: Sad Path - Cannot create new user, edit and destroy existing user if I
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
   And I am on the Users page
-  And I follow "New User"
-  Then I should see "Error: Only Staff can create and edit users"
-  And I press "Edit" for "user1"
-  Then I should see "Error: Only Staff can create and edit users"
+  Then I should see "You do not have access to that page."
 
 Scenario: Happy Path - Can use the Create page and submit the form if I am Staff
   #Story ID: 153042639
@@ -117,7 +104,7 @@ Scenario: Sad Path - Cannot use the Create page and submit the form if I am not 
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
   And I am on the create page
-  Then I should see "Error: Only Staff can create apps, orgs, users"
+  Then I should see "You do not have access to that page."
 
 Scenario: Happy Path - Can create new engagement, edit and destroy existing engagement if I am Staff
   #Story ID: 153042639
@@ -143,15 +130,7 @@ Scenario: Sad Path - Cannot create new engagement, edit and destroy existing eng
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
   And I am on the Apps page
-  Given I follow "app1"
-  And I follow "New Engagement"
-  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
-  And I follow "app1"
-  And I press "Edit" for "2017-03-25"
-  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
-  And I follow "app1"
-  And I press "Destroy" for "2017-03-25"
-  Then I should see "Error: Only Staff can create, edit and destroy apps and engagements"
+  Then I should see "You do not have access to that page."
 
 Scenario: Happy Path - Can create new iteration, edit and destroy existing iterations if I am Staff
   #Story ID: 153042639
@@ -178,14 +157,7 @@ Scenario: Sad Path - Cannot create new iteration, edit and destroy existing iter
     | 1  | user1 | esaas_developer | test@user.com  | student       |
   And I am logged in
   And I am on the Apps page
-  And I follow "app1"
-  And I follow "2017-03-25"
-  And I follow "Add Iteration"
-  Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
-  And I press "Edit" for "2017-04-14"
-  Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
-  And I press "Destroy" for "2017-04-14"
-  Then I should see "Error: Only Staff can create, edit and destroy apps, engagements and iterations"
+  Then I should see "You do not have access to that page."
 
   Scenario: Happy Path - Can view engagements on the information page when the app is owned or the user is coach
   #Story ID: 170145947

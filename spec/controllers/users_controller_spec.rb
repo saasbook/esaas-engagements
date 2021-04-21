@@ -3,6 +3,7 @@ require 'rails_helper'
 describe UsersController, type: :controller do
   before do
     allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
+    allow_any_instance_of(ApplicationController).to receive(:check_student).and_return(true)
     @user = FactoryBot.create(:user)
     @user_params = {
         :name => "user1",
