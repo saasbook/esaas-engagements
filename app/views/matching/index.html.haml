@@ -24,7 +24,12 @@
           %span.badge.h4
             = matching.status
         %td.align-middle
-          = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger'
+          %a.button{href: "#myModal"} Current Open Positions
+          -# = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger'
+          
+%div#myModal.model.fade
+  %p.text-center "LOLOLO"
+  %button "SDSAD"
 
 
 
