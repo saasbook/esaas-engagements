@@ -24,6 +24,7 @@ class MatchingController < ApplicationController
   def create
     @matching = Matching.new(matching_params)
     if @matching.save
+      @matching.projects.shift
       @matching.update(result: Matching.initialize_hash(@matching.engagements))
       @matching.update(last_edit_users: Matching.initialize_hash(@matching.engagements))
       @matching.update(preferences: Matching.initialize_preferences(@matching.engagements, @matching.projects))
