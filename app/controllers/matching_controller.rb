@@ -68,7 +68,7 @@ class MatchingController < ApplicationController
 
     dummy = []
     currentPreferences.each do |currentPreference|
-      dummy.push(App.where(:name => currentPreference).first.id)
+      dummy.push(App.where(:name => currentPreference).first.id.to_s)
     end
 
     @matching = Matching.find(params[:matching_id])

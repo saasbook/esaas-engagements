@@ -104,7 +104,7 @@
 
       button.addEventListener('click', async function() {
         const url = window.location.pathname.split("/");
-        const engagement_id = url[-1];
+        const engagement_id = url.pop()
         const matching_id = url[2];
         await $.ajax({
           url: window.location.href + "/store", 
@@ -116,9 +116,6 @@
           type: "POST",
           success: function (data) {
             console.log("success AJAX Store")
-            console.log(currentRank)
-            console.log(matching_id)
-            console.log(engagement_id)
           }
         }).then(() => {
         // await aysnc
