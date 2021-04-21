@@ -35,20 +35,102 @@ class Matching < ActiveRecord::Base
       end
     end
 
-    # given :preferences exist, produces a matching between team_number and app_id, stores in :result
-    def match
-      # :preferences format:
-      # each team_number maps to an array of app_id's.
-      # position in array indicates ranking (position 0 is the most preferred project)
-      # number of keys is the number of teams participating
-      # num projects >= num teams
-      # example:
-      preferences = { "sp21-1" => [ "app_id1", "app_id2", "app_id3" ], "sp21-2" => [ "app_id3", "app_id2", "app_id1" ] }
+    # Global variables to be used across functions for convenience.
+    def prepare_match
+      $engagements = self.preferences.keys
+      $engagement_preferences = self.preferences
+      $apps = self.projects
+      $app_preferences = {}
+      $matchings = {}
+    end
 
-      # :result format:
-      # each team_number maps to one app_id
-      # match function updates the :result after running its matching algorithm
-      # example:
-      result = { "sp21-1" => "app_id1", "sp21-2" => "app_id3" }
+    # Indexing and looking up projects (represented by ints) is confusing. Represent ints in arrays as strings.
+    def convert_array_numbers_to_string(arr)
+      return arr.map(&:to_s)
+    end
+
+    # The matching algorithm uses Gale-Shapley which requires a preference list
+    def assign_apps_preferences
+      if $app_preferences.empty?
+        $apps.each do |curr_app|
+          @randomized_preferences = $engagements.shuffle
+          $app_preferences[curr_app] = @randomized_preferences
+        end
+      end
+    end
+
+    # Engagment proposes to apps. Update matching if app prefers new one more.
+    # Return true for successful match, false otherwise.
+    def propose(team, team_preferences)
+      team_preferences.each do |app|
+        puts "Team preferences: " + team_preferences.to_s
+        puts "Team " + team + " proposing to App " + app
+        # Check if the app is currently matched
+        if $matchings.key? app
+          # compare rank of current match to new proposing team
+          @previous_match = $matchings[app]
+          puts "Previous match: Team " + @previous_match
+          @app_preference = $app_preferences[app]
+          puts "App Preferences: Teams " + @app_preference.to_s
+          @rank_previous = @app_preference.index(@previous_match)
+          puts "Rank of previous match: " + @rank_previous.to_s
+          @rank_proposal = @app_preference.index(team)
+          puts "Rank of proposing: " + @rank_proposal.to_s
+          puts ""
+
+          # lower number is more preferred because earlier in the preference list
+          if @rank_proposal < @rank_previous
+            # Update match
+            $matchings[app] = team
+            puts "Matched App " + app + " to Team " + team
+            puts ""
+            # Old match must propose again starting from next highest preference
+            @engagement_preference = $engagement_preferences[@previous_match]
+            puts "Previous Matched Team preferences: "
+            puts @engagement_preference.to_s
+            @index_of_match = @engagement_preference.index(app)
+
+            puts "Previous Team " + @previous_match + " proposing again"
+            propose(@previous_match, @engagement_preference.slice(@index_of_match + 1, @engagement_preference.length))
+            return true
+          end
+          puts "App " + app + " prefers current matched Team " + @previous_match + " over proposing Team " + team
+          puts ""
+        else
+          # App has no current match. Set matching to current proposer.
+          $matchings[app] = team
+          puts "Matched App " + app + " to Team " + team
+          puts ""
+          return true
+        end
+      end
+    end
+
+    # Match using Gale-Shapley
+    def match
+      if not $matchings.empty?
+        return $matchings
+      end
+
+      # Format the projects to be strings instead of ints for indexing/lookup convenience.
+      $apps = convert_array_numbers_to_string($apps)
+
+      # Format the team preferences hash to have string values instead of ints representing projects.
+      @engagement_preferences_formatted = {}
+      $engagement_preferences.each do |key, value|
+        value = convert_array_numbers_to_string(value)
+        @engagement_preferences_formatted[key] = value
+      end
+      $engagement_preferences = @engagement_preferences_formatted
+
+      assign_apps_preferences
+
+      # Each team will propose to the next preferred project (app).
+      $engagements.each do |team|
+          propose(team, $engagement_preferences[team])
+      end
+
+      puts $matchings
+      return $matchings
     end
 end

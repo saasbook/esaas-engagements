@@ -1,0 +1,19 @@
+%h1.jumbotron.header.p-5
+  Project Matching Result for #{@matching.name}
+
+%table.table.table-condensed#apps_table
+  %thead
+    %tr
+      %th.h4
+        Team Name
+      %th.h4
+        Project Assigned
+  %tbody
+    - @result.each do |key, value|
+      %tr
+        %td.align-middle{:height => "70"}
+          %span.badge.bg-primary.h4
+            = value
+        %td.align-middle
+          %span.badge.bg-white.text-dark.h4
+            = App.find_by(id: key).name

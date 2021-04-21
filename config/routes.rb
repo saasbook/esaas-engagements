@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/matching/:matching_id' => 'matching#show', :as => "show_my_matching"
   get "/matching/:matching_id/progress" => 'matching#progress', :as => "matching_progress"
   post "/matching/store" => 'matching#store'
+  get '/matching/:matching_id/result' => 'matching#result', :as => "matching_result"
   delete '/matching/:matching_id' => 'matching#destroy', :as => "delete_matching"
 
   # OmniAuth authentication with GitHub

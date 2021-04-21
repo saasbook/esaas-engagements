@@ -57,6 +57,12 @@ class MatchingController < ApplicationController
     end
   end
 
+  def result
+    @matching = Matching.find(params[:matching_id])
+    @matching.prepare_match
+    @result = @matching.match
+  end
+
   def store
     @match = Matching.find_or_create_by(:id => 1)
     preference = params[:preferences]
