@@ -36,15 +36,19 @@ class MatchingController < ApplicationController
 
   def show
     @matching = Matching.find(params[:matching_id])
+    @engagement = Engagement.find(params[:engagement_id])
 
     @currentPreference = []
     @description = []
-    @matching.projects.each do |project_id| 
-      currApp = App.find_by_id(project_id)
-      @currentPreference.push(currApp.name)
-      @description.push(currApp.description)
+    @matching.preferences.each do |key, preference| 
+      if (key == @engagement.team_number)
+        preference.each do |project_id|
+          currApp = App.find_by_id(project_id)
+          @currentPreference.push(currApp.name)
+          @description.push(currApp.description)
+        end
+      end
     end
-    
   end
 
   def progress
@@ -62,6 +66,9 @@ class MatchingController < ApplicationController
   def store
     @match = Matching.find_or_create_by(:id => 1)
     preference = params[:preferences]
+
+    
+
     @match.update_attributes(:preferences => preference)
   end
 
