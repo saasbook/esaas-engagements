@@ -4,7 +4,8 @@
     = stylesheet_link_tag "matching"
 
     %h1.jumbotron.header.p-5
-      Project Matching #{@matching.name}
+      Project #{@matching.name}
+    
 
 
     %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
@@ -59,7 +60,7 @@
                     %div.card-body
                       %blockquote.blockquote.mb-0
                         %p
-                          = @mockProjectsHash[currentPreference.to_sym]
+                          = @description[0]
 
 
 

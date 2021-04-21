@@ -4,7 +4,7 @@
     = stylesheet_link_tag "progress"
 
 %h1
-  Matching #{@mockMatching} Progress
+  Matching #{@matching.id} Progress
   %div.btn.btn-success.pull-right{:disabled => 'disabled', "data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"} Begin Matching
 
 %div.progress
@@ -34,7 +34,7 @@
       %tr
         %td{:height => "70"}
           %span.badge.bg-primary.h4
-            = link_to e.team_number, show_my_matching_path(matching_id: @matching.id), :class => 'text-light'
+            = link_to e.team_number, show_engagement_matching_path(matching_id: @matching.id, engagement_id: e.id), :class => 'text-light'
         %td
           %span.badge.bg-dark.h4
             = User.find(e.coach_id).name

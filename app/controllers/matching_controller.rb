@@ -36,13 +36,15 @@ class MatchingController < ApplicationController
 
   def show
     @matching = Matching.find(params[:matching_id])
-    @mockProjectsHash = {
-                        "AFX Dance": "Create a website that allows admins of different levels in AFX Dance to organize their audition process and pick dancers.",
-                        "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
-                        "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
-                        }
-    @currentPreference = ["AFX Dance", "BCal API Integration", "CS61 series Lab assistant check-in"]
-    # Matching.find_or_create_by(:id => 1).preferences
+
+    @currentPreference = []
+    @description = []
+    @matching.projects.each do |project_id| 
+      currApp = App.find_by_id(project_id)
+      @currentPreference.push(currApp.name)
+      @description.push(currApp.description)
+    end
+    
   end
 
   def progress
