@@ -75,6 +75,7 @@
                   $(".project").each((i, projectHTML) => {
                     arr.push(projectHTML.innerText);
                   });
+                  console.log(arr)
 
                   $(".rank").each((i, rankName) => {
                         rankName.innerText = arr[i]
@@ -102,12 +103,22 @@
       buttonText.innerHTML = "Submit";
 
       button.addEventListener('click', async function() {
+        const url = window.location.pathname.split("/");
+        const engagement_id = url[-1];
+        const matching_id = url[2];
         await $.ajax({
-          url: window.location.href + "/store",
-          data: {"preference": currentRank},
+          url: window.location.href + "/store", 
+          data: {
+            "preference": currentRank, 
+            "matching_id": matching_id,
+            "engagement_id": engagement_id,
+            },
           type: "POST",
           success: function (data) {
-            console.log("success AJAX POST")
+            console.log("success AJAX Store")
+            console.log(currentRank)
+            console.log(matching_id)
+            console.log(engagement_id)
           }
         }).then(() => {
         // await aysnc

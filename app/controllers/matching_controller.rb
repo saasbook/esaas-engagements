@@ -64,10 +64,25 @@ class MatchingController < ApplicationController
   end
 
   def store
-    @match = Matching.find_or_create_by(:id => 1)
-    preference = params[:preferences]
+    currentPreferences = params[:preference]
 
-    @match.update_attributes(:preferences => preference)
+    dummy = []
+    currentPreferences.each do |currentPreference|
+      dummy.push(App.where(:name => currentPreference).first.id)
+    end
+
+    @matching = Matching.find(params[:matching_id])
+    @engagement = Engagement.find(params[:engagement_id])
+
+    newPreferences = {}
+    @matching.preferences.each do |key, preference| 
+      if (@engagement.team_number == key)
+        newPreferences[key] = dummy
+      else 
+        newPreferences[key] = preference
+      end
+    end
+    @matching.update_attributes(:preferences => newPreferences)
   end
 
   def destroy
