@@ -45,6 +45,19 @@ class Matching < ActiveRecord::Base
       return responded.to_f / last_edit_users.length.to_f * 100
     end
 
+    def self.find_last_edit_user(matching, engagement) 
+      matching.last_edit_users.each do |team, last_edit_user|
+        if (team == engagement.team_number)
+          if (last_edit_user == 0) 
+            return "Your team has not responded yet!"
+          else 
+            return "Last updated by " + team + " at " + matching.updated_at
+          end
+        end
+      end
+      raise "Database has wrong info for matching!"
+    end
+
 
     # given :preferences exist, produces a matching between team_number and app_id, stores in :result
     def match

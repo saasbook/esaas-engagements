@@ -45,11 +45,15 @@
       <form action="/matching/new" method="get">
         <div class="form-group">
           <label for="exampleInputPassword1">Number of Engagements</label>
-          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="0">
+          <input type="text" class="form-control" name="num_engagements" id="num_engagements validationCustom03" placeholder="1" required>
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
         </div>
         <button type="submit" class="btn btn-dark">Next</button>
       </form>
-    </div>`
+    </div>
+    `
     })
   });
 
