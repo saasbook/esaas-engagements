@@ -26,6 +26,13 @@
           = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger'
           = link_to "Edit", edit_matching_path(matching_id: matching.id),:class => 'btn btn-secondary'
 
+      %div#myModal.modal.fade{"tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
+        .modal-dialog.modal-dialog-centered{:role => "document"}
+          .modal-content
+            .modal-body
+              %h4.mb-5 Are you sure to delete #{matching.name}?
+              .btn.btn-dark.pull-right.ml-3{"data-dismiss" => "modal"} Close
+              = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger pull-right ml-4'
 
 
 
