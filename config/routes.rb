@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   get "/matching" => 'matching#index'
   get '/matching/:matching_id/engagement/:engagement_id' => 'matching#show', :as => "show_engagement_matching"
   get "/matching/:matching_id/progress" => 'matching#progress', :as => "matching_progress"
-  
   post "/matching/:matching_id/engagement/:engagement_id/store" => 'matching#store'
+  get '/matching/:matching_id/result' => 'matching#result', :as => "matching_result"
+  get '/matching/:matching_id/finalize' => 'matching#finalize', :as => "matching_finalize"
   delete '/matching/:matching_id' => 'matching#destroy', :as => "delete_matching"
+  get '/matching/:matching_id/edit' => 'matching#edit', :as => "edit_matching"
+  match '/matching/:matching_id/update' => 'matching#update', :via => [:put, :patch], :as => 'update_matching'
 
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'

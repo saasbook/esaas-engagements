@@ -4,8 +4,9 @@
     = stylesheet_link_tag "progress"
 
 %h1
-  Matching #{@matching.id} Progress
-  %div.btn.btn-success.pull-right{:disabled => 'disabled', "data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"} Begin Matching
+  Matching #{@mockMatching} Progress
+  %div.btn.btn-success.pull-right{"data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"}
+    = link_to 'Begin Matching', matching_result_path(matching_id: @matching.id), :class => 'text-light'
 
 - responded_percentage = Matching.calculate_respond_percentage(@matching.last_edit_users).to_s + "%"
 %div.progress
