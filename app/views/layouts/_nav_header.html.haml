@@ -7,11 +7,11 @@
   - klass = controller.controller_name
 .navbar.navbar-dark.bg-dark.m-0.navbar-static-top
   = image_tag 'Berkeley.png', alt: 'Berkeley', height: '40', width: '130', :class=>"p-0"
-  %a.navbar-brand.pl-0{:href => "/" } ESaaS Engagement
+  %a.navbar-brand.px-1{:href => "/" } ESaaS Engagement
   
   .navbar-nav
   - if not current_user&.student?
-    = link_to apps_path, :class => "#{('active' if klass =~ /apps/i)} text-light text-light-nav px-1" do
+    = link_to apps_path, :class => "#{('active' if klass =~ /apps/i)} text-light text-light-nav pr-1 pl-3" do
       Apps
       %i.fas.fa-rocket  
   - if current_user
@@ -45,6 +45,8 @@
       = link_to current_iteration_path, :class => "text-light text-light-nav px-1" do
         Current iteration
       - if current_user&.coach? || current_user&.student? 
-        = link_to "Project Matchings", matching_path, :class => "text-light text-light-nav px-1"
+        = link_to matching_path, :class => "text-light text-light-nav px-1" do
+          Project Matching
+          %i.fas.fa-random
     = link_to "Logout @#{current_user.github_uid}", logout_path, :class => "text-light text-light-nav px-1"
 
