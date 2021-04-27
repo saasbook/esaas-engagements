@@ -27,11 +27,21 @@ class Matching < ActiveRecord::Base
       h
     end
 
+    # return individual engagement status
     def self.engagement_status(last_edit_user)
       if last_edit_user == 0
         return 'Not responded yet'
       else
         return 'Responded'
+      end
+    end
+
+    # update matching status
+    def update_status
+      if self.status == 'Collecting responses'
+        if !self.last_edit_users.has_value?(0)
+          self.status = 'Responses collected'
+        end
       end
     end
 
@@ -41,6 +51,7 @@ class Matching < ActiveRecord::Base
         project_id = self.result[e.team_number]
         e.update(app_id: project_id)
       end
+      self.status = 'Completed'
     end
 
     def self.calculate_respond_percentage(last_edit_users)

@@ -2,6 +2,9 @@ class MatchingController < ApplicationController
 
   def index
     @matchings = Matching.all
+    @matchings.each do |m|
+      m.update_status
+    end
     @currentPreference = nil
     if current_user&.coach?
       render 'index'
@@ -27,7 +30,7 @@ class MatchingController < ApplicationController
       @matching.update(preferences: Matching.initialize_preferences(@matching.engagements, @matching.projects))
       redirect_to '/matching', notice: 'Matching was successfully created.'
     else
-      redirect_to '/matching', notice: 'Invalid matching fields.'
+      redirect_to '/matching/new', notice: 'Invalid matching fields.'
     end
   end
 
@@ -37,7 +40,7 @@ class MatchingController < ApplicationController
 
     @currentPreference = []
     @description = []
-    @matching.preferences.each do |key, preference| 
+    @matching.preferences.each do |key, preference|
       if (key == @engagement.team_number)
         preference.each do |project_id|
           currApp = App.find_by_id(project_id)
@@ -70,11 +73,10 @@ class MatchingController < ApplicationController
   def finalize
     @matching = Matching.find(params[:matching_id])
     @matching.finalize
-    redirect_to '/matching', notice: 'Matching was successfully finalized.'
+    redirect_to '/matching', notice: 'Engagements were successfully finalized.'
   end
 
   def store
-
     if not params[:preference].nil?
 
       currentPreferences = params[:preference]
@@ -88,10 +90,10 @@ class MatchingController < ApplicationController
       @engagement = Engagement.find(params[:engagement_id])
 
       newPreferences = {}
-      @matching.preferences.each do |key, preference| 
+      @matching.preferences.each do |key, preference|
         if (@engagement.team_number == key)
           newPreferences[key] = dummy
-        else 
+        else
           newPreferences[key] = preference
         end
       end
@@ -101,27 +103,16 @@ class MatchingController < ApplicationController
 
   def destroy
     @matching = Matching.find(params[:matching_id])
-    if @matching.status != "Completed"
+    if @matching.status != 'Completed'
       @matching.engagements.each do |e|
         e.destroy
       end
       @matching.destroy
+      redirect_to '/matching', notice: 'Matching deleted.'
     else
       @matching.destroy
+      redirect_to '/matching', notice: 'Matching record deleted. (Engagements persist)'
     end
-    redirect_to '/matching', notice: 'Matching deleted.'
-  end
-
-  # GET /matching/edit
-  def edit
-    @matching = Matching.find(params[:matching_id])
-  end
-
-  # PATCH/PUT /matching/update
-  def update
-    @matching = Matching.find(params[:matching_id])
-    @matching.update(matching_params)
-    redirect_to '/matching', notice: 'Matching updated.'
   end
 
   def matching_params
