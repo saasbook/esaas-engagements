@@ -1,8 +1,11 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "navbar"
+
 #nav_header{role: 'navigation'}
   - klass = controller.controller_name
-
-
-.navbar.navbar-dark.bg-dark
+.navbar.navbar-dark.bg-dark.m-0
   %a.navbar-brand{:href => "/" } ESaaS Engagement
   .navbar-nav
   - if not current_user&.student?
@@ -30,11 +33,13 @@
       - if current_user&.coach? || current_user&.student? 
         = link_to "Project Matchings", matching_path, :class => "text-light"
     = link_to "Logout @#{current_user.github_uid}", logout_path, :class => "text-light"
-.navbar.navbar-light.bg-light.d-flex.m-0
+.navbar.mt-0{:style=> "background: #1e364f;"}
   = form_tag search_path, :method => :post do
     = label_tag :keyword
     = text_field_tag "keyword", ""
-    = submit_tag "Search", :class => "btn btn-primary"
+    = button_tag :type=>"submit", :class => "btn", :style=> "background-color: #ffd15c;" do
+      Search 
+      %i.fas.fa-search 
     - %w(Apps Organizations Users Semesters).each do |category|
-      = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
+      = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter ml-3 bg-white'
       = label_tag category, category
