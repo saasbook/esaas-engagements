@@ -34,7 +34,8 @@ class MatchingController < ApplicationController
   def show
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
-
+    
+    # update current preference
     @currentPreference = []
     @description = []
     @matching.preferences.each do |key, preference| 
@@ -75,8 +76,22 @@ class MatchingController < ApplicationController
 
   def store
 
-    if not params[:preference].nil?
 
+    @matching = Matching.find(params[:matching_id])
+    @engagement = Engagement.find(params[:engagement_id])
+
+    # Update last update users
+    new_last_edit_users = @matching.last_edit_users
+    @last_update_id = User.find_by_github_uid(params[:update_by]).id
+    @matching.last_edit_users.each do |team, edit_user|
+      if (team == @engagement.team_number)
+        new_last_edit_users[team] = @last_update_id
+      end
+    end
+    @matching.update_attributes(:last_edit_users => new_last_edit_users)
+
+
+    if not params[:preference].nil?
       currentPreferences = params[:preference]
 
       dummy = []
@@ -84,8 +99,6 @@ class MatchingController < ApplicationController
         dummy.push(App.where(:name => currentPreference).first.id.to_s)
       end
 
-      @matching = Matching.find(params[:matching_id])
-      @engagement = Engagement.find(params[:engagement_id])
 
       newPreferences = {}
       @matching.preferences.each do |key, preference| 
