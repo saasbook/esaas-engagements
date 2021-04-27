@@ -1,11 +1,9 @@
-!!!
-%html
-  %head
-    = stylesheet_link_tag "navbar"
+%head
+  = stylesheet_link_tag "navbar"
 
-.navbar.ml-5{role: 'search'}
+.navbar.ml-5
   = form_tag search_path, :method => :post do
-    = label_tag :keyword
+    = label_tag "keyword", ""
     = text_field_tag "keyword", "", :size=>"70", :style=>"height:2.5em;", :placeholder => "Try 'Spring 15'", :class=>"search-input"
     = button_tag :type=>"submit", :class => "btn search-btn", :style=> "background-color: #ffd15c;" do
       Search 
