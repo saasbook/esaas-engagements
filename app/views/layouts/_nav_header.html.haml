@@ -1,41 +1,40 @@
 #nav_header{role: 'navigation'}
   - klass = controller.controller_name
-  -# .navbar.navbar-dark.bg-dark.d-flex.m-0
 
-  %ul.navbar.navbar-dark.bg-dark
-    %a.navbar-brand{:href => "/" } ESaaS Engagement
-    %ul.navbar-nav
+
+.navbar.navbar-dark.bg-dark
+  %a.navbar-brand{:href => "/" } ESaaS Engagement
+  .navbar-nav
+  - if not current_user&.student?
+    = link_to 'Apps', apps_path, :class => "#{('active' if klass =~ /apps/i)} text-light"
+  - if current_user
+    = link_to 'My Projects', my_projects_path, :class => "text-light"
+  - if current_user&.coach?
+    - requests_count = get_pending_requests_count
+    = link_to my_approval_requests_path, :class => "text-light" do
+      App Edit Requests 
+      - unless requests_count == 0
+        %span.label{class: 'label-danger', style: ' font-size: 13px;'}
+          = requests_count
+  
+  - if not current_user&.student?        
+    = link_to 'Orgs', orgs_path, :class =>  "#{('active' if klass =~ /orgs/i)} text-light"
+    = link_to 'Users', users_path, :class =>  "#{('active' if klass =~ /users/i)} text-light"
+    = link_to 'Create', creation_path, :class =>  "#{('active' if klass =~ /creation/i)} text-light"
+  = link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank',  :class => "text-light"
+  - if not current_user
+    = link_to 'Login', my_projects_path, :class => "text-light"
+  - if current_user
     - if not current_user&.student?
-      = link_to 'Apps', apps_path, :class => "#{('active' if klass =~ /apps/i)}, text-light"
-    - if current_user
-      = link_to 'My Projects', my_projects_path, :class => "text-light"
-    - if current_user&.coach?
-      - requests_count = get_pending_requests_count
-      = link_to my_approval_requests_path, :class => "text-light" do
-        App Edit Requests 
-        - unless requests_count == 0
-          %span.label{class: 'label-danger', style: ' font-size: 13px;'}
-            = requests_count
-    
-    - if not current_user&.student?        
-      = link_to 'Orgs', orgs_path, :class =>  "#{('active' if klass =~ /orgs/i)}, text-light"
-      = link_to 'Users', users_path, :class =>  "#{('active' if klass =~ /users/i)}, text-light"
-      = link_to 'Create', creation_path, :class =>  "#{('active' if klass =~ /creation/i)}, text-light"
-    = link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank',  :class => "text-light"
-    - if not current_user
-      = link_to 'Login', my_projects_path, :class => "text-light"
-    - if current_user
-      - if not current_user&.student?
-        = link_to "Current iteration", current_iteration_path, :class => "text-light"
-        - if current_user&.coach? || current_user&.student? 
-          = link_to "Project Matchings", matching_path, :class => "text-light"
-      = link_to "Logout @#{current_user.github_uid}", logout_path, :class => "text-light"
-  %ul.nav.nav-tabs
-    %li
-      = form_tag search_path, :method => :post do
-        = label_tag :keyword
-        = text_field_tag "keyword", ""
-        = submit_tag "Search", :class => "btn btn-primary"
-        - %w(Apps Organizations Users Semesters).each do |category|
-          = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
-          = label_tag category, category
+      = link_to "Current iteration", current_iteration_path, :class => "text-light"
+      - if current_user&.coach? || current_user&.student? 
+        = link_to "Project Matchings", matching_path, :class => "text-light"
+    = link_to "Logout @#{current_user.github_uid}", logout_path, :class => "text-light"
+.navbar.navbar-light.bg-light.d-flex.m-0
+  = form_tag search_path, :method => :post do
+    = label_tag :keyword
+    = text_field_tag "keyword", ""
+    = submit_tag "Search", :class => "btn btn-primary"
+    - %w(Apps Organizations Users Semesters).each do |category|
+      = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
+      = label_tag category, category
