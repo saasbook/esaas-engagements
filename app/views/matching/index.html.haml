@@ -23,7 +23,7 @@
           %span.badge.h4
             = matching.status
         %td.align-middle
-          = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger'
+          .btn.btn-danger{"data-target" => "#myModal", "data-toggle"=>"modal"} Delete
           = link_to "Edit", edit_matching_path(matching_id: matching.id),:class => 'btn btn-secondary'
 
       %div#myModal.modal.fade{"tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
