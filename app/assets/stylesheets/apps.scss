@@ -2,15 +2,13 @@
     width: 200px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
-    top: 30; /* Stay at the top */
+    top: 3rem; /* Stay at the top */
     left: 20;
     padding-top: 60px;
-    // border-width: 3px !important;
-    margin-top: -5px;
+    margin-top: 0px;
 }
   
 .container {
     margin-left: 200px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
 }
   

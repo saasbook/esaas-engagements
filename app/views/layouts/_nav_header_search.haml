@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "navbar"
+
+.navbar.ml-5{role: 'search'}
+  = form_tag search_path, :method => :post do
+    -# = label_tag :keyword
+    = text_field_tag "keyword", "", :size=>"70", :style=>"height:2.5em;", :placeholder => "Try 'Spring 15'", :class=>"search-input"
+    = button_tag :type=>"submit", :class => "btn search-btn", :style=> "background-color: #ffd15c;" do
+      Search 
+      %i.fas.fa-search 
+    - %w(Apps Organizations Users Semesters).each do |category|
+      = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter ml-3'
+      = label_tag category, category
