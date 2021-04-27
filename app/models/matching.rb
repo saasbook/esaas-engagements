@@ -54,12 +54,12 @@ class Matching < ActiveRecord::Base
     end
 
     def self.find_last_edit_user(matching, engagement)
-      matching.last_edit_users.each do |team, last_edit_user|
+      matching.last_edit_users.each do |team, last_edit_user_id|
         if (team == engagement.team_number)
-          if (last_edit_user == 0)
+          if (last_edit_user_id == 0)
             return "Your team has not responded yet!"
           else
-            return "Last updated by " + team + " at " + matching.updated_at
+            return "Last updated by " + User.find(last_edit_user_id).name + " at " + matching.updated_at.strftime("%B %d, %Y")
           end
         end
       end

@@ -26,3 +26,8 @@
 @keyframes animate-positive {
     0% { width: 0%; }
 }
+
+
+.collapse-general:hover {
+    pointer-events: none !important;
+}
