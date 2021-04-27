@@ -20,7 +20,9 @@
           %div.card-body
             %h3.pl-3
               Ranking
-              .help-block.h4 Your Preference
+              .help-block.h4 
+                Your Preference
+                
               %ul.pt-3{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
                 - @currentPreference.each do |currentPreference|
@@ -51,7 +53,9 @@
           %div.card-body
             %h3.pr-5.text-right
               Matching
-              .help-block.h4 Drag projects below to rank them
+              .help-block.h4 
+                %i.fas.fa-exclamation-circle
+                Drag projects below to rank them
             %ul.p-3{:style => "list-style: none;", :id => "matching"}
               - @currentPreference.each do |currentPreference|
                 %li.mt-2
