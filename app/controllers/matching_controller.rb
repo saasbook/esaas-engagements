@@ -83,8 +83,6 @@ class MatchingController < ApplicationController
     # Update last update users
     new_last_edit_users = @matching.last_edit_users
     @last_update_id = User.find_by_github_uid(params[:update_by]).id
-    puts params[:update_by]
-    puts "SDasdas"
     @matching.last_edit_users.each do |team, edit_user|
       if (team == @engagement.team_number)
         new_last_edit_users[team] = @last_update_id

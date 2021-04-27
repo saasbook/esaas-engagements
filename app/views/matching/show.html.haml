@@ -5,7 +5,8 @@
 
     %h1.jumbotron.header.p-5
       Matching - #{@engagement.team_number}
-    %div.help-block.ml-5 #{Matching.find_last_edit_user(@matching, @engagement)}
+    %div.help-block.ml-5 
+      #{Matching.find_last_edit_user(@matching, @engagement)}
     %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
       .tick
         Submit
@@ -110,6 +111,8 @@
         const engagement_id = url.pop()
         const matching_id = url[2];
         const github_uid = "#{current_user.github_uid}";
+
+
         await $.ajax({
           url: window.location.href + "/store", 
           data: {
@@ -123,10 +126,11 @@
             console.log("success AJAX Store")
           }
         }).then(() => {
-        // await aysnc
         if (buttonText.innerHTML === "Submit") {
           buttonText.innerHTML = tickMark;
           this.classList.add('button__circle');
         }
+        const userName = "#{current_user.name}";
+        document.querySelector(".help-block").innerHTML = "Last updated by " + userName + " at " + new Date()
         })
       });
