@@ -8,9 +8,6 @@ class MatchingController < ApplicationController
     else
       render 'show'
     end
-
-    # [["Matching 1", "Complete", 1], ["Matching 2", "In Progress", 2], ["Matching 3", "Complete", 3]]
-
   end
 
   # GET /matching/new
@@ -20,7 +17,7 @@ class MatchingController < ApplicationController
     @num_engagements = params[:num_engagements].to_i
   end
 
-  # POST /matching
+  # POST /matching/create
   def create
     @matching = Matching.new(matching_params)
     if @matching.save
@@ -60,7 +57,14 @@ class MatchingController < ApplicationController
   def result
     @matching = Matching.find(params[:matching_id])
     @matching.prepare_match
-    @result = @matching.match
+    @matching.update(result: @matching.match)
+    @result = @matching.result
+  end
+
+  def finalize
+    @matching = Matching.find(params[:matching_id])
+    @matching.finalize
+    redirect_to '/matching', notice: 'Matching was successfully finalized.'
   end
 
   def store
@@ -70,8 +74,28 @@ class MatchingController < ApplicationController
   end
 
   def destroy
-    Matching.find(params[:matching_id]).destroy
+    @matching = Matching.find(params[:matching_id])
+    if @matching.status != "Completed"
+      @matching.engagements.each do |e|
+        e.destroy
+      end
+      @matching.destroy
+    else
+      @matching.destroy
+    end
     redirect_to '/matching', notice: 'Matching deleted.'
+  end
+
+  # GET /matching/edit
+  def edit
+    @matching = Matching.find(params[:matching_id])
+  end
+
+  # PATCH/PUT /matching/update
+  def update
+    @matching = Matching.find(params[:matching_id])
+    @matching.update(matching_params)
+    redirect_to '/matching', notice: 'Matching updated.'
   end
 
   def matching_params

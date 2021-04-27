@@ -5,7 +5,8 @@
 
 %h1
   Matching #{@mockMatching} Progress
-  %div.btn.btn-success.pull-right{:disabled => 'disabled', "data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"} Begin Matching
+  %div.btn.btn-success.pull-right{"data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"}
+    = link_to 'Begin Matching', matching_result_path(matching_id: @matching.id), :class => 'text-light'
 
 %div.progress
   %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
@@ -15,7 +16,7 @@
     %tr
     %th
       %h3
-        Team Number
+        Team Name
     %th
       %h3
         Coach

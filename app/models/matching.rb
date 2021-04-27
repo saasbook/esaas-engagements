@@ -35,6 +35,14 @@ class Matching < ActiveRecord::Base
       end
     end
 
+    # Assign current result projects to corresponding engagements
+    def finalize
+      self.engagements.each do |e|
+        project_id = self.result[e.team_number]
+        e.update(app_id: project_id)
+      end
+    end
+
     # Global variables to be used across functions for convenience.
     def prepare_match
       $engagements = self.preferences.keys
@@ -130,7 +138,7 @@ class Matching < ActiveRecord::Base
           propose(team, $engagement_preferences[team])
       end
 
-      puts $matchings
-      return $matchings
+      # maps team_number -> app_id instead of app_id -> team_number
+      return $matchings.invert
     end
 end
