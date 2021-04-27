@@ -4,12 +4,14 @@
     = stylesheet_link_tag "matching"
 
     %h1.jumbotron.header.p-5
-      Project Matching #{@mockMatching}
-
-
+      Matching - #{@engagement.team_number}
+    %div.help-block.ml-5 #{Matching.find_last_edit_user(@matching, @engagement)}
     %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
       .tick
         Submit
+  
+    
+
     // Scroll bar TODO:
     %body
       .container
@@ -18,7 +20,9 @@
           %div.card-body
             %h3.pl-3
               Ranking
-              .help-block.h4 Your Preference
+              .help-block.h4 
+                Your Preference
+                
               %ul.pt-3{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
                 - @currentPreference.each do |currentPreference|
@@ -27,17 +31,17 @@
                     %li.mt-2{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "Most Preferred"}
                       %div.card.mb-5
                         %div.card-header.bg-secondary.text-light
-                          Rank 
+                          Rank
                           = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
                             %p.rank
                               = @currentPreference[count]
-                  - else 
+                  - else
                     %li.mt-2
                       %div.card.mb-5
-                        %div.card-header.bg-secondary.text-light 
-                          Rank 
+                        %div.card-header.bg-secondary.text-light
+                          Rank
                           = count+1
                         %div.card-body
                           %blockquote.blockquote.mb-0
@@ -49,7 +53,9 @@
           %div.card-body
             %h3.pr-5.text-right
               Matching
-              .help-block.h4 Drag projects below to rank them
+              .help-block.h4 
+                %i.fas.fa-exclamation-circle
+                Drag projects below to rank them
             %ul.p-3{:style => "list-style: none;", :id => "matching"}
               - @currentPreference.each do |currentPreference|
                 %li.mt-2
@@ -59,13 +65,13 @@
                     %div.card-body
                       %blockquote.blockquote.mb-0
                         %p
-                          = @mockProjectsHash[currentPreference.to_sym]
+                          = @description[0]
 
 
 
     :javascript
       let currentRank = []
-      // For sortable 
+      // For sortable
       const el = document.getElementById('matching');
       const sortable = new Sortable(el, {
         animation: 150,
@@ -76,7 +82,6 @@
                   $(".project").each((i, projectHTML) => {
                     arr.push(projectHTML.innerText);
                   });
-
                   $(".rank").each((i, rankName) => {
                         rankName.innerText = arr[i]
                   })
@@ -101,13 +106,21 @@
       let buttonText = document.querySelector('.tick');
       const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>";
       buttonText.innerHTML = "Submit";
+
       button.addEventListener('click', async function() {
+        const url = window.location.pathname.split("/");
+        const engagement_id = url.pop()
+        const matching_id = url[2];
         await $.ajax({
-          url: "store",
-          data: {"preference": currentRank},
+          url: window.location.href + "/store", 
+          data: {
+            "preference": currentRank, 
+            "matching_id": matching_id,
+            "engagement_id": engagement_id,
+            },
           type: "POST",
           success: function (data) {
-            console.log("success AJAX POST")
+            console.log("success AJAX Store")
           }
         }).then(() => {
         // await aysnc
@@ -117,4 +130,3 @@
         }
         })
       });
-      
