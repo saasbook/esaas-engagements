@@ -8,7 +8,7 @@ Background: Logged in
         | id | name         | github_uid      | email                     | user_type |
         | 1  | Armando Fox  | armandofox      | fox@berkeley.edu          | coach     |
         | 2  | Joe Deatrick | jldeatrick      | jldeatrick@protonmail.com | client    |
-        | 3  | Developer    | esaas_developer | esaas@saasbook.info       | student   |
+        | 3  | Developer    | esaas_developer | esaas@saasbook.info       | coach   |
 
     And the following orgs exist:
         | id | name         | contact_id |

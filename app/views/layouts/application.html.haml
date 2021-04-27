@@ -2,7 +2,9 @@
 %html{lang: "en", dir: 'ltr'}
   %head
     %title ESaaS Customer Engagements
+    // Bootstrap4, FontAwesome CDN
     %link{rel: "stylesheet", href: "//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"}
+    %link{rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v5.10.0/css/all.css", integrity: "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p", crossorigin: "anonymous"}
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     = stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -12,12 +14,12 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.4.0/axe.min.js" integrity="sha256-3uvAwJcMTsYRtepeqr32rrpy5zZ/fMYjiKEKPZM6Rtc=" crossorigin="anonymous"></script>
 
   %body
-    -# .border-secondary.border-right
+    = render 'layouts/nav_header'
     .sidenav{role: 'navigation', title: 'filters'}
       = yield :filters
         
     #main.container{role: 'main'}
-      = render 'layouts/nav_header'
+      = render 'layouts/nav_header_search'
       = render 'shared/flash_messages'
       = yield :form_errors
       = yield

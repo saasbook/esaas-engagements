@@ -52,6 +52,7 @@ Background: Logged in
 
 Scenario: There are some click buttons on apps page that I can control the pagination
     Given I am on the apps page
+    And I follow "Log in with GitHub"
     Then I should see "10"
     And I should see "50"
     And I should see "100"
@@ -61,6 +62,7 @@ Scenario: There are some click buttons on apps page that I can control the pagin
 
 Scenario: I can see all apps with selection all
     Given I am on the apps page
+    And I follow "Log in with GitHub"
     When I follow "All"
     Then I should see "app_a"
     And I should see "app_b"
@@ -69,6 +71,7 @@ Scenario: I can see all apps with selection all
 
 Scenario: I can press number buttons to do pagination
     Given I am on the apps page
+    And I follow "Log in with GitHub"
     When I follow "10"
     Then I should see "app_a"
     And I should see "app_b"
@@ -78,6 +81,7 @@ Scenario: I can press number buttons to do pagination
 
 Scenario: I can use "next" and "previous" buttons to see previous or next apps
     Given I am on the apps page
+    And I follow "Log in with GitHub"
     When I follow "10"
     Then I should see "app_a"
     And I should see "app_b"
@@ -121,6 +125,7 @@ Scenario: I can use "next" and "previous" buttons to see previous or next apps
 
 Scenario: I can click "First" or "Last" to see the first page or last page of apps
     Given I am on the apps page
+    And I follow "Log in with GitHub"
     When I follow "10"
     Then I should see "app_b"
     And I should not see "app_k"

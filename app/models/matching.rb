@@ -43,6 +43,29 @@ class Matching < ActiveRecord::Base
       end
     end
 
+    def self.calculate_respond_percentage(last_edit_users)
+      responded = 0
+      last_edit_users.each do |team, last_edit_user|
+        if last_edit_user != 0
+          responded += 1
+        end
+      end
+      return responded.to_f / last_edit_users.length.to_f * 100
+    end
+
+    def self.find_last_edit_user(matching, engagement)
+      matching.last_edit_users.each do |team, last_edit_user|
+        if (team == engagement.team_number)
+          if (last_edit_user == 0)
+            return "Your team has not responded yet!"
+          else
+            return "Last updated by " + team + " at " + matching.updated_at
+          end
+        end
+      end
+      raise "Database has wrong info for matching!"
+    end
+
     # Global variables to be used across functions for convenience.
     def prepare_match
       $engagements = self.preferences.keys

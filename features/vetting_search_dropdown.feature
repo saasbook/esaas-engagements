@@ -21,10 +21,10 @@ Background: user and orgs have been added to database
 Scenario: I can search the dropdown list of status on new app page (including vetting status options)
 
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I press "Create App"
     # id for original (deployment) status
@@ -38,10 +38,10 @@ Scenario: I can search the dropdown list of status on new app page (including ve
 Scenario: I can see the dropdown list of status on new app page (including vetting status options)
 
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I press "Create App"
   # id for original (deployment) status

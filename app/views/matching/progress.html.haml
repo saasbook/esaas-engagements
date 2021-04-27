@@ -8,15 +8,16 @@
   %div.btn.btn-success.pull-right{"data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"}
     = link_to 'Begin Matching', matching_result_path(matching_id: @matching.id), :class => 'text-light'
 
+- responded_percentage = Matching.calculate_respond_percentage(@matching.last_edit_users).to_s + "%"
 %div.progress
-  %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: 66.6%;", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
-    66.6%
+  %div.progress-bar.progress-bar-striped.bg-primary.progress-bar-animated.active.progress{ :style=>"width: #{responded_percentage};", :aria_valuenow=>"66.6", :aria_valuemin=>"0", :aria_valuemax=>"100"}
+    = responded_percentage
 %table.table.table-condensed#apps_table
   %thead
     %tr
     %th
       %h3
-        Team Name
+        Team
     %th
       %h3
         Coach
@@ -34,8 +35,8 @@
     - @engagements.each do |e|
       %tr
         %td{:height => "70"}
-          %span.badge.bg-primary.h4
-            = link_to e.team_number, show_my_matching_path(matching_id: @matching.id), :class => 'text-light'
+          .btn.btn-dark.h4
+            = link_to e.team_number, show_engagement_matching_path(matching_id: @matching.id, engagement_id: e.id), :class => 'text-light'
         %td
           %span.badge.bg-dark.h4
             = User.find(e.coach_id).name
@@ -56,7 +57,7 @@
           //- else
           //  %span.badge.alert-success
           //    = mockStudent[1]
-= link_to 'Back', '/matching', :class => 'btn btn-primary m-2'
+-# = link_to 'Back', '/matching', :class => 'btn btn-secondary m-2'
 
 :javascript
   // For tool tip

@@ -13,3 +13,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( apps.scss )
 Rails.application.config.assets.precompile += %w( matching.css )
 Rails.application.config.assets.precompile += %w( progress.css )
+Rails.application.config.assets.precompile += %w( navbar.css )

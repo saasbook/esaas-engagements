@@ -33,13 +33,19 @@ class MatchingController < ApplicationController
 
   def show
     @matching = Matching.find(params[:matching_id])
-    @mockProjectsHash = {
-                        "AFX Dance": "Create a website that allows admins of different levels in AFX Dance to organize their audition process and pick dancers.",
-                        "BCal API Integration": "Unified portal for event requests and calendar management after transition from Oracle Calendar.",
-                        "CS61 series Lab assistant check-in": "Sign in portal for the 61 series lab assistants"
-                        }
-    @currentPreference = ["AFX Dance", "BCal API Integration", "CS61 series Lab assistant check-in"]
-    # Matching.find_or_create_by(:id => 1).preferences
+    @engagement = Engagement.find(params[:engagement_id])
+
+    @currentPreference = []
+    @description = []
+    @matching.preferences.each do |key, preference| 
+      if (key == @engagement.team_number)
+        preference.each do |project_id|
+          currApp = App.find_by_id(project_id)
+          @currentPreference.push(currApp.name)
+          @description.push(currApp.description)
+        end
+      end
+    end
   end
 
   def progress
@@ -68,9 +74,29 @@ class MatchingController < ApplicationController
   end
 
   def store
-    @match = Matching.find_or_create_by(:id => 1)
-    preference = params[:preferences]
-    @match.update_attributes(:preferences => preference)
+
+    if not params[:preference].nil?
+
+      currentPreferences = params[:preference]
+
+      dummy = []
+      currentPreferences.each do |currentPreference|
+        dummy.push(App.where(:name => currentPreference).first.id.to_s)
+      end
+
+      @matching = Matching.find(params[:matching_id])
+      @engagement = Engagement.find(params[:engagement_id])
+
+      newPreferences = {}
+      @matching.preferences.each do |key, preference| 
+        if (@engagement.team_number == key)
+          newPreferences[key] = dummy
+        else 
+          newPreferences[key] = preference
+        end
+      end
+      @matching.update_attributes(:preferences => newPreferences)
+    end
   end
 
   def destroy

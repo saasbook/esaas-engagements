@@ -1,6 +1,5 @@
 class AppsController < ApplicationController
   before_action :set_app, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :logged_in?, :only => :index
   skip_before_filter :auth_user?, :only => :index
 
   # GET /apps
