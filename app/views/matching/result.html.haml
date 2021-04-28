@@ -80,11 +80,11 @@
             - count += 1
             %li.mt-2
               %div.card.mb-5
-                %div.card-header.bg-dark.text-light.project
+                %div.card-header.bg-dark.text-light
                   Project
                   = count
                 %div.card-body
-                  %blockquote.blockquote.mb-0
+                  %blockquote.blockquote.mb-0.project
                     %p
                       = App.find_by(id: value).name
  
@@ -102,7 +102,12 @@
       // ghostClass: 'blue-background-class',
       // On sort callback render rank
       onSort: function(e) {
-          
-                // Change back to submit button as potentially need to save
+          const arr = [];
+          $(".project").each((i, projectHTML) => {
+            arr.push(projectHTML.innerText);
+          });
+          // Store current ranking choice in arr preparing submit
+          currentRank = arr;
+          console.log(currentRank)
       }
     });
