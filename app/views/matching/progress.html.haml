@@ -106,6 +106,12 @@
 %a.btn.btn-primary{"data-toggle"=>"collapse", :href=>"#addp", :role=>"button", "aria-expanded"=>"false", "aria-controls"=>"collapseExample" }
   Edit Projects Pool
 
+-# .card#snackbar{:style=>"width: 10rem;"}
+-#   .card-header 
+-#     Notification
+-#   .card-body 
+-#     .blockquote
+-#     Lorem ipsum 
 .div.collapse{:id=>"addp"}
   = bootstrap_form_for([@matching], url: '/matching/' + @matching.id.to_s + '/apps/update', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
     = f.collection_select(:projects, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2', style: 'width:1000px'})
@@ -113,9 +119,19 @@
 
 :javascript
   // For tool tip
+
+    //TODO: Once reach 100% enable button
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   })
 
+  document.querySelector(".btn-warning").addEventListener('click', async function() {
+      var x = document.getElementById("snackbar");
 
-  //TODO: Once reach 100% enable button
+      // Add the "show" class to DIV
+      x.className = "show";
+
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  })
+
