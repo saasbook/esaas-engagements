@@ -69,6 +69,15 @@ class MatchingController < ApplicationController
     @matching.prepare_match
     @matching.update(result: @matching.match)
     @result = @matching.result
+    
+    @engagements = @matching.engagements.order(:team_number).all
+    @students = {}
+    @engagements.each do |e|
+      @students[e] = []
+      e.developers.each do |d|
+        @students[e].push(d.name)
+      end
+    end
   end
 
   def finalize

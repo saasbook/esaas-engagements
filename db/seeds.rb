@@ -6,6 +6,7 @@ CSV.foreach("#{Rails.root}/db/user_orgs.csv", headers: true, header_converters: 
 		u.name = row[:user_name]
 		u.github_uid = row[:github_uid]
 		u.user_type = row[:user_type]
+		#FIXME: changed HERE -- FRED
 	end
 	Org.find_or_create_by!(name: row[:org_name]) do |o|
 		o.contact = user
@@ -16,10 +17,10 @@ end
 puts "#{Org.all.size} orgs, #{User.all.size} users"
 
 # default coach/coaching org
-coach = User.find_or_create_by(email: 'fox@cs.berekley.edu') do |fox|
+coach = User.create(email: 'fox@cs.berekley.edu') do |fox|
 	fox.name = "Armando Fox"
 	fox.github_uid = 'fox'
-	fox.user_type = 'coach'
+	fox.type_user = 'Coach'
 end
 cs169 = Org.find_or_create_by(name: 'UCB CS169 Fox') do |ucbcs169|
 	ucbcs169.description = 'CS 169 at UC Berkeley'
