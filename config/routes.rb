@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   delete '/matching/:matching_id' => 'matching#destroy', :as => "delete_matching"
   get '/matching/:matching_id/edit' => 'matching#edit', :as => "edit_matching"
   match '/matching/:matching_id/update' => 'matching#update', :via => [:put, :patch], :as => 'update_matching'
+  post "/matching/:matching_id/result/finalize" => 'matching#finalize'
+
 
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'

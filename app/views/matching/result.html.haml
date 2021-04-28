@@ -94,7 +94,6 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
 
-    let currentRank = []
     // For sortable
     const el = document.getElementById('matching');
     const sortable = new Sortable(el, {
@@ -107,7 +106,17 @@
             arr.push(projectHTML.innerText);
           });
           // Store current ranking choice in arr preparing submit
-          currentRank = arr;
-          console.log(currentRank)
+          $.ajax({
+            url: window.location.href + "/finalize", 
+            data: {
+              "final_result": arr, 
+              },
+            type: "POST",
+            success: function (data) {
+              console.log("success AJAX Finalize")
+            }
+          })
       }
     });
+
+    

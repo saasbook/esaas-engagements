@@ -66,7 +66,7 @@ class MatchingController < ApplicationController
     @matching.prepare_match
     @matching.update(result: @matching.match)
     @result = @matching.result
-    
+
     @engagements = @matching.engagements.order(:team_number).all
     @students = {}
     @engagements.each do |e|
@@ -84,8 +84,6 @@ class MatchingController < ApplicationController
   end
 
   def store
-
-
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
 
@@ -119,6 +117,14 @@ class MatchingController < ApplicationController
       end
       @matching.update_attributes(:preferences => newPreferences)
     end
+
+    redirect_to show_engagement_matching_path(params[:matching_id], params[:engagement_id])
+  end
+
+
+  def finalize 
+
+    redirect_to "/matching"
   end
 
   def destroy
