@@ -5,11 +5,15 @@
 
     %h1.jumbotron.header.p-5
       Matching - #{@engagement.team_number}
-    %div.help-block.ml-5 
+    %div.help-block.ml-5
       #{Matching.find_last_edit_user(@matching, @engagement)}
     %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
       .tick.submit
         Submit
+    %div.button.btn-dark.pull-right.h6.mr-5.my-0
+      %h4
+        = link_to "Back", matching_progress_path(matching_id: @matching.id), :class => "text-light"
+
 
     %body
       .container
@@ -18,9 +22,9 @@
           %div.card-body
             %h3.pl-3
               Ranking
-              .help-block.h4 
+              .help-block.h4
                 Your Preference
-                
+
               %ul.pt-3{:style => "list-style: none; padding-left: 0", :id => "rank"}
                 - count = -1
                 - @currentPreference.each do |currentPreference|
@@ -46,12 +50,12 @@
                             %p.rank
                               = @currentPreference[count]
                   -# - content_for :list do
-        
+
         %div.card.mt-5
           %div.card-body
             %h3.pr-5.text-right
               Matching
-              .help-block.h4 
+              .help-block.h4
                 %i.fas.fa-exclamation-circle
                 Drag projects below to rank them
             %ul.p-3{:style => "list-style: none;", :id => "matching"}
@@ -63,7 +67,7 @@
                     %div.card-body
                       %blockquote.blockquote.mb-0
                         %p
-                          = @description[0]
+                          = @description[currentPreference]
 
 
 
@@ -113,9 +117,9 @@
 
 
         await $.ajax({
-          url: window.location.href + "/store", 
+          url: window.location.href + "/store",
           data: {
-            "preference": currentRank, 
+            "preference": currentRank,
             "matching_id": matching_id,
             "engagement_id": engagement_id,
             "update_by": github_uid,
