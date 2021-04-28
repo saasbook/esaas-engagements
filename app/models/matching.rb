@@ -40,7 +40,7 @@ class Matching < ActiveRecord::Base
     def update_status
       if self.status == 'Collecting responses'
         if !self.last_edit_users.has_value?(0)
-          self.status = 'Responses collected'
+          self.update(status: 'Responses collected')
         end
       end
     end
@@ -51,7 +51,7 @@ class Matching < ActiveRecord::Base
         project_id = self.result[e.team_number]
         e.update(app_id: project_id)
       end
-      self.status = 'Completed'
+      self.update(status: 'Completed')
     end
 
     def self.calculate_respond_percentage(last_edit_users)
