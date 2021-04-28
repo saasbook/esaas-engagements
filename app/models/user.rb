@@ -56,8 +56,12 @@ class User < ActiveRecord::Base
     keys = ['name', 'email', 'github_uid', 'user_type']
     CSV.foreach(file.path, headers: true) do |row|
       row = (row.select { |key,_| keys.include? key }).to_h
-      if User.find_by("email" => row["email"]).nil?
-        u = User.create(row)
+      if row.empty?
+        raise "No valid columns. Valid columns are: 'name', 'email', 'github_uid', 'user_type'"
+      else
+        if User.find_by("email" => row["email"]).nil?
+          u = User.create(row)
+        end
       end
     end
   end

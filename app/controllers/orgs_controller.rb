@@ -88,8 +88,12 @@ class OrgsController < ApplicationController
   end
 
   def import
-    Org.import(params[:file])
-    redirect_to orgs_path, notice: 'Org was successfully imported.'
+    begin
+      Org.import(params[:file])
+      redirect_to orgs_path, notice: 'Org was successfully imported.'
+    rescue StandardError => e  
+      redirect_to orgs_path, notice: e.message
+    end
   end
 
   private
