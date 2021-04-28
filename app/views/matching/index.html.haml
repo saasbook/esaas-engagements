@@ -25,14 +25,14 @@
           %span.badge.h4
             = matching.status
         %td.align-middle
-          .btn.btn-danger.m-2{"data-target" => "#myModal", "data-toggle"=>"modal"} 
+          .btn.btn-danger.m-2{"data-target" => "#pop#{matching.id}", "data-toggle"=>"modal"} 
             Delete
             %i.fas.fa-trash-alt
           = link_to edit_matching_path(matching_id: matching.id),:class => 'btn btn-secondary m-2' do
             Edit 
             %i.far.fa-edit
 
-      %div#myModal.modal.fade{"tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
+      %div.modal.fade{:id=>"pop#{matching.id}", "tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
         .modal-dialog.modal-dialog-centered{:role => "document"}
           .modal-content
             .modal-body
@@ -74,19 +74,3 @@
     });
   });
 
-  $('.btn').on('click', function() {
-    new Noty({
-      type: 'success', //alert (default), success, error, warning, info - ClassName generator uses this value → noty_type__${type}
-      layout: 'topRight', //top, topLeft, topCenter, topRight (default), center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight - ClassName generator uses this value → noty_layout__${layout}
-      theme: 'bootstrap-v4', //relax, mint (default), metroui - ClassName generator uses this value → noty_theme__${theme}
-      text: 'My beautiful snackbar', //This string can contain HTML too. But be careful and don't pass user inputs to this parameter.
-      //timeout: 5000, // false (default), 1000, 3000, 3500, etc. Delay for closing event in milliseconds (ms). Set 'false' for sticky notifications.
-      progressBar: true, //Default, progress before fade out is displayed
-      //closeWith: 'click' //default; alternative: button
-      
-      /*animation: {
-              open: 'animated bounceInRight', // Animate.css class names
-              close: 'animated bounceOutRight' // Animate.css class names
-          }*/
-    }).show();
-  });
