@@ -33,7 +33,7 @@ Scenario: Happy Path - Can create new app, edit and destroy existing app if I am
   And I press "Edit" for "app1"
   Then I should see "Editing App"
   And I follow "Back"
-  And I press "Destroy" for "app1"
+  And I press "Delete" for "app1"
   Then I should see "App was successfully destroyed."
 
 Scenario: Sad Path - Cannot create new app, edit and destroy existing app if I am not Staff

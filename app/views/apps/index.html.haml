@@ -6,7 +6,9 @@
 .page-header
   %h1
     Listing Apps
-    = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
+    = link_to new_app_path, :class => 'btn btn-success pull-right m-3' do 
+      New App
+      %i.fas.fa-pencil-alt
   .help-block Click an App name to see more information
 
   - content_for :filters do
@@ -96,5 +98,9 @@
           %td
             = sanitize app.description
           %td{style: 'white-space: nowrap'}
-            = link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
-            = link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+            = link_to edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-sm btn-dark m-1' do
+              Edit
+              %i.far.fa-edit
+            = link_to app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger m-1' do
+              Delete
+              %i.far.fa-trash-alt

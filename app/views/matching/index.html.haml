@@ -1,7 +1,9 @@
 .page-header.jumbotron.mt-4.my-4
   %h1
     Project Matchings
-    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" } New Matching
+    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" }
+      New Matching
+      %i.fas.fa-pencil-alt
   .help-block Click a matching to see more information
 
 -# For coach only -> show all ongoing matching
@@ -18,12 +20,14 @@
     - @matchings.each do |matching|
       %tr
         %td.align-middle{:height => "70"}
-          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-primary'
+          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-dark'
         %td.align-middle
           %h4
             = matching.status
         %td.align-middle
-          .btn.btn-danger{"data-target" => "#myModal#{matching.id}", "data-toggle"=>"modal"} Delete
+          .btn.btn-danger{"data-target" => "#myModal#{matching.id}", "data-toggle"=>"modal"}
+            Delete
+            %i.fas.fa-trash-alt
 
           %div.modal.fade{:id=>"myModal#{matching.id}", "tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
             .modal-dialog.modal-dialog-centered{:role => "document"}
@@ -51,7 +55,7 @@
       <form action="/matching/new" method="get">
         <div class="form-group">
           <label for="exampleInputPassword1">Number of Engagements</label>
-          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="0">
+          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="1">
         </div>
         <button type="submit" class="btn btn-dark">Next</button>
       </form>
@@ -66,3 +70,4 @@
         }
     });
   });
+
