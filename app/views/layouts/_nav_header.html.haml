@@ -6,12 +6,12 @@
   .navbar.navbar-dark.bg-dark.m-0.navbar-static-top
     = image_tag 'Berkeley.png', alt: 'Berkeley', height: '40', width: '130', :class=>"p-0"
     %a.navbar-brand.px-1{:href => "/" } ESaaS Engagement
-    
+
     .navbar-nav
     - if not current_user&.student?
       = link_to apps_path, :class => "#{('active' if klass =~ /apps/i)} text-light text-light-nav pr-1 pl-3" do
         Apps
-        %i.fas.fa-rocket  
+        %i.fas.fa-rocket
     - if current_user
       = link_to my_projects_path, :class => "text-light  text-light-nav px-1" do
         My Projects
@@ -19,13 +19,13 @@
     - if current_user&.coach?
       - requests_count = get_pending_requests_count
       = link_to my_approval_requests_path, :class => "text-light text-light-nav px-1" do
-        App Edit Requests 
+        App Edit Requests
         %i.fas.fa-user-edit
         - unless requests_count == 0
           %span.label{class: 'label-danger', style: ' font-size: 13px;'}
             = requests_count
-    
-    - if not current_user&.student?        
+
+    - if not current_user&.student?
       = link_to orgs_path, :class =>  "#{('active' if klass =~ /orgs/i)} text-light text-light-nav px-1" do
         Orgs
       = link_to users_path, :class =>  "#{('active' if klass =~ /users/i)} text-light text-light-nav px-1" do
@@ -42,9 +42,8 @@
       - if not current_user&.student?
         = link_to current_iteration_path, :class => "text-light text-light-nav px-1" do
           Current iteration
-        - if current_user&.coach? || current_user&.student? 
-          = link_to matching_path, :class => "text-light text-light-nav px-1" do
-            Project Matching
-            %i.fas.fa-random
+      - if current_user&.coach? || current_user&.student?
+        = link_to matching_path, :class => "text-light text-light-nav px-1" do
+          Project Matching
+          %i.fas.fa-random
       = link_to "Logout @#{current_user.github_uid}", logout_path, :class => "text-light text-light-nav px-1"
-
