@@ -62,13 +62,23 @@
             .div.collapse{:id=>"collapse#{e.team_number}", :class => "collapse-general"}
               .div.card.card-body
                 You wanna edit #{e.team_number}
-
+  <div id="snackbar">Some text some message..</div>
 
 :javascript
   // For tool tip
+
+    //TODO: Once reach 100% enable button
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   })
 
+  document.querySelector(".btn-warning").addEventListener('click', async function() {
+      var x = document.getElementById("snackbar");
 
-  //TODO: Once reach 100% enable button
+      // Add the "show" class to DIV
+      x.className = "show";
+
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  })
+

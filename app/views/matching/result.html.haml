@@ -95,6 +95,7 @@
     })
 
     // For sortable
+    var currentRank = []
     const el = document.getElementById('matching');
     const sortable = new Sortable(el, {
       animation: 150,
@@ -105,15 +106,17 @@
           $(".project").each((i, projectHTML) => {
             arr.push(projectHTML.innerText);
           });
+          currentRank = arr
           // Store current ranking choice in arr preparing submit
           $.ajax({
             url: window.location.href + "/finalize", 
             data: {
-              "final_result": arr, 
+              "final_result": currentRank, 
               },
             type: "POST",
             success: function (data) {
               console.log("success AJAX Finalize")
+              console.log(currentRank)
             }
           })
       }
