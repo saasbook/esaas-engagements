@@ -99,6 +99,8 @@
             = sanitize app.description
           %td{style: 'white-space: nowrap'}
             = link_to edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-sm btn-dark m-1' do
+              Edit
               %i.far.fa-edit
             = link_to app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger m-1' do
+              Delete
               %i.far.fa-trash-alt
