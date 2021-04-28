@@ -27,6 +27,7 @@ class Matching < ActiveRecord::Base
       h
     end
 
+    # return individual engagement status
     def self.engagement_status(last_edit_user)
       if last_edit_user == 0
         return 'Not responded yet'
@@ -35,12 +36,31 @@ class Matching < ActiveRecord::Base
       end
     end
 
-    # Assign current result projects to corresponding engagements
+    # update matching status
+    def update_status
+      if self.status == 'Collecting responses'
+        if !self.last_edit_users.has_value?(0)
+          self.update(status: 'Responses collected')
+        end
+      end
+    end
+
+    # coach can do a final edit of the matching result
+    def final_edit(final_result)
+      h = self.result
+      h.keys.each_with_index do |key, index|
+        h.store(key, App.find_by_name(final_result[index]).id)
+      end
+      self.update(result: h)
+    end
+
+    # assign current result projects to corresponding engagements
     def finalize
       self.engagements.each do |e|
         project_id = self.result[e.team_number]
         e.update(app_id: project_id)
       end
+      self.update(status: 'Completed')
     end
 
     def self.calculate_respond_percentage(last_edit_users)
@@ -51,6 +71,10 @@ class Matching < ActiveRecord::Base
         end
       end
       return responded.to_f / last_edit_users.length.to_f * 100
+    end
+
+    def self.ready_to_match?(last_edit_users, matching_status)
+      (self.calculate_respond_percentage(last_edit_users) == 100 and matching_status != 'Completed')
     end
 
     def self.find_last_edit_user(matching, engagement)
@@ -64,6 +88,82 @@ class Matching < ActiveRecord::Base
         end
       end
       raise "Database has wrong info for matching!"
+    end
+
+    # returns the engagement id the user is developing if its in an active matching
+    # returns 0 if such id does not exist
+    def self.find_user_engagement_id(user_id)
+      dev_engagement = User.find(user_id).developing_engagement
+      if !dev_engagement.nil?
+        matching = dev_engagement.matching
+        if !matching.nil?
+          if matching.status != 'Completed'
+            return dev_engagement.id
+          end
+        end
+      end
+      return 0
+    end
+
+    # reset last edit user for a specific engagement
+    # used when the engagement is updated
+    def reset_last_edit_user(engagement)
+      team_number = engagement.team_number
+      new_last_edit_users = self.last_edit_users
+      new_last_edit_users.store(team_number, 0)
+      self.update(last_edit_users: new_last_edit_users)
+    end
+
+    # remove related values from all hash fields when an engagement is deleted
+    # destroy the engagement afterward
+    def remove_engagement(engagement)
+      team_number = engagement.team_number
+      new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.delete(team_number)
+      new_preferences.delete(team_number)
+      new_result.delete(team_number)
+      self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
+      engagement.destroy
+    end
+
+    # add an engagement to the current matching
+    def add_engagement(engagement)
+      team_number = engagement.team_number
+      new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.store(team_number, 0)
+      new_preferences.store(team_number, self.projects)
+      new_result.store(team_number, 0)
+      self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
+      engagement.update(matching_id: self.id)
+    end
+
+    # update project pool of the current matching
+    # reset all fields
+    def update_projects(projects)
+      new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.each do |k, v|
+        new_last_edit_users.store(k, 0)
+      end
+      new_preferences.each do |k, v|
+        new_preferences.store(k, projects)
+      end
+      new_result.each do |k, v|
+        new_result.store(k, 0)
+      end
+      self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
+      self.update(projects: projects)
     end
 
     # Global variables to be used across functions for convenience.

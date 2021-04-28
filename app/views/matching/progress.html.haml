@@ -4,9 +4,9 @@
     = stylesheet_link_tag "progress"
 
 %h1
-  Matching #{@mockMatching} Progress
-  %div.btn.btn-success.pull-right{"data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submit their preference"}
-    = link_to 'Begin Matching', matching_result_path(matching_id: @matching.id), :class => 'text-light'
+  Matching #{@mockMatching} Progress #{@matching_completed}
+  %div.btn.btn-success.pull-right{"data-toggle" => "tooltip", "data-placement"=>"top", :title => "You can only begin matching once everyone submits their preference & the matching is not completed"}
+    = link_to_if @enable_matching, 'Begin Matching', matching_result_path(matching_id: @matching.id), :class => 'text-light'
 
 - responded_percentage = Matching.calculate_respond_percentage(@matching.last_edit_users).to_s + "%"
 %div.progress
@@ -33,36 +33,83 @@
             Start Date
         %th
           %h3
-            Edit
+            Operation
 
     %tbody
       - @engagements.each do |e|
         %tr
-          %td{:height => "70"}
-            .btn.btn-dark.h4
+          %td.align-middle
+            .btn.btn-dark.h7
               = link_to e.team_number, show_engagement_matching_path(matching_id: @matching.id, engagement_id: e.id), :class => 'text-light'
-          %td
+          %td.align-middle
             %span.badge.bg-dark.h4
               = User.find(e.coach_id).name
-          %td
+          %td.align-middle
             - @students[e].each do |n|
               %span.badge.alert-primary.bg-light.text-dark.h4
                 = n
-          %td
-            %span.badge.h4
+          %td.align-middle
+            %span.badge.bg-white.text-dark.h4
               = Matching.engagement_status(@matching.last_edit_users[e.team_number])
-          %td
+          %td.align-middle
             %span.badge.bg-white.text-dark.h4
               = e.start_date.strftime("%B %d, %Y")
-          %td
+          %td.align-middle
             %a.btn.btn-warning{"data-toggle"=>"collapse", :href=>"#collapse#{e.team_number}", :role=>"button", "aria-expanded"=>"false", "aria-controls"=>"collapseExample" }
               Edit
-        %tr
-          %td{:colspan=>"6", :style=>"border: none;"}
-            .div.collapse{:id=>"collapse#{e.team_number}", :class => "collapse-general"}
-              .div.card.card-body
-                You wanna edit #{e.team_number}
+            .btn.btn-danger{"data-target" => "#myModal#{e.id}", "data-toggle"=>"modal"} Delete
 
+        %tr
+          %td{:colspan=>"6"}
+            .div.collapse{:id=>"collapse#{e.team_number}"}
+              = bootstrap_form_for([e], url: '/matching/' + @matching.id.to_s + '/engagement/' + e.id.to_s + '/update', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+                = f.text_field :team_number, label: 'Team Number/Name', style: 'width:200px'
+                = f.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2', style: 'width:200px'})
+                = f.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2', style: 'width:1000px'})
+                = f.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date', style: 'width:200px'
+                = f.submit class: 'btn btn-success'
+
+            %div.modal.fade{:id=>"myModal#{e.id}", "tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
+              .modal-dialog.modal-dialog-centered{:role => "document"}
+                .modal-content
+                  .modal-body
+                    %h4.mb-5 Are you sure to delete #{e.team_number}?
+                    .btn.btn-dark.pull-right.ml-3{"data-dismiss" => "modal"} Close
+                    = link_to "Delete", delete_engagement_path(matching_id: @matching.id, engagement_id: e.id), :method => :delete, :class => 'btn btn-danger pull-right ml-4'
+
+
+
+%a.btn.btn-primary{"data-toggle"=>"collapse", :href=>"#add", :role=>"button", "aria-expanded"=>"false", "aria-controls"=>"collapseExample" }
+  Add Engagement
+
+.div.collapse{:id=>"add"}
+  = bootstrap_form_for([@new_engagement], url: '/matching/' + @matching.id.to_s + '/engagement/create', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+    = f.text_field :team_number, label: 'Team Number/Name', style: 'width:200px'
+    = f.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2', style: 'width:200px'})
+    = f.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2', style: 'width:1000px'})
+    = f.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date', style: 'width:200px'
+    = f.submit class: 'btn btn-success'
+
+%br
+%br
+%table.table.table-condensed#apps_table
+  %thead
+    %tr
+      %th.h1
+        Projects
+  %tbody
+    - @current_projects.each do |p|
+      %tr
+        %th.h4
+          #{p}
+
+%a.btn.btn-primary{"data-toggle"=>"collapse", :href=>"#addp", :role=>"button", "aria-expanded"=>"false", "aria-controls"=>"collapseExample" }
+  Edit Projects Pool
+
+.div.collapse{:id=>"addp"}
+  = bootstrap_form_for([@matching], url: '/matching/' + @matching.id.to_s + '/apps/update', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+    = f.collection_select(:projects, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2', style: 'width:1000px'})
+    = f.submit 'Update Projects Pool', class: 'btn btn-success'
 
 :javascript
   // For tool tip
