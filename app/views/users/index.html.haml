@@ -56,12 +56,19 @@
       <form action="users/import?&X-CSRF-Token=${AUTH_TOKEN}&X-Requested-With=XMLHttpRequest" enctype="multipart/form-data" method="post">
         <div class="form-group">
           <input type="file"
-          id="file" name="file">
+          id="file" name="file" accept=".csv">
         </div>
-        <button type="submit" class="btn btn-dark">Import</button>
+        <div class="row" style="margin-left: 0px; align-items: center; ">
+          <button type="submit" class="btn btn-dark">Import</button>
+          <a href="#" class="tooltip-toggle" 
+            aria-label="Accepts comma delimited CSV file, with columns being of user_email,
+            user_name, org_name, etc..." 
+            tabindex="0" style="margin-left: 5px;">
+            Help
+          </a>
+        </div>
       </form>
     </div>`;
-
     $('[data-toggle="popover"]').popover({
       container: 'body',
       html: true,
