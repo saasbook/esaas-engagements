@@ -58,7 +58,7 @@ Scenario: Happy Path - Can create new org, edit and destroy existing org if I am
   And I press "Edit" for "org1"
   Then I should see "Editing"
   And I follow "Back"
-  And I press "Delete" for "org1"
+  And I press "Destroy" for "org1"
   Then I should see "Org was successfully destroyed."
 
 Scenario: Sad Path - Cannot create new org, edit and destroy existing org if I am not Staff
