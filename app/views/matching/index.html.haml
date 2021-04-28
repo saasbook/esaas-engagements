@@ -1,7 +1,9 @@
 .page-header.jumbotron.mt-4.my-4
   %h1
     Project Matchings
-    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" } New Matching
+    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" }
+      New Matching
+      %i.fas.fa-pencil-alt
   .help-block Click a matching to see more information
 
 -# For coach only -> show all ongoing matching
@@ -18,13 +20,17 @@
     - @matchings.each do |matching|
       %tr
         %td.align-middle{:height => "70"}
-          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-primary'
+          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-dark'
         %td.align-middle
           %span.badge.h4
             = matching.status
         %td.align-middle
-          .btn.btn-danger{"data-target" => "#myModal", "data-toggle"=>"modal"} Delete
-          = link_to "Edit", edit_matching_path(matching_id: matching.id),:class => 'btn btn-secondary'
+          .btn.btn-danger.m-2{"data-target" => "#myModal", "data-toggle"=>"modal"} 
+            Delete
+            %i.fas.fa-trash-alt
+          = link_to edit_matching_path(matching_id: matching.id),:class => 'btn btn-secondary m-2' do
+            Edit 
+            %i.far.fa-edit
 
       %div#myModal.modal.fade{"tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
         .modal-dialog.modal-dialog-centered{:role => "document"}
