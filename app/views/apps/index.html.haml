@@ -68,7 +68,7 @@
       %li{:class=>'page_num'}
         %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters}=action
     - elsif action == "Previous" then
-      - unless @page_num <= 1 then 
+      - unless @page_num <= 1 then
         %li{:class=>'page_num'}
           %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num-1}
     - elsif action == "Next" then
@@ -97,10 +97,6 @@
             = link_to app.org.name, app.org
           %td
             = sanitize app.description
-            %br
-            - app.engagements.each do |engagement|
-              %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
-              %br
           %td{style: 'white-space: nowrap'}
             = link_to edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-sm btn-dark m-1' do
               %i.far.fa-edit

@@ -102,11 +102,36 @@ class ApplicationController < ActionController::Base
   # Denies access if user is a student
   def check_student
     @@name_path = request.env['PATH_INFO']
-    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/")
+    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != "/matching")
       begin
         redirect_to :back, alert: "You do not have access to that page."
       rescue Exception
         redirect_to "/", alert: "You do not have access to that page."
+      end
+    end
+  end
+
+  # redirects users to corresponding matching page
+  def auth_matching
+    @@name_path = request.env['PATH_INFO']
+    if current_user&.client?
+      begin
+        redirect_to :back, alert: "You do not have access to that page."
+      rescue Exception
+        redirect_to "/", alert: "You do not have access to that page."
+      end
+    end
+    if current_user&.student?
+      engagement_id = Matching.find_user_engagement_id(current_user.id)
+      if engagement_id == 0
+        begin
+          redirect_to :back, alert: "You do not have a matching in progress."
+        rescue Exception
+          redirect_to "/", alert: "You do not have a matching in progress."
+        end
+      else
+        matching_id = Engagement.find(engagement_id).matching.id
+        redirect_to show_engagement_matching_path(matching_id: matching_id, engagement_id: engagement_id)
       end
     end
   end
