@@ -45,6 +45,15 @@ class Matching < ActiveRecord::Base
       end
     end
 
+    # coach can do a final edit of the matching result
+    def final_edit(final_result)
+      h = self.result
+      h.keys.each_with_index do |key, index|
+        h.store(key, final_result[index])
+      end
+      self.update(result: h)
+    end
+
     # Assign current result projects to corresponding engagements
     def finalize
       self.engagements.each do |e|

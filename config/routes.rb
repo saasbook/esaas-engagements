@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get '/matching/:matching_id/result' => 'matching#result', :as => "matching_result"
   get '/matching/:matching_id/finalize' => 'matching#finalize', :as => "matching_finalize"
   delete '/matching/:matching_id' => 'matching#destroy', :as => "delete_matching"
-  
+  post "/matching/:matching_id/result/finalize" => 'matching#finalize'
+
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'
   match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]

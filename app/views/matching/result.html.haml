@@ -80,11 +80,11 @@
             - count += 1
             %li.mt-2
               %div.card.mb-5
-                %div.card-header.bg-dark.text-light.project
+                %div.card-header.bg-dark.text-light
                   Project
                   = count
                 %div.card-body
-                  %blockquote.blockquote.mb-0
+                  %blockquote.blockquote.mb-0.project
                     %p
                       = App.find_by(id: value).name
  
@@ -94,7 +94,6 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
 
-    let currentRank = []
     // For sortable
     const el = document.getElementById('matching');
     const sortable = new Sortable(el, {
@@ -102,7 +101,22 @@
       // ghostClass: 'blue-background-class',
       // On sort callback render rank
       onSort: function(e) {
-          
-                // Change back to submit button as potentially need to save
+          const arr = [];
+          $(".project").each((i, projectHTML) => {
+            arr.push(projectHTML.innerText);
+          });
+          // Store current ranking choice in arr preparing submit
+          $.ajax({
+            url: window.location.href + "/finalize", 
+            data: {
+              "final_result": arr, 
+              },
+            type: "POST",
+            success: function (data) {
+              console.log("success AJAX Finalize")
+            }
+          })
       }
     });
+
+    
