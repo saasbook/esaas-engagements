@@ -37,8 +37,8 @@ deploy:
   app: esaas-team8
   on:
     repo: zfred219/esaas-engagements
-  after_deploy:
-  - bundle exec rake db:migrate
-  - bundle exec rake db:reset
+  # after_deploy:
+  # - bundle exec rake db:migrate
+  # - bundle exec rake db:reset
 
 

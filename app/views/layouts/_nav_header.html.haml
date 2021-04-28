@@ -1,38 +1,50 @@
+%head
+  = stylesheet_link_tag "navbar"
+
 #nav_header{role: 'navigation'}
   - klass = controller.controller_name
-  %ul.nav.nav-tabs{style: 'border: none;'}
+  .navbar.navbar-dark.bg-dark.m-0.navbar-static-top
+    = image_tag 'Berkeley.png', alt: 'Berkeley', height: '40', width: '130', :class=>"p-0"
+    %a.navbar-brand.px-1{:href => "/" } ESaaS Engagement
+    
+    .navbar-nav
     - if not current_user&.student?
-      %li= link_to 'Apps', apps_path, :class => ('active' if klass =~ /apps/i)
+      = link_to apps_path, :class => "#{('active' if klass =~ /apps/i)} text-light text-light-nav pr-1 pl-3" do
+        Apps
+        %i.fas.fa-rocket  
     - if current_user
-      %li= link_to 'My Projects', my_projects_path
+      = link_to my_projects_path, :class => "text-light  text-light-nav px-1" do
+        My Projects
+        %i.fas.fa-tasks
     - if current_user&.coach?
-      %li
-        - requests_count = get_pending_requests_count
-        = link_to my_approval_requests_path do
-          App Edit Requests
-          - unless requests_count == 0
-            %span.label{class: 'label-danger', style: ' font-size: 13px;'}
-              = requests_count
+      - requests_count = get_pending_requests_count
+      = link_to my_approval_requests_path, :class => "text-light text-light-nav px-1" do
+        App Edit Requests 
+        %i.fas.fa-user-edit
+        - unless requests_count == 0
+          %span.label{class: 'label-danger', style: ' font-size: 13px;'}
+            = requests_count
     
     - if not current_user&.student?        
-      %li= link_to 'Orgs', orgs_path, :class => ('active' if klass =~ /orgs/i)
-      %li= link_to 'Users', users_path, :class => ('active' if klass =~ /users/i)
-      %li= link_to 'Create', creation_path, :class => ('active' if klass =~ /creation/i)
-    %li= link_to 'Help', 'https://github.com/saasbook/esaas-engagements', :target => '_blank'
+      = link_to orgs_path, :class =>  "#{('active' if klass =~ /orgs/i)} text-light text-light-nav px-1" do
+        Orgs
+      = link_to users_path, :class =>  "#{('active' if klass =~ /users/i)} text-light text-light-nav px-1" do
+        Users
+      = link_to creation_path, :class =>  "#{('active' if klass =~ /creation/i)} text-light text-light-nav px-1" do
+        Create
+    = link_to 'https://github.com/saasbook/esaas-engagements', :target => '_blank',  :class => "text-light text-light-nav px-1" do
+      Help
     - if not current_user
-      %li= link_to 'Login', my_projects_path
+      = link_to my_projects_path, :class => "text-light text-light-nav px-1" do
+        Login
+        %i.fas.fa-sign-in-alt
     - if current_user
       - if not current_user&.student?
-        %li= link_to "Current iteration", current_iteration_path
+        = link_to current_iteration_path, :class => "text-light text-light-nav px-1" do
+          Current iteration
         - if current_user&.coach? || current_user&.student? 
-          %li= link_to "Project Matchings", matching_path
-      %li= link_to "Logout @#{current_user.github_uid}", logout_path
-  %ul.nav.nav-tabs
-    %li
-      = form_tag search_path, :method => :post do
-        = label_tag :keyword
-        = text_field_tag "keyword", ""
-        = submit_tag "Search", :class => "btn btn-primary"
-        - %w(Apps Organizations Users Semesters).each do |category|
-          = check_box_tag category, 1, (if @filters.nil? then true else @filters.include?(category) end), :class => 'filter'
-          = label_tag category, category
+          = link_to matching_path, :class => "text-light text-light-nav px-1" do
+            Project Matching
+            %i.fas.fa-random
+      = link_to "Logout @#{current_user.github_uid}", logout_path, :class => "text-light text-light-nav px-1"
+

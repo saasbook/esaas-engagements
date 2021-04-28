@@ -1,24 +1,179 @@
 class Matching < ActiveRecord::Base
-  @@preferences = {}
-  @@teams = {}
-  @@result = {}
-  @@projects = []
+    has_many :engagements
+    serialize :projects, Array
+    serialize :preferences, Hash
+    serialize :result, Hash
+    serialize :last_edit_users, Hash
 
-  # Dummy data for testing in ruby console. Uncomment and run commands: m = Matching.create and m.match to see results
-  # @@projects =[1, 2, 3, 4, 5, 6, 7, 8]
-  # @@preferences = { 'sp21-1' => [1, 2, 3, 4, 5, 6, 7, 8], 'sp21-2' => [3, 2, 4, 1, 5, 7, 8, 6],
-                #  'sp21-3' => [2, 3, 4, 5, 1, 8, 7, 6], 'sp21-4' => [1, 2, 3, 4, 5, 6, 7, 8],
-                #  'sp21-5' => [5, 3, 2, 4, 6, 7, 8, 1], 'sp21-6' => [8, 7, 6, 5, 4, 3, 2, 1] }
-  # @@teams = { 'sp21-1' => [1, 2, 3, 4, 5, 6, 7, 8], 'sp21-2' => [3, 2, 4, 1, 5, 7, 8, 6],
-                #  'sp21-3' => [2, 3, 4, 5, 1, 8, 7, 6], 'sp21-4' => [1, 2, 3, 4, 5, 6, 7, 8],
-                #  'sp21-5' => [5, 3, 2, 4, 6, 7, 8, 1], 'sp21-6' => [8, 7, 6, 5, 4, 3, 2, 1] }
+    @@STATUSES = ['Collecting responses', 'Responses collected', 'Completed']
 
-  # Global variables to be used across functions for convenience.
-  $engagements = @@teams.keys
-  $engagement_preferences = @@preferences
-  $apps = @@projects
-  $app_preferences = {}
-  $matchings = {}
+    validates_presence_of :name, :projects
+    validates_inclusion_of :status, in: @@STATUSES
+    accepts_nested_attributes_for :engagements
+
+    def self.initialize_hash(engagements)
+      h = {}
+      engagements.each do |e|
+        h.store(e.team_number, 0)
+      end
+      h
+    end
+
+    def self.initialize_preferences(engagements, projects)
+      h = {}
+      engagements.each do |e|
+        h.store(e.team_number, projects)
+      end
+      h
+    end
+
+    # return individual engagement status
+    def self.engagement_status(last_edit_user)
+      if last_edit_user == 0
+        return 'Not responded yet'
+      else
+        return 'Responded'
+      end
+    end
+
+    # update matching status
+    def update_status
+      if self.status == 'Collecting responses'
+        if !self.last_edit_users.has_value?(0)
+          self.update(status: 'Responses collected')
+        end
+      end
+    end
+
+    # coach can do a final edit of the matching result
+    def final_edit(final_result)
+      h = self.result
+      h.keys.each_with_index do |key, index|
+        h.store(key, App.find_by_name(final_result[index]).id)
+      end
+      self.update(result: h)
+    end
+
+    # assign current result projects to corresponding engagements
+    def finalize
+      self.engagements.each do |e|
+        project_id = self.result[e.team_number]
+        e.update(app_id: project_id)
+      end
+      self.update(status: 'Completed')
+    end
+
+    def self.calculate_respond_percentage(last_edit_users)
+      responded = 0
+      last_edit_users.each do |team, last_edit_user|
+        if last_edit_user != 0
+          responded += 1
+        end
+      end
+      return responded.to_f / last_edit_users.length.to_f * 100
+    end
+
+    def self.ready_to_match?(last_edit_users, matching_status)
+      (self.calculate_respond_percentage(last_edit_users) == 100 and matching_status != 'Completed')
+    end
+
+    def self.find_last_edit_user(matching, engagement)
+      matching.last_edit_users.each do |team, last_edit_user_id|
+        if (team == engagement.team_number)
+          if (last_edit_user_id == 0)
+            return "Your team has not responded yet!"
+          else
+            return "Last updated by " + User.find(last_edit_user_id).name + " at " + matching.updated_at.strftime("%B %d, %Y")
+          end
+        end
+      end
+      raise "Database has wrong info for matching!"
+    end
+
+    # returns the engagement id the user is developing if its in an active matching
+    # returns 0 if such id does not exist
+    def self.find_user_engagement_id(user_id)
+      dev_engagement = User.find(user_id).developing_engagement
+      if !dev_engagement.nil?
+        matching = dev_engagement.matching
+        if !matching.nil?
+          if matching.status != 'Completed'
+            return dev_engagement.id
+          end
+        end
+      end
+      return 0
+    end
+
+    # reset last edit user for a specific engagement
+    # used when the engagement is updated
+    def reset_last_edit_user(engagement)
+      team_number = engagement.team_number
+      new_last_edit_users = self.last_edit_users
+      new_last_edit_users.store(team_number, 0)
+      self.update(last_edit_users: new_last_edit_users)
+    end
+
+    # remove related values from all hash fields when an engagement is deleted
+    # destroy the engagement afterward
+    def remove_engagement(engagement)
+      team_number = engagement.team_number
+      new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.delete(team_number)
+      new_preferences.delete(team_number)
+      new_result.delete(team_number)
+      self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
+      engagement.destroy
+    end
+
+    # add an engagement to the current matching
+    def add_engagement(engagement)
+      team_number = engagement.team_number
+      new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.store(team_number, 0)
+      new_preferences.store(team_number, self.projects)
+      new_result.store(team_number, 0)
+      self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
+      engagement.update(matching_id: self.id)
+    end
+
+    # update project pool of the current matching
+    # reset all fields
+    def update_projects(projects)
+      new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.each do |k, v|
+        new_last_edit_users.store(k, 0)
+      end
+      new_preferences.each do |k, v|
+        new_preferences.store(k, projects)
+      end
+      new_result.each do |k, v|
+        new_result.store(k, 0)
+      end
+      self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
+      self.update(projects: projects)
+    end
+
+    # Global variables to be used across functions for convenience.
+    def prepare_match
+      $engagements = self.preferences.keys
+      $engagement_preferences = self.preferences
+      $apps = self.projects
+      $app_preferences = {}
+      $matchings = {}
+    end
 
     # Indexing and looking up projects (represented by ints) is confusing. Represent ints in arrays as strings.
     def convert_array_numbers_to_string(arr)
@@ -97,7 +252,7 @@ class Matching < ActiveRecord::Base
         value = convert_array_numbers_to_string(value)
         @engagement_preferences_formatted[key] = value
       end
-      $engagement_preferences =@engagement_preferences_formatted
+      $engagement_preferences = @engagement_preferences_formatted
 
       assign_apps_preferences
 
@@ -106,7 +261,7 @@ class Matching < ActiveRecord::Base
           propose(team, $engagement_preferences[team])
       end
 
-      puts $matchings
-      return $matchings
+      # maps team_number -> app_id instead of app_id -> team_number
+      return $matchings.invert
     end
 end

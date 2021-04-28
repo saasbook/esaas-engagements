@@ -1,48 +1,42 @@
 %h1.jumbotron
   Create Matching
-  
-= bootstrap_form_for([@matching], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+
+= bootstrap_form_for([@matching], url: 'create', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
   - appCount = 1
   - teamCount = 1
-  .row
-    %fieldset.col-md-6
+  .col
+    %fieldset.row-md-6
+      .container-fluid{:id => "e_container"}
+        = f.text_field :name, label: 'Matching Name'
+    %fieldset.row-md-6
       %legend Projects
       .container-fluid{:id => "e_container"}
-        %div.card.text-center.mb-5
-          %div.card-header
+        %div.card.text-left.mb-5
+          %div.card-header.text-white.bg-dark
             // Must use = instead of - to run it
-            = "Team" + teamCount.to_s
+            = "Project Pool"
           %div.card-body
-            = f.collection_select(:teams, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2'})
-        %div.card.text-center.mb-5
-          %div.card-header
-            // Must use = instead of - to run it
-            = "Team" + teamCount.to_s
-          %div.card-body
-            = f.collection_select(:teams, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2'})
-      %div.btn.btn-dark.pull-right{:id => "e_button"} Add another project
-      
-    %fieldset.col-md-6
+            = f.collection_select(:projects, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2'})
+    %fieldset.row-md-6
       %legend Engagements
       -# %input{:type => "number"}
       .container-fluid{:id => "e_container"}
-        %div.card.text-center.mb-5
-          %div.card-header
-            // Must use = instead of - to run it
-            = "Team" + teamCount.to_s
-          %div.card-body
-            = f.collection_select(:teams, User.students, :id, :name, {label: 'Student Names'}, {multiple: true, class: 'select2'})
-        %div.card.text-center.mb-5
-          %div.card-header
-            // Must use = instead of - to run it
-            = "Team" + teamCount.to_s
-          %div.card-body
-            = f.collection_select(:teams, User.students, :id, :name, {label: 'Student Names'}, {multiple: true, class: 'select2'})
-      %div.btn.btn-dark.pull-right{:id => "e_button"} Add another Engagement
+        - @num_engagements.times do
+          %div.card.text-left.mb-5
+            %div.card-header.text-white.bg-dark
+              // Must use = instead of - to run it
+              = "Engagement " + teamCount.to_s
+            %div.card-body
+              = f.fields_for (:engagements) do |e|
+                = e.text_field :team_number, label: 'Team Number/Name'
+                = e.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2'})
+                = e.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2'})
+                = e.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date'
+              // %div.btn.btn-dark.pull-right{:id => "e_button"} Add another Engagement
+          - teamCount += 1
     = f.submit "Submit", class: 'btn btn-success m-2'
     = button_tag 'Reset', type: :reset, :class => 'btn btn-primary m-2'
-    = link_to 'Back', @matching, :class => 'btn btn-primary m-2'
-
+    = link_to 'Back', '/matching', :class => 'btn btn-primary m-2'
 
 // TODO: add dynamic team number
 :javascript

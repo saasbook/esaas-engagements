@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
 
-  # Notice order 
-  get 'matching/new', :as => "project_matching_new"
-  get "/matching" => 'matching#index'
-  get 'matching/:matching_id' => 'matching#show', :as => "show_my_matching"
-  get "/matching/:matching_id/progress" => 'matching#progress', :as => "matching_progress"
-  post "/matching/store" => 'matching#store'
-
-
- 
+  # Notice order
+  get '/matching/new' => 'matching#new', :as => 'new_matching'
+  post '/matching/create' => 'matching#create'
+  get '/matching' => 'matching#index'
+  get '/matching/:matching_id/engagement/:engagement_id' => 'matching#show', :as => 'show_engagement_matching'
+  get '/matching/:matching_id/progress' => 'matching#progress', :as => 'matching_progress'
+  post '/matching/:matching_id/engagement/:engagement_id/store' => 'matching#store'
+  get '/matching/:matching_id/result' => 'matching#result', :as => 'matching_result'
+  delete '/matching/:matching_id' => 'matching#destroy', :as => 'delete_matching'
+  post '/matching/:matching_id/result/final_edit' => 'matching#final_edit'
+  get '/matching/:matching_id/result/finalize' => 'matching#finalize', :as => 'matching_finalize'
+  post '/matching/:matching_id/engagement/create' => 'matching#create_engagement'
+  post '/matching/:matching_id/engagement/:engagement_id/update' => 'matching#update_engagement'
+  delete '/matching/:matching_id/engagement/:engagement_id' => 'matching#delete_engagement', :as => 'delete_engagement'
+  post '/matching/:matching_id/apps/update' => 'matching#update_apps'
 
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'
