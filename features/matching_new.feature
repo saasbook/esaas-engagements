@@ -16,7 +16,8 @@ Background: Users and apps have been added to database
         | 2  | user2 |                 | test1@user.com | student   |
         | 3  | user3 |                 | test2@user.com | student     |
 
-Scenario: Coach can create new matching
+@javascript
+Scenario: Coach can press new matching button
     Given I am on the login page
     And I follow "Log in with GitHub"
     And I am on the matching page
@@ -24,5 +25,10 @@ Scenario: Coach can create new matching
     And I click the button "New Matching"
     Then I should see hidden "Number of Engagements"
     Then I press hidden button "Next"
-    Then I should see "Create Matching"
     
+@javascript
+Scenario: Coach can press new matching button
+    Given I am on the login page
+    And I follow "Log in with GitHub"
+    And I am on the matching page
+    Then I want to create matching with "1" engagements
