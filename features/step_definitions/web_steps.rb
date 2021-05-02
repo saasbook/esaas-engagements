@@ -50,8 +50,8 @@ When /^(?:|I )go to (.+)$/ do |page_name|
 end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
-  # page.open_screenshot(full: true)
   click_button(button)
+  page.save_and_open_screenshot(full: true)
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|

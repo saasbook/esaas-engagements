@@ -9,6 +9,10 @@ Given /^(?:|I )click the button "([^"]*)"$/ do |button|
     %{I press (button)}
 end
 
+Given /^(?:|I )created new matching with two engagements$/ do 
+
+end
+
 
 Then /^(?:|I )should see hidden "([^"]*)"$/ do |text|
     Capybara.ignore_hidden_elements = false
@@ -18,7 +22,6 @@ end
 
 Then /^(?:|I )press hidden button "([^"]*)"$/ do |button|
     Capybara.ignore_hidden_elements = false
-    
     %{I press (button)}
     Capybara.ignore_hidden_elements = true
 end
@@ -32,5 +35,5 @@ end
 
 When /^(?:|I )want to create matching with "([^"]*)" engagements$/ do |num|
     visit "/matching/new?num_engagements=#{num}"
-    page.save_and_open_screenshot(full: true)
 end
+
