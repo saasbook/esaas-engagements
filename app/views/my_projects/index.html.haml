@@ -49,7 +49,7 @@
             %em (#{@vetting_map[status.to_s].to_i})
             %br
         %br
-        = submit_tag 'Apply Filters'
+        = submit_tag 'Apply Filters', :class => "btn btn-dark btn-sm mt-2"
         #{@filtered_count.to_s + ' results'}
 
 %ul{:class => 'pagination'}

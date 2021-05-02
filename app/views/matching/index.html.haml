@@ -1,7 +1,7 @@
 .page-header.jumbotron.mt-4.my-4
   %h1
     Project Matchings
-    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "title"=>"Quick Info" }
+    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "id"=>"New Matching" }
       New Matching
       %i.fas.fa-pencil-alt
   .help-block Click a matching to see more information
@@ -55,7 +55,7 @@
       <form action="/matching/new" method="get">
         <div class="form-group">
           <label for="exampleInputPassword1">Number of Engagements</label>
-          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="1">
+          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="1" value="1">
         </div>
         <button type="submit" class="btn btn-dark">Next</button>
       </form>
