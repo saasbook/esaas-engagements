@@ -4,6 +4,8 @@ require 'csv'
 CSV.foreach("#{Rails.root}/db/user_orgs.csv", headers: true, header_converters: :symbol) do |row|
 	user = User.find_or_create_by!(email: row[:user_email]) do |u|
 		u.name = row[:user_name]
+		u.github_uid = row[:github_uid]
+		u.user_type = row[:user_type]
 	end
 	Org.find_or_create_by!(name: row[:org_name]) do |o|
 		o.contact = user
