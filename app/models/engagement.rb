@@ -20,4 +20,19 @@ class Engagement < ActiveRecord::Base
       cum.merge(cur) {|_key, oldValue, newValue| oldValue + newValue / valid_count.to_f}
     end
   end
+
+  def get_semester
+    # For simplicity, chose (1/1-5/15) as spring sem, (5/16-8/15) as summer sem, (8/16-12/31) as fall sem
+    sp_end = DateTime.new(start_date.year, 5, 16)
+    su_end = DateTime.new(start_date.year, 8, 16)
+
+    if start_date < sp_end
+      sem = "SP"
+    elsif start_date < su_end
+      sem = "SU"
+    else
+      sem = "FA"
+    end
+    start_date.strftime("#{sem}%y")
+  end
 end
