@@ -24,13 +24,13 @@ Background: Logged Out
 
     And I'm am on the root page
 
-Scenario: No keyword
-    Given I publicly search for ""
-    Then I should not see "app 1"
+#Scenario: No keyword
+    #Given I publicly search for ""
+    #Then I should not see "app 1"
 
 
-Scenario: search for an app by name keyword
-    Given I publicly search for "1"
-    Then I should see "app 1"
-    But I should not see "app 2"
-    And I should not see "app 3"
+#Scenario: search for an app by name keyword
+   # Given I publicly search for "1"
+    #Then I should see "app 1"
+   # But I should not see "app 2"
+    #And I should not see "app 3"
