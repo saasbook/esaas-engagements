@@ -24,7 +24,6 @@ Scenario: Coach can press new matching button
     And I should see "New Matching"
     And I click the button "New Matching"
     Then I should see hidden "Number of Engagements"
-    Then I press hidden button "Next"
     
 @javascript
 Scenario: Coach can create new matching
@@ -73,6 +72,7 @@ Scenario: Coach can delete a matching
     Then I should see "Delete"
     Then I follow "Delete"
     And I should not see "Matching 1"
+    Then I visit "/matching"
     
 
 @javascript
@@ -80,3 +80,16 @@ Scenario: Non-Coach without access cannot visit matching page
     Given I am not logged in
     And I visit "/matching"
     Then I should not see "Project Matchings"
+    Then I visit "/matching"
+
+@javascript
+Scenario: Coach need to fill out all field to create new matching
+    Given I am on the login page
+    And I follow "Log in with GitHub"
+    And I am on the matching page
+    Then I want to create matching with "2" engagements
+    Then I fill in "Matching Name" with "Matching 1"
+    And I press "Submit"
+    Then I should not see "Matching 1"
+    Then I should see "Number of engagements needs to be at least one."
+    Then I visit "/matching"
