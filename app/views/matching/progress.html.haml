@@ -67,7 +67,7 @@
                 = f.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2', style: 'width:200px'})
                 = f.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2', style: 'width:1000px'})
                 = f.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date', style: 'width:200px'
-                = f.submit class: 'btn btn-success'
+                = f.submit class: 'btn btn-success', :id => "edit#{e.team_number}"
 
             %div.modal.fade{:id=>"myModal#{e.id}", "tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
               .modal-dialog.modal-dialog-centered{:role => "document"}
@@ -88,7 +88,7 @@
     = f.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2', style: 'width:200px'})
     = f.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2', style: 'width:1000px'})
     = f.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date', style: 'width:200px'
-    = f.submit class: 'btn btn-success'
+    = f.submit "Create Engagement", class: 'btn btn-success', id: 'create' 
 
 %br
 %br
@@ -109,7 +109,7 @@
 .div.collapse{:id=>"addp"}
   = bootstrap_form_for([@matching], url: '/matching/' + @matching.id.to_s + '/apps/update', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
     = f.collection_select(:projects, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2', style: 'width:1000px'})
-    = f.submit 'Update Projects Pool', class: 'btn btn-success'
+    = f.submit 'Update Projects Pool', class: 'btn btn-success', id: 'update' 
 
 :javascript
   // For tool tip

@@ -24,7 +24,6 @@ Scenario: Coach can press new matching button
     And I should see "New Matching"
     And I click the button "New Matching"
     Then I should see hidden "Number of Engagements"
-    Then I press hidden button "Next"
     
 @javascript
 Scenario: Coach can create new matching
@@ -42,4 +41,55 @@ Scenario: Coach can create new matching
     And I press "Submit"
     Then I should see "Matching 1"
     Then I visit "/matching"
+
+@javascript
+Scenario: Coach cannot create new matching with 0 engagement (sad)
+    Given I am on the login page
+    And I follow "Log in with GitHub"
+    And I am on the matching page
+    Then I want to create matching with "0" engagements
+    Then I should see "Number of engagements needs to be at least one."
+    Then I visit "/matching"
+
+@javascript
+Scenario: Coach can delete a matching
+    Given I am on the login page
+    And I follow "Log in with GitHub"
+    And I am on the matching page
+    Then I want to create matching with "2" engagements
+    Then I fill in "Matching Name" with "Matching 1"
+    And I select "App1" from "App Names"
+    And I select "App2" from "App Names"
+    And I fill in "1) Team Number/Name" with "Team1"
+    And I select "user2" from "1) Students"
+    And I fill in "2) Team Number/Name" with "Team2"
+    And I select "user3" from "2) Students"
+    And I press "Submit"
+    Then I should see "Matching 1"
+    Then I should see "Delete"
+    And I click the delay delete button "Delete"
+    Then I should see "Are you sure to delete Matching 1?"
+    Then I should see "Delete"
+    Then I follow "Delete"
+    And I should not see "Matching 1"
+    Then I visit "/matching"
     
+
+@javascript
+Scenario: Non-Coach without access cannot visit matching page
+    Given I am not logged in
+    And I visit "/matching"
+    Then I should not see "Project Matchings"
+    Then I visit "/matching"
+
+@javascript
+Scenario: Coach need to fill out all field to create new matching
+    Given I am on the login page
+    And I follow "Log in with GitHub"
+    And I am on the matching page
+    Then I want to create matching with "2" engagements
+    Then I fill in "Matching Name" with "Matching 1"
+    And I press "Submit"
+    Then I should not see "Matching 1"
+    Then I should see "Number of engagements needs to be at least one."
+    Then I visit "/matching"

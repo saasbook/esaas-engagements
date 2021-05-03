@@ -40,7 +40,8 @@ Feature: Test Ranking page feature
       Then I should see "Not responded yet"
       Then I follow "Team1"
       Then I should see "Your team has not responded yet!"
-      Then I click the button "Submit"
+      Then I want to submit ranking preference
+      # Then I should not see "Your team has not responded yet!"
       Then I follow "Back"
       Then I visit "/matching"
 

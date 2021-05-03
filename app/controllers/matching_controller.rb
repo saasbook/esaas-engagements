@@ -64,7 +64,6 @@ class MatchingController < ApplicationController
   end
 
   def progress
-    puts Matching.all
     @matching = Matching.find(params[:matching_id])
     @engagements = @matching.engagements.order(:team_number).all
     @current_projects = []
@@ -134,6 +133,9 @@ class MatchingController < ApplicationController
   end
 
   def store
+    puts "TODAY I STORED"
+    puts "TODAY I STORED"
+    puts "TODAY I STORED"
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
 
