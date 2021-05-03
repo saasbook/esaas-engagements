@@ -55,9 +55,18 @@
       <form action="orgs/import?&X-CSRF-Token=${AUTH_TOKEN}" enctype="multipart/form-data" method="post">
         <div class="form-group">
           <input type="file"
-          id="file" name="file">
+          id="file" name="file" accept=".csv">
         </div>
-        <button type="submit" class="btn btn-dark">Import</button>
+        <div class="row" style="margin-left: 0px; align-items: center; ">
+          <button type="submit" class="btn btn-dark">Import</button>
+          <a href="#" class="tooltip-toggle" 
+            aria-label="Accepts comma delimited CSV file, with columns being of form: 
+            name,
+            desciption,url,etc..." 
+            tabindex="0" style="margin-left: 5px;">
+            Help
+          </a>
+        </div>
       </form>
     </div>`;
 

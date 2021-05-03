@@ -28,15 +28,14 @@
               = "Engagement " + teamCount.to_s
             %div.card-body
               = f.fields_for (:engagements) do |e|
-                = e.text_field :team_number, label: 'Team Number/Name'
-                = e.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2'})
-                = e.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2'})
-                = e.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date'
-              // %div.btn.btn-dark.pull-right{:id => "e_button"} Add another Engagement
+                = e.text_field :team_number, label: teamCount.to_s + ') Team Number/Name' 
+                = e.collection_select(:coach_id, User.coach, :id, :name, {label: teamCount.to_s + ') Coach'}, {class: 'select2'})
+                = e.collection_select(:developer_ids, User.student, :id, :name, {label: teamCount.to_s + ') Students'}, {multiple: true, class: 'select2'})
+                = e.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: teamCount.to_s + ') Start Date' 
           - teamCount += 1
-    = f.submit "Submit", class: 'btn btn-success m-2'
-    = button_tag 'Reset', type: :reset, :class => 'btn btn-primary m-2'
-    = link_to 'Back', '/matching', :class => 'btn btn-primary m-2'
+    = f.submit "Submit", class: 'btn btn-dark m-2 pull-right'
+    -# = button_tag 'Reset', type: :reset, :class => 'btn btn-primary m-2'
+    = link_to 'Back', '/matching', :class => 'btn btn-danger m-2'
 
 // TODO: add dynamic team number
 :javascript

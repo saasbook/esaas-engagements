@@ -39,8 +39,12 @@ class UsersController < ApplicationController
   end
 
   def import
-    User.import(params[:file])
-    redirect_to users_path, notice: 'User was successfully imported.'
+    begin
+      User.import(params[:file])
+      redirect_to users_path, notice: 'User was successfully imported.'
+    rescue StandardError => e  
+      redirect_to users_path, notice: e.message
+    end
   end
 
   private
