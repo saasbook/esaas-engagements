@@ -51,11 +51,11 @@ end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
-  page.save_and_open_screenshot(full: true)
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
+  # page.save_and_open_screenshot(full: true)
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|

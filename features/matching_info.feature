@@ -1,7 +1,7 @@
-Feature: Test Ranking page feature
-   As a student who is involved in the matching
-   I want to go to matching page
-   So that I can easily choose my preference for projects
+Feature: Test Team Info page feature
+   As a coach who created matching 1
+   I want to go to matching 1 page
+   So that I can see all current progress
 
    Background: Users and apps have been added to database
       Given the following apps exist:
@@ -16,10 +16,13 @@ Feature: Test Ranking page feature
          | 1  | user1 | esaas_developer | test@user.com  | coach     |
          | 2  | user2 |                 | test1@user.com | student   |
          | 3  | user3 |                 | test2@user.com | student   |
-
       Given I am on the login page
       And I follow "Log in with GitHub"
-      And I am on the matching page
+      
+   @javascript
+   Scenario: Coach can see matching info created 
+      
+      And I visit "/matching"
       Then I want to create matching with "2" engagements
       Then I fill in "Matching Name" with "Matching 1"
       And I select "App1" from "App Names"
@@ -31,18 +34,19 @@ Feature: Test Ranking page feature
       And I select "user1" from "2) Coach"
       And I select "user3" from "2) Students"
       And I press "Submit"
-      Then I visit "/matching"
-      
-   @javascript
-   Scenario: Coach can see matching info created 
       And I visit "/matching"
       Then I follow "Matching 1"
-      Then I should see "Not responded yet"
-      Then I follow "Team1"
-      Then I should see "Your team has not responded yet!"
-      Then I click the button "Submit"
-      Then I follow "Back"
+      Then I should see "Matching Progress"
+      And I should see "user1"
+      And I should see "Team1"
+      And I should see "Team2"
+      And I should not see "Team3"
+      And I should see "user2"
+      And I should see "user3"
+      And I should see "0.0%"
+      Then I click the button "Delete"
+      Then I should see hidden "Are you sure to delete Team1?"
       Then I visit "/matching"
 
       
-      
+  
