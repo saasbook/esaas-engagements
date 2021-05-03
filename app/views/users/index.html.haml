@@ -14,12 +14,12 @@
     - else
       %li{:class=>'each_page'}
         %a{:class=>"page-link", :href=>"?user_each_page=#{num_per_page}"}=num_per_page
-      
+
 %ul{:class => 'pagination pull-right'}
   - ["First","Previous","Current","Next","Last"].each do |action|
     - if action != "Current" then
       %li{:class=>'page_num'}
-        %a{:class=>"page-link", :href=>"?user_page_action=#{action}&prev=#{@page_num}"}=action 
+        %a{:class=>"page-link", :href=>"?user_page_action=#{action}&prev=#{@page_num}"}=action
     - else
       %li{:class=>"page-num"}
         %a{:class=>'page_link'} Page #{[1,@page_num].max}
@@ -29,7 +29,7 @@
     %tr
       %th Name
       %th Email
-      %th GitHub username
+      %th GitHub Username
       %th Type
       %th SID
       %th

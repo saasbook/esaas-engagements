@@ -12,7 +12,7 @@
                 = user_form.text_field :name, label: 'User Name'
                 = user_form.email_field :email, label: 'Email'
                 = user_form.phone_field :preferred_contact, label: 'Preferred Contact'
-                = user_form.text_field :github_uid, label: 'Github Uid'
+                = user_form.text_field :github_uid, label: 'GitHub Username'
                 = user_form.collection_select :user_type, User.user_types, :first, ->(x){x.first.humanize}, {label: 'User Type'}, {class: 'select2'}
                 = user_form.text_field :sid, label: 'SID'
         %fieldset.col-sm-4
