@@ -10,9 +10,8 @@
     %div.button.btn-dark.pull-right.h6.mr-5.my-0{"data-toggle" => "tooltip", "data-placement"=>"left", :title => "You can submit multiple times before deadline"}
       .tick.submit
         Submit
-    %div.button.btn-dark.pull-right.h6.mr-5.my-0
-      %h4
-        = link_to "Back", matching_progress_path(matching_id: @matching.id), :class => "text-light"
+    %div.btn.button.pull-left.my-2
+      = link_to "Back", matching_progress_path(matching_id: @matching.id), :class => "btn btn-danger"
 
 
     %body
