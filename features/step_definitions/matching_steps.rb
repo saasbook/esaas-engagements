@@ -52,6 +52,10 @@ Given /^(?:|I )update the project$/ do
   find("#update").click
 end
 
+Given /^(?:|I )update the engagement$/ do
+  find("#editTeam1").click
+end
+
 Given /^(?:|I )remove the project$/ do
   find(".select2-selection__choice__remove").click
   find(:xpath, "//html").click   # Due to behavior of drop down ,need to click empty area

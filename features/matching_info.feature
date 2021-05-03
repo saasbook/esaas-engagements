@@ -45,6 +45,14 @@ Feature: Test Team Info page feature
       Then I visit "/matching"
 
    @javascript
+   Scenario: Coach can edit engagement
+      Given I follow "Edit"
+      And I wait "1" seconds for animation
+      Then I update the engagement
+      Then I should see "Engagement updated."
+      Then I visit "/matching"
+
+   @javascript
    Scenario: Coach can add engagement after creation
       Then I want to create matching with "1" engagements
       Then I fill in "Matching Name" with "Matching 2"
