@@ -102,18 +102,11 @@ class ApplicationController < ActionController::Base
   # Denies access if user is a student
   def check_student
     @@name_path = request.env['PATH_INFO']
-    puts @@name_path
-    puts @@name_path != "/my_projects"
-    puts @@name_path != "/"
-    puts @@name_path != "/matching"
-    puts @@name_path != "/my_projects" and @@name_path != "/"
-    puts (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != show_engagement_matching_path(matching_id: params[:matching_id], engagement_id: params[:engagement_id]))
-    puts current_user&.student?
-    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != show_engagement_matching_path(matching_id: params[:matching_id], engagement_id: params[:engagement_id]))
+    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/")
       begin
-        redirect_to :back, alert: "You do not have access to that page!!!456"
+        redirect_to :back, alert: "You do not have access to that page."
       rescue Exception
-        redirect_to "/", alert: "You do not have access to that page!!!123"
+        redirect_to "/", alert: "You do not have access to that page."
       end
     end
   end
