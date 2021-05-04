@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
     puts @@name_path != "/"
     puts @@name_path != "/matching"
     puts @@name_path != "/my_projects" and @@name_path != "/"
-    puts (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != "/matching")
+    puts (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != show_engagement_matching_path(params[:matching_id], params[:engagement_id]))
     puts current_user&.student?
     if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != "/matching")
       begin
