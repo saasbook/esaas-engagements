@@ -104,9 +104,9 @@ class ApplicationController < ActionController::Base
     @@name_path = request.env['PATH_INFO']
     if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != "/matching")
       begin
-        redirect_to :back, alert: "You do not have access to that page."
+        redirect_to :back, alert: "You do not have access to that page!!!456"
       rescue Exception
-        redirect_to "/", alert: "You do not have access to that page."
+        redirect_to "/", alert: "You do not have access to that page!!!123"
       end
     end
   end
