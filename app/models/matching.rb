@@ -7,7 +7,8 @@ class Matching < ActiveRecord::Base
 
     @@STATUSES = ['Collecting responses', 'Responses collected', 'Completed']
 
-    validates_presence_of :name, :projects
+    validates_presence_of :name, :projects, message: 'must present in a matching.'
+    validates_uniqueness_of :name, message: 'must be unique.'
     validates_inclusion_of :status, in: @@STATUSES
     accepts_nested_attributes_for :engagements
 
@@ -105,13 +106,19 @@ class Matching < ActiveRecord::Base
       return 0
     end
 
-    # reset last edit user for a specific engagement
-    # used when the engagement is updated
-    def reset_last_edit_user(engagement)
+    # update related values from all hash fields when an engagement is updated
+    def update_engagement(engagement, old_team_number)
       team_number = engagement.team_number
       new_last_edit_users = self.last_edit_users
+      new_preferences = self.preferences
+      new_result = self.result
+      new_last_edit_users.delete(old_team_number)
       new_last_edit_users.store(team_number, 0)
+      new_preferences[team_number] = new_preferences.delete old_team_number
+      new_result[team_number] = new_result.delete old_team_number
       self.update(last_edit_users: new_last_edit_users)
+      self.update(preferences: new_preferences)
+      self.update(result: new_result)
     end
 
     # remove related values from all hash fields when an engagement is deleted
@@ -142,7 +149,6 @@ class Matching < ActiveRecord::Base
       self.update(last_edit_users: new_last_edit_users)
       self.update(preferences: new_preferences)
       self.update(result: new_result)
-      engagement.update(matching_id: self.id)
     end
 
     # update project pool of the current matching

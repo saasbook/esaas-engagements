@@ -62,7 +62,7 @@
                     %div.card-body
                       %blockquote.blockquote.mb-0
                         %p.rank
-                          - @students[Engagement.find_by(team_number: team_name)].each do |n|
+                          - @students[team_name].each do |n|
                             = n.to_s + ","
 
 

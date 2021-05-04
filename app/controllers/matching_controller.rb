@@ -29,6 +29,24 @@ class MatchingController < ApplicationController
 
   # POST /matching/create
   def create
+    # check if student is already in an existing engagement
+    seen = []
+    matching_params[:engagements_attributes].each do |key, value|
+      student_array = value[:developer_ids]
+      student_array.shift
+      student_array.each do |sid|
+        s = User.find(sid)
+        if !s.developing_engagement.nil?
+          redirect_to '/matching', alert: "#{s.name} is already in an existing engagement."
+          return
+        end
+      end
+      seen += student_array
+      if seen.uniq.length != seen.length
+        redirect_to '/matching', alert: 'You cannot have duplicate students in different engagements.'
+        return
+      end
+    end
     @matching = Matching.new(matching_params)
     if @matching.save
       @matching.projects.shift
@@ -37,14 +55,15 @@ class MatchingController < ApplicationController
       @matching.update(preferences: Matching.initialize_preferences(@matching.engagements, @matching.projects))
       redirect_to '/matching', notice: 'Matching was successfully created.'
     else
-      redirect_to '/matching/new', alert: 'Invalid matching fields.'
+      msg = @matching.errors.full_messages.first if @matching.errors.any?
+      redirect_to '/matching', alert: "Invalid matching fields. #{msg}"
     end
   end
 
   def show
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
-    if current_user&.client? or (current_user&.student? and @engagement.developers.where(id: session[:user_id]).empty?)
+    if current_user&.client? or (current_user&.student? && @engagement.developers.where(id: session[:user_id]).empty?)
       redirect_to '/', alert: 'You do not have access to that page.'
       return
     end
@@ -52,14 +71,11 @@ class MatchingController < ApplicationController
     # update current preference
     @currentPreference = []
     @description = {}
-    @matching.preferences.each do |key, preference|
-      if (key == @engagement.team_number)
-        preference.each do |project_id|
-          currApp = App.find_by_id(project_id)
-          @currentPreference.push(currApp.name)
-          @description.store(currApp.name, currApp.description)
-        end
-      end
+    preference = @matching.preferences[@engagement.team_number]
+    preference.each do |project_id|
+      currApp = App.find_by_id(project_id)
+      @currentPreference.push(currApp.name)
+      @description.store(currApp.name, currApp.description)
     end
   end
 
@@ -72,9 +88,9 @@ class MatchingController < ApplicationController
     end
     @students = {}
     @engagements.each do |e|
-      @students[e] = []
+      @students[e.id] = []
       e.developers.each do |d|
-        @students[e].push(d.name)
+        @students[e.id].push(d.name)
       end
     end
     last_edit_users = @matching.last_edit_users
@@ -101,13 +117,12 @@ class MatchingController < ApplicationController
     @matching.prepare_match
     @matching.update(result: @matching.match)
     @result = @matching.result
-
     @engagements = @matching.engagements.order(:team_number).all
     @students = {}
     @engagements.each do |e|
-      @students[e] = []
+      @students[e.team_number] = []
       e.developers.each do |d|
-        @students[e].push(d.name)
+        @students[e.team_number].push(d.name)
       end
     end
   end
@@ -133,9 +148,6 @@ class MatchingController < ApplicationController
   end
 
   def store
-    puts "TODAY I STORED"
-    puts "TODAY I STORED"
-    puts "TODAY I STORED"
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
 
@@ -193,10 +205,25 @@ class MatchingController < ApplicationController
       redirect_to matching_progress_path(params[:matching_id]), alert: 'Matching is already completed.'
       return
     end
+    # check if students already exist in a different engagement
+    student_array = engagement_params[:developer_ids]
+    student_array.shift
+    student_array.each do |sid|
+      s = User.find(sid)
+      if !s.developing_engagement.nil? && s.developing_engagement.id != params[:engagement_id].to_i
+        redirect_to matching_progress_path(params[:matching_id]), alert: "#{s.name} is already in a different engagement."
+        return
+      end
+    end
     @engagement = Engagement.find(params[:engagement_id])
-    @engagement.update(engagement_params)
-    @matching.reset_last_edit_user(@engagement)
-    redirect_to matching_progress_path(params[:matching_id]), notice: 'Engagement updated.'
+    curr_team_number = @engagement.team_number
+    if @engagement.update(engagement_params)
+      @matching.update_engagement(@engagement, curr_team_number)
+      redirect_to matching_progress_path(params[:matching_id]), notice: 'Engagement updated.'
+    else
+      msg = @engagement.errors.full_messages.first if @engagement.errors.any?
+      redirect_to matching_progress_path(params[:matching_id]), alert: "#{msg}"
+    end
   end
 
   def delete_engagement
@@ -220,9 +247,25 @@ class MatchingController < ApplicationController
       redirect_to matching_progress_path(params[:matching_id]), alert: 'You cannot add more engagements than projects.'
       return
     end
+    # check if the students already exist in an engagement
+    student_array = engagement_params[:developer_ids]
+    student_array.shift
+    student_array.each do |sid|
+      s = User.find(sid)
+      if !s.developing_engagement.nil?
+        redirect_to matching_progress_path(params[:matching_id]), alert: "#{s.name} is already in an existing engagement."
+        return
+      end
+    end
     @engagement = Engagement.new(engagement_params)
-    @matching.add_engagement(@engagement)
-    redirect_to matching_progress_path(params[:matching_id]), notice: 'Engagement added.'
+    if @engagement.update(matching_id: params[:matching_id].to_i)
+      @matching.add_engagement(@engagement)
+      redirect_to matching_progress_path(params[:matching_id]), notice: 'Engagement added.'
+    else
+      @engagement.destroy
+      msg = @engagement.errors.full_messages.first if @engagement.errors.any?
+      redirect_to matching_progress_path(params[:matching_id]), alert: "#{msg}"
+    end
   end
 
   def update_apps
