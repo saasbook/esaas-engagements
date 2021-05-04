@@ -39,6 +39,7 @@ class EngagementsController < ApplicationController
   # DELETE /engagements/1
   # DELETE /engagements/1.json
   def destroy
+    #@engagement.
     @engagement.destroy
     redirect_to @app, notice: 'Engagement was successfully destroyed.'
   end

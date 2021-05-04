@@ -45,7 +45,7 @@
             %span.badge.bg-dark.h4
               = User.find(e.coach_id).name
           %td.align-middle
-            - @students[e].each do |n|
+            - @students[e.id].each do |n|
               %span.badge.alert-primary.bg-light.text-dark.h4
                 = n
           %td.align-middle
@@ -88,7 +88,7 @@
     = f.collection_select(:coach_id, User.coach, :id, :name, {label: 'Coach'}, {class: 'select2', style: 'width:200px'})
     = f.collection_select(:developer_ids, User.student, :id, :name, {label: 'Students'}, {multiple: true, class: 'select2', style: 'width:1000px'})
     = f.date_field :start_date, value: Time.now.strftime('%Y-%m-%d'), label: 'Start Date', style: 'width:200px'
-    = f.submit "Create Engagement", class: 'btn btn-success', id: 'create' 
+    = f.submit "Create Engagement", class: 'btn btn-success', id: 'create'
 
 %br
 %br
@@ -109,7 +109,7 @@
 .div.collapse{:id=>"addp"}
   = bootstrap_form_for([@matching], url: '/matching/' + @matching.id.to_s + '/apps/update', method: :post, layout: :vertical, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
     = f.collection_select(:projects, App.all, :id, :name, {label: 'App Names'}, {multiple: true, class: 'select2', style: 'width:1000px'})
-    = f.submit 'Update Projects Pool', class: 'btn btn-success', id: 'update' 
+    = f.submit 'Update Projects Pool', class: 'btn btn-success', id: 'update'
 
 :javascript
   // For tool tip
@@ -128,4 +128,3 @@
       // After 3 seconds, remove the show class from DIV
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   })
-

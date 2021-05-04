@@ -16,6 +16,8 @@ Feature: Test Team Info page feature
          | 1  | user1 | esaas_developer | test@user.com  | coach     |
          | 2  | user2 |                 | test1@user.com | student   |
          | 3  | user3 |                 | test2@user.com | student   |
+         | 4  | user4 |                 | test3@user.com | student   |
+
       Given I am on the login page
       And I follow "Log in with GitHub"
       And I visit "/matching"
@@ -28,9 +30,9 @@ Feature: Test Team Info page feature
       And I press "Submit"
       And I visit "/matching"
       Then I follow "Matching 1"
-      
+
    @javascript
-   Scenario: Coach can see matching info created 
+   Scenario: Coach can see matching info created
       Then I should see "Matching Progress"
       And I should see "user1"
       And I should see "Team1"
@@ -60,7 +62,7 @@ Feature: Test Team Info page feature
       And I select "App4" from "App Names"
       And I fill in "1) Team Number/Name" with "T-1"
       And I select "user1" from "1) Coach"
-      And I select "user2" from "1) Students"
+      And I select "user4" from "1) Students"
       And I press "Submit"
       Then I follow "Matching 2"
       Given I follow "Add Engagement"
@@ -98,8 +100,3 @@ Feature: Test Team Info page feature
      Then I update the project
      Then I should see "Number of projects cannot be fewer than engagements."
      Then I visit "/matching"
-
-
-
-      
-  

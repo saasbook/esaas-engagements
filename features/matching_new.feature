@@ -16,6 +16,7 @@ Background: Users and apps have been added to database
         | 1  | user1 | esaas_developer | test@user.com  | coach     |
         | 2  | user2 |                 | test1@user.com | student   |
         | 3  | user3 |                 | test2@user.com | student   |
+
 @javascript
 Scenario: Coach can press new matching button
     Given I am on the login page
@@ -24,7 +25,7 @@ Scenario: Coach can press new matching button
     And I should see "New Matching"
     And I click the button "New Matching"
     Then I should see hidden "Number of Engagements"
-    
+
 @javascript
 Scenario: Coach can create new matching
     Given I am on the login page
@@ -73,7 +74,7 @@ Scenario: Coach can delete a matching
     Then I follow "Delete"
     And I should not see "Matching 1"
     Then I visit "/matching"
-    
+
 
 @javascript
 Scenario: Non-Coach without access cannot visit matching page
@@ -91,5 +92,5 @@ Scenario: Coach need to fill out all field to create new matching
     Then I fill in "Matching Name" with "Matching 1"
     And I press "Submit"
     Then I should not see "Matching 1"
-    Then I should see "Number of engagements needs to be at least one."
+    Then I should see "You cannot have duplicate team number/names"
     Then I visit "/matching"
