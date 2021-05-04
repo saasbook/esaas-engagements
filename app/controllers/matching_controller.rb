@@ -30,8 +30,15 @@ class MatchingController < ApplicationController
   # POST /matching/create
   def create
     # check if student is already in an existing engagement
+    # check if team_number is unique
     seen = []
+    team_numbers = []
     matching_params[:engagements_attributes].each do |key, value|
+      team_numbers.push(value[:team_number])
+      if team_numbers.uniq.length != team_numbers.length
+        redirect_to '/matching', alert: "You cannot have duplicate team number/names within a matching."
+        return
+      end
       student_array = value[:developer_ids]
       student_array.shift
       student_array.each do |sid|
@@ -205,6 +212,19 @@ class MatchingController < ApplicationController
       redirect_to matching_progress_path(params[:matching_id]), alert: 'Matching is already completed.'
       return
     end
+    @engagement = Engagement.find(params[:engagement_id])
+    curr_team_number = @engagement.team_number
+    # check if team number already exists
+    new_team_number = engagement_params[:team_number]
+    if new_team_number != curr_team_number
+      @matching.engagements.each do |e|
+        if (e.team_number != curr_team_number) && (e.team_number == new_team_number)
+          redirect_to matching_progress_path(params[:matching_id]), alert: 'Team number/name already exists.'
+          return
+        end
+      end
+    end
+
     # check if students already exist in a different engagement
     student_array = engagement_params[:developer_ids]
     student_array.shift
@@ -215,8 +235,6 @@ class MatchingController < ApplicationController
         return
       end
     end
-    @engagement = Engagement.find(params[:engagement_id])
-    curr_team_number = @engagement.team_number
     if @engagement.update(engagement_params)
       @matching.update_engagement(@engagement, curr_team_number)
       redirect_to matching_progress_path(params[:matching_id]), notice: 'Engagement updated.'
@@ -246,6 +264,14 @@ class MatchingController < ApplicationController
     if @matching.projects.length < @matching.engagements.count + 1
       redirect_to matching_progress_path(params[:matching_id]), alert: 'You cannot add more engagements than projects.'
       return
+    end
+    # check if team number already exist in an engagement
+    new_team_number = engagement_params[:team_number]
+    @matching.engagements.each do |e|
+      if e.team_number == new_team_number
+        redirect_to matching_progress_path(params[:matching_id]), alert: 'Team number/name already exists.'
+        return
+      end
     end
     # check if the students already exist in an engagement
     student_array = engagement_params[:developer_ids]

@@ -11,7 +11,6 @@ class Engagement < ActiveRecord::Base
   has_many :developers, foreign_key: :developing_engagement_id, class_name: 'User'
 
   validates_presence_of :coach_id, :team_number, :start_date
-  validates_uniqueness_of :team_number, scope: :matching, message: 'must be unique within a matching.'
   default_scope { order('start_date DESC') }
 
   def summarize_customer_rating
