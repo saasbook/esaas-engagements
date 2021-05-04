@@ -70,8 +70,14 @@ class MatchingController < ApplicationController
   def show
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
+    puts @engagement.developers
+    puts @engagement.developers.where(id: session[:user_id])
+    puts @engagement.developers.where(id: session[:user_id]).empty?
+    puts current_user&.client?
+    puts current_user&.student? && @engagement.developers.where(id: session[:user_id]).empty?
+    puts current_user&.client? or (current_user&.student? && @engagement.developers.where(id: session[:user_id]).empty?)
     if current_user&.client? or (current_user&.student? && @engagement.developers.where(id: session[:user_id]).empty?)
-      redirect_to '/', alert: 'You do not have access to that page.'
+      redirect_to '/', alert: 'You do not have access to that page!!!!!!!'
       return
     end
 
