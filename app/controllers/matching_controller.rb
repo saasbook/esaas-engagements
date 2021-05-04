@@ -72,7 +72,7 @@ class MatchingController < ApplicationController
     @matching = Matching.find(params[:matching_id])
     @engagement = Engagement.find(params[:engagement_id])
     if current_user&.client? or (current_user&.student? && @engagement.developers.where(id: session[:user_id]).empty?)
-      redirect_to '/', alert: 'You do not have access to that page!!!!!!!'
+      redirect_to '/', alert: 'You do not have access to that page.'
       return
     end
 
