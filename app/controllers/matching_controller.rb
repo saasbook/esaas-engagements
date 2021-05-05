@@ -1,6 +1,7 @@
 class MatchingController < ApplicationController
   # redirects students to their engagement's preference page
   # only if they are involved in a matching in progress
+  skip_before_filter :check_student
   before_action :auth_matching, except: [:show, :store]
 
   def index

@@ -102,7 +102,7 @@ class ApplicationController < ActionController::Base
   # Denies access if user is a student
   def check_student
     @@name_path = request.env['PATH_INFO']
-    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/" and @@name_path != "/matching")
+    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/")
       begin
         redirect_to :back, alert: "You do not have access to that page."
       rescue Exception
