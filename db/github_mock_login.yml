@@ -3,8 +3,22 @@ development:
   name: 'Armando Fox'
   email: 'fox@cs.berkeley.edu'
   user_type: 'coach'
+  
 test:
   github_uid: "esaas_developer"
   name: "ESaas Developer"
   email: "esaas_developer@saasbook.info"
-  user_type: 'coach'
+  user_type: 'coach' # must be coach not Coach
+
+# 2021 Spring
+test_student:
+  github_uid: "esaas_student_github"
+  name: "ESaas Student"
+  email: "esaas_student@saasbook.info"
+  user_type: 'student'
+
+test_client:
+  github_uid: "esaas_client_github"
+  name: "ESaas Client"
+  email: "esaas_client@saasbook.info"
+  user_type: 'client'

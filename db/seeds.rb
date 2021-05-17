@@ -4,6 +4,8 @@ require 'csv'
 CSV.foreach("#{Rails.root}/db/user_orgs.csv", headers: true, header_converters: :symbol) do |row|
 	user = User.find_or_create_by!(email: row[:user_email]) do |u|
 		u.name = row[:user_name]
+		u.github_uid = row[:github_uid]
+		u.user_type = row[:user_type]
 	end
 	Org.find_or_create_by!(name: row[:org_name]) do |o|
 		o.contact = user
@@ -14,14 +16,18 @@ end
 puts "#{Org.all.size} orgs, #{User.all.size} users"
 
 # default coach/coaching org
-coach = User.find_or_create_by(email: 'fox@cs.berekley.edu') do |fox|
+coach = User.create(email: 'fox@cs.berekley.edu') do |fox|
 	fox.name = "Armando Fox"
+	fox.github_uid = 'fox'
+	fox.type_user = 'Coach'
 end
 cs169 = Org.find_or_create_by(name: 'UCB CS169 Fox') do |ucbcs169|
 	ucbcs169.description = 'CS 169 at UC Berkeley'
 	ucbcs169.url = "http://cs169.saas-class.org"
 	ucbcs169.contact = coach
 end
+
+
 
 # create orgs and engagements
 CSV.foreach("#{Rails.root}/db/apps.csv",
@@ -49,6 +55,10 @@ CSV.foreach("#{Rails.root}/db/apps.csv",
 			e.presentation_url = row[:link_to_presentation_slides]
 			e.prototype_deployment_url = row[:deployment]
 			e.student_names = row[:students] || 'Unknown'
+
+			# say only spring and summer based on csv
+			semester = "#{row[:semester]}"
+			e.semester = (semester[0] == "F" ? "FALL" : "SPRING") + " 20" +semester[1,3]
 		end
 	else
 		puts "No org #{row[:org_name]}"
@@ -57,4 +67,4 @@ end
 puts "#{App.all.size} apps, #{Engagement.all.size} engagements"
 
 # login mockup
-User.find_or_create_by YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")
+User.find_or_create_by(YAML.load(File.read "#{Rails.root}/db/github_mock_login.yml")["development"])

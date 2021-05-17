@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+
+  # Notice order
+  get '/matching/new' => 'matching#new', :as => 'new_matching'
+  post '/matching/create' => 'matching#create'
+  get '/matching' => 'matching#index'
+  get '/matching/:matching_id/engagement/:engagement_id' => 'matching#show', :as => 'show_engagement_matching'
+  get '/matching/:matching_id/progress' => 'matching#progress', :as => 'matching_progress'
+  post '/matching/:matching_id/engagement/:engagement_id/store' => 'matching#store'
+  get '/matching/:matching_id/result' => 'matching#result', :as => 'matching_result'
+  delete '/matching/:matching_id' => 'matching#destroy', :as => 'delete_matching'
+  post '/matching/:matching_id/result/final_edit' => 'matching#final_edit'
+  get '/matching/:matching_id/result/finalize' => 'matching#finalize', :as => 'matching_finalize'
+  post '/matching/:matching_id/engagement/create' => 'matching#create_engagement'
+  post '/matching/:matching_id/engagement/:engagement_id/update' => 'matching#update_engagement'
+  delete '/matching/:matching_id/engagement/:engagement_id' => 'matching#delete_engagement', :as => 'delete_engagement'
+  post '/matching/:matching_id/apps/update' => 'matching#update_apps'
+
   # OmniAuth authentication with GitHub
   get 'login' => 'session#login', :as => 'login'
   match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]
@@ -14,12 +31,20 @@ Rails.application.routes.draw do
   resources :engagements, :only => [] do # don't route engagements by themselves
     resources :iterations
   end
+
+  get 'orgs/import' => 'orgs#import'
+
   resources :orgs do
     resources :comments, :only => [:create, :update], module: :orgs
+    collection {post :import}
   end
   resources :comments, :only => [:edit, :destroy]
+
+  get 'users/import' => 'users#import'
+
   resources :users do
     resources :comments, only: [:create, :update], module: :users
+    collection {post :import}
   end
 
   # my_projects routes
