@@ -280,6 +280,9 @@ averages on each category
     + Coach: A badge next to the `App Edit Requests` tab, showing the number of `submitted` and `resubmitted` requests.
     + Client: Two notification icons on `My Projects` index page, one of which will notify the user when `Iteration` Feedback Form has been requested from a `coach`, and the other when a `coach` has reviewed a request.
 
+# SP21 Engagements: Main Features
+* Contributors: [Fred Zhang](https://github.com/zfred219), [Kevin Lo](https://github.com/databears-cal), [Enjia Xu](https://github.com/EnjiaXu), [Wesley Wang](https://github.com/wwang3990), [Robert Qiu](https://github.com/robertqiu110), [Jeremy Lee](https://github.com/jrmylee)
+
 # High priority feature list
 
 1. Add user contact info and a way to track user meeting notes
