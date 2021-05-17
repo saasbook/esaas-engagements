@@ -288,9 +288,9 @@ averages on each category
 * \[Enhanced feature\]: for security reasons, students and clients can only see/access `My Projects`, `Help`, and `Logout` pages, guests can only access the `Login` page
 * \[Quality of life\]: staff can see which fields are required when creating new users
 * \[New feature\]: users can upload csv files to create multiple user/orgs instead of doing so manually 
-* \[New feature\]: a new `Project Matchings` feature added, it is used for matching between engagements and projects: 
+* \[New feature\]: an entirely new `Project Matchings` feature added, it is used for matching between engagements and projects: 
     + Phase 1 (create matching):
-        + Coaches can go to the `Project Matchings` page and create new matchings that involve new engagements (coach and students) and a project pool (from existing projects). 
+        + Coaches can go to the `Project Matchings` tab/page and create new matchings that involve new engagements (coach and students) and a project pool (from existing projects). 
         + After a matching is created, coaches can go to the matching page and add/edit engagements, as well as the project pool
     + Phase 2 (collect preferences): 
         + After phase 1, Students from each engagement can (only) access their respective project preference page and rank the project pool (last edited user is shown)
