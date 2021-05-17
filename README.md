@@ -282,7 +282,7 @@ averages on each category
 
 # SP21 Engagements: Main Features
 * Contributors: [Fred Zhang](https://github.com/zfred219), [Kevin Lo](https://github.com/databears-cal), [Enjia Xu](https://github.com/EnjiaXu), [Wesley Wang](https://github.com/wwang3990), [Robert Qiu](https://github.com/robertqiu110), [Jeremy Lee](https://github.com/jrmylee)
-* \[UI\]: improved UI of the overall application (navigation bar & buttons etc.); moved filters bar to the left for more clarity
+* \[UI\]: improved UI of the overall application (navigation bar & buttons etc.); changed filters bar to sidebar for more clarity
 * \[Enhanced feature\]: users are able to search project by email, Github username, and/or semester using the search bar
 * \[Enhanced feature\]: users are able to see & edit pivotal tracker url when creating/editing apps; pivotal tracker link added to app page
 * \[Enhanced feature\]: for security reasons, students and clients can only see/access `My Projects`, `Help`, and `Logout` pages, guests can only access the `Login` page
@@ -293,7 +293,7 @@ averages on each category
         + Coaches can go to the `Project Matchings` tab/page and create new matchings that involve new engagements (coach and students) and a project pool (from existing projects). 
         + After a matching is created, coaches can go to the matching page and add/edit engagements, as well as the project pool
     + Phase 2 (collect preferences): 
-        + After phase 1, Students from each engagement can (only) access their respective project preference page and rank the project pool (last edited user is shown)
+        + After phase 1, Students from each engagement can (only) access their respective project preference page and rank the project pool through drag-and-drop function with SortableJS and AJAX call (last edited user is shown)
         + Coaches can go to any project preference page to see/edit the current rankings (last edited user is shown)
         + Coaches can see the current progress of each engagement ("not responded yet" or "responded")
         + Coaches can add/edit engagements (it will reset the respective preferences, meaning the edited engagement needs to rank again)
