@@ -93,7 +93,7 @@ Scenario: User can submit a create form that includes user type and SID for Stud
     | User Name         | Fakeuser              |
     | Email             | fakeuser@berkeley.edu |
     | Preferred Contact | 555-555-5555          |
-    | Github Uid        | fakegithubuid         |
+    | GitHub Username   | fakegithubuid         |
     | User Type         | Student               |
     | SID               | 11111111              |
   And I fill in the "Org Information" fields as follows:
@@ -123,7 +123,7 @@ Scenario: User can submit a create form that includes user type and SID for Staf
     | User Name         | Professor              |
     | Email             | professor@berkeley.edu |
     | Preferred Contact | 555-555-5555           |
-    | Github Uid        | fakegithubuid          |
+    | GitHub Username   | fakegithubuid          |
     | User Type         | Staff                  |
     | SID               | 222222                 |
   And I fill in the "Org Information" fields as follows:
