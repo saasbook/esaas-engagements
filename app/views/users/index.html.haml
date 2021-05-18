@@ -1,7 +1,12 @@
+%csrf_meta_tag
 .page-header
-  %h1
-    Users
-    = link_to 'New User', new_user_path, :class => 'btn btn-success pull-right'
+  %div{:class => 'header-div'}
+    %h1
+      Users
+    %div{:class => 'header-right'}
+      .btn.btn-primary.pull-right{"data-toggle" => "popover", "title"=>"Quick Info" } Import Users      
+      = link_to 'New User', new_user_path, :class => 'btn btn-success pull-right'
+
   .help-block Click a User name to see more information
 
 %ul{:class => 'pagination'}
@@ -14,12 +19,12 @@
     - else
       %li{:class=>'each_page'}
         %a{:class=>"page-link", :href=>"?user_each_page=#{num_per_page}"}=num_per_page
-      
+
 %ul{:class => 'pagination pull-right'}
   - ["First","Previous","Current","Next","Last"].each do |action|
     - if action != "Current" then
       %li{:class=>'page_num'}
-        %a{:class=>"page-link", :href=>"?user_page_action=#{action}&prev=#{@page_num}"}=action 
+        %a{:class=>"page-link", :href=>"?user_page_action=#{action}&prev=#{@page_num}"}=action
     - else
       %li{:class=>"page-num"}
         %a{:class=>'page_link'} Page #{[1,@page_num].max}
@@ -29,7 +34,7 @@
     %tr
       %th Name
       %th Email
-      %th GitHub username
+      %th GitHub Username
       %th Type
       %th SID
       %th
@@ -42,3 +47,33 @@
         %td= user.user_type.try(:humanize)
         %td= user.sid
         %td= link_to 'Edit', edit_user_path(user), :class => 'btn btn-primary'
+
+:javascript
+  $(() => {
+    var AUTH_TOKEN = $('meta[name="csrf-token"]').attr("content");
+    var html = `
+    <div id="PopoverContent">
+      <form action="users/import?&X-CSRF-Token=${AUTH_TOKEN}&X-Requested-With=XMLHttpRequest" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+          <input type="file"
+          id="file" name="file" accept=".csv">
+        </div>
+        <div class="row" style="margin-left: 0px; align-items: center; ">
+          <button type="submit" class="btn btn-dark">Import</button>
+          <a href="#" class="tooltip-toggle" 
+            aria-label="Accepts comma delimited CSV file, with columns being of user_email,
+            user_name, org_name, etc..." 
+            tabindex="0" style="margin-left: 5px;">
+            Help
+          </a>
+        </div>
+      </form>
+    </div>`;
+    $('[data-toggle="popover"]').popover({
+      container: 'body',
+      html: true,
+      placement: 'bottom',
+      sanitize: false,
+      content: html
+    })
+  });

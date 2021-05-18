@@ -8,7 +8,7 @@ Background: Logged in
         | id | name         | github_uid      | email                     | user_type |
         | 1  | Armando Fox  | armandofox      | fox@berkeley.edu          | coach     |
         | 2  | Joe Deatrick | jldeatrick      | jldeatrick@protonmail.com | client    |
-        | 3  | Developer    | esaas_developer | esaas@saasbook.info       | student   |
+        | 3  | Developer    | esaas_developer | esaas@saasbook.info       | coach   |
 
     And the following orgs exist:
         | id | name         | contact_id |
@@ -32,6 +32,7 @@ Scenario: User view displays the correct names
     Given I am on the Users page
     Then I should see "Joe Deatrick"
     And I should see "Armando Fox"
+		And I should see "GitHub Username"
     And I should not see "Jackson Murphy"
 
 # Story ID: 153070288
@@ -48,6 +49,7 @@ Scenario: The User profile page should have the correct information
     And I should see "2017-11-02"
     And I should see "178"
     And I should see "Armando Fox"
+		And I should see "GitHub Username"
     And I should not see "ACElab"
     And I should not see "Teamscope"
-
+		And I should not see "Github ID"
