@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_filter :logged_in?
+  before_filter :check_student
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -10,7 +11,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_pending_iteration_feedbacks
   helper_method :get_reviewed_apps
   private
-  @@name_path = nil
+  @@name_path = "/my_projects"
 
   def logged_in?
     @@name_path = request.env['PATH_INFO']
@@ -57,14 +58,14 @@ class ApplicationController < ActionController::Base
 
   def change_page_num(name, total_item)
     page_num = (params[:prev] || session["#{name}_page_num"]).to_i
-    max_page_num =  (total_item - 1) / @each_page + 1
-    @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>max_page_num, nil => page_num}[params["#{name}_page_action"]].to_i
+    @max_page_num = (total_item - 1) / @each_page + 1
+    @page_num = {"Previous"=>page_num-1,"Next"=>page_num+1,"First"=>1,"Last"=>@max_page_num, nil => page_num}[params["#{name}_page_action"]].to_i
     flash.now[:alert] = "You are already on the FIRST page." if @page_num == 0
-    flash.now[:alert] = "You are already on the LAST page." if @page_num == max_page_num + 1
-    @page_num = [[1,@page_num].max,max_page_num].min
+    flash.now[:alert] = "You are already on the LAST page." if @page_num == @max_page_num + 1
+    @page_num = [[1,@page_num].max,@max_page_num].min
     session["#{name}_page_num"] = @page_num.to_s
   end
-  
+
   def app_owner(app_id)
     current_user.app_ids.include? app_id unless current_user.student?
   end
@@ -85,7 +86,7 @@ class ApplicationController < ActionController::Base
     end
     @pending_iterations = Iteration.where(id: pending_iteration_ids)
   end
-  
+
   def get_reviewed_apps
     reviewed_app_ids = []
     @apps.each do |app|
@@ -96,5 +97,42 @@ class ApplicationController < ActionController::Base
       end
     end
     @reviewed_apps = App.where(id: reviewed_app_ids)
+  end
+
+  # Denies access if user is a student
+  def check_student
+    @@name_path = request.env['PATH_INFO']
+    if current_user&.student? and (@@name_path != "/my_projects" and @@name_path != "/")
+      begin
+        redirect_to :back, alert: "You do not have access to that page."
+      rescue Exception
+        redirect_to "/", alert: "You do not have access to that page."
+      end
+    end
+  end
+
+  # redirects users to corresponding matching page
+  def auth_matching
+    @@name_path = request.env['PATH_INFO']
+    if current_user&.client?
+      begin
+        redirect_to :back, alert: "You do not have access to that page."
+      rescue Exception
+        redirect_to "/", alert: "You do not have access to that page."
+      end
+    end
+    if current_user&.student?
+      engagement_id = Matching.find_user_engagement_id(current_user.id)
+      if engagement_id == 0
+        begin
+          redirect_to :back, alert: "You do not have a matching in progress."
+        rescue Exception
+          redirect_to "/", alert: "You do not have a matching in progress."
+        end
+      else
+        matching_id = Engagement.find(engagement_id).matching.id
+        redirect_to show_engagement_matching_path(matching_id: matching_id, engagement_id: engagement_id)
+      end
+    end
   end
 end
