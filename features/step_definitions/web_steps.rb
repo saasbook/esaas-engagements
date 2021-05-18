@@ -55,6 +55,7 @@ end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
+  # page.save_and_open_screenshot(full: true)
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
@@ -131,6 +132,7 @@ Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   else
     assert page.has_no_content?(text)
   end
+  # page.save_and_open_screenshot(full: true)
 end
 
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
@@ -141,6 +143,7 @@ Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
   else
     assert page.has_no_xpath?('//*', :text => regexp)
   end
+  # page.save_and_open_screenshot(full: true)
 end
 
 Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
