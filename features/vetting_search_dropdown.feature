@@ -5,6 +5,7 @@ I want to do a string matching within the dropdown menu
 
 Background: user and orgs have been added to database
 # The following tables are not needed for the feature, just copied from the original file
+  Given I will be logged in as "coach" type
   And the following orgs exist:
         | id | name     | contact_id |
         | 1  | Berkeley | 1          |
@@ -20,10 +21,10 @@ Background: user and orgs have been added to database
 Scenario: I can search the dropdown list of status on new app page (including vetting status options)
 
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I press "Create App"
     # id for original (deployment) status
@@ -37,10 +38,10 @@ Scenario: I can search the dropdown list of status on new app page (including ve
 Scenario: I can see the dropdown list of status on new app page (including vetting status options)
 
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
   And I press "Create App"
   # id for original (deployment) status
