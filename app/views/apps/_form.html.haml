@@ -6,6 +6,7 @@
   = f.url_field :deployment_url, label: 'Deployment Url'
   = f.url_field :repository_url, label: 'Repository Url'
   = f.url_field :code_climate_url, label: 'Code Climate Url'
+  = f.url_field :pivotal_tracker_url, label: 'Pivotal Tracker Url'
   = f.text_area :features, rows: '5', label: 'App Initial Features'
   = f.collection_select :org_id, Org.all, :id, :name, {label: 'Organization'}, {class: 'select2'}
   = f.collection_select :status, App.statuses, :first, ->(x) { x.first.humanize}, {label: 'Status'}, {class: 'select2'}
