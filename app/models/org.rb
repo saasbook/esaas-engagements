@@ -19,4 +19,16 @@ class Org < ActiveRecord::Base
   def self.for_user(contact_id)
     Org.where(:contact_id => contact_id)
   end
+
+  def self.import(file)
+    keys = ['name', 'description', 'url', 'contact_id', "address_line_1", "address_line_2", "city_state_zip", "phone"]
+    CSV.foreach(file.path, headers: true) do |row|
+      row = row.select { |key,_| keys.include? key }
+      if row.empty?
+        raise "No valid columns. Valid columns are: 'name', 'description', 'url', 'contact_id', 'address_line_1', 'address_line_2', 'city_state_zip', 'phone'"
+      else
+        Org.create(row.to_h)
+      end
+    end
+  end
 end

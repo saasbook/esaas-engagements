@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'byebug'
 
 describe Engagement do
     #Story ID: #153069725
@@ -86,5 +87,40 @@ describe Engagement do
 
     end
     
+    # Story ID: 176932021
+    describe 'convert start date to semester' do
+        it 'converts semesters' do
+            eng = Engagement.new
+
+            eng.start_date = DateTime.new(2017,2,3)
+            expect(eng.get_semester()).to eq('SP17')
+
+            eng.start_date = DateTime.new(2018,6,7)
+            expect(eng.get_semester()).to eq('SU18')
+
+            eng.start_date = DateTime.new(2019,9,10)
+            expect(eng.get_semester()).to eq('FA19')
+            
+            # This needs an extra 8 because 8 hours gets subtracted from the datetime, unsure why
+            eng.start_date = DateTime.new(2017,1,1,8)
+            expect(eng.get_semester()).to eq('SP17')
+
+            eng.start_date = DateTime.new(2017,5,15)
+            expect(eng.get_semester()).to eq('SP17')
+
+            eng.start_date = DateTime.new(2017,8,15)
+            expect(eng.get_semester()).to eq('SU17')
+
+            eng.start_date = DateTime.new(2017,8,16)
+            expect(eng.get_semester()).to eq('FA17')
+
+            eng.start_date = DateTime.new(2017,12,31,8)
+            expect(eng.get_semester()).to eq('FA17')
+
+            eng.start_date += 1.days
+            expect(eng.get_semester()).to eq('SP18')
+        end
+        
+    end
 
 end

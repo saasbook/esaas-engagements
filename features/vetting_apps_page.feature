@@ -27,6 +27,7 @@ Background: Logged in
 
 Scenario: There is a form on users page that I can use to create a user
     Given I am on the apps page
+    And I follow "Log in with GitHub"
     Then I should see "Vetting pending"
     And I should see "On hold"
     And I should see "Staff approved"
