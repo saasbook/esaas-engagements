@@ -1,55 +1,84 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "apps"
+
 .page-header
   %h1
     Listing Apps
-    = link_to 'New App', new_app_path, :class => 'btn btn-success pull-right'
+    = link_to new_app_path, :class => 'btn btn-success pull-right m-3' do 
+      New App
+      %i.fas.fa-pencil-alt
   .help-block Click an App name to see more information
 
-#filters
-  %label.checkbox-inline
-    %div#deploy
-      %strong Deployment Status:
-      %em #{" (" + @total_deploy.to_s + ")"}
-      %br
-      - App.getAllDeploymentStatuses.each do |status|
-        = check_box_tag status, 1, true, :class => 'filter'
-        %span{:class => status}= status.to_s.humanize
-        %em (#{@deployment_map[status.to_s].to_i})
+  - content_for :filters do
+    - $filters = ""
+    = form_tag "/", :method => :get do
+      %div#deploy
+        %strong Deployment Status:
+        %em #{" (" + @total_deploy.to_s + ")"}
         %br
-    
-  %label.checkbox-inline
-    %div#vetting
-      %strong Vetting Status:
-      %em #{" (" + @total_vet.to_s + ")"}
+        .checkbox-inline
+          - App.getAllDeploymentStatuses.each do |status|
+            - if @deployment_statuses.key? status
+              - $filters = $filters + "&" + status.to_s + "=1"
+              = check_box_tag status, 1, true, :class => 'filter'
+            - else
+              = check_box_tag status, 1, false, :class => 'no_filter'
+            = label_tag status do
+              %span{:class => status}
+                = status.to_s.humanize
+            %em (#{@deployment_map[status.to_s].to_i})
+            %br
       %br
-      - App.getAllVettingStatuses.each do |status|
-        = check_box_tag status, 1, true, :class => 'filter'
-        %span{:class => status}= status.to_s.humanize
-        %em (#{@vetting_map[status.to_s].to_i})
+      %div#vetting
+        %strong Vetting Status:
+        %em #{" (" + @total_vet.to_s + ")"}
         %br
-
-  :javascript
-      $('.filter').change(function() { var klass = $("#apps_table ."+$(this).attr('name')).toggle(); });
+        .checkbox-inline
+          - App.getAllVettingStatuses.each do |status|
+            - if @vetting_statuses.key? status
+              - $filters = $filters + "&" + status.to_s + "=1"
+              = check_box_tag status, 1, true, :class => 'filter'
+            - else
+              = check_box_tag status, 1, false, :class => 'no_filter'
+            = label_tag status do
+              %span{:class => status}
+                = status.to_s.humanize
+            %em (#{@vetting_map[status.to_s].to_i})
+            %br
+        %br
+        = submit_tag 'Apply Filters', :class => "btn btn-dark btn-sm mt-2"
+        #{@filtered_count.to_s + ' results'}
 
 %ul{:class => 'pagination'}
-  %li{:class=>'each_page'} 
+  %li{:class=>'each_page'}
     %a{:class=>"page_link"} Apps per page
   - ["10","50","100","All"].each do |num_per_page|
     - if @each_page == @page_dict[num_per_page] then
-      %li{:class=>'each_page active'} 
-        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}"}=num_per_page
+      %li{:class=>'each_page active'}
+        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}" + $filters}=num_per_page
     - else
       %li{:class=>'each_page'}
-        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}"}=num_per_page
+        %a{:class=>"page-link", :href=>"?app_each_page=#{num_per_page}" + $filters}=num_per_page
 
 %ul{:class => 'pagination pull-right'}
   - ["First","Previous","Current","Next","Last"].each do |action|
-    - if action != "Current" then 
+    - if action == "First" || action == "Last" then
       %li{:class=>'page_num'}
-        %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}"}=action
+        %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters}=action
+    - elsif action == "Previous" then
+      - unless @page_num <= 1 then
+        %li{:class=>'page_num'}
+          %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num-1}
+    - elsif action == "Next" then
+      - unless @page_num >= @max_page_num then
+        %li{:class=>'page_num'}
+          %a{:class=>"page-link", :href=>"?app_page_action=#{action}&prev=#{@page_num}" + $filters} #{@page_num+1}
     - else
-      %li{:class=>"page-num"}
-        %a{:class=>'page_link'} Page #{[1,@page_num].max}
- 
+      %li{:class=>"page-num active"}
+        %a{:class=>'page_link'} #{[1,@page_num].max}
+
 %table.table.table-condensed#apps_table
   %thead
     %tr
@@ -59,18 +88,19 @@
       %th
   %tbody
     - @apps.each do |app|
-      %tr{:class => [app.status.to_s]}
-        %td
-          = app.id
-          = link_to app.name, app
-        %td
-          = link_to app.org.name, app.org
-        %td
-          = sanitize app.description
-          %br
-          - app.engagements.each do |engagement|
-            %span #{engagement.id} (#{engagement.team_number}): #{engagement.student_names}
-            %br
-        %td{style: 'white-space: nowrap'}
-          = link_to 'Edit', edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-primary'
-          = link_to 'Destroy', app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+      - if @deployment_statuses.key? app.status.to_sym
+        %tr{:class => [app.status.to_s]}
+          %td
+            = app.id
+            = link_to app.name, app
+          %td
+            = link_to app.org.name, app.org
+          %td
+            = sanitize app.description
+          %td{style: 'white-space: nowrap'}
+            = link_to edit_app_path(app), :title => "Last update: #{app.updated_at.strftime('%c')}", :class => 'btn btn-sm btn-dark m-1' do
+              Edit
+              %i.far.fa-edit
+            = link_to app, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-danger m-1' do
+              Delete
+              %i.far.fa-trash-alt
