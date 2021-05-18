@@ -1,0 +1,73 @@
+.page-header.jumbotron.mt-4.my-4
+  %h1
+    Project Matchings
+    .btn.btn-success.pull-right.mt-3{"data-toggle" => "popover", "id"=>"New Matching" }
+      New Matching
+      %i.fas.fa-pencil-alt
+  .help-block Click a matching to see more information
+
+-# For coach only -> show all ongoing matching
+%table.table.table-condensed#apps_table
+  %thead
+    %tr
+      %th.h4
+        Matching Name
+      %th.h4
+        Status
+      %th.h4
+        Operation
+  %tbody
+    - @matchings.each do |matching|
+      %tr
+        %td.align-middle{:height => "70"}
+          = link_to matching.name, matching_progress_path(matching_id: matching.id), :class => 'btn btn-dark'
+        %td.align-middle
+          %h4
+            = matching.status
+        %td.align-middle
+          .btn.btn-danger{"data-target" => "#myModal#{matching.id}", "data-toggle"=>"modal"}
+            Delete
+            %i.fas.fa-trash-alt
+
+          %div.modal.fade{:id=>"myModal#{matching.id}", "tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
+            .modal-dialog.modal-dialog-centered{:role => "document"}
+              .modal-content
+                .modal-body
+                  %h4.mb-5 Are you sure to delete #{matching.name}?
+                  .btn.btn-dark.pull-right.ml-3{"data-dismiss" => "modal"} Close
+                  = link_to "Delete", delete_matching_path(matching_id: matching.id), :method => :delete, :class => 'btn btn-danger pull-right ml-4'
+
+
+
+:javascript
+
+  //TODO: need validation
+  // Bootstrap Function for popover when click New matching
+  $(function () {
+    $('[data-toggle="popover"]').popover({
+    container: 'body',
+    html: true,
+    placement: 'bottom',
+    sanitize: false,
+    content:
+    `
+    <div id="PopoverContent">
+      <form action="/matching/new" method="get">
+        <div class="form-group">
+          <label for="exampleInputPassword1">Number of Engagements</label>
+          <input type="text" class="form-control" name="num_engagements" id="num_engagements" placeholder="1" label="Num">
+        </div>
+        <button type="submit" class="btn btn-dark">Next</button>
+      </form>
+    </div>`
+    })
+  });
+
+  $(document).on('click',  (e) => {
+    $('[data-toggle="popover"]').each(function () {
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            (($(this).popover('hide').data('bs.popover')||{}).inState||{}).click = false  // fix for BS 3.3.6
+        }
+    });
+  });
+

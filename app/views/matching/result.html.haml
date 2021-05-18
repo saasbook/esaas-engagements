@@ -1,0 +1,123 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag "matching"
+
+%h1.jumbotron.p-5
+  Project Matching Result for #{@matching.name}
+
+%body
+  .btn.btn-danger.pull-right{"data-target" => "#myModal", "data-toggle"=>"modal"}
+    Finalize
+    %i.fas.fa-check-circle
+  = link_to matching_progress_path(matching_id: @matching.id), :class => 'btn btn-dark m-2' do
+    %i.fas.fa-undo-alt
+    Cancel
+
+  %div#myModal.modal.fade{"tabindex"=>"-1", :role=>"dialog", "aria-labelledby"=>"exampleModalCenterTitle", "aria-hidden"=>"true"}
+    .modal-dialog.modal-dialog-centered{:role => "document"}
+      .modal-content
+        .modal-header
+          %h4.modal-title Are you sure to finalize #{@matching.name}?
+        .modal-body
+          Once finalized, engagements will appear under the respective apps, and you will not be able to modify them through matching.
+        .btn.btn-danger.mx-3{"data-dismiss" => "modal"} Cancel
+        = link_to "I want to finalize it.", matching_finalize_path(matching_id: @matching.id), :class => 'btn btn-dark m-2 mx-3 pull-right'
+
+
+
+  .container
+  .card-columns.d-flex.justify-content-center
+    %div.card.mt-5.w-50
+      %div.card-body
+        %h3.pl-3
+          Coach
+          .help-block.h4
+            Team Coach
+            %ul.p-3.mt-3{:style => "list-style: none; padding-left: 0", :id => "rank"}
+              - count = 0
+              - @result.each do |key, value|
+                - count += 1
+                %li.mt-2
+                  %div.card.mb-5
+                    %div.card-header.bg-secondary.text-light
+                      Coach
+                      = count
+                    %div.card-body
+                      %blockquote.blockquote.mb-0
+                        %p.rank
+                          = User.find(Engagement.find_by(team_number: key).coach_id).name
+    %div.card.mt-5.w-20
+      %div.card-body
+        %h3.pl-3
+          Team Name
+          .help-block.h4
+            Students
+            %ul.p-3.mt-3{:style => "list-style: none; padding-left: 0", :id => "rank"}
+              - @result.each do |team_name, value|
+                %li.mt-2
+                  %div.card.mb-5
+                    %div.card-header.bg-secondary.text-light
+                      = team_name
+                    %div.card-body
+                      %blockquote.blockquote.mb-0
+                        %p.rank
+                          - @students[team_name].each do |n|
+                            = n.to_s + ","
+
+
+
+
+    %div.card.mt-5.w-50
+      %div.card-body
+        %h3.pr-5.text-right
+          Project
+          .help-block.h4
+            Assigned
+        %ul.p-3{:style => "list-style: none;", :id => "matching"}
+          - count = 0
+          - @result.each do |key, value|
+            - count += 1
+            %li.mt-2
+              %div.card.mb-5
+                %div.card-header.bg-dark.text-light
+                  Project
+                  = count
+                %div.card-body
+                  %blockquote.blockquote.mb-0.project
+                    %p
+                      = App.find_by(id: value).name
+
+
+  :javascript
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    // For sortable
+    var currentRank = []
+    const el = document.getElementById('matching');
+    const sortable = new Sortable(el, {
+      animation: 150,
+      // ghostClass: 'blue-background-class',
+      // On sort callback render rank
+      onSort: function(e) {
+          const arr = [];
+          $(".project").each((i, projectHTML) => {
+            arr.push(projectHTML.innerText);
+          });
+          currentRank = arr
+          // Store current ranking choice in arr preparing submit
+          $.ajax({
+            url: window.location.href + "/final_edit",
+            data: {
+              "final_result": currentRank,
+              },
+            type: "post",
+            success: function (data) {
+              console.log("success AJAX Finalize")
+              console.log(currentRank)
+            }
+          })
+      }
+    });
