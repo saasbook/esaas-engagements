@@ -83,3 +83,27 @@ eg. if you have a `SENDGRID` key you want to use for production, overwrite the j
 Now run `figaro heroku:set -e production -a YOUR+HEROKU+APP+NAME+HERE`.
 
 Replace `YOUR+HEROKU+APP+NAME+HERE` with `example-app` if your heroku app is at `example-app.herokuapp.com`.
+
+
+## 4. Set up simple Continuous Deployment(CD)
+
+#### Step 1: Set up travis.yml
+Read the documentation for [Heroku Deployment with Travis](https://docs.travis-ci.com/user/deployment/heroku/).
+
+```
+deploy:
+  provider: heroku
+  api_key:
+    secure: "[You Key Here]"
+  app: [Your app name on Heroku]
+  on:
+    repo: "[Your Repo name and path]" 
+````
+- For API Key: generate short-term API Key with `travis encrypt $(heroku auth:create)`
+- For App Name: use Heroku deployment app name
+- For Repo Name: use your repo name with github id (ex: my-github/esaas-engagements)
+
+#### Step 2: Configure Heroku
+- Go to your Heroku App page -> Deploy 
+  - Deployment method -> Connect to Github with your repo
+  - Automatic deploys -> Enable "Auto deployment" and "Wait for CI Pass"
