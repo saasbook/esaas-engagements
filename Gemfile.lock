@@ -185,7 +185,9 @@ GEM
     mime-types (3.3)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
-    mimemagic (0.3.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.13.0)
@@ -372,6 +374,7 @@ DEPENDENCIES
   jquery-rails
   json
   launchy
+  mimemagic (~> 0.3.10)
   omniauth-github
   paperclip (~> 5.2.1)
   pg (< 1.0.0)
