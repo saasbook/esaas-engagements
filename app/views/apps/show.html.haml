@@ -12,7 +12,8 @@
 .page-header
   %h1
     = link_to_unless @app.deployment_url.blank?, @app.name, @app.deployment_url, :target => '_blank'
-    = link_to_unless @app.repository_url.blank?, image_tag('octocat.png'), @app.repository_url, :target => '_blank'
+    = link_to_unless @app.repository_url.blank?, image_tag('octocat.png', title: 'GitHub Repository'), @app.repository_url, :target => '_blank'
+    = link_to_unless @app.pivotal_tracker_url.blank?, image_tag('tracker.png', size: '45x45', title: 'Pivotal Tracker'), @app.pivotal_tracker_url, :target => '_blank'
     - unless (url = @app.code_climate_url).blank?
       = link_to image_tag(url + '/badges/gpa.svg'), url, :target => '_blank'
       = link_to image_tag(url + '/badges/coverage.svg'), url, :target => '_blank'

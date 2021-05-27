@@ -2,6 +2,10 @@
 %html{lang: "en", dir: 'ltr'}
   %head
     %title ESaaS Customer Engagements
+    // Bootstrap4, FontAwesome CDN
+    %link{rel: "stylesheet", href: "//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"}
+    %link{rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v5.10.0/css/all.css", integrity: "sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p", crossorigin: "anonymous"}
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     = stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -10,11 +14,26 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/3.4.0/axe.min.js" integrity="sha256-3uvAwJcMTsYRtepeqr32rrpy5zZ/fMYjiKEKPZM6Rtc=" crossorigin="anonymous"></script>
 
   %body
+    = render 'layouts/nav_header'
+    .sidenav{role: 'navigation', title: 'filters'}
+      = yield :filters
+        
     #main.container{role: 'main'}
-      = render 'layouts/nav_header'
+      = render 'layouts/nav_header_search'
       = render 'shared/flash_messages'
       = yield :form_errors
       = yield
+
+    - if Rails.env.test?
+      :css
+        .modal.fade, .fade, .modal-dialog {
+          -webkit-transition: opacity 0.01s;
+          -moz-transition: opacity 0.01s;
+          -ms-transition: opacity 0.01s;
+          -o-transition: opacity 0.01s;
+          transition: opacity 0.01s;
+        }
     
     <script>var allEditors = document.querySelectorAll('textarea');for (var i = 0; i < allEditors.length; ++i) {var temp = ClassicEditor.create(allEditors[i]);if(i == 0)temp.then( editor => {myEditor = editor;} );}</script>
     <style> .ck-editor__editable_inline {min-height: 150px;} </style>
+

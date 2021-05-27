@@ -1409,7 +1409,7 @@ a.bg-danger:focus {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
+  /* margin: 40px 0 20px; */
   border-bottom: 1px solid #eee;
 }
 ul,
@@ -2644,7 +2644,7 @@ input[type="search"] {
   padding-left: 20px;
   margin-bottom: 0;
   font-weight: normal;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
@@ -2666,7 +2666,7 @@ input[type="search"] {
   margin-bottom: 0;
   font-weight: normal;
   vertical-align: middle;
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
