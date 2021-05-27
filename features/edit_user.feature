@@ -19,7 +19,7 @@ Scenario: There is a form on the edit user page
     And I should see "User Name"
     And I should see "Email"
     And I should see "Preferred Contact"
-    And I should see "Github Uid"
+    And I should see "GitHub Username"
 
 Scenario: I can edit a user
     And I fill in the "Edit User" fields as follows:
@@ -54,5 +54,3 @@ Scenario: I cannot submit with user name field blank
 Scenario: When I click back I go back to the users page
     And I follow "Back"
     Then I am on the users page
-
-
