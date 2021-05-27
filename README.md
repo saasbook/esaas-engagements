@@ -1,12 +1,12 @@
 # ESaaS Engagements Tracker
 
-[![Build Status](https://travis-ci.org/jaspak/esaas-engagements.svg?branch=master)](https://travis-ci.org/jaspak/esaas-engagements)
-[![Maintainability](https://api.codeclimate.com/v1/badges/59d3a23ad4ebfce891be/maintainability)](https://codeclimate.com/github/jaspak/esaas-engagements/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/59d3a23ad4ebfce891be/test_coverage)](https://codeclimate.com/github/jaspak/esaas-engagements/test_coverage)
-[![Known Vulnerabilities](https://snyk.io/test/github/jaspak/esaas-engagements/badge.svg)](https://snyk.io/test/github/jaspak/esaas-engagements)
+[![Build Status](https://travis-ci.org/zfred219/esaas-engagements.svg?branch=master)](https://travis-ci.org/zfred219/esaas-engagements)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4f34f3ba42625e63922e/maintainability)](https://codeclimate.com/github/zfred219/esaas-engagements/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/4f34f3ba42625e63922e/test_coverage)](https://codeclimate.com/github/zfred219/esaas-engagements/test_coverage)
+[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_8-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-GH-zfred219_esaas-engagements/main)
+[<img src="app/assets/images/pivotal_tracker_logo.png">](https://www.pivotaltracker.com/n/projects/2070245) 
 
-[Pivotal Tracker](https://www.pivotaltracker.com/n/projects/2316824)  
-[Heroku Deployment](https://esaas-demo.herokuapp.com/)
+[Heroku Deployment](https://esaas-team8.herokuapp.com/)
 
 The goal of this currently bare-bones app, thrown together by Armando
 Fox with contributions by [Andrew Halle](https://github.com/andrewhalle),
@@ -279,6 +279,30 @@ averages on each category
 * Added notification features for both `coach` and `client`:
     + Coach: A badge next to the `App Edit Requests` tab, showing the number of `submitted` and `resubmitted` requests.
     + Client: Two notification icons on `My Projects` index page, one of which will notify the user when `Iteration` Feedback Form has been requested from a `coach`, and the other when a `coach` has reviewed a request.
+
+# SP21 Engagements: Main Features
+* Contributors: [Fred Zhang](https://github.com/zfred219), [Kevin Lo](https://github.com/databears-cal), [Enjia Xu](https://github.com/EnjiaXu), [Wesley Wang](https://github.com/wwang3990), [Robert Qiu](https://github.com/robertqiu110), [Jeremy Lee](https://github.com/jrmylee)
+* \[UI\]: improved UI of the overall application (navigation bar & buttons etc.); changed filters bar to sidebar for more clarity
+* \[Enhanced feature\]: users are able to search project by email, Github username, and/or semester using the search bar
+* \[Enhanced feature\]: users are able to see & edit pivotal tracker url when creating/editing apps; pivotal tracker link added to app page
+* \[Enhanced feature\]: for security reasons, students and clients can only see/access `My Projects`, `Help`, and `Logout` pages, guests can only access the `Login` page
+* \[Quality of life\]: staff can see which fields are required when creating new users
+* \[New feature\]: users can upload csv files to create multiple user/orgs instead of doing so manually 
+* \[New feature\]: an entirely new `Project Matchings` feature added, it is used for matching between engagements and projects: 
+    + Phase 1 (create matching):
+        + Coaches can go to the `Project Matchings` tab/page and create new matchings that involve new engagements (coach and students) and a project pool (from existing projects). 
+        + After a matching is created, coaches can go to the matching page and add/edit engagements, as well as the project pool
+    + Phase 2 (collect preferences): 
+        + After phase 1, Students from each engagement can (only) access their respective project preference page and rank the project pool through drag-and-drop function with SortableJS and AJAX call (last edited user is shown)
+        + Coaches can go to any project preference page to see/edit the current rankings (last edited user is shown)
+        + Coaches can see the current progress of each engagement ("not responded yet" or "responded")
+        + Coaches can add/edit engagements (it will reset the respective preferences, meaning the edited engagement needs to rank again)
+        + Coaches can edit the project pool (it will reset all preferences, every engagement needs to rank again)
+    + Phase 3 (finalize matching):
+        + After all engagements have submitted their project ranking, coaches can follow `Begin Matching` button to see the result of the matching
+        + The matching algorithm is based on the [Gale–Shapley algorithm](https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm), aiming to have the best possible & stable outcome for each engagement based on their project ranking
+        + Coaches can see the matching result generated by the algorithm, and can edit the matching result further
+        + Coaches can then `Finalize` the matching result, engagements will then appear under their respective matched project
 
 # High priority feature list
 
