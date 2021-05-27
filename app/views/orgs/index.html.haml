@@ -1,8 +1,10 @@
 .page-header
-  %h1
-    Organizations
-    = link_to 'Email Orgs', mail_all_orgs_form_path, :class => 'btn btn-success pull-right'
-    = link_to 'New Org', new_org_path, :class => 'btn btn-success pull-right btn-space'
+  %div{:class => 'header-div'}
+    %h1
+      Organizations
+    %div{:class => 'header-right'}
+      .btn.btn-primary.pull-right{"data-toggle" => "popover", "title"=>"Quick Info" } Import Orgs
+      = link_to 'New Org', new_org_path, :class => 'btn btn-success pull-right btn-space'
   .help-block Click an Organization name to see more information
 
 %ul{:class => 'pagination'}
@@ -45,4 +47,34 @@
             = link_to 'Edit', edit_org_path(org), :title => "Last update: #{org.updated_at.strftime('%c')}", :class => 'btn btn-primary'
             = link_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
 
+:javascript
+  $(() => {
+    var AUTH_TOKEN = $('meta[name="csrf-token"]').attr("content");
+    var html = `
+    <div id="PopoverContent">
+      <form action="orgs/import?&X-CSRF-Token=${AUTH_TOKEN}" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+          <input type="file"
+          id="file" name="file" accept=".csv">
+        </div>
+        <div class="row" style="margin-left: 0px; align-items: center; ">
+          <button type="submit" class="btn btn-dark">Import</button>
+          <a href="#" class="tooltip-toggle" 
+            aria-label="Accepts comma delimited CSV file, with columns being of form: 
+            name,
+            desciption,url,etc..." 
+            tabindex="0" style="margin-left: 5px;">
+            Help
+          </a>
+        </div>
+      </form>
+    </div>`;
 
+    $('[data-toggle="popover"]').popover({
+      container: 'body',
+      html: true,
+      placement: 'bottom',
+      sanitize: false,
+      content: html
+    })
+  });
