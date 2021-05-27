@@ -3,6 +3,6 @@ When /^(?:|I )want to edit "([^"]*)"$/ do |field|
 end
 
 When /^(?:|I )want to destroy "([^"]*)"$/ do |field|
-  find('tr', text: field.to_s).click_link('Destroy')
+  find('tr', text: field.to_s).click_link('Delete')
 end
 

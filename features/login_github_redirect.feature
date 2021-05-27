@@ -70,17 +70,17 @@ Scenario: login with Github from create page, after visiting orgs and users
 Scenario: Login to github to create a new app
   #Story ID: #152298585
   Given I am not logged in
-  And I am on the apps page
-  And I follow "New App"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I follow "New App"
   And I am on the new_app page
 
 Scenario: Login to github to edit an existing app successfully
   #Story ID: #152298585
   Given I am not logged in
-  And I am on the apps page
-  And I want to edit "app1"
   And I am on the login page
   And I follow "Log in with GitHub"
+  And I am on the apps page
+  And I want to edit "app1"
   And I should see "Editing App"
