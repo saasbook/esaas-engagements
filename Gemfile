@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Keep Ruby version in Gemfile in sync with Ruby version in Dockerfile
-ruby '2.4.5'
+ruby '2.5.9'
 
 gem 'rails', '4.2.11.1'
 gem 'omniauth-github'
