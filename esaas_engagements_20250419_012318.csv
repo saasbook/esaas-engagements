@@ -1,0 +1,1125 @@
+Id,Title,Labels,Iteration,Iteration Start,Iteration End,Type,Estimate,Priority,Current State,Created at,Accepted at,Deadline,Requested By,Description,URL,Owned By,Owned By,Owned By,Comment,Task,Task Status,Task,Task Status,Task,Task Status,Task,Task Status,Task,Task Status,Task,Task Status,Pull Request,Git Branch,Git Branch
+151974234,"User can create a new app, user, and org all at once",iter1,1,"Oct 23, 2017","Nov 5, 2017",feature,2,p3 - Low,accepted,"Oct 15, 2017","Oct 25, 2017",,Sungwon Cho,"AS a user of this app
+SO THAT I can create an app, org, and user all at once
+I WANT the app to have a single page with all forms necessary",https://www.pivotaltracker.com/story/show/151974234,Joe Deatrick,Julie Soohoo,Kim Hoang," (Sungwon Cho - Oct 15, 2017)",,,,,,,,,,,,,,,
+151974242,Make independent comment section for all users,iter1,1,"Oct 23, 2017","Nov 5, 2017",feature,2,p3 - Low,accepted,"Oct 15, 2017","Oct 25, 2017",,Sungwon Cho,"AS a user of the app
+SO THAT I can comment on an App with others
+I WANT each app has a comment section for all users
+",https://www.pivotaltracker.com/story/show/151974242,Dae Geun Kwon,Sungwon Cho,," (Sungwon Cho - Oct 15, 2017)",,,,,,,,,,,,,,,
+152298680,Validation on duplicate users and orgs,iter2,1,"Oct 23, 2017","Nov 5, 2017",feature,1,p3 - Low,accepted,"Oct 25, 2017","Nov 5, 2017",,Andrew Halle,"AS a developer of the app
+SO THAT I do not mistakenly link users/orgs to an app
+I WANT to validate on the uniqueness of a user and org",https://www.pivotaltracker.com/story/show/152298680,Dae Geun Kwon,,,,,,,,,,,,,,,,,,
+152298699,logout link on apps page,iter2,2,"Nov 6, 2017","Nov 19, 2017",feature,1,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"AS a user of the ESaaS Engagement Tracker app
+SO THAT I can logout anywhere on the app
+I WANT to see a 'logout' link on 'apps' page",https://www.pivotaltracker.com/story/show/152298699,Sungwon Cho,,,,,,,,,,,,,,,,,,
+152298660,fix login with github,"",2,"Nov 6, 2017","Nov 19, 2017",bug,,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"AS a developer of the app
+SO THAT the users can use the production app
+I WANT to fix the login bug",https://www.pivotaltracker.com/story/show/152298660,Sungwon Cho,,,,,,,,,,,,,,,,,,
+152298649,Print customer feedback for each iteration with nicer format,iter2,2,"Nov 6, 2017","Nov 19, 2017",feature,2,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"AS a staff or an org who use ESaaS Engagement who manages an app
+SO THAT I can understand the developer team and the app better
+I WANT to see the all answers from customer feedback nicely format
+",https://www.pivotaltracker.com/story/show/152298649,Kim Hoang,Sungwon Cho,Joe Deatrick," (Sungwon Cho - Oct 25, 2017)",,,,,,,,,,,,,,,
+152298633,Summarizing information on Iteration page,iter2,2,"Nov 6, 2017","Nov 19, 2017",feature,2,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"AS a staff or an organization who use the app
+SO THAT I can grade the team / make decision on which team to hire
+I WANT to see how the team performed over the iterations",https://www.pivotaltracker.com/story/show/152298633,Sungwon Cho,Joe Deatrick,," (Sungwon Cho - Oct 25, 2017)",,,,,,,,,,,,,,,
+152298618,"Engagement owns developing students, not just string of students",iter2,2,"Nov 6, 2017","Nov 19, 2017",feature,1,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"AS a staff who uses the app
+SO THAT I can easily assign students to an app
+I WANT each engagement links to User objects ",https://www.pivotaltracker.com/story/show/152298618,Kyriaki Papadimitriou,Julie Soohoo,," (Sungwon Cho - Oct 25, 2017)",,,,,,,,,,,,,,,
+152298593,Enhance User model to support Student and Staff,iter2,2,"Nov 6, 2017","Nov 19, 2017",feature,2,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"AS a developer
+SO THAT I can organize the users more effectively
+I WANT to differentiate between students and staff among User",https://www.pivotaltracker.com/story/show/152298593,Julie Soohoo,Kyriaki Papadimitriou,," (Sungwon Cho - Oct 25, 2017)",,,,,,,,,,,,,,,
+152298585,Redirect back to page User was on when logging in,iter2,2,"Nov 6, 2017","Nov 19, 2017",feature,1,p3 - Low,accepted,"Oct 25, 2017","Nov 7, 2017",,Andrew Halle,"as a user of the ESaaS Engagement Tracker app who logs into the app
+so that I do not lose where I was
+I want to be redirected to the page where I was before I logged in",https://www.pivotaltracker.com/story/show/152298585,Kyriaki Papadimitriou,,," (Sungwon Cho - Oct 25, 2017)",,,,,,,,,,,,,,,
+152689950,Add more functionalities to engagement and iteration page,iter3,2,"Nov 6, 2017","Nov 19, 2017",feature,1,p3 - Low,accepted,"Nov 8, 2017","Nov 19, 2017",,Sungwon Cho,"As a staff of the course
+SO THAT I can manage the engagements and iterations
+I WANT to add edit and delete button to engagement page and iteration page",https://www.pivotaltracker.com/story/show/152689950,Kyriaki Papadimitriou,Julie Soohoo,," (Sungwon Cho - Nov 8, 2017)",,,,,,,,,,,,,,,
+152689630,Grant access to edit iteration information to users,iter3,2,"Nov 6, 2017","Nov 19, 2017",feature,1,p3 - Low,accepted,"Nov 8, 2017","Nov 19, 2017",,Sungwon Cho,"AS a staff of the course
+SO THAT I can manually fill out the iteration customer feedback form
+I WANT to have an access to an empty iteration feedback form",https://www.pivotaltracker.com/story/show/152689630,Kim Hoang,,,,,,,,,,,,,,,,,,
+152689457,Different types of comments,iter3,2,"Nov 6, 2017","Nov 19, 2017",feature,2,p3 - Low,accepted,"Nov 8, 2017","Nov 19, 2017",,Andrew Halle,"AS a staff that manages the matching between a project and customers
+SO THAT I can easily keep track of an app's progress of customer matching
+I WANT the app page have different comment types not only for general comments, but also for contact progress",https://www.pivotaltracker.com/story/show/152689457,Sungwon Cho,Dae Geun Kwon,," (Sungwon Cho - Nov 8, 2017)",,,,,,,,,,,,,,,
+152689294,Dump engagement info as CSV file,iter3,2,"Nov 6, 2017","Nov 19, 2017",feature,2,p3 - Low,accepted,"Nov 8, 2017","Nov 19, 2017",,Sungwon Cho,"AS a developer,
+SO THAT the staff and other developers can access the engagement information without having to look at the website,
+I WANT the app to dump the engagement information as a CSV file",https://www.pivotaltracker.com/story/show/152689294,Joe Deatrick,Kim Hoang,," (Sungwon Cho - Nov 8, 2017)",,,,,,,,,,,,,,,
+152985775,Refactor and improve test coverage,iter3,3,"Nov 20, 2017","Dec 3, 2017",chore,,p3 - Low,accepted,"Nov 18, 2017","Dec 3, 2017",,Kim Hoang,Testing/refactoring ,https://www.pivotaltracker.com/story/show/152985775,Kim Hoang,,,,,,,,,,,,,,,,,,
+150954658,"Orgs should be able to be marked as ""defunct""","",7,"Jan 15, 2018","Jan 28, 2018",feature,1,p3 - Low,accepted,"Sep 11, 2017","Jan 18, 2018",,Armando Fox,"AS a staff who manages the app
+SO THAT I can differentiate between live apps and defunct app
+I WANT an app can be marked as ""defunct""",https://www.pivotaltracker.com/story/show/150954658,Andrew Halle,,,,,,,,,,,,,,,,,,
+150602475,"App should allow ""proposed"" status for an app (not yet vetted) with validations that don't require nonblank repo etc.","",7,"Jan 15, 2018","Jan 28, 2018",feature,1,p3 - Low,accepted,"Aug 28, 2017","Jan 18, 2018",,Armando Fox,"AS a staff who manages the apps
+SO THAT I can mark an app as pending
+I WANT the App allow ""proposed"" status for an app",https://www.pivotaltracker.com/story/show/150602475,Andrew Halle,,,,,,,,,,,,,,,,,,
+151350620,Auto generation/emailing of customer feedback forms for the current iteration,"",7,"Jan 15, 2018","Jan 28, 2018",feature,2,p3 - Low,accepted,"Sep 23, 2017","Jan 18, 2018",,Andrew Halle,"AS a coach of an engagement
+SO THAT I can check the performance of developers
+I WANT to have a customer feedback form for each iteration",https://www.pivotaltracker.com/story/show/151350620,Andrew Halle,,,,,,,,,,,,,,,,,,
+151133902,"Search for a user, org, or app/project by simple string match","",7,"Jan 15, 2018","Jan 28, 2018",feature,2,p3 - Low,accepted,"Sep 15, 2017","Jan 18, 2018",,Armando Fox,"AS a staff of the course
+SO THAT I can easily match users, orgs, and apps
+I WANT to be able to find user, org, or app by simple string match",https://www.pivotaltracker.com/story/show/151133902,Andrew Halle,,,,,,,,,,,,,,,,,,
+153042639,"Only authorized users can create, edit, and destroy users, orgs, apps, engagements, and iterations",iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,2,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"AS a staff of the course
+SO that nothing in the database is modified by unauthorized users
+I WANT to add user authentication check before any modification to the database",https://www.pivotaltracker.com/story/show/153042639,Kyriaki Papadimitriou,,,"Lo-Fi (Kyriaki Papadimitriou - Nov 21, 2017)",,,,,,,,,,,,,,,
+153043640,The iterations' 'Edit' page should have a 'Back' button,iter4,7,"Jan 15, 2018","Jan 28, 2018",bug,,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Kyriaki Papadimitriou,"As a user of the app
+So that I can navigate around the app's pages
+I want to be able to click on ""Back"" on the edit Iteration page to go back to the iteration page",https://www.pivotaltracker.com/story/show/153043640,Kyriaki Papadimitriou,,,"Lo-Fi (Kyriaki Papadimitriou - Nov 21, 2017)",,,,,,,,,,,,,,,
+153071841,[style] page header is positioned appropriately,iter4,7,"Jan 15, 2018","Jan 28, 2018",bug,,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Sungwon Cho,"As a developer of the app
+So that the app has a better user experience
+I want to unify the style of the header on each page",https://www.pivotaltracker.com/story/show/153071841,Sungwon Cho,,,,,,,,,,,,,,,,,,
+153070531,Remove Engagements#index,iter4,7,"Jan 15, 2018","Jan 28, 2018",bug,,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a developer of the app
+So that I can have the files as concise as possible
+I want to remove unnecessary methods",https://www.pivotaltracker.com/story/show/153070531,Sungwon Cho,,,,,,,,,,,,,,,,,,
+153070288,User details page,iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,1,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a coach of an engagement
+So that I can easily access to contact information of a customer/student
+I want to add a details page for each user",https://www.pivotaltracker.com/story/show/153070288,Joe Deatrick,,," (Sungwon Cho - Nov 21, 2017)",,,,,,,,,,,,,,,
+153070134,"""General"" customer feedback ",iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,1,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a customer of an engagement/iteration
+So that I can fill out a general comment on each iteration before the full/comprehensive customer feedback
+I want to have a ""General"" comment section in the customer feedback",https://www.pivotaltracker.com/story/show/153070134,Kim Hoang,,," (Sungwon Cho - Nov 21, 2017)",,,,,,,,,,,,,,,
+153070009,"""Clear Form"" button in each form",iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,1,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a user of the app
+So that I can start over filling out the form
+I want to have a ""Clear Form"" button that erases all fields",https://www.pivotaltracker.com/story/show/153070009,Dae Geun Kwon,,," (Sungwon Cho - Nov 21, 2017)",,,,,,,,,,,,,,,
+153069853,String matching while typing within a dropdown menu,iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,2,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a user of the app
+So that I do not have to look through a long list of dropdown menu
+I want to do a string matching within the dropdown menu",https://www.pivotaltracker.com/story/show/153069853,Kim Hoang,,," (Sungwon Cho - Nov 21, 2017)",,,,,,,,,,,,,,,
+153069725,Engagements belong to coaching org and client org,iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,2,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a staff of the course
+So that I can figure out which organizations are related to an engagement
+I want to link coaching org and client org to an engagement",https://www.pivotaltracker.com/story/show/153069725,Kyriaki Papadimitriou,Julie Soohoo,Sungwon Cho,,,,,,,,,,,,,,,,
+153069541,Profile Images on each User,iter4,7,"Jan 15, 2018","Jan 28, 2018",feature,2,p3 - Low,accepted,"Nov 21, 2017","Jan 18, 2018",,Andrew Halle,"As a user of the app
+So that I can easily communicate with other users
+I want to be able to upload a profile picture and see it on the users page",https://www.pivotaltracker.com/story/show/153069541,Sungwon Cho,,," (Sungwon Cho - Nov 21, 2017)",,,,,,,,,,,,,,,
+165105206,Feature 2: Ability to provide vetting comments during the vetting process,"",39,"Apr 8, 2019","Apr 21, 2019",feature,1,p3 - Low,accepted,"Apr 3, 2019","Apr 18, 2019",,JIANHUI LI,"### Why
+
+
+**As admin **
+**I want  to click a ""vetting"" radio button of the existing comment**
+**So that the comment is labeled as vetting  **
+",https://www.pivotaltracker.com/story/show/165105206,JIANHUI LI,Sarah Lin,Libo Chen,,,,,,,,,,,,,,,,
+164720954,Feature 5: Adding a deployment status and a vetting status for each application.,"",39,"Apr 8, 2019","Apr 21, 2019",feature,4,p3 - Low,accepted,"Mar 19, 2019","Apr 18, 2019",,JIANHUI LI,"### Why
+
+
+**As an instructor**
+**I want  to be able to set and view the deployment/vetting status for each project**
+**So that I can set their status anytime and also view all projects according to certain status selected**
+
+Notes:
+Deployment statuses: Dead,Development,In use,In use and wants improvement, Inactive but wants improvement, Pending
+Vetting statuses:Below is a list of vetting statuses that could be provided on top of what we already have for efficient filtering of projects:
+1.Vetting Pending(not yet vetted)
+2.On Hold (we need something from customer during vetting phase)
+3.Staff Approved(approved by the faculty during vetting phase)
+4.CustomerInformed(staff has approved the project and we’ve informed the customer about acceptance and are waiting for them to confirm whether they meet our customer expectations)
+5.CustomerConfirmation Received(customer has confirmed to meet our expectations)
+6. Declined by Staff (Project declined by staff during vetting)
+7.Declined by Customer(engagement declined by the customer after we accepted the project)
+8. Declined by Customer–AvailableNext Sem (customer is not available this semester but will be available for next semester)
+9.Backup(we are saving this project as a backup incase a client drops
+",https://www.pivotaltracker.com/story/show/164720954,JIANHUI LI,Eddi Xu,,,,,,,,,,,,,,,,,
+165256973,Feature 5.3: Show total no.of projects for each project status and the cumulative total in the UI,"",39,"Apr 8, 2019","Apr 21, 2019",feature,1,p3 - Low,accepted,"Apr 10, 2019","Apr 18, 2019",,JIANHUI LI,"### Why
+
+
+**As admin**
+**I want to see the total number of projects for each status**
+**So that I can the status numbers**
+
+",https://www.pivotaltracker.com/story/show/165256973,JIANHUI LI,Eddi Xu,,,,,,,,,,,,,,,,,
+165460530,Feature 4: add hyperlink to organization column,iter3,40,"Apr 22, 2019","May 5, 2019",feature,1,p3 - Low,accepted,"Apr 19, 2019","May 1, 2019",,Libo Chen,The organization column should have hyperlink values instead of plain text so that user can directly navigate to the organization details page,https://www.pivotaltracker.com/story/show/165460530,Libo Chen,Ruiqing Xiang,,,,,,,,,,,,,,,,,
+165435216,"Feature 2: Move the two buttons of edit and back in app detailed page/iteration page to the top right
+","",40,"Apr 22, 2019","May 5, 2019",feature,1,p3 - Low,accepted,"Apr 17, 2019","May 1, 2019",,Sarah Lin,,https://www.pivotaltracker.com/story/show/165435216,Sarah Lin,,,,,,,,,,,,,,,,,,
+165269471,Add Search bar on App Listing page: searching to quickly find apps according to name/organization/description,"",40,"Apr 22, 2019","May 5, 2019",feature,2,p3 - Low,accepted,"Apr 11, 2019","May 1, 2019",,Sarah Lin,"As a logged in user
+	So that I can quickly find the app I'm looking for
+	I should be able to search the app in the app listing page by name/organization/description
+New Update:
+Search:
+Goal: Merge the function with the previous search column and enable it to have “app only” choice when searching description
+By default search all three at the same time, but can uncheck boxes to search only for a specific category
+",https://www.pivotaltracker.com/story/show/165269471,Sarah Lin,,,,,,,,,,,,,,,,,,
+165265798,Feature 7: Specifying Repository Url  when adding an app should be optional or mandatory depending on app's status,iter3,40,"Apr 22, 2019","May 5, 2019",feature,1,p3 - Low,accepted,"Apr 10, 2019","May 1, 2019",,Libo Chen,"Make sure that esaas allows the admin to add an app without specifying Repository Url (should be optional) if the status of app is in vetting category. If the status of app changes to  deployment category (dev, in use etc.) - entering Repository Url should be mandatory",https://www.pivotaltracker.com/story/show/165265798,zhichen98,Libo Chen,,,,,,,,,,,,,,,,,
+165435224,"Feature 1: When clicking on the edit button on the “edit app” page, should go back to app detailed page instead of app listing page",iter3,40,"Apr 22, 2019","May 5, 2019",feature,1,p3 - Low,accepted,"Apr 17, 2019","May 1, 2019",,Sarah Lin,,https://www.pivotaltracker.com/story/show/165435224,Libo Chen,,,,,,,,,,,,,,,,,,
+165267927,Feature 6: Beautify content box,iter3,40,"Apr 22, 2019","May 5, 2019",feature,1,p3 - Low,accepted,"Apr 11, 2019","May 1, 2019",,Libo Chen,"descript: Right now the description section displays the text inline, so difficult to read.
+1. Provide 3-4 basic text beautifying options when editing an app. Examples to look at: Quora, Zhihu.
+2. look for what open source libraries can offer
+3. email content, description, potentially feature box",https://www.pivotaltracker.com/story/show/165267927,JIANHUI LI,,,,,,,,,,,,,,,,,,
+165786286,"Adding feature boxes to the apps, need change to schema",iter4,41,"May 6, 2019","May 19, 2019",feature,0,p3 - Low,accepted,"May 3, 2019","May 14, 2019",,Eddi Xu,,https://www.pivotaltracker.com/story/show/165786286,Eddi Xu,,,,,,,,,,,,,,,,,,
+165669453,Feature 8.1: DB change - adding a column of features to the engagement table,iter3,41,"May 6, 2019","May 19, 2019",feature,4,p3 - Low,accepted,"Apr 29, 2019","May 14, 2019",,Eddi Xu,,https://www.pivotaltracker.com/story/show/165669453,Eddi Xu,,,,,,,,,,,,,,,,,,
+165670417,Feature 8.2: Able to input features while creating the engagements.,iter3,41,"May 6, 2019","May 19, 2019",feature,1,p3 - Low,accepted,"Apr 29, 2019","May 14, 2019",,Eddi Xu,,https://www.pivotaltracker.com/story/show/165670417,Eddi Xu,,,,,,,,,,,,,,,,,,
+165670484,Feature 8.3: Display features for each engagement on the app's detail page.,iter3,41,"May 6, 2019","May 19, 2019",feature,1,p3 - Low,accepted,"Apr 29, 2019","May 14, 2019",,Eddi Xu,,https://www.pivotaltracker.com/story/show/165670484,Eddi Xu,,,,,,,,,,,,,,,,,,
+164720917,Feature 1: Admin can send emails to all organization,"iter1, iter2",41,"May 6, 2019","May 19, 2019",feature,4,p3 - Low,accepted,"Mar 19, 2019","May 14, 2019",,Sarah Lin,"### Why
+
+
+**As admin of the website**
+**I want to be able to click the ""Send email to all recipient"" button on the Organization page**
+**So that I can send emails to all representative emails of organizations listed in the organization page from my admin Gmail address to ask if they have projects to cooperate.**
+
+### Acceptance Criteria
+
+```gherkin
+Scenario: 
+Given
+When
+Then
+```
+
+**Notes:**",https://www.pivotaltracker.com/story/show/164720917,JIANHUI LI,Libo Chen,,,,,,,,,,,,,,,,,
+164721084,Feature 1.6: Mail a particular group based on vetting results,"iter1, iter2",41,"May 6, 2019","May 19, 2019",feature,2,p3 - Low,accepted,"Mar 19, 2019","May 14, 2019",,Sarah Lin,"### Why
+
+
+**As admin**
+**I want to select checkboxes on vetting statuses {Accepted, Rejected, Negotiable} in the Organization page and click ""Send emails to a specific group""**
+**So that I can send emails to only those customers. **
+
+### Acceptance Criteria
+
+```gherkin
+Scenario: 
+Given
+When
+Then
+```
+
+**Notes:**",https://www.pivotaltracker.com/story/show/164721084,JIANHUI LI,Libo Chen,,,,,,,,,,,,,,,,,
+165267564,"Dynamic pagination on the App Listing page with the ability to save preferred page size (dropdown of 10,50,100, Show All) - by default show 10",iter3,41,"May 6, 2019","May 19, 2019",feature,2,p3 - Low,accepted,"Apr 11, 2019","May 14, 2019",,Ruiqing Xiang,"Dynamic pagination on the App Listing page with the ability to save preferred page size (dropdown of 10,50,100, Show All) - by default show 10",https://www.pivotaltracker.com/story/show/165267564,Ruiqing Xiang,zhichen98,,,,,,,,,,,,,,,,,
+165668566,Feature 6.1 display rich text content correctly,iter4,41,"May 6, 2019","May 19, 2019",feature,1,p3 - Low,accepted,"Apr 29, 2019","May 14, 2019",,JIANHUI LI,,https://www.pivotaltracker.com/story/show/165668566,JIANHUI LI,,,,,,,,,,,,,,,,,,
+165786231,Fix the counting error for the apps in vetting status,iter4,41,"May 6, 2019","May 19, 2019",bug,,p3 - Low,accepted,"May 3, 2019","May 14, 2019",,Eddi Xu,"1. fix a bug where the number of vetting apps doesn't show
+2. add parentheses to each tally",https://www.pivotaltracker.com/story/show/165786231,Eddi Xu,Libo Chen,,,,,,,,,,,,,,,,,
+165787492,memorize search bar checkboxes choice. Remove leading and trailing spaces from a search keyword,iter4,41,"May 6, 2019","May 19, 2019",bug,,p3 - Low,accepted,"May 3, 2019","May 14, 2019",,Libo Chen,,https://www.pivotaltracker.com/story/show/165787492,Sarah Lin,Libo Chen,,,,,,,,,,,,,,,,,
+165808838,Add pagination to orgs and users,iter4,41,"May 6, 2019","May 19, 2019",feature,1,p3 - Low,accepted,"May 4, 2019","May 14, 2019",,Ruiqing Xiang,Add the pagination on App page to user and org page,https://www.pivotaltracker.com/story/show/165808838,Ruiqing Xiang,,,,,,,,,,,,,,,,,,
+165785615,App status should be displayed on the app page,iter4,41,"May 6, 2019","May 19, 2019",feature,1,p3 - Low,accepted,"May 3, 2019","May 14, 2019",,zhichen98,"As a admin user,
+In order to check app's status,
+I want to see app's status on app's detailed page. ",https://www.pivotaltracker.com/story/show/165785615,zhichen98,Sarah Lin,,,,,,,,,,,,,,,,,
+165787527,"Display info on ""email to organization"" page",iter4,41,"May 6, 2019","May 19, 2019",feature,1,p3 - Low,accepted,"May 3, 2019","May 14, 2019",,Libo Chen,also need to fix a bug when none of the boxes is checked,https://www.pivotaltracker.com/story/show/165787527,Libo Chen,,,,,,,,,,,,,,,,,,
+169662021,2.2: Add new migration for EditRequest,iter2,54,"Nov 4, 2019","Nov 17, 2019",chore,,p3 - Low,accepted,"Nov 9, 2019","Nov 13, 2019",,pgenerao,"""As a developer of ESaaS Engagements
+I would like to add migration for new model EditRequest
+So that I can store information about the EditRequests
+""",https://www.pivotaltracker.com/story/show/169662021,Xiang Shao,jwp,,,,,,,,,,,,,,,,,
+169662026,2.3: Add new model for EditRequest,iter2,54,"Nov 4, 2019","Nov 17, 2019",chore,,p3 - Low,accepted,"Nov 9, 2019","Nov 13, 2019",,pgenerao,"""As a developer of ESaaS Engagements,
+I would like to add a new model EditRequest to apps/model,
+So that I can interact with the database table for EditRequests to serve the controller actions for EditRequests
+""",https://www.pivotaltracker.com/story/show/169662026,Xiang Shao,jwp,,,,,,,,,,,,,,,,,
+169388034,Client: Specific Project Information Page -- Shows Relevant Information,iter1,54,"Nov 4, 2019","Nov 17, 2019",feature,2,p3 - Low,accepted,"Oct 28, 2019","Nov 13, 2019",,mutex,"### Why
+
+**When a client is on their “Project A” page
+They should see all information associated with a “Project A” on the page
+So that they can view their project’s information**
+
+**When a client is on their “Project A” page
+They should see the following information on it:**
+     * **Description**
+     * **Status**
+     * **Associated Pivotal Tracker Link**
+     * **Associated Github**
+**So they can easily go to platforms they use for project organization**
+
+### Acceptance Criteria
+
+```gherkin
+Scenario: A logged-in user can view the Projects Information Page through the 'My Projects' index
+   Given I am logged in
+   When I follow ""My Projects""
+   When I follow ""app1""
+   Then I should see ""app1""
+   Then I should see ""Status: pending""
+   Then I should see ""test1""
+   Then I should see ""f1""
+   Then I should see ""p1.com""
+   Then I should see ""repo-url1.com""
+   Then I should see ""deploy-url1.com""
+```",https://www.pivotaltracker.com/story/show/169388034,pgenerao,jwp,,,,,,,,,,,,,,,,,
+169388023,Client: My Projects Page -- Request Change Button,iter1,54,"Nov 4, 2019","Nov 17, 2019",feature,2,p3 - Low,accepted,"Oct 28, 2019","Nov 13, 2019",,pgenerao,"### Why
+
+**When a client is on their “My Projects” page
+They should see a project list entry with “Project Name”
+And for project list entry “Project Name”
+They should see a button “Request Change”
+And when they click “Request Change”
+They should be redirected to a Change-Request Form.
+So that they can request to update this project’s information**
+
+### Acceptance Criterion
+```gherkin
+ Scenario: A logged-in user can Request a change to their project through the Project Information Page
+   Given I am logged in
+   When I follow ""My Projects""
+   When I follow ""app1""
+   When I follow ""Request Change""
+   Then I should see /Request Changes for ""app1""/
+```",https://www.pivotaltracker.com/story/show/169388023,mutex,Xiang Shao,,,,,,,,,,,,,,,,,
+169387986, Accessing the My Projects Page,iter1,54,"Nov 4, 2019","Nov 17, 2019",feature,4,p3 - Low,accepted,"Oct 28, 2019","Nov 13, 2019",,pgenerao,"### Why
+
+**When a client is on any page of ESaaS Engagements with a Taskbar
+They should see a tab labeled “My Projects”
+And when they click on “My Projects”
+They should be redirected to their own project listing page
+So that they can manage their projects**
+
+### Acceptance Criterion
+```gherkin
+ # Story ID: 169387986
+ Scenario: A user that is not logged in cannot see 'My Projects' tab
+   Given I am not logged in
+   Then I should not see ""My Projects""
+
+ # Story ID: 169387986
+ Scenario: A user that is logged in can see 'My Projects' tab
+   Given I am logged in
+   Then I should see ""My Projects""
+
+# Story ID: 169387986
+ Scenario: A logged in user can see list of their projects in 'My Projects' tab
+   Given I am logged in
+   When I follow ""My Projects""
+   Then I should see the following apps in ""apps_table"" in the given order:
+     | name  | description | org_id    | status  |
+     | app1  | test1       | org1      | pending |
+     | app2  | test2       | org1      | pending |
+     | app3  | test3       | org1      | pending |
+   And I should not see ""app4""
+
+```",https://www.pivotaltracker.com/story/show/169387986,Xiang Shao,mutex,,,,,,,,,,,,,,,,,
+169388010, My Projects Page -- Link project names to their respective Project Information Pages,iter1,54,"Nov 4, 2019","Nov 17, 2019",feature,4,p3 - Low,accepted,"Oct 28, 2019","Nov 13, 2019",,pgenerao,"###Why
+
+**When a client is on their “My Projects” page
+They should see a project list entry with “Project Name”
+And for project list entry “Project Name”
+And they click “Project Name”
+They should be redirected to their Project Information page
+So that they can view this project’s information**
+
+###Acceptance Criterion
+```Gherkin
+ # Story ID: 169387986
+ Scenario: A logged in user can see list of their projects in 'My Projects' tab
+   Given I am logged in
+   When I follow ""My Projects""
+   Then I should see the following apps in ""apps_table"" in the given order:
+     | name  | description | org_id    | status  |
+     | app1  | test1       | org1      | pending |
+     | app2  | test2       | org1      | pending |
+     | app3  | test3       | org1      | pending |
+   And I should not see ""app4""
+
+Scenario:  A logged-in client from the My Projects page clicks on a project name 
+   Given I am logged in
+   When I follow ""My Projects""
+   When I follow ""app1""
+   Then I should see ""app1""
+   Then I should see ""Status: pending""
+   Then I should see ""test1""
+   Then I should see ""f1""
+   Then I should see ""p1.com""
+   Then I should see ""repo-url1.com""
+   Then I should see ""deploy-url1.com""
+   
+
+```",https://www.pivotaltracker.com/story/show/169388010,mutex,Xiang Shao,,,,,,,,,,,,,,,,,
+169388043,Client: Specific Project Information Page -- Request Change Button,iter1,54,"Nov 4, 2019","Nov 17, 2019",feature,2,p3 - Low,accepted,"Oct 28, 2019","Nov 13, 2019",,pgenerao,"### Why
+
+**When a client is on their “Project A” page
+They should see a button “Request Change”
+And when they click “Request Change”
+They should be redirected to a Change-Request Form.
+So that they can update this project’s information**
+
+### Acceptance Criterion
+```gherkin
+ Scenario: A logged in user can Request a change to their project through the Project Information Page
+   Given I am logged in
+   When I follow ""My Projects""
+   When I follow ""app1""
+   When I follow ""Request Change""
+   Then I should see /Request Changes for ""app1""/
+```",https://www.pivotaltracker.com/story/show/169388043,pgenerao,Sabrina Suhair,,,,,,,,,,,,,,,,,
+169745679,Testing: Tests for Iteration 1 -- MyProjects Information Page,iter2,54,"Nov 4, 2019","Nov 17, 2019",chore,,p3 - Low,accepted,"Nov 13, 2019","Nov 14, 2019",,pgenerao,Adding tests for MyProjects Project Information page.,https://www.pivotaltracker.com/story/show/169745679,Sabrina Suhair,pgenerao,,,,,,,,,,,,,,,,,
+169746193,TODO: Implement step definitions in myprojects.feature,iter2,54,"Nov 4, 2019","Nov 17, 2019",chore,,p3 - Low,accepted,"Nov 14, 2019","Nov 16, 2019",,pgenerao,Need to implement step definitions in myprojects.feature,https://www.pivotaltracker.com/story/show/169746193,mutex,,,,,,,,,,,,,,,,,,
+169662110,2.0: Recap of Meeting w/ Srujay,iter2,54,"Nov 4, 2019","Nov 17, 2019",chore,,p3 - Low,accepted,"Nov 9, 2019","Nov 16, 2019",,pgenerao,Give the client a brief recap via email of the Iteration 2 customer meeting.,https://www.pivotaltracker.com/story/show/169662110,pgenerao,,,,,,,,,,,,,,,,,,
+169662063,2.6: Add new route (for coaches) for viewing Change Requests,iter2,54,"Nov 4, 2019","Nov 17, 2019",chore,,p3 - Low,accepted,"Nov 9, 2019","Nov 18, 2019",,pgenerao,"""As a coach on ESaaS Engagements
+I would like to have a new resource entry in routes.rb for MyRequests controller
+So that I can Index, View and Edit EditRequests from clients
+""",https://www.pivotaltracker.com/story/show/169662063,mutex,,,,,,,,,,,,,,,,,,
+169662039,"2.5: Handle edit request action -- i.e. ""POST MyProjects/<index>/edit""",iter2,55,"Nov 18, 2019","Dec 1, 2019",chore,,p3 - Low,accepted,"Nov 9, 2019","Nov 18, 2019",,pgenerao,"""As a developer of ESaaS Engagements
+I would like to Add new action MyProjects/:id/edit to handle edit requests
+So that I can serve requests by project client's to request edits on their projects
+""",https://www.pivotaltracker.com/story/show/169662039,Xiang Shao,King Arthur Alagao,,,,,,,,,,,,,,,,,
+169795466,2.26: Customer Calendar for Srujay [Create by Sunday],iter2,55,"Nov 18, 2019","Dec 1, 2019",chore,,p3 - Low,accepted,"Nov 16, 2019","Nov 18, 2019",,pgenerao,Create and send a Customer Calendar by Sunday,https://www.pivotaltracker.com/story/show/169795466,pgenerao,,,,,,,,,,,,,,,,,,
+169860631,2.28: Submitting New Feature Request for Dead Apps changes status to Vetting-Pending,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 20, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+** As a Client **
+** When I am on the ""project listing page”**
+** And If the status of an app is ""Dead""**
+** Then I should see ""Request New Feature"" button
+** Given I have submitted a request for this app
+** Then I should see the status of the app to be ""Vetting Pending""**
+
+### Acceptance Criteria
+```gherkin
+   Scenario: A client submits a Change Request form for a currently dead app
+   Given I am logged in
+   When I follow ""My Projects""
+   And I press ""Request New Feature"" for ""app3""
+   And I fill in ""description"" with ""new test description""
+   And I fill in ""features"" with ""123abc""
+   And I press ""Send Request""
+   Then I should see ""Status: vetting pending""
+```
+**Notes**
+Link for the Edit Customer Feedback form here: 
+http://localhost:3000/my_projects
+Steps to find the form:
+1. Navigate to this page by clicking on My Projects tab
+2. Scroll down to the apps table, and find an app with status ""Dead""
+3. Then click on the ""Request New Feature"" button, and you will be redirected to Change Request form.
+4. Fill in the text box for both Description and App Initial Features
+5. Click ""Send Request"" button
+6. Now the Status will be changed to ""Vetting Pending""
+
+Description and App Initial Features text area should be pre-filled with existing/previous descriptions.
+
+Only the customer and coaches should be able to request new feature for dead apps.  Not students.",https://www.pivotaltracker.com/story/show/169860631,pgenerao,Xiang Shao,Sabrina Suhair,,,,,,,,,,,,,,,,
+169671773,"2.24: ""My Projects"" Index -- Ordering of  Projects Listing",iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 11, 2019","Nov 23, 2019",,pgenerao,"	### Why
+
+** As a Client **
+** When I am on ""Project Listing"" Page**
+** And I want to see my projects are ordered by status**
+** Here are the orders **
+**[Development, Vetting pending, On hold, Staff approved, Customer informed, Customer confirmation received, Declined by staff, Declined by customer, Declined by customer available next sem, Back up, In use, In use and wants improvement, Inactive but wants improvement, Dead]**
+
+
+### Acceptance Criteria
+```gherkin
+Background: logged in, apps exist
+
+|   app  |        status         |
+|  app1  |    development        |
+|  app2  |    vetting pending |
+|  app3  |         on hold         |
+|  app4  |          in use    |
+|  app5  |          dead           |
+
+Scenario: As a logged in Client 
+Given I am on the ""Project Listing"" Page
+And I should see ""app1"" before ""app2""
+And I should see ""app2"" before ""app3""
+And I should see ""app3"" before ""app4""
+And I should see ""app4"" before ""app5""
+
+```
+**Notes**
+Link for the Edit Customer Feedback form here: 
+http://localhost:3000/my_projects
+w",https://www.pivotaltracker.com/story/show/169671773,Xiang Shao,jwp,,,,,,,,,,,,,,,,,
+169662032,2.4:  Coaches should be treated as Clients,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,4,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+**""As a coach on ESaaS Engagements
+I would like to have a MyProjects/index action that to allow me as a coach to Request Change on MyProjects just like a client can
+Currently MyProjects/index shows list of projects for coach with Edit buttons instead of Request Change like for the client
+""**
+
+### Acceptance Criteria
+```gherkin
+Scenario: A coach that is not logged in cannot see 'My Projects' tab
+Given I am not logged in
+Then I should not see ""My Projects""
+
+Scenario: A coach that is logged in can see 'My Projects' tab and have access to the same functionality as a client
+  Given I am logged in
+  Then I should see ""My Projects""
+  When I follow ""My Projects""
+  Then I should be on the my projects page
+  And I should see ""app-1""
+  And I should see ""app-description-1""
+  And I should see ""Request Change""
+  When I follow ""Request Change""
+  Then I should be on the new edit request page for app-1
+
+```",https://www.pivotaltracker.com/story/show/169662032,Xiang Shao,jwp,,,,,,,,,,,,,,,,,
+169744358,Bug Fix: show only the projects of current logged in user under MyProjects,iter2,55,"Nov 18, 2019","Dec 1, 2019",bug,,p3 - Low,accepted,"Nov 13, 2019","Nov 23, 2019",,Sabrina Suhair,"### Steps to reproduce
+1. Log in
+2. Click on My Projects Tab
+3. Scroll through projects listing
+
+### Expected 
+User should see all their projects
+
+### Actual
+User sees all projects/apps on Esaas Engagements (not only their own)",https://www.pivotaltracker.com/story/show/169744358,pgenerao,Sabrina Suhair,,,,,,,,,,,,,,,,,
+169662064,2.7: Submitting a project update request using the Change-Request form,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,4,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+**As a** client 
+**I want** to be able to submit a Change-Request Form with specified edits to the project description and features
+**So that**  I can request new features and/or updates to be made to my projects
+
+
+### Acceptance Criteria
+```gherkin
+ Scenario: A logged in user will see the ""Request Change"" button change to ""Update Request"" when a Change Request is submitted
+   Given I am logged in
+   When I follow ""My Projects""
+   Then I should not see ""Update Request""
+   And I follow ""app1""
+   And I follow ""Request Change""
+   And I fill in ""description"" with ""123abc""
+   And I fill in ""features"" with ""123abc""
+   And I press ""Send Request""
+   Then I should see ""Update Request""
+   When I follow ""My Projects""
+   Then I should see ""Update Request""
+```",https://www.pivotaltracker.com/story/show/169662064,pgenerao,Sabrina Suhair,,,,,,,,,,,,,,,,,
+169662088,2.9: Change-Request form fields pre-filled w/ relevant information (initial request),iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+** As a Client of Esaas Engagements **
+** I want to be able to create an edit request for a project via the Change Request form and I should see an editable box with the current descriptions and features pre-filled **
+** So that I can easily edit and/or append any new additions to the existing descriptions and features.**
+
+### Acceptance Criteria
+```gherkin
+ Scenario: A logged in user can view the Projects Information Page through the 'My Projects' index
+   Given I am logged in
+   When I follow ""My Projects""
+   When I follow ""app1""
+   Then I should see ""app1""
+   Then I should see ""Status: pending""
+   Then I should see ""test1""
+   Then I should see ""f1""
+   Then I should see ""p1.com""
+   Then I should see ""repo-url1.com""
+   Then I should see ""deploy-url1.com""
+   When I follow ""Request Change""
+   Then I should see ""app1""
+   Then I should see ""test1""
+   Then I should see ""f1""
+   Then I should see ""p1.com""
+   Then I should see ""repo-url1.com""
+   Then I should see ""deploy-url1.com""
+   And I fill in ""description"" with ""123abc""
+   And I fill in ""features"" with ""123abcd""
+   And I press ""Send Request""
+   When I follow ""Update Request""
+   Then I should see ""app1""
+   Then I should see ""123abc""
+   Then I should see ""123abcd""
+   Then I should see ""p1.com""
+   Then I should see ""p1.com""
+   Then I should see ""repo-url1.com""
+   Then I should see ""deploy-url1.com""
+   Then I should see ""deploy-url1.com""
+```
+
+**Notes**
+",https://www.pivotaltracker.com/story/show/169662088,pgenerao,Sabrina Suhair,,,,,,,,,,,,,,,,,
+169803693,Add Test for Pagination on My Projects Page,"",55,"Nov 18, 2019","Dec 1, 2019",chore,,p3 - Low,accepted,"Nov 18, 2019","Nov 23, 2019",,mutex,"As a client or coach on Esaas I would like to have pagination for My Projects Index Page
+So that I can view list of my projects piecemeal-wise",https://www.pivotaltracker.com/story/show/169803693,mutex,,,,,,,,,,,,,,,,,,
+169803709,"Add Sabrina, Anthony and King on Heroku Stage as coach users","",55,"Nov 18, 2019","Dec 1, 2019",chore,,p3 - Low,accepted,"Nov 18, 2019","Nov 23, 2019",,mutex,"As a member of ESaaS developer team, 
+I would like to have access to ESaaS's stage env
+so that I can test the code on jaspak/master",https://www.pivotaltracker.com/story/show/169803709,mutex,,,,,,,,,,,,,,,,,,
+169662160,2.16: Project Information page of projects with pending edits show both proposed edits and current information,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,4,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+** As a Client of Esaas Engagements **
+** I want the Project Information Page for projects for which I have submitted a Change Request form to show the proposed edits as well as the current information**
+** So that I can compare the proposed edits to the current information.**
+
+### Acceptance Criteria
+```gherkin
+Scenario: A client views the Project Information Page and tries to ""
+Given I am on the ""My Projects"" page
+When I follow ""app1""
+Then I should see ""Edit Request for app1""
+```
+
+**Notes**
+Project information page corresponds to 'apps/:app_id'",https://www.pivotaltracker.com/story/show/169662160,mutex,,,,,,,,,,,,,,,,,,
+169662132,2.20 Add Delete Change Request Functionality,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,4,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,Sabrina Suhair,"### Why
+
+** As a client of Esaas Engagements 
+ I want there to be a ""Delete Request"" button  on the Change Request form of a project with an existing submitted Change Request form
+So that I can delete the existing Change Request if I no longer want it**
+
+### Acceptance Criteria
+```gherkin
+Scenario: A logged-in client can delete a Change Request on the Update/Edit Request Page
+   Given I am logged in
+   When I follow ""My Projects""
+   And I follow ""app1""
+   And I follow ""Request Change""
+   And I fill in ""description"" with ""123abc""
+   And I fill in ""features"" with ""123abc""
+   And I press ""Send Request""
+   Then I should see ""Update Request""
+   When I follow ""Update Request""
+   And I press ""Delete Request""
+   Then I should see ""Successfully deleted edit request for: app1""
+```
+",https://www.pivotaltracker.com/story/show/169662132,mutex,,,,,,,,,,,,,,,,,,
+169662170,2.23 Add Alert icons in My Projects page for Reviewed App Edit Requests Notifications and for Customer Iteration Feedback Requests,"",55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,Sabrina Suhair,"
+### Why
+**As a client**
+** I want the My Projects page to notify me when a change request which I submitted for my project has been reviewed by staff (a Coach user) **
+**So that I will know about the status of my project requests **
+
+### Acceptance Criteria
+```gherkin
+Scenario: Client can view and link to requested Itearation Form through dropdown menu
+  When I follow ""My Projects""
+  Then I should see ""We want your feedback!""
+  When I click on the ""feedbacks"" icon
+  Then I should see ""app1: Iteration 1 Feedback Form""
+  Then I should see ""ap6: Iteration 2 Feedback Form""
+  When I follow ""app1: Iteration 1 Feedback Form""
+  Then I should see ""Edit Customer Feedback""
+
+Scenario: Client can view and link to reviewed requests through icon dropdown menu
+  Given I am logged in
+  When I follow ""My Projects""
+  Then I should see ""Your request has been reviewed!""
+  When I click on the ""requests"" icon
+  Then I should see ""View Feedback for app6""
+  And I should not see ""View Feedback for app1""
+  When I follow ""View Feedback for app6""
+  Then I should see ""Edit Request for app6""
+  Then I should see ""test6""
+  Then I should see ""f6""
+
+**Notes**
+
+
+Link for the Edit Customer Feedback form here: 
+http://localhost:3000/engagements/2/iterations/2/edit
+Note: An alert will appear for iteration feedback forms only if they have been requested by staff
+
+Link for the App Information page here:
+http://localhost:3000/apps/2
+Note: An alert will appear for requests only if they have been reviewed by staff
+
+
+Steps to find the form:
+1. Navigate to My Projects index page,  and you should be able to see the icons.
+2. If there are reviewed requests and pending iteration feedback forms, then you will see ""A staff has reviewed your request!"" and ""We want your feedback!"" as notifications on each icon. 
+3. Click or hover your cursor on either icon, you will see a drop-down list of reviewed requests or pending iteration feedback forms.
+4. Click on any items in the drop-down list, then you will be redirected to the required page.
+
+Only the customer and coaches should be able to view the icons. Not students.
+
+```
+
+
+
+
+
+
+",https://www.pivotaltracker.com/story/show/169662170,Xiang Shao,,,,,,,,,,,,,,,,,,
+169662153,"Add  ""Send Request"" Button to the Change-Request Form",iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,Sabrina Suhair,"
+
+### Why
+
+** As a Client **
+**I want to see a button that says ""Send Request"" in Change-Request From.**
+**When I fill out the new description and features.**
+**I want to click the ""Sent Request"" Button**
+**So that I can submit my Change Request for Staff to review.**
+
+### Acceptance Criteria
+```gherkin
+Scenario: As a logged in Client 
+Given I am on Change Request Page
+Then I should see ""Send Request"" button
+When I fill in  Description with ""new description""
+And I fill in App Features with ""new features""
+And  I press ""Send Request""
+Then I should see an alert that says ""Your app edit request has been submitted to staff for review and approval. Staff has not yet reviewed/approved this request.""
+```
+**Notes**
+Link for the Change Request  form here: 
+http://localhost:3000/my_project_edit/97/new
+Steps to find the form:
+1. Navigate to this page by clicking My Projects tab
+2. Follow an app, and click on ""Request Change"" button
+3. Description and App Features fields should be pre-filled with existing ones.
+
+
+
+Only the customer and coaches should be able to view the Send Request button. Not Student.",https://www.pivotaltracker.com/story/show/169662153,Xiang Shao,King Arthur Alagao,,,,,,,,,,,,,,,,,
+169662145,2.13: Banner on the Project Information Page showing Change-Request status,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,4,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+** As a logged-in Client of Esaas Engagements **
+**I want to be able to see the status of my submitted change request form on the respective Project Information Page as a banner alert.**
+** So that I can quickly find out the status of my Change Request. **
+        
+### Acceptance Criteria
+```gherkin
+Scenario: A logged-in client clicks on the Project information page of a project for which a change request form has been submitted but not reviewed by Staff
+Given I am logged in
+When I follow ""My Projects""
+And I follow ""app1""
+Then I should see ""Staff has not yet reviewed/approved this request.""
+
+Scenario: A logged-in client clicks on the Project information page of a project for which a change request form has been submitted and reviewed by Staff with feedback
+Given I am logged in
+When I follow ""My Projects""
+And I follow ""app5""
+Then I should see ""Staff has reviewed and left feedback on your edit request. Kindly review staff feedback and update the request.""
+```",https://www.pivotaltracker.com/story/show/169662145,Xiang Shao,King Arthur Alagao,,,,,,,,,,,,,,,,,
+169662134,2.11: Submitting a Change-Request Form Redirects User to the Respective Project Information Page,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+** As a logged-in Client of Esaas Engagements **
+**I want to be redirected to the Project Information page (apps/:app_id) of the corresponding project when I submit a change request form for that project**
+** So that I can more easily confirm that my submission was successful and can see the latest change request and its status reflected in the project information page. **
+        
+### Acceptance Criteria
+```gherkin
+Scenario: A logged-in client submits a Request Change form
+Given I am on the  Change Request Page for ""app1""
+When I fill in  Description with ""new description""
+And I fill in App Features with ""new features""
+And  I press ""Send Request""
+Then I should see  ""Your app edit request has been submitted to staff for review and approval.""
+And I should see ""Edit Request for app1""
+And I should see ""Request Status: submitted""
+```",https://www.pivotaltracker.com/story/show/169662134,mutex,pgenerao,,,,,,,,,,,,,,,,,
+169662166,"2.22: Buttons that say ""Request Change"" => ""Update Request"" when a Change-Request has been made for that project",iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,4,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,"### Why
+
+** As a Client of Esaas Engagements **
+**I want the 'Request Change' button for any project which I have submitted an Edit Request for that has not yet been fully resolved by a Coach to change to  'Update Request'**
+** So that I can easily identify my projects for which I have already submitted an edit request. **
+
+### Acceptance Criteria
+```gherkin
+Scenario: A logged in user will see the ""Request Change"" button change to ""Update Request"" when a Change Request is submitted
+   Given I am logged in
+   When I follow ""My Projects""
+   Then I should not see ""Update Request""
+   And I follow ""app1""
+   And I follow ""Request Change""
+   And I fill in ""description"" with ""123abc""
+   And I fill in ""features"" with ""123abc""
+   And I press ""Send Request""
+   Then I should see ""Update Request""
+   When I follow ""My Projects""
+   Then I should see ""Update Request"" for ""app1""
+```",https://www.pivotaltracker.com/story/show/169662166,pgenerao,Sabrina Suhair,,,,,,,,,,,,,,,,,
+169860600,2.27: Staff App Edit Requests Review Portal,iter2,55,"Nov 18, 2019","Dec 1, 2019",feature,2,p3 - Low,accepted,"Nov 20, 2019","Nov 23, 2019",,Sabrina Suhair,"### Why
+
+** As a Coach **
+**I want to be able to view an App Edit (Feature Change) Request **
+** So that I can approve the Edit Request or give feedback to the client to revise the Edit Request**
+
+### Acceptance Criteria
+```gherkin
+Scenario: A logged-in coach user can view an App Edit (Feature Change) Request through the 'App Edit Requests' index
+  Given I am logged in
+  When I follow ""App Edit Requests""
+  When I follow the App Edit Request with id 102
+  Then I should see /Edit request for ""app2""/
+```
+
+**Notes**
+App Edit Requests controller is named MyApprovalRequestsController",https://www.pivotaltracker.com/story/show/169860600,pgenerao,Sabrina Suhair,,,,,,,,,,,,,,,,,
+169662130,2.1: Updated Lofi-Mockup w/ Srujay,iter2,55,"Nov 18, 2019","Dec 1, 2019",chore,,p3 - Low,accepted,"Nov 9, 2019","Nov 23, 2019",,pgenerao,Need to send client updated lofi-mockups which correspond to our current understanding of how things will be implemented.,https://www.pivotaltracker.com/story/show/169662130,pgenerao,,,,,,,,,,,,,,,,,,
+169930888,3.0 Add Login option in Menubar,iter3,56,"Dec 2, 2019","Dec 15, 2019",feature,2,p3 - Low,accepted,"Nov 23, 2019","Dec 6, 2019",,Sabrina Suhair,"### Why
+
+** As a User of Esaas Engagements **
+**I want the Log In button to be on the Menu bar **
+** So that I and other new users on the platform can easily find out how to log in without having to look through the different pages on the site . **
+
+### Acceptance Criteria
+```gherkin
+Scenario: A user that is not logged in can see Log In in the menu bar
+ Given I am not logged in
+Then I should see ""Log In""
+
+Given I am not logged in
+When I follow ""Log In""
+Then I should see ""Login to ESaaS Engagements""
+```
+
+
+
+**Notes**",https://www.pivotaltracker.com/story/show/169930888,jwp,,,,,,,,,,,,,,,,https://github.com/jaspak/esaas-engagements/pull/25,,
+169931133,3.3 Make the Iteration field in Add New Iteration form a dropdown,iter3,56,"Dec 2, 2019","Dec 15, 2019",feature,2,p3 - Low,accepted,"Nov 23, 2019","Dec 6, 2019",,Sabrina Suhair,"### Why
+
+** As a Coach user on the New Iteration form  **
+** I want the Iteration field to be a dropdown with options 1-4**
+** So that the iteration options are fixed and consistent for all projects **
+
+### Acceptance Criteria
+```gherkin
+Scenario: As a logged in Coach user 
+Given I am on the ""New Iteration for <Project Name>"" Page
+...
+```
+
+
+
+**Notes**",https://www.pivotaltracker.com/story/show/169931133,jwp,,,,,,,,,,,,,,,,https://github.com/jaspak/esaas-engagements/pull/25,,
+169930914,3.1 Request feedback from customer,iter3,56,"Dec 2, 2019","Dec 15, 2019",feature,2,p3 - Low,accepted,"Nov 23, 2019","Dec 6, 2019",,Sabrina Suhair,"### Why
+
+** As a Coach user **
+**I want to be able to request iteration feedback on a project from the client **
+** So that I can determine if the client is satisfied with the deliverable and has any feedback on the delivered features. **
+
+### Acceptance Criteria
+```gherkin
+Scenario: As a logged in Coach user 
+Given I am on the ""Project Information Page""
+Then I should see a ""Request Feedback"" button
+
+Given I am on the ""Project Information Page"" for <Project Name>
+When I follow ""Request Feedback"" 
+Then I should see ""New Iteration for <Project Name>""
+```
+
+
+
+**Notes**
+Link for the Add Iteration form here: 
+http://localhost:3000/engagements/2/iterations/new
+Navigate to this page by clicking on an app from Apps.
+Scroll down to the Engagements section of the application/project information page where you will find a table.
+Then click on the date in the ""Started"" column of the table. You will now be redirected to the new iteration form page.",https://www.pivotaltracker.com/story/show/169930914,jwp,,,,,,,,,,,,,,,,https://github.com/jaspak/esaas-engagements/pull/25,,
+169930961,3.2 Client View of Feedback Request Form,iter3,56,"Dec 2, 2019","Dec 15, 2019",feature,2,p3 - Low,accepted,"Nov 23, 2019","Dec 13, 2019",,Sabrina Suhair,"### Why
+
+** As a Client **
+**I want to see a banner alert on the My Projects page  and the Project Information page that says ""Staff has requested feedback from you. Fill it out (hyperlink to form).”**
+** So that I know when feedback for my project deliverable is requested by Staff  **
+
+### Acceptance Criteria
+```gherkin
+Scenario: As a logged in Client 
+Given I am on the ""Project Information Page""
+Then I should see ""Staff has requested feedback from you. Fill it out. ""
+
+Given I am on the ""Project Information Page"" for <Project Name>
+When I follow ""Staff has requested feedback from you. Fill it out. ""
+Then I should see ""Iteration Feedback for <Project Name>""
+```
+**Notes**
+Link for the Edit Customer Feedback form here: 
+http://localhost:3000/engagements/2/iterations/2/edit
+Steps to find the form:
+1. Navigate to this page by clicking on an app from Apps.
+2. Scroll down to the Engagements section of the application/project information page where you will find a table.
+3. Then click on the date in the ""Started"" column of the table. You will now be redirected to the new iteration form page.
+4. Then Click the Add Iteration button and Add iteration
+5. Click on the edit button beside the Iteration in the table
+You will be redirected to the  Edit Customer Feedback form.
+Iteration number and end date should be locked for clients. 
+
+Feedback Form Fields:
+How well are you able to engage with student score 1-5
+Pre-filled questions : json results of the form stored in one single column in json form
+
+Only the customer and coaches should be able to view the feedback information. Not students.",https://www.pivotaltracker.com/story/show/169930961,King Arthur Alagao,Xiang Shao,,"Implemented to limit access on number and end date only to coach (jwp - Nov 27, 2019)",,,,,,,,,,,,,,,
+170145947,3.5 Restrict Engagements to Coaches and Project Owners Only,iter3,56,"Dec 2, 2019","Dec 15, 2019",feature,2,p3 - Low,accepted,"Dec 6, 2019","Dec 14, 2019",,Sabrina Suhair,"### Why
+
+** As a Client **
+**I want only Coaches and me (and others who also own the same projects as me ) to see Engagements for a project that I own**
+** So that sensitive information can not be accessed from unauthorized entities. **
+
+### Acceptance Criteria
+```gherkin
+Scenario: As a logged in Client who owns the app
+    Given I am on the ""Project Information Page""
+    Then I should see ""Engagements""
+```
+**Notes**
+",https://www.pivotaltracker.com/story/show/170145947,jwp,,,,,,,,,,,,,,,,https://github.com/jaspak/esaas-engagements/pull/39,,
+170295319,"2.29: Allow coaches to review, leave feedback, and/or approve edit requests.",iter2,56,"Dec 2, 2019","Dec 15, 2019",feature,4,p3 - Low,accepted,"Dec 13, 2019","Dec 14, 2019",,King Arthur Alagao,"### Why
+(Completed as a side effect of one of the previous stories; including here for documentation)
+
+As a Coach on ESaaS Engagements
+I would like to be able to review a customer's edit requests for an application, give a feedback, and/or approve their requests, so that I can inform the client about the acceptability of their requests
+### Acceptance Criteria
+```gherkin
+Scenario: A coach should be able to see ""App Edit Requests"" tab
+    Given I am logged in
+    Then I should see ""App Edit Requests""
+Scenario: A logged in coach user can see list of App Edit Requests in 'App Edit Requests' tab
+    Given I am logged in
+    When I follow ""App Edit Requests 2""
+    Then I should see ""app1"" before ""app2""
+    And I should not see ""app4""
+    And I should not see ""app3""
+Scenario: A logged in coach user can view an App Edit (Feature Change) Request through the 'App Edit Requests' index
+    Given I am logged in
+    When I follow ""App Edit Requests""
+    When I follow the App Edit Request with id 102
+    Then I should see /Edit request for ""app2""/
+...
+```
+",https://www.pivotaltracker.com/story/show/170295319,mutex,,,,,,,,,,,,,,,,,,
+170146075,4.1 Student Associations w/ Engagement,iter4,56,"Dec 2, 2019","Dec 15, 2019",feature,4,p3 - Low,accepted,"Dec 6, 2019","Dec 14, 2019",,pgenerao,"As a coach,
+So that I can associate the relevant students to a given project for the customer
+I would like to have a field in the form where I can assign student names
+And when I add students to the form, they will be associated with the given engagement in database.
+
+As a coach, or as a owning client,
+So that I can easily contact the corresponding user via email
+I would like a link from the information page that includes email address
+
+### Acceptance Criteria
+```gherkin
+Scenario: As a logged in Coach
+    Given I follow ""<Project Name>""
+    And I create a new engagement for ""<Project Name>""
+    Then I should see ""Student Names""
+    When I fill in the engagement fields as follows:
+        | field | value |
+        | Team Number | <Team Number> |
+    And I select ""<Student Names>"" as Team members
+    And I press ""Create Engagement""
+    Then I should see ""Engagement was successfully created.""
+
+Scenario: As a logged in Coach
+    Given I follow ""<Project Name>""
+    Then I should see links to the contact email information
+...
+```
+",https://www.pivotaltracker.com/story/show/170146075,mutex,,,,,,,,,,,,,,,,,,
+170295552,"2.30 Provide a filter option on AppEditRequest page that uses three different request statuses: submitted, reviewed, and resubmitted ",iter2,56,"Dec 2, 2019","Dec 15, 2019",feature,2,p3 - Low,accepted,"Dec 14, 2019","Dec 14, 2019",,King Arthur Alagao,"### Why 
+(Completed as a side effect of one of the previous stories; including here for documentation)
+
+As a coach on ESaaS Engagements
+I would like to have a filter option on my AppEditRequests page that would enable me to filter requests based on their statuses (submitted, reviewed, resubmitted) so that I can easily see which customer requests still need my feedback.
+
+### Acceptance Criteria
+```gherkin
+Given I am logged in
+  Then I should see ""App Edit Requests 2""
+  When I follow ""My Projects""
+  Then I should be on the my projects page
+  When I follow ""app5""
+  Then I should not see ""Your app edit request has been submitted to staff for review and approval. Staff has not yet reviewed/approved this request.""
+  When I follow ""Back""
+  And I follow Request Change with id 105
+  Then I should see ""There are currently no edit requests for your app. You can request new edits for you app here.""
+  When I fill in ""description"" with ""This is app5""
+  And I fill in ""features"" with ""login, logout""
+  Then I press ""Send Request""
+  Then I should see ""Your app edit request has been submitted to staff for review and approval. Staff has not yet reviewed/approved this request.""
+
+  Then I should see ""App Edit Requests 3""
+  When I follow ""App Edit Requests""
+  Then I should see ""app1""
+  Then I should see ""app2""
+  Then I should see ""app5""
+
+  And I follow the App Edit Request with id 105
+  Then I should see ""This is app5""
+  And I should see ""login, logout""
+  When I fill in ""feedback"" with ""I can only do login""
+  And I press ""Post Feedback""
+  Then I should see ""App Edit Requests 2""
+  And I follow the App Edit Request with id 105
+  Then I should see ""reviewed""
+
+  When I follow ""My Projects""
+  Then I should be on the my projects page
+  When I follow ""app5""
+  Then I should see ""Staff has reviewed and left feedback on your edit request. Kindly review staff feedback and update the request.""
+  And I should see ""I can only do login""
+
+  Given I follow ""Update Edits""
+  When I press ""Update Request""
+  Then I should see ""There were no updates to edits made.""
+
+  Given I fill in ""features"" with ""login""
+  And I press ""Update Request""
+  Then I should see ""Successfully updated edit request.""
+  And I should see ""You resubmitted an edit request after staff left feedback but staff has not yet reviewed your updates.""
+  Then I should see ""App Edit Requests 3""
+
+  When I follow ""App Edit Requests""
+  Then I should see ""app1""
+  Then I should see ""app5""
+  And I uncheck ""resubmitted""
+  And I press ""Filter Requests""
+  Then I should not see ""app5""
+  And I check ""resubmitted""
+
+  And I uncheck ""submitted""
+  Then I press ""Filter Requests""
+  Then I should not see ""app1""
+  
+  And I follow the App Edit Request with id 105
+  And I press ""Post Feedback and Approve""
+  Then I should see /You have successfully approved edits for ""app5""./
+  Then I should see ""App Edit Requests 2""
+  And I press ""Filter Requests""
+  Then I should not see ""app5""
+```
+
+Notes
+Link for the App Edit Requests index page:
+https://esaas-demo.herokuapp.com/my_approval_requests?status%5Bresubmitted_status%5D=1&status%5Breviewed_status%5D=1&status%5Bsubmitted_status%5D=1
+Steps to filter:
+Navigate to this page by clicking on App Edit Requests  tab:
+Check/uncheck request status check box.
+",https://www.pivotaltracker.com/story/show/170295552,mutex,Xiang Shao,,,,,,,,,,,,,,,,,
+170041333,Add features to README.md,"",56,"Dec 2, 2019","Dec 15, 2019",chore,,p3 - Low,accepted,"Dec 2, 2019","Dec 14, 2019",,mutex,"Add features that were added this semester to the README.md file. 
+",https://www.pivotaltracker.com/story/show/170041333,mutex,,,,,,,,,,,,,,,,,,
+170041361,Add INSTALL.md file with directions on how to setup the app locally.,"",56,"Dec 2, 2019","Dec 15, 2019",chore,,p3 - Low,accepted,"Dec 2, 2019","Dec 14, 2019",,mutex,Add INSTALL.md file that has directions on how to setup the app locally based on the new config generator,https://www.pivotaltracker.com/story/show/170041361,mutex,,,,,,,,,,,,,,,,,,
+176932016,App should save the filter selection when user go to next/previous page,"",88,"Feb 22, 2021","Mar 7, 2021",feature,1,p3 - Low,accepted,"Feb 13, 2021","Feb 25, 2021",,Fred Zhang,"As an authorized user
+So that I can filter the project list 
+I want to keep current filtering choices after switching page",https://www.pivotaltracker.com/story/show/176932016,klo824,,,,,,,,,,,,,,,,,176932016-session-save-filters,pr/iter1/176932016-save-filters
+176932021,"Project should use ""semester"" for start date record ","",88,"Feb 22, 2021","Mar 7, 2021",feature,1,p3 - Low,accepted,"Feb 13, 2021","Feb 25, 2021",,Fred Zhang,"As an authorized user
+So that I can check the project details
+I want to see the start semester of some projects",https://www.pivotaltracker.com/story/show/176932021,Wesley Wang,,,,,,,,,,,,,,,,,176932021-add-semester,pr/iter1/176932021-add-semester
+176932017,User should see number of projects after filtering  ,"",88,"Feb 22, 2021","Mar 7, 2021",feature,1,p3 - Low,accepted,"Feb 13, 2021","Feb 25, 2021",,Fred Zhang,"As an authorized user
+So that I can filter the project list 
+I want to directly see number of project after filtering",https://www.pivotaltracker.com/story/show/176932017,robertqiu1,,,,,,,,,,,,,,,,,176932017-filter-count,pr/iter1/176932017-filter-count
+176931992,User should be able to search project by email or Github username ,"",88,"Feb 22, 2021","Mar 7, 2021",feature,1,p3 - Low,accepted,"Feb 13, 2021","Feb 25, 2021",,Fred Zhang,"As an admin
+So that I can see list of project
+I want to search certain project by email or Github username
+
+(For BDD convenience)",https://www.pivotaltracker.com/story/show/176931992,jrmylee,Fred Zhang,,,,,,,,,,,,,,,,pr/iter1/176931992-improve-search,
+176932004,"Github user id should be  ""Github username""","",88,"Feb 22, 2021","Mar 7, 2021",bug,,p3 - Low,accepted,"Feb 13, 2021","Feb 25, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/176932004,enjiaxu,,,,,,,,,,,,,,,,,176932004-bug/github-username,pr/iter1/176932004-userid-to-username
+176931989,Authorized user should be directed to main page once login with Github account ,"",88,"Feb 22, 2021","Mar 7, 2021",bug,,p3 - Low,accepted,"Feb 13, 2021","Feb 26, 2021",,Fred Zhang,"Right now the first time anyone login, it will be an error though he/she can login ",https://www.pivotaltracker.com/story/show/176931989,Fred Zhang,,,,,,,,,,,,,,,,,176931989-bug/github_login_redirect,pr/iter1/176931989-fix-redirect
+177125007,Fix check box toggle on main page ,"",88,"Feb 22, 2021","Mar 7, 2021",bug,,p3 - Low,accepted,"Feb 26, 2021","Mar 3, 2021",,Fred Zhang,As a user I would like to select filters to query my results.,https://www.pivotaltracker.com/story/show/177125007,klo824,,,,,,,,,,,,,,,,,177125007-fix-checkbox-toggle,pr/iter1/177125007-fix-checkbox
+177124942,Fix Invalid credential upon login in production environment,"",89,"Mar 8, 2021","Mar 21, 2021",bug,,p3 - Low,accepted,"Feb 26, 2021","Mar 17, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177124942,enjiaxu,Fred Zhang,,,,,,,,,,,,,,,,177124942-bug/github_login,pr/iter2/177124942-fix-dev-login
+177125046,User should see which fields are required when creating new user,"",89,"Mar 8, 2021","Mar 21, 2021",feature,1,p3 - Low,accepted,"Feb 26, 2021","Mar 17, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177125046,robertqiu1,,,,,,,,,,,,,,,,,177125046-user-required-fields,pr/iter2/177125046-add-asterisk
+177198607,"Fix bug where ""My Project"" page does not work for users without projects.","",89,"Mar 8, 2021","Mar 21, 2021",bug,,p3 - Low,accepted,"Mar 4, 2021","Mar 17, 2021",,enjiaxu,My project page errors with users without projects.,https://www.pivotaltracker.com/story/show/177198607,enjiaxu,,,,,,,,,,,,,,,,,177198607-bug/my-project-page-zero-projects-error,
+177125023,User can upload the csv file to add more user/orgs,"",89,"Mar 8, 2021","Mar 21, 2021",feature,2,p3 - Low,accepted,"Feb 26, 2021","Mar 20, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177125023,jrmylee,,,,,,,,,,,,,,,,,pr/iter2/177125023-csv-upload,
+177125107,User should be able to search by semester,"",89,"Mar 8, 2021","Mar 21, 2021",feature,1,p3 - Low,accepted,"Feb 26, 2021","Mar 20, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177125107,Fred Zhang,,,,,,,,,,,,,,,,,177125107-search-by-semster,pr/iter2/177125107-semester-search
+177125080,User should be able to see/edit pivotal tracker url when editing apps,"",89,"Mar 8, 2021","Mar 21, 2021",feature,1,p3 - Low,accepted,"Feb 26, 2021","Mar 21, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177125080,enjiaxu,,,"Also add form field  (Fred Zhang - Feb 26, 2021)",,,,,,,,,,,,,,177125080-feature/pivotal-tracker-engagements,177125080-bug/pivotal-trakcer-edit
+177393286,CD setup,"",90,"Mar 22, 2021","Apr 4, 2021",chore,,p3 - Low,accepted,"Mar 18, 2021","Mar 22, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177393286,Fred Zhang,,,,,,,,,,,,,,,,,177393286-setup-cd,
+176447282,GitHub login/auth API has changed; must make minor change to SSO flow,"",90,"Mar 22, 2021","Apr 4, 2021",bug,,p3 - Low,accepted,"Jan 11, 2021","Mar 29, 2021",,Armando Fox,"Application (ESaaS Engagements (production)) used an access token (with the User-Agent Faraday v0.15.4) as part of a query parameter to access an endpoint through the GitHub API.
+
+https://api.github.com/user
+
+Please use the Authorization HTTP header instead as using the `access_token` query parameter is deprecated.
+
+Depending on your API usage, we'll be sending you this email reminder on a monthly basis.
+
+Visit https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param for more information about suggested workarounds and removal dates.",https://www.pivotaltracker.com/story/show/176447282,enjiaxu,,,"The access_token issue was resolved in story #177124942 (Fix Invalid credential upon login in production environment).
+
+PR: https://github.com/zfred219/esaas-engagements/pull/18
+
+Ed post: https://edstem.org/us/courses/3809/discussion/287862
+
+The problem came from the omniauth-github gem sending access_token via query during the callback phase. After researching around, I found that there was no way to set that other than overriding the specific function of the gem that is responsible for that. 
+
+Since the problem was fairly recent, updating the gem to a newer version did not solve the problem and raised some compatibility issues, so the current version of gem from the golden repo is kept unchanged.  (enjiaxu - Mar 31, 2021)",,,,,,,,,,,,,,,
+177124970,"(Lofi) prototype the search, filter and pagination for main page","",90,"Mar 22, 2021","Apr 4, 2021",feature,0,p3 - Low,accepted,"Feb 26, 2021","Mar 31, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177124970,Wesley Wang,,,,,,,,,,,,,,,,,177124970-main-page-redesign,
+177448437,Create high-fi prototype for matching pages,"",90,"Mar 22, 2021","Apr 4, 2021",feature,1,p3 - Low,accepted,"Mar 22, 2021","Mar 31, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177448437,Fred Zhang,,,,,,,,,,,,,,,,,177448437-matching-hifi-prototype,
+177526874,Sortable matching list,"",90,"Mar 22, 2021","Apr 4, 2021",feature,1,p3 - Low,accepted,"Mar 28, 2021","Mar 31, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177526874,Fred Zhang,,,,,,,,,,,,,,,,,177526874-sortable-matching-list,
+177586525,Fix sortable UI,"",90,"Mar 22, 2021","Apr 4, 2021",chore,,p3 - Low,accepted,"Mar 31, 2021","Apr 3, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177586525,Fred Zhang,,,,,,,,,,,,,,,,,,
+177673573,"Add amazon style redesign to ""My Projects"" view","",91,"Apr 5, 2021","Apr 18, 2021",feature,1,p3 - Low,accepted,"Apr 7, 2021","Apr 13, 2021",,Wesley Wang,,https://www.pivotaltracker.com/story/show/177673573,Wesley Wang,,,,,,,,,,,,,,,,,177673573-add-redesign,
+177448444,Figured out an algorithm for matching ,"",91,"Apr 5, 2021","Apr 18, 2021",feature,1,p3 - Low,accepted,"Mar 22, 2021","Apr 17, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177448444,klo824,,,,,,,,,,,,,,,,,177448444-matching-algorithm,
+177390815,Hide tabs for different types of users,"",92,"Apr 19, 2021","May 2, 2021",feature,1,p3 - Low,accepted,"Mar 17, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177390815,robertqiu1,,,,,,,,,,,,,,,,,177390815-student-hide-tabs,
+177615650,Matching UI and front end logic,"",92,"Apr 19, 2021","May 2, 2021",feature,1,p3 - Low,accepted,"Apr 3, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177615650,Fred Zhang,,,,Add test for matching model,completed,Add test for sortable ,completed,"Add test for type of user of what they can see, topbar",completed,"Add progress bar, begin matching button",completed,Last edited time and name,completed,Check AJAX dropdown,completed,,177615650-project-matching,
+177448448,Create matching model and controller method,"",92,"Apr 19, 2021","May 2, 2021",feature,2,p3 - Low,accepted,"Mar 22, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177448448,enjiaxu,Fred Zhang,klo824,,,,,,,,,,,,,,,177448448-feature/matchinng-model,
+177586517,csv validation when uploading,"",92,"Apr 19, 2021","May 2, 2021",bug,,p3 - Low,accepted,"Mar 31, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177586517,jrmylee,Fred Zhang,,,,,,,,,,,,,,,,,
+177860616,store and show user matching info with real data,"",92,"Apr 19, 2021","May 2, 2021",feature,1,p3 - Low,accepted,"Apr 21, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177860616,Fred Zhang,,,,,,,,,,,,,,,,,177860616-store-show-matching-info,
+177802925,FIX tab,"",92,"Apr 19, 2021","May 2, 2021",bug,,p3 - Low,accepted,"Apr 17, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177802925,Fred Zhang,,,,Student should see what?  APP?,completed,,,,,,,,,,,,,
+177737286,Topbar UI update,"",92,"Apr 19, 2021","May 2, 2021",feature,1,p3 - Low,accepted,"Apr 13, 2021","May 2, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177737286,Fred Zhang,,,,,,,,,,,,,,,,,,
+177996853,Fix minor bug for matching,"",93,"May 3, 2021","May 16, 2021",bug,,p3 - Low,accepted,"May 2, 2021","May 17, 2021",,enjiaxu,,https://www.pivotaltracker.com/story/show/177996853,enjiaxu,,,,,,,,,,,,,,,,,,
+177125148,Add cucumb/rspec tests,"",93,"May 3, 2021","May 16, 2021",chore,,p3 - Low,accepted,"Feb 26, 2021","May 17, 2021",,Fred Zhang,,https://www.pivotaltracker.com/story/show/177125148,Fred Zhang,,,,Add another two type of user for testing purpose,completed,,,,,,,,,,,,177125148-add-more-test,177125148-test-coverage
+165435221,"View the code of Current Iteration Page to see what it actually does, and See what improvement can be added
+","",,,,feature,1,p3 - Low,unscheduled,"Apr 17, 2019",,,Sarah Lin,,https://www.pivotaltracker.com/story/show/165435221,,,,,,,,,,,,,,,,,,,
+177732263,Fix current iteration feedback tab,"",,,,feature,,p3 - Low,unscheduled,"Apr 12, 2021",,,nmecklenburg,"	- purpose of current iteration feedback unclear to new user
+- need better way of setting questions for feedback and sending info out to customers",https://www.pivotaltracker.com/story/show/177732263,,,,,,,,,,,,,,,,,,,
+165105259,Feature 3: Ability to add projects more easily,"",,,,feature,4,p3 - Low,unscheduled,"Apr 3, 2019",,,JIANHUI LI,"### Why
+
+
+**As an admin**
+**I want to add projects, users, org at the same time**
+**So that I don't need to add them separately **
+",https://www.pivotaltracker.com/story/show/165105259,,,,,,,,,,,,,,,,,,,
+164721135,Archive after semester is over,"",,,,feature,2,p3 - Low,unscheduled,"Mar 19, 2019",,,Sarah Lin,"### Why
+
+
+As admin, 
+I want to be able to click “Archive all current projects” button on the homepage, 
+So that I can record customer feedback and archive all projects after the semester is over.
+
+### Acceptance Criteria
+
+```gherkin
+Scenario: 
+Given
+When
+Then
+```
+
+**Notes:**",https://www.pivotaltracker.com/story/show/164721135,,,,,,,,,,,,,,,,,,,
+177614107,404 Page,"",,,,feature,1,p3 - Low,unscheduled,"Apr 2, 2021",,,Fred Zhang,,https://www.pivotaltracker.com/story/show/177614107,,,,,,,,,,,,,,,,,,,
+177522622,Pagination with AJAX,"",,,,feature,1,p3 - Low,unscheduled,"Mar 28, 2021",,,Fred Zhang,,https://www.pivotaltracker.com/story/show/177522622,,,,,,,,,,,,,,,,,,,
+177737242,Matching mailer,"",,,,feature,1,p3 - Low,unscheduled,"Apr 13, 2021",,,Fred Zhang,,https://www.pivotaltracker.com/story/show/177737242,,,,,,,,,,,,,,,,,,,
+177737268,lints + gem ?,"",,,,chore,,p3 - Low,unscheduled,"Apr 13, 2021",,,Fred Zhang,,https://www.pivotaltracker.com/story/show/177737268,,,,,rubocop,not completed,,,,,,,,,,,,,
+164649665,Current version of ruby is incompatible with the latest Heroku,"",,,,bug,,p3 - Low,unscheduled,"Mar 14, 2019",,,Libo Chen,"The current application is built on ruby 2.3.1 which is no longer supported by the latest Heroku stack  (18). Downgrading to Heroku  Cedar-14 could be a solution. Or maybe we should upgrade ruby version., ",https://www.pivotaltracker.com/story/show/164649665,,,,,,,,,,,,,,,,,,,
+164650175,some tests are failing possibly due to latest version of web browsers,"",,,,bug,,p3 - Low,unscheduled,"Mar 15, 2019",,,Libo Chen,"Latest Firefox with latest gecko driver fail some tests somewhat nondeterministically
+Latest chrome with geckodriver v0.19.1passes all tests (that's not supposed to happen)
+Lastest Chrome with the latest ChromeDriver hasn't be tested",https://www.pivotaltracker.com/story/show/164650175,,,,,,,,,,,,,,,,,,,
+159761587,"""search anything"" box should search case-insensitively","",,,,feature,,p3 - Low,unscheduled,"Aug 14, 2018",,,Armando Fox,,https://www.pivotaltracker.com/story/show/159761587,,,,,,,,,,,,,,,,,,,
+159719603,"Main view of ""show app details"" should have links to the app's primary (""golden"") GitHub repo","",,,,feature,,p3 - Low,unscheduled,"Aug 12, 2018",,,Armando Fox,,https://www.pivotaltracker.com/story/show/159719603,,,,,,,,,,,,,,,,,,,
+159719600,"Pressing ""Back"" while in ""Edit App"" should return you to the app's Show action, not the list of all apps","",,,,bug,,p3 - Low,unscheduled,"Aug 12, 2018",,,Armando Fox,,https://www.pivotaltracker.com/story/show/159719600,,,,,,,,,,,,,,,,,,,
+165173635,Feature 3: Add projects more easily,"",,,,feature,2,p3 - Low,unscheduled,"Apr 8, 2019",,,Sarah Lin,,https://www.pivotaltracker.com/story/show/165173635,zhichen98,,,,,,,,,,,,,,,,,,
+159719591,"""Comment"" model seems to have broken logic","",,,,bug,,p3 - Low,unscheduled,"Aug 12, 2018",,,Armando Fox,"The logic in the Comments model is highly suspect/makes little sense, and in addition if you try to manually call `ActiveRecord::Base#destroy` on a user instance, it fails because `User::PostedComment` is undefined (trying to run the pre-delete callbacks, presumably).  Someone needs to document, write tests for, and validate what this model does, including making sure there is a test for destroying a user that fails in the presence of this bug and passes when it's fixed.",https://www.pivotaltracker.com/story/show/159719591,,,,,,,,,,,,,,,,,,,
+159719583,"""user type"" field doesn't make sense anymore","",,,,bug,,p3 - Low,unscheduled,"Aug 12, 2018",,,Armando Fox,"Any user can potentially be a coach, client contact, developer, etc. The ""user type"" field should therefore be removed.",https://www.pivotaltracker.com/story/show/159719583,,,,,,,,,,,,,,,,,,,
+159719580,App admin can merge duplicate users,"",,,,feature,,p3 - Low,unscheduled,"Aug 12, 2018",,,Armando Fox,"WHen merging users a and b, Involves making sure that any foreign keys pointing to a now point to b, and that email address/github username are properly retained",https://www.pivotaltracker.com/story/show/159719580,,,,,,,,,,,,,,,,,,,
+154449443,"App's status (inactive, wants improve, etc) is not displayed on app's page","",,,,bug,,p3 - Low,unscheduled,"Jan 18, 2018",,,Armando Fox,,https://www.pivotaltracker.com/story/show/154449443,,,,,,,,,,,,,,,,,,,
+153417028,"New engagement cannot be added unless app status is ""Development""","",,,,feature,,p3 - Low,unscheduled,"Dec 5, 2017",,,Armando Fox,,https://www.pivotaltracker.com/story/show/153417028,,,,,,,,,,,,,,,,,,,
+151387527,Admin user can set/view global app config options,"",,,,feature,,p3 - Low,unscheduled,"Sep 25, 2017",,,Armando Fox,,https://www.pivotaltracker.com/story/show/151387527,,,,,,,,,,,,,,,,,,,
+151387568,Default mail 'from' should be a global config option,"",,,,feature,,p3 - Low,unscheduled,"Sep 25, 2017",,,Armando Fox,along with any credentials needed for the app to send email as that user,https://www.pivotaltracker.com/story/show/151387568,,,,,,,,,,,,,,,,,,,
+151387844,Use Sendgrid or another email-as-a-service rather than relying on someone's personal gmail credentials,"",,,,feature,,p3 - Low,unscheduled,"Sep 25, 2017",,,Armando Fox,	@armandofox will open a Sendgrid account for ESaaS whose credentials we can use,https://www.pivotaltracker.com/story/show/151387844,,,,,,,,,,,,,,,,,,,
+150580470,JSONize and record customer feedback from S'16 (URL in story body),"",,,,feature,,p3 - Low,unscheduled,"Aug 27, 2017",,,Armando Fox,https://docs.google.com/spreadsheets/d/1QxNsazdtDgOiCamU2TM6DjuYYaIPK4Se01rhwlT50og/edit#gid=566137566,https://www.pivotaltracker.com/story/show/150580470,Andrew Halle,,,,,,,,,,,,,,,,,,
+150580468,JSONize and record F'16 customer feedback (URL in story body),"",,,,feature,,p3 - Low,unscheduled,"Aug 27, 2017",,,Armando Fox,"https://docs.google.com/spreadsheets/d/133pg1ZEs4tqn7oKfIlRZJ66xi2JPotDvtsx0uvrqp2s/edit#gid=936983779
+",https://www.pivotaltracker.com/story/show/150580468,Andrew Halle,,,,,,,,,,,,,,,,,,
+165435225,"Adding feature box 
+","",,,,feature,4,p3 - Low,unscheduled,"Apr 17, 2019",,,Sarah Lin,"Can add feature when adding a new engagement for each app
+It should also have beautification function like that of the email
+Can specify all fields in an engagement after it’s approved
+Also show most up-to-date feature list in the app details page to help admin make decisions more conveniently(similar to description, but don’t show history -- those can be viewed in previous engagement)
+When creating a new app:
+Status: vetting or pending
+Engagement: let the org input information including feature(most important)
+Filter app by status to see pending apps
+Once approved: enter all info 
+
+
+",https://www.pivotaltracker.com/story/show/165435225,,,,,,,,,,,,,,,,,,,
+164721009,Feature 1.5: Show the date you last sent out mail to all the customer in the UI.,"",,,,feature,1,p3 - Low,unscheduled,"Mar 19, 2019",,,Sarah Lin,"### Why
+
+
+**As admin of website**
+**I want to be able to view the date you last sent out mail to all the customer.**
+**So that I can know the last time I email them **
+
+### Acceptance Criteria
+
+```gherkin
+Scenario: 
+Given
+When
+Then
+```
+
+**Notes:**",https://www.pivotaltracker.com/story/show/164721009,,,,,,,,,,,,,,,,,,,
+165113380,"Feature 4.2: Admin is able to get the feedback of customers in ""current iteration"" page using ""get customer feedback"" button","",,,,feature,1,p3 - Low,unscheduled,"Apr 4, 2019",,,zhichen98,"As an project manager,
+In order to develop projects based on feedback of customers,
+I want to check feedback of customers by clicking ""get feedback"" button on ""current iteration"" page.",https://www.pivotaltracker.com/story/show/165113380,,,,,,,,,,,,,,,,,,,
+164721357,Feature 4.1: Customer able to add feedback for each iteration easily,"",,,,feature,4,p3 - Low,unscheduled,"Mar 19, 2019",,,Sarah Lin,"### Why
+
+
+**As an organization representative**
+**I want to be able to find a place in the project info page to add my feedback **
+**So that I can add feedback for each iteration and also send a general feedback at the end of semester**
+
+### Acceptance Criteria
+
+```gherkin
+Scenario: 
+Given
+When
+Then
+```
+
+**Notes:**",https://www.pivotaltracker.com/story/show/164721357,,,,,,,,,,,,,,,,,,,
+165272301,Feature 5: add a section for specifying features for an app,"",,,,feature,2,p3 - Low,unscheduled,"Apr 11, 2019",,,Libo Chen,"1. provide some basic text formatting options when editing
+2. maintain a history of features for each engagement
+3. In special cases such as at vetting stage, features can be temporarily assigned to some value say ""current date"". Once it gets approved, we can assign them to an engagement
+4. By default, only show the features (if not too long) by the latest engagement. Past features can be shown by expanding ""past feature or feature history"".",https://www.pivotaltracker.com/story/show/165272301,Libo Chen,,,,,,,,,,,,,,,,,,
+165137791,Feature 8: Figure out how to represent iteration in the current iteration page,"",,,,feature,2,p3 - Low,unscheduled,"Apr 4, 2019",,,zhichen98,"As a developer,
+in order to manage my working apps for each iteration,
+I want to create a space called ""current iteration"" to record apps that I current work on.",https://www.pivotaltracker.com/story/show/165137791,,,,,,,,,,,,,,,,,,,
+169662159,Save In-progress/incomplete Change-Request Form,"",,,,feature,,p3 - Low,unscheduled,"Nov 9, 2019",,,Sabrina Suhair,"When a client is on the Change-Request Form
+And they close to browser without saving
+Then the next time they go to the Change-Request Form
+They should see their current work saved
+So that they do not lose any work
+",https://www.pivotaltracker.com/story/show/169662159,,,,,,,,,,,,,,,,,,,
